@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.afl-video" name="AFL Video" version="0.1" provider-name="Andy Botting">
+   <requires>
+      <import addon="xbmc.python" version="2.0"/>
+      <import addon="script.module.simplejson" version="2.0.10"/>
+   </requires>
+   <extension point="xbmc.python.pluginsource" provides="video" library="default.py">
+    <provides>video</provides>
+  </extension>
+   <extension point="xbmc.addon.metadata">
+      <summary lang="en">AFL Video</summary>
+      <description lang="en">Watch the latest AFL replays and post match press reports.</description>
+      <disclaimer lang="en">This plugin is not affiliated with the AFL or Bigpond Video in any way.</disclaimer>
+      <provides>video</provides>
+      <platform>all</platform>
+   </extension>
+</addon>
