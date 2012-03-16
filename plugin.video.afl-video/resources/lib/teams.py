@@ -36,7 +36,6 @@ def fill_team_list(teams):
 		ok = True
 
 		for t in teams:
-			print t
 			# Thumbnail
 			#thumbnail = config.SERVER + '/media/img/logos/' + t['id'] + '.gif'
 			thumbnail = ''

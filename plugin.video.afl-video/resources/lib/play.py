@@ -16,13 +16,17 @@ def get_url(video_id):
 
 	client = RemotingService('http://afl.bigpondvideo.com/App/AmfPhp/gateway.php')
 	service = client.getService('SEOPlayer')
-	#video_high_qual = service.getMediaURL({'cid': video_id})
 	video_url = service.getMediaURL({'cid': video_id})
-	#video_low_qual = re.sub("2[mM][bB]{,1}.mp4", "172K.mp4", video_high_qual)
-	#video_med_qual = re.sub("2[mM][bB]{,1}.mp4", "1M.mp4", video_high_qual)
 
-	#quality =  __addon__.getSetting('quality')
-	#video_url = video_high_qual
+	quality =  __addon__.getSetting('QUALITY')
+
+	utils.log("Quality setting: %s" % quality)
+
+	# Get the video URL based on the addon quality setting
+	if quality == '0':
+		video_url = re.sub("2[mM][bB]{,1}.mp4", "172K.mp4", video_url)
+	elif quality == '1':
+		video_url = re.sub("2[mM][bB]{,1}.mp4", "1M.mp4", video_url)
 
 	utils.log("Video URL found %s" % video_url)
 	return video_url

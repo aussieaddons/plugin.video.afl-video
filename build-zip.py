@@ -4,8 +4,8 @@ import os
 import zipfile
 from xml.dom.minidom import parse
 
-
 ADDON='plugin.video.afl-video'
+EXCLUDE_EXTS = ['.pyc', '.pyo', '.swp']
 
 # Parse addon.xml for version number
 dom = parse("%s/addon.xml" % ADDON)
@@ -17,6 +17,14 @@ zfilename = "%s-%s.zip" % (ADDON, version)
 z = zipfile.ZipFile(zfilename, 'w')
 for r, d, f in os.walk(ADDON):
   for ff in f:
-    z.write(os.path.join(r, ff), os.path.join(r, ff))
+    skip = False
+
+    # If it's not one of the files we're excluding
+    for ext in EXCLUDE_EXTS:
+      if ff.endswith(ext):
+        skip = True
+
+    if not skip: 
+      z.write(os.path.join(r, ff), os.path.join(r, ff))
 z.close()
 
