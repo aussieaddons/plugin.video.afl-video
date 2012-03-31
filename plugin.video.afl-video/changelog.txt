@@ -1,3 +1,7 @@
+[B]Version 0.3[/B]
+- Downgrade PyAMF to 0.4 for stability
+- Add team logos
+
 [B]Version 0.2[/B]
 - Implement quality setting
 
