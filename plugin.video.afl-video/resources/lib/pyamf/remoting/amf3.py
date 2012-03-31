@@ -1,5 +1,5 @@
-# Copyright (c) The PyAMF Project.
-# See LICENSE.txt for details.
+# Copyright (c) 2007-2009 The PyAMF Project.
+# See LICENSE for details.
 
 """
 AMF3 RemoteObject support.
@@ -10,21 +10,18 @@ AMF3 RemoteObject support.
 @since: 0.1.0
 """
 
-import calendar
-import time
-import uuid
-import sys
+import calendar, time, uuid, sys
 
-import pyamf.python
+import pyamf
 from pyamf import remoting
 from pyamf.flex import messaging
 
+error_alias = pyamf.get_class_alias(messaging.ErrorMessage)
 
 class BaseServerError(pyamf.BaseError):
     """
     Base server error.
     """
-
 
 class ServerCallFailed(BaseServerError):
     """
@@ -32,10 +29,12 @@ class ServerCallFailed(BaseServerError):
     """
     _amf_code = 'Server.Call.Failed'
 
+pyamf.register_class(ServerCallFailed, attrs=error_alias.attrs)
+
+del error_alias
 
 def generate_random_id():
     return str(uuid.uuid4())
-
 
 def generate_acknowledgement(request=None):
     ack = messaging.AcknowledgeMessage()
@@ -49,8 +48,7 @@ def generate_acknowledgement(request=None):
 
     return ack
 
-
-def generate_error(request, cls, e, tb, include_traceback=False):
+def generate_error(request, cls, e, tb):
     """
     Builds an L{ErrorMessage<pyamf.flex.messaging.ErrorMessage>} based on the
     last traceback and the request that was sent.
@@ -62,36 +60,15 @@ def generate_error(request, cls, e, tb, include_traceback=False):
     else:
         code = cls.__name__
 
-    details = None
-    rootCause = None
+    detail = []
 
-    if include_traceback:
-        details = traceback.format_exception(cls, e, tb)
-        rootCause = e
+    for x in traceback.format_exception(cls, e, tb):
+        detail.append(x.replace("\\n", ''))
 
-    faultDetail = None
-    faultString = None
-
-    if hasattr(e, 'message'):
-        faultString = unicode(e.message)
-    elif hasattr(e, 'args') and e.args:
-        if isinstance(e.args[0], pyamf.python.str_types):
-            faultString = unicode(e.args[0])
-
-    if details:
-        faultDetail = unicode(details)
-
-    return messaging.ErrorMessage(
-        messageId=generate_random_id(),
-        clientId=generate_random_id(),
-        timestamp=calendar.timegm(time.gmtime()),
-        correlationId=request.messageId,
-        faultCode=code,
-        faultString=faultString,
-        faultDetail=faultDetail,
-        extendedData=details,
-        rootCause=rootCause)
-
+    return messaging.ErrorMessage(messageId=generate_random_id(),
+        clientId=generate_random_id(), timestamp=calendar.timegm(time.gmtime()),
+        correlationId = request.messageId, faultCode=code, faultString=str(e),
+        faultDetail=str(detail), extendedData=detail)
 
 class RequestProcessor(object):
     def __init__(self, gateway):
@@ -111,7 +88,7 @@ class RequestProcessor(object):
         else:
             cls, e, tb = sys.exc_info()
 
-        return generate_error(request, cls, e, tb, self.gateway.debug)
+        return generate_error(request, cls, e, tb)
 
     def _getBody(self, amf_request, ro_request, **kwargs):
         """

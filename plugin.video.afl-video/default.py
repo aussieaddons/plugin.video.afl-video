@@ -6,7 +6,11 @@ import os
 import sys
 
 # Add our resources/lib to the python path
-current_dir = os.path.dirname(os.path.abspath(__file__))
+try:
+	current_dir = os.path.dirname(os.path.abspath(__file__))
+except:
+	current_dir = os.getcwd()
+
 sys.path.append( os.path.join( current_dir, "resources", "lib" ) )
 
 import utils, config, index, teams, videos, play, pyamf

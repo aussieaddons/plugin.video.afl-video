@@ -1,137 +1,297 @@
-# Copyright (c) The PyAMF Project.
-# See LICENSE.txt for details.
+# Copyright (c) 2007-2009 The PyAMF Project.
+# See LICENSE for details.
 
 """
-Tools for doing dynamic imports.
+Tools for doing dynamic imports
 
-@since: 0.3
+This module has been borrowed from the Importing package.
+
+@see: U{http://pypi.python.org/pypi/Importing}
+@see: U{http://peak.telecommunity.com/DevCenter/Importing}
+
+Original author: U{Phillip J. Eby<peak@eby-sarna.com>}
+
+@since: 0.3.0
 """
 
-import sys
+__all__ = [
+    'lazyModule', 'joinPath', 'whenImported', 'getModuleHooks',
+]
 
+import sys, os.path
+from types import ModuleType
 
-__all__ = ['when_imported']
+postLoadHooks = {}
+loadedModules = []
 
+try:
+    from imp import find_module
 
-def when_imported(name, *hooks):
+    # google app engine requires this because it checks to ensure that the
+    # find_module function is functioning at least basically
+    # most appengine patchers just stub the function
+    find_module('pyamf.util.imports')
+except ImportError:
+    def find_module(subname, path=None):
+        # the dev_appserver freaks out if you have pyc, pyo in here as 
+        # we're hooking pyamf.amf0 and pyamf.amf3 in the gae adapter and
+        # monkey-patching it. It rightly complains as the byte-compiled module
+        # is different to the 'final' module.
+        PY_EXT = ('.py',)
+
+        if path is None:
+            path = sys.path
+
+        for p in path:
+            py = os.path.join(p, subname)
+
+            for full in PY_EXT:
+                full = py + full
+
+                if os.path.exists(full):
+                    return open(full), full, None
+
+            py = os.path.join(p, subname, '__init__')
+
+            for full in PY_EXT:
+                full = py + full
+
+                if os.path.exists(full):
+                    return None, os.path.join(p, subname), None
+
+        raise ImportError('No module named %s' % subname)
+
+class SubModuleLoadHook(object):
+    def __init__(self, parent, child, hook, *args, **kwargs):
+        self.parent = parent
+        self.child = child
+        self.hook = hook
+        self.args = args
+        self.kwargs = kwargs
+
+    def __eq__(self, other):
+        if not isinstance(other, SubModuleLoadHook):
+            return False
+
+        return self.parent == other.parent and self.child == other.child
+
+    def __call__(self, module):
+        return self.hook(*self.args, **self.kwargs)
+
+class AlreadyRead(Exception):
+    pass
+
+class LazyModule(ModuleType):
+    __slots__ = ()
+    __reserved_attrs__ = ('__name__', '__file__', '__path__')
+
+    def __init__(self, name, file, path=None):
+        ModuleType.__setattr__(self, '__name__', name)
+        ModuleType.__setattr__(self, '__file__', file)
+
+        if path is not None:
+            ModuleType.__setattr__(self, '__path__', path)
+
+    def __getattribute__(self, attr):
+        if attr not in LazyModule.__reserved_attrs__:
+            _loadModule(self)
+
+        return ModuleType.__getattribute__(self, attr)
+
+    def __setattr__(self, attr, value):
+        if attr not in LazyModule.__reserved_attrs__:
+            _loadModule(self)
+
+        return ModuleType.__setattr__(self, attr, value)
+
+def _loadModule(module):
+    if _isLazy(module) and module not in loadedModules:
+        _loadAndRunHooks(module)
+
+def joinPath(modname, relativePath):
     """
-    Call C{hook(module)} when module named C{name} is first imported. C{name}
-    must be a fully qualified (i.e. absolute) module name.
-
-    C{hook} must accept one argument: which will be the imported module object.
-
-    If the module has already been imported, 'hook(module)' is called
-    immediately, and the module object is returned from this function. If the
-    module has not been imported, then the hook is called when the module is
-    first imported.
+    Adjust a module name by a '/'-separated, relative or absolute path
     """
-    global finder
+    module = modname.split('.')
 
-    finder.when_imported(name, *hooks)
+    for p in relativePath.split('/'):
+        if p == '..':
+            module.pop()
+        elif not p:
+            module = []
+        elif p != '.':
+            module.append(p)
 
+    return '.'.join(module)
 
-class ModuleFinder(object):
+def lazyModule(modname, relativePath=None):
     """
-    This is a special module finder object that executes a collection of
-    callables when a specific module has been imported. An instance of this
-    is placed in C{sys.meta_path}, which is consulted before C{sys.modules} -
-    allowing us to provide this functionality.
+    Return module 'modname', but with its contents loaded "on demand"
 
-    @ivar post_load_hooks: C{dict} of C{full module path -> callable} to be
-        executed when the module is imported.
-    @ivar loaded_modules: C{list} of modules that this finder has seen. Used
-        to stop recursive imports in L{load_module}
-    @see: L{when_imported}
-    @since: 0.5
+    This function returns 'sys.modules[modname]', if present.  Otherwise
+    it creates a 'LazyModule' object for the specified module, caches it
+    in 'sys.modules', and returns it.
+
+    'LazyModule' is a subclass of the standard Python module type, that
+    remains empty until an attempt is made to access one of its
+    attributes.  At that moment, the module is loaded into memory, and
+    any hooks that were defined via 'whenImported()' are invoked.
+
+    Note that calling 'lazyModule' with the name of a non-existent or
+    unimportable module will delay the 'ImportError' until the moment
+    access is attempted.  The 'ImportError' will occur every time an
+    attribute access is attempted, until the problem is corrected.
+
+    This function also takes an optional second parameter, 'relativePath',
+    which will be interpreted as a '/'-separated path string relative to
+    'modname'.  If a 'relativePath' is supplied, the module found by
+    traversing the path will be loaded instead of 'modname'.  In the path,
+    '.' refers to the current module, and '..' to the current module's
+    parent.  For example::
+
+        fooBaz = lazyModule('foo.bar','../baz')
+
+    will return the module 'foo.baz'.  The main use of the 'relativePath'
+    feature is to allow relative imports in modules that are intended for
+    use with module inheritance.  Where an absolute import would be carried
+    over as-is into the inheriting module, an import relative to '__name__'
+    will be relative to the inheriting module, e.g.::
+
+        something = lazyModule(__name__,'../path/to/something')
+
+    The above code will have different results in each module that inherits
+    it.
+
+    (Note: 'relativePath' can also be an absolute path (starting with '/');
+    this is mainly useful for module '__bases__' lists.)
     """
+    if relativePath:
+        modname = joinPath(modname, relativePath)
 
-    def __init__(self):
-        self.post_load_hooks = {}
-        self.loaded_modules = []
+    if modname not in sys.modules:
+        file_name = path = None
 
-    def find_module(self, name, path=None):
-        """
-        Called when an import is made. If there are hooks waiting for this
-        module to be imported then we stop the normal import process and
-        manually load the module.
+        if '.' in modname:
+            splitpos = modname.rindex('.')
 
-        @param name: The name of the module being imported.
-        @param path The root path of the module (if a package). We ignore this.
-        @return: If we want to hook this module, we return a C{loader}
-            interface (which is this instance again). If not we return C{None}
-            to allow the standard import process to continue.
-        """
-        if name in self.loaded_modules:
-            return None
+            parent = sys.modules[modname[:splitpos]]
+            file_name = find_module(modname[splitpos + 1:], parent.__path__)[1]
+        else:
+            file_name = find_module(modname)[1]
 
-        hooks = self.post_load_hooks.get(name, None)
+        if os.path.isdir(file_name):
+            path = [file_name]
+            py = os.path.join(file_name, '__init__')
 
-        if hooks:
-            return self
+            for full in ('.pyo', '.pyc', '.py'):
+                full = py + full
 
-    def load_module(self, name):
-        """
-        If we get this far, then there are hooks waiting to be called on
-        import of this module. We manually load the module and then run the
-        hooks.
+                if os.path.exists(full):
+                    break
+            else:
+                raise ImportError('No module name %d' % modname)
 
-        @param name: The name of the module to import.
-        """
-        self.loaded_modules.append(name)
+            file_name = full
 
-        try:
-            __import__(name, {}, {}, [])
+        getModuleHooks(modname) # force an empty hook list into existence
+        sys.modules[modname] = LazyModule(modname, file_name, path)
 
-            mod = sys.modules[name]
-            self._run_hooks(name, mod)
-        except:
-            self.loaded_modules.pop()
+        if '.' in modname:
+            # ensure parent module/package is in sys.modules
+            # and parent.modname=module, as soon as the parent is imported
 
-            raise
+            splitpos = modname.rindex('.')
 
-        return mod
+            whenImported(
+                modname[:splitpos],
+                lambda m: setattr(m, modname[splitpos + 1:], sys.modules[modname])
+            )
 
-    def when_imported(self, name, *hooks):
-        """
-        @see: L{when_imported}
-        """
-        if name in sys.modules:
-            for hook in hooks:
-                hook(sys.modules[name])
+    return sys.modules[modname]
 
-            return
+def _isLazy(module):
+    """
+    Checks to see if the supplied C{module} is lazy
+    """
+    if module.__name__ not in postLoadHooks.keys():
+        return False
 
-        h = self.post_load_hooks.setdefault(name, [])
-        h.extend(hooks)
+    return postLoadHooks[module.__name__] is not None
 
-    def _run_hooks(self, name, module):
-        """
-        Run all hooks for a module.
-        """
-        hooks = self.post_load_hooks.pop(name, [])
+def _loadAndRunHooks(module):
+    """
+    Load an unactivated "lazy" module object
+    """
+    if _isLazy(module): # don't reload if already loaded!
+        loadedModules.append(module)
+        reload(module)
 
-        for hook in hooks:
+    try:
+        for hook in getModuleHooks(module.__name__):
             hook(module)
+    finally:
+        # Ensure hooks are not called again, even if they fail
+        postLoadHooks[module.__name__] = None
 
-    def __getstate__(self):
-        return (self.post_load_hooks.copy(), self.loaded_modules[:])
-
-    def __setstate__(self, state):
-        self.post_load_hooks, self.loaded_modules = state
-
-
-def _init():
+def getModuleHooks(moduleName):
     """
-    Internal function to install the module finder.
+    Get list of hooks for 'moduleName'; error if module already loaded
     """
-    global finder
+    hooks = postLoadHooks.setdefault(moduleName, [])
 
-    if finder is None:
-        finder = ModuleFinder()
+    if hooks is None:
+        raise AlreadyRead("Module already imported", moduleName)
 
-    if finder not in sys.meta_path:
-        sys.meta_path.insert(0, finder)
+    return hooks
 
+def _setModuleHook(moduleName, hook):
+    if moduleName in sys.modules and postLoadHooks.get(moduleName) is None:
+        # Module is already imported/loaded, just call the hook
+        module = sys.modules[moduleName]
+        hook(module)
 
-finder = None
-_init()
+        return module
+
+    getModuleHooks(moduleName).append(hook)
+
+    return lazyModule(moduleName)
+
+def whenImported(moduleName, hook):
+    """
+    Call 'hook(module)' when module named 'moduleName' is first used
+
+    'hook' must accept one argument: the module object named by 'moduleName',
+    which must be a fully qualified (i.e. absolute) module name.  The hook
+    should not raise any exceptions, or it may prevent later hooks from
+    running.
+
+    If the module has already been imported normally, 'hook(module)' is
+    called immediately, and the module object is returned from this function.
+    If the module has not been imported, or has only been imported lazily,
+    then the hook is called when the module is first used, and a lazy import
+    of the module is returned from this function.  If the module was imported
+    lazily and used before calling this function, the hook is called
+    immediately, and the loaded module is returned from this function.
+
+    Note that using this function implies a possible lazy import of the
+    specified module, and lazy importing means that any 'ImportError' will be
+    deferred until the module is used.
+    """
+    if '.' in moduleName:
+        # If parent is not yet imported, delay hook installation until the
+        # parent is imported.
+        splitpos = moduleName.rindex('.')
+
+        sub_hook = SubModuleLoadHook(moduleName[:splitpos],
+            moduleName[splitpos + 1:], _setModuleHook, moduleName, hook)
+
+        if moduleName[:splitpos] not in postLoadHooks.keys():
+            whenImported(moduleName[:splitpos], sub_hook)
+        elif postLoadHooks[moduleName[:splitpos]] is None:
+            whenImported(moduleName[:splitpos], sub_hook)
+        elif sub_hook not in postLoadHooks[moduleName[:splitpos]]:
+            whenImported(moduleName[:splitpos], sub_hook)
+        else:
+            postLoadHooks[moduleName[:splitpos]].append(sub_hook)
+    else:
+        return _setModuleHook(moduleName, hook)

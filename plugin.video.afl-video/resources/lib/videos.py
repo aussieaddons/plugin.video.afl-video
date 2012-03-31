@@ -39,11 +39,12 @@ def get_videos(channel_id):
 		for video_item in videos_list[0]['items']:
 			video = parse_video(video_item)
 			videos.append(video)
+		return videos
 	else:
-		print "ERROR: Video list returned no results."
-
-	return videos
-
+		d = xbmcgui.Dialog()
+		msg = utils.dialog_message("Video list returned no results.")
+		d.ok(*msg)
+		return
 
 def make_list(url):
 	params = utils.get_url(url)
@@ -81,7 +82,9 @@ def fill_video_list(videos):
 		xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
 	except:
 		# user cancelled dialog or an error occurred
-		print "ERROR: %s (%d) - %s" % ( sys.exc_info()[ 2 ].tb_frame.f_code.co_name, sys.exc_info()[ 2 ].tb_lineno, sys.exc_info()[ 1 ], )
-		ok = False
+		d = xbmcgui.Dialog()
+		msg = utils.dialog_error("Unable to fetch video list")
+		d.ok(*msg)
+		utils.log_error();
 	return ok
 

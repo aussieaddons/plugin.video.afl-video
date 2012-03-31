@@ -1,3 +1,4 @@
+import os
 import sys
 import config
 import utils
@@ -37,8 +38,15 @@ def fill_team_list(teams):
 
 		for t in teams:
 			# Thumbnail
-			#thumbnail = config.SERVER + '/media/img/logos/' + t['id'] + '.gif'
-			thumbnail = ''
+
+			# Add our resources/lib to the python path
+			try:
+				current_dir = os.path.dirname(os.path.abspath(__file__))
+			except:
+				current_dir = os.getcwd()
+
+			thumbnail = os.path.join(current_dir, "..", "..", "resources", "img", t['thumb'])
+			utils.log("Thumbnail: %s" % thumbnail)
 			listitem = xbmcgui.ListItem(label=t['name'], iconImage=thumbnail, thumbnailImage=thumbnail)
 			url = "%s?channel=%s" % (sys.argv[0], t['id'])
 

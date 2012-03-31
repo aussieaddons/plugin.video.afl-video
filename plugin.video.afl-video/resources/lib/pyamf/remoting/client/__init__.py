@@ -1,5 +1,5 @@
-# Copyright (c) The PyAMF Project.
-# See LICENSE.txt for details.
+# Copyright (c) 2007-2009 The PyAMF Project.
+# See LICENSE for details.
 
 """
 Remoting client implementation.
@@ -7,26 +7,26 @@ Remoting client implementation.
 @since: 0.1.0
 """
 
-import urllib2
-import urlparse
+import httplib, urlparse
 
 import pyamf
-from pyamf import remoting
+from pyamf import remoting, logging
 
-try:
-    from gzip import GzipFile
-except ImportError:
-    GzipFile = False
+#: Default AMF client type.
+#: @see: L{ClientTypes<pyamf.ClientTypes>}
+DEFAULT_CLIENT_TYPE = pyamf.ClientTypes.Flash6
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+#: Default user agent is C{PyAMF/x.x.x}.
+DEFAULT_USER_AGENT = 'PyAMF/%s' % '.'.join(map(lambda x: str(x),
+    pyamf.__version__))
 
+HTTP_OK = 200
 
-#: Default user agent is `PyAMF/x.x(.x)`.
-DEFAULT_USER_AGENT = 'PyAMF/%s' % (pyamf.version,)
-
+def convert_args(args):
+    if args == (tuple(),):
+        return []
+    else:
+        return [x for x in args]
 
 class ServiceMethodProxy(object):
     """
@@ -63,7 +63,6 @@ class ServiceMethodProxy(object):
 
         return service_name
 
-
 class ServiceProxy(object):
     """
     Serves as a service object proxy for RPC calls. Generates
@@ -74,12 +73,12 @@ class ServiceProxy(object):
     @ivar _gw: The parent gateway
     @type _gw: L{RemotingService}
     @ivar _name: The name of the service
-    @type _name: L{str}
+    @type _name: C{str}
     @ivar _auto_execute: If set to C{True}, when a service method is called,
         the AMF request is immediately sent to the remote gateway and a
-        response is returned. If set to C{False}, a C{RequestWrapper}
-        is returned, waiting for the underlying gateway to fire the
-        L{execute <RemotingService.execute>} method.
+        response is returned. If set to C{False}, a L{RequestWrapper} is
+        returned, waiting for the underlying gateway to fire the
+        L{execute<RemotingService.execute>} method.
     """
 
     def __init__(self, gw, name, auto_execute=True):
@@ -93,22 +92,15 @@ class ServiceProxy(object):
     def _call(self, method_proxy, *args):
         """
         Executed when a L{ServiceMethodProxy} is called. Adds a request to the
-        underlying gateway.
+        underlying gateway. If C{_auto_execute} is set to C{True}, then the
+        request is immediately called on the remote gateway.
         """
         request = self._gw.addRequest(method_proxy, *args)
 
         if self._auto_execute:
             response = self._gw.execute_single(request)
 
-            if response.status == remoting.STATUS_ERROR:
-                if hasattr(response.body, 'raiseException'):
-                    try:
-                        response.body.raiseException()
-                    except:
-                        raise
-                else:
-                    raise remoting.RemotingError
-
+            # XXX nick: What to do about Fault objects here?
             return response.body
 
         return request
@@ -124,7 +116,6 @@ class ServiceProxy(object):
         Returns a string representation of the name of the service.
         """
         return self._name
-
 
 class RequestWrapper(object):
     """
@@ -153,6 +144,7 @@ class RequestWrapper(object):
         """
         A response has been received by the gateway
         """
+        # XXX nick: What to do about Fault objects here?
         self.response = response
         self.result = self.response.body
 
@@ -165,8 +157,7 @@ class RequestWrapper(object):
         yet been called, an C{AttributeError} exception is raised.
         """
         if not hasattr(self, '_result'):
-            raise AttributeError(
-                "'RequestWrapper' object has no attribute 'result'")
+            raise AttributeError("'RequestWrapper' object has no attribute 'result'")
 
         return self._result
 
@@ -175,86 +166,112 @@ class RequestWrapper(object):
 
     result = property(_get_result, _set_result)
 
-
 class RemotingService(object):
     """
     Acts as a client for AMF calls.
 
-    @ivar url: The url of the remote gateway. Accepts C{http} or C{https} as
-        valid schemes.
-    @type url: C{string}
+    @ivar url: The url of the remote gateway. Accepts C{http} or C{https}
+        as valid schemes.
+    @type url: C{str}
     @ivar requests: The list of pending requests to process.
     @type requests: C{list}
     @ivar request_number: A unique identifier for tracking the number of
         requests.
-    @ivar amf_version: The AMF version to use. See
-        L{ENCODING_TYPES<pyamf.ENCODING_TYPES>}.
+    @ivar amf_version: The AMF version to use.
+        See L{ENCODING_TYPES<pyamf.ENCODING_TYPES>}.
+    @type amf_version: C{int}
     @ivar referer: The referer, or HTTP referer, identifies the address of the
         client. Ignored by default.
-    @type referer: C{string}
+    @type referer: C{str}
+    @ivar client_type: The client type. See L{ClientTypes<pyamf.ClientTypes>}.
+    @type client_type: C{int}
     @ivar user_agent: Contains information about the user agent (client)
         originating the request. See L{DEFAULT_USER_AGENT}.
-    @type user_agent: C{string}
+    @type user_agent: C{str}
+    @ivar connection: The underlying connection to the remoting server.
+    @type connection: C{httplib.HTTPConnection} or C{httplib.HTTPSConnection}
     @ivar headers: A list of persistent headers to send with each request.
     @type headers: L{HeaderCollection<pyamf.remoting.HeaderCollection>}
-    @ivar http_headers: A dict of HTTP headers to apply to the underlying HTTP
-        connection.
+    @ivar http_headers: A dict of HTTP headers to apply to the underlying
+        HTTP connection.
     @type http_headers: L{dict}
     @ivar strict: Whether to use strict AMF en/decoding or not.
-    @ivar opener: The function used to power the connection to the remote
-        server. Defaults to U{urllib2.urlopen<http://
-        docs.python.org/library/urllib2.html#urllib2.urlopen}.
+    @type strict: C{bool}
     """
 
-    def __init__(self, url, amf_version=pyamf.AMF0, **kwargs):
+    def __init__(self, url, amf_version=pyamf.AMF0, client_type=DEFAULT_CLIENT_TYPE,
+                 referer=None, user_agent=DEFAULT_USER_AGENT, strict=False):
+        self.logger = logging.instance_logger(self)
         self.original_url = url
-        self.amf_version = amf_version
-
         self.requests = []
         self.request_number = 1
+
+        self.user_agent = user_agent
+        self.referer = referer
+        self.amf_version = amf_version
+        self.client_type = client_type
         self.headers = remoting.HeaderCollection()
         self.http_headers = {}
-        self.proxy_args = None
-
-        self.user_agent = kwargs.pop('user_agent', DEFAULT_USER_AGENT)
-        self.referer = kwargs.pop('referer', None)
-        self.strict = kwargs.pop('strict', False)
-        self.logger = kwargs.pop('logger', None)
-        self.opener = kwargs.pop('opener', urllib2.urlopen)
-
-        if kwargs:
-            raise TypeError('Unexpected keyword arguments %r' % (kwargs,))
+        self.strict = strict
 
         self._setUrl(url)
 
     def _setUrl(self, url):
         """
+        @param url: Gateway URL.
+        @type url: C{str}
+        @raise ValueError: Unknown scheme.
         """
         self.url = urlparse.urlparse(url)
-        self._root_url = url
+        self._root_url = urlparse.urlunparse(['', ''] + list(self.url[2:]))
 
-        if not self.url[0] in ('http', 'https'):
-            raise ValueError('Unknown scheme %r' % (self.url[0],))
+        port = None
+        hostname = None
 
-        if self.logger:
-            self.logger.info('Connecting to %r', self._root_url)
-            self.logger.debug('Referer: %r', self.referer)
-            self.logger.debug('User-Agent: %r', self.user_agent)
+        if hasattr(self.url, 'port'):
+            if self.url.port is not None:
+                port = self.url.port
+        else:
+            if ':' not in self.url[1]:
+                hostname = self.url[1]
+                port = None
+            else:
+                sp = self.url[1].split(':')
 
-    def setProxy(self, host, type='http'):
-        """
-        Set the proxy for all requests to use.
+                hostname, port = sp[0], sp[1]
+                port = int(port)
 
-        @see: U{The Python Docs<http://docs.python.org/library/urllib2.html#
-            urllib2.Request.set_proxy}
-        """
-        self.proxy_args = (host, type)
+        if hostname is None:
+            if hasattr(self.url, 'hostname'):
+                hostname = self.url.hostname
+
+        if self.url[0] == 'http':
+            if port is None:
+                port = httplib.HTTP_PORT
+
+            self.connection = httplib.HTTPConnection(hostname, port)
+        elif self.url[0] == 'https':
+            if port is None:
+                port = httplib.HTTPS_PORT
+
+            self.connection = httplib.HTTPSConnection(hostname, port)
+        else:
+            raise ValueError('Unknown scheme')
+        
+        location = '%s://%s:%s%s' % (self.url[0], hostname, port, self.url[2])
+        
+        self.logger.info('Connecting to %s' % location)
+        self.logger.debug('Referer: %s' % self.referer)
+        self.logger.debug('User-Agent: %s' % self.user_agent)
 
     def addHeader(self, name, value, must_understand=False):
         """
         Sets a persistent header to send with each request.
 
         @param name: Header name.
+        @type name: C{str}
+        @param must_understand: Default is C{False}.
+        @type must_understand: C{bool}
         """
         self.headers[name] = value
         self.headers.set_required(name, must_understand)
@@ -276,6 +293,9 @@ class RemotingService(object):
         Returns a L{ServiceProxy} for the supplied name. Sets up an object that
         can have method calls made to it that build the AMF requests.
 
+        @param auto_execute: Default is C{True}.
+        @type auto_execute: C{bool}
+        @raise TypeError: C{string} type required for C{name}.
         @rtype: L{ServiceProxy}
         """
         if not isinstance(name, basestring):
@@ -287,13 +307,13 @@ class RemotingService(object):
         """
         Gets a request based on the id.
 
-        :raise LookupError: Request not found.
+        @raise LookupError: Request not found.
         """
         for request in self.requests:
             if request.id == id_:
                 return request
 
-        raise LookupError("Request %r not found" % (id_,))
+        raise LookupError("Request %s not found" % id_)
 
     def addRequest(self, service, *args):
         """
@@ -304,9 +324,7 @@ class RemotingService(object):
 
         self.request_number += 1
         self.requests.append(wrapper)
-
-        if self.logger:
-            self.logger.debug('Adding request %s%r', wrapper.service, args)
+        self.logger.debug('Adding request %s%r' % (wrapper.service, args))
 
         return wrapper
 
@@ -314,20 +332,19 @@ class RemotingService(object):
         """
         Removes a request from the pending request list.
 
+        @raise LookupError: Request not found.
         """
         if isinstance(service, RequestWrapper):
-            if self.logger:
-                self.logger.debug('Removing request: %s',
-                    self.requests[self.requests.index(service)])
+            self.logger.debug('Removing request: %s' % (
+                self.requests[self.requests.index(service)]))
             del self.requests[self.requests.index(service)]
 
             return
 
         for request in self.requests:
             if request.service == service and request.args == args:
-                if self.logger:
-                    self.logger.debug('Removing request: %s',
-                        self.requests[self.requests.index(request)])
+                self.logger.debug('Removing request: %s' % (
+                    self.requests[self.requests.index(request)]))
                 del self.requests[self.requests.index(request)]
 
                 return
@@ -336,13 +353,17 @@ class RemotingService(object):
 
     def getAMFRequest(self, requests):
         """
-        Builds an AMF request {LEnvelope<pyamf.remoting.Envelope>} from a
+        Builds an AMF request L{Envelope<pyamf.remoting.Envelope>} from a
         supplied list of requests.
-        """
-        envelope = remoting.Envelope(self.amf_version)
 
-        if self.logger:
-            self.logger.debug('AMF version: %s' % self.amf_version)
+        @param requests: List of requests
+        @type requests: C{list}
+        @rtype: L{Envelope<pyamf.remoting.Envelope>}
+        """
+        envelope = remoting.Envelope(self.amf_version, self.client_type)
+
+        self.logger.debug('AMF version: %s' % self.amf_version)
+        self.logger.debug('Client type: %s' % self.client_type)
 
         for request in requests:
             service = request.service
@@ -371,21 +392,22 @@ class RemotingService(object):
         """
         Builds, sends and handles the response to a single request, returning
         the response.
+
+        @param request:
+        @type request:
+        @rtype:
         """
-        if self.logger:
-            self.logger.debug('Executing single request: %s', request)
-
-        self.removeRequest(request)
-
+        self.logger.debug('Executing single request: %s' % request)
         body = remoting.encode(self.getAMFRequest([request]), strict=self.strict)
 
-        http_request = urllib2.Request(self._root_url, body.getvalue(),
-            self._get_execute_headers())
+        self.logger.debug('Sending POST request to %s' % self._root_url)
+        self.connection.request('POST', self._root_url,
+            body.getvalue(),
+            self._get_execute_headers()
+        )
 
-        if self.proxy_args:
-            http_request.set_proxy(*self.proxy_args)
-
-        envelope = self._getResponse(http_request)
+        envelope = self._getResponse()
+        self.removeRequest(request)
 
         return envelope[request.id]
 
@@ -394,80 +416,68 @@ class RemotingService(object):
         Builds, sends and handles the responses to all requests listed in
         C{self.requests}.
         """
-        requests = self.requests[:]
+        body = remoting.encode(self.getAMFRequest(self.requests), strict=self.strict)
 
-        for r in requests:
-            self.removeRequest(r)
+        self.logger.debug('Sending POST request to %s' % self._root_url)
+        self.connection.request('POST', self._root_url,
+            body.getvalue(),
+            self._get_execute_headers()
+        )
 
-        body = remoting.encode(self.getAMFRequest(requests),
-            strict=self.strict)
+        envelope = self._getResponse()
 
-        http_request = urllib2.Request(self._root_url, body.getvalue(),
-            self._get_execute_headers())
+        for response in envelope:
+            request = self.getRequest(response[0])
+            response = response[1]
 
-        if self.proxy_args:
-            http_request.set_proxy(*self.proxy_args)
+            request.setResponse(response)
 
-        envelope = self._getResponse(http_request)
+            self.removeRequest(request)
 
-        return envelope
-
-    def _getResponse(self, http_request):
+    def _getResponse(self):
         """
         Gets and handles the HTTP response from the remote gateway.
+        
+        @raise RemotingError: HTTP Gateway reported error status.
+        @raise RemotingError: Incorrect MIME type received.
         """
-        if self.logger:
-            self.logger.debug('Sending POST request to %s', self._root_url)
+        self.logger.debug('Waiting for response...')
+        http_response = self.connection.getresponse()
+        self.logger.debug('Got response status: %s' % http_response.status)
+        self.logger.debug('Content-Type: %s' % http_response.getheader('Content-Type'))
 
-        try:
-            fbh = self.opener(http_request)
-        except urllib2.URLError, e:
-            if self.logger:
-                self.logger.exception('Failed request for %s',
-                    self._root_url)
+        if http_response.status != HTTP_OK:
+            self.logger.debug('Body: %s' % http_response.read())
 
-            raise remoting.RemotingError(str(e))
+            if hasattr(httplib, 'responses'):
+                raise remoting.RemotingError("HTTP Gateway reported status %d %s" % (
+                    http_response.status, httplib.responses[http_response.status]))
 
-        http_message = fbh.info()
+            raise remoting.RemotingError("HTTP Gateway reported status %d" % (
+                http_response.status,))
 
-        content_encoding = http_message.getheader('Content-Encoding')
-        content_length = http_message.getheader('Content-Length') or -1
-        content_type = http_message.getheader('Content-Type')
-        server = http_message.getheader('Server')
-
-        if self.logger:
-            self.logger.debug('Content-Type: %r', content_type)
-            self.logger.debug('Content-Encoding: %r', content_encoding)
-            self.logger.debug('Content-Length: %r', content_length)
-            self.logger.debug('Server: %r', server)
+        content_type = http_response.getheader('Content-Type')
 
         if content_type != remoting.CONTENT_TYPE:
-            if self.logger:
-                self.logger.debug('Body = %s', fbh.read())
+            self.logger.debug('Body = %s' % http_response.read())
 
-            raise remoting.RemotingError('Incorrect MIME type received. '
-                '(got: %s)' % (content_type,))
+            raise remoting.RemotingError("Incorrect MIME type received. (got: %s)" % content_type)
 
-        bytes = fbh.read(int(content_length))
+        content_length = http_response.getheader('Content-Length')
+        bytes = ''
 
-        if self.logger:
-            self.logger.debug('Read %d bytes for the response', len(bytes))
+        self.logger.debug('Content-Length: %s' % content_length)
+        self.logger.debug('Server: %s' % http_response.getheader('Server'))
 
-        if content_encoding and content_encoding.strip().lower() == 'gzip':
-            if not GzipFile:
-                raise remoting.RemotingError(
-                    'Decompression of Content-Encoding: %s not available.' % (
-                        content_encoding,))
+        if content_length in (None, ''):
+            bytes = http_response.read()
+        else:
+            bytes = http_response.read(int(content_length))
 
-            compressedstream = StringIO(bytes)
-            gzipper = GzipFile(fileobj=compressedstream)
-            bytes = gzipper.read()
-            gzipper.close()
+        self.logger.debug('Read %d bytes for the response' % len(bytes))
 
         response = remoting.decode(bytes, strict=self.strict)
-
-        if self.logger:
-            self.logger.debug('Response: %s', response)
+        self.logger.debug('Response: %s' % response)
 
         if remoting.APPEND_TO_GATEWAY_URL in response.headers:
             self.original_url += response.headers[remoting.APPEND_TO_GATEWAY_URL]
@@ -484,11 +494,13 @@ class RemotingService(object):
             for k, v in data.iteritems():
                 self.headers[k] = v
 
+        http_response.close()
+
         return response
 
     def setCredentials(self, username, password):
         """
         Sets authentication credentials for accessing the remote gateway.
         """
-        self.addHeader('Credentials', dict(userid=username.decode('utf-8'),
-            password=password.decode('utf-8')), True)
+        self.addHeader('Credentials', dict(userid=unicode(username),
+            password=unicode(password)), True)

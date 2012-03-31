@@ -1,5 +1,5 @@
-# Copyright (c) The PyAMF Project.
-# See LICENSE.txt for details.
+# Copyright (c) 2007-2009 The PyAMF Project.
+# See LICENSE for details.
 
 """
 AMF Remoting support.
@@ -11,24 +11,25 @@ authentication info, tag transactions, etc. Bodies contain actual Remoting
 requests and responses. A single Remoting envelope can contain several
 requests; Remoting supports batching out of the box.
 
-Client headers and bodies need not be responded to in a one-to-one manner.
-That is, a body or header may not require a response. Debug information is
-requested by a header but sent back as a body object. The response index is
-essential for the Adobe Flash Player to understand the response therefore.
+Client headers and bodies need not be responded to in a one-to-one manner. That
+is, a body or header may not require a response. Debug information is requested
+by a header but sent back as a body object. The response index is essential for
+the Flash Player to understand the response therefore.
 
-@see: U{Remoting Envelope on OSFlash
-    <http://osflash.org/documentation/amf/envelopes/remoting>}
-@see: U{Remoting Headers on OSFlash
-    <http://osflash.org/amf/envelopes/remoting/headers>}
-@see: U{Remoting Debug Headers on OSFlash
-    <http://osflash.org/documentation/amf/envelopes/remoting/debuginfo>}
+@see: U{Remoting Envelope on OSFlash (external)
+<http://osflash.org/documentation/amf/envelopes/remoting>}
+@see: U{Remoting Headers on OSFlash (external)
+<http://osflash.org/amf/envelopes/remoting/headers>}
+@see: U{Remoting Debug Headers on OSFlash (external)
+<http://osflash.org/documentation/amf/envelopes/remoting/debuginfo>}
 
-@since: 0.1
+@since: 0.1.0
 """
+
+import copy
 
 import pyamf
 from pyamf import util
-
 
 __all__ = ['Envelope', 'Request', 'Response', 'decode', 'encode']
 
@@ -58,26 +59,22 @@ APPEND_TO_GATEWAY_URL = 'AppendToGatewayUrl'
 REPLACE_GATEWAY_URL = 'ReplaceGatewayUrl'
 REQUEST_PERSISTENT_HEADER = 'RequestPersistentHeader'
 
-
 class RemotingError(pyamf.BaseError):
     """
     Generic remoting error class.
     """
 
-
 class RemotingCallFailed(RemotingError):
     """
-    Raised if B{Server.Call.Failed} received.
+    Raised if C{Server.Call.Failed} received.
     """
 
 pyamf.add_error_class(RemotingCallFailed, ERROR_CODES[ERROR_CALL_FAILED])
-
 
 class HeaderCollection(dict):
     """
     Collection of AMF message headers.
     """
-
     def __init__(self, raw_headers={}):
         self.required = []
 
@@ -108,7 +105,6 @@ class HeaderCollection(dict):
     def __len__(self):
         return len(self.keys())
 
-
 class Envelope(object):
     """
     I wrap an entire request, encapsulating headers and bodies.
@@ -117,21 +113,24 @@ class Envelope(object):
 
     @ivar amfVersion: AMF encoding version. See L{pyamf.ENCODING_TYPES}
     @type amfVersion: C{int} or C{None}
+    @ivar clientType: Client type. See L{ClientTypes<pyamf.ClientTypes>}
+    @type clientType: C{int} or C{None}
     @ivar headers: AMF headers, a list of name, value pairs. Global to each
         request.
     @type headers: L{HeaderCollection}
     @ivar bodies: A list of requests/response messages
-    @type bodies: C{list} containing tuples of the key of the request and the
-        L{Message}.
+    @type bodies: L{list} containing tuples of the key of the request and
+        the instance of the L{Message}
     """
-
-    def __init__(self, amfVersion=None):
+    def __init__(self, amfVersion=None, clientType=None):
         self.amfVersion = amfVersion
+        self.clientType = clientType
         self.headers = HeaderCollection()
         self.bodies = []
 
     def __repr__(self):
-        r = "<Envelope amfVersion=%r>\n" % (self.amfVersion,)
+        r = "<Envelope amfVersion=%s clientType=%s>\n" % (
+            self.amfVersion, self.clientType)
 
         for h in self.headers:
             r += " " + repr(h) + "\n"
@@ -169,9 +168,6 @@ class Envelope(object):
 
         raise KeyError("'%r'" % (name,))
 
-    def __nonzero__(self):
-        return len(self.bodies) != 0 or len(self.headers) != 0
-
     def __iter__(self):
         for body in self.bodies:
             yield body[0], body[1]
@@ -202,9 +198,10 @@ class Envelope(object):
 
     def __eq__(self, other):
         if isinstance(other, Envelope):
-            return (self.amfVersion == other.amfVersion and
-                self.headers == other.headers and
-                self.bodies == other.bodies)
+            return self.amfVersion == other.amfVersion and \
+                self.clientType == other.clientType and \
+                self.headers == other.headers and \
+                self.bodies == other.bodies
 
         if hasattr(other, 'keys') and hasattr(other, 'items'):
             keys, o_keys = self.keys(), other.keys()
@@ -224,19 +221,20 @@ class Envelope(object):
 
             return True
 
-
 class Message(object):
     """
     I represent a singular request/response, containing a collection of
     headers and one body of data.
 
-    I am used to iterate over all requests in the :class:`Envelope`.
+    I am used to iterate over all requests in the L{Envelope}.
 
-    @ivar envelope: The parent L{envelope<Envelope>} of this AMF Message.
+    @ivar envelope: The parent envelope of this AMF Message.
+    @type envelope: L{Envelope}
     @ivar body: The body of the message.
-    @ivar headers: The message headers. Dict like in behaviour.
+    @type body: C{mixed}
+    @ivar headers: The message headers.
+    @type headers: C{dict}
     """
-
     def __init__(self, envelope, body):
         self.envelope = envelope
         self.body = body
@@ -246,14 +244,13 @@ class Message(object):
 
     headers = property(_get_headers)
 
-
 class Request(Message):
     """
     An AMF Request payload.
 
-    @ivar target: The C{string} target of the request
+    @ivar target: The target of the request
+    @type target: C{basestring}
     """
-
     def __init__(self, target, body=[], envelope=None):
         Message.__init__(self, envelope, body)
 
@@ -263,7 +260,6 @@ class Request(Message):
         return "<%s target=%s>%s</%s>" % (
             type(self).__name__, repr(self.target), repr(self.body), type(self).__name__)
 
-
 class Response(Message):
     """
     An AMF Response.
@@ -271,7 +267,6 @@ class Response(Message):
     @ivar status: The status of the message. Default is L{STATUS_OK}.
     @type status: Member of L{STATUS_CODES}.
     """
-
     def __init__(self, body, status=STATUS_OK, envelope=None):
         Message.__init__(self, envelope, body)
 
@@ -283,24 +278,23 @@ class Response(Message):
             type(self).__name__
         )
 
-
 class BaseFault(object):
     """
-    I represent a fault message (C{mx.rpc.Fault}).
+    I represent a C{Fault} message (C{mx.rpc.Fault}).
 
     @ivar level: The level of the fault.
+    @type level: C{str}
     @ivar code: A simple code describing the fault.
+    @type code: C{str}
     @ivar details: Any extra details of the fault.
-    @ivar description: A longer description of the fault.
+    @type details: C{str}
+    @ivar description: Text description of the fault.
+    @type description: C{str}
 
-    @see: U{mx.rpc.Fault on Livedocs
-          <http://livedocs.adobe.com/flex/201/langref/mx/rpc/Fault.html>}
+    @see: U{mx.rpc.Fault on Livedocs (external)
+    <http://livedocs.adobe.com/flex/201/langref/mx/rpc/Fault.html>}
     """
-
     level = None
-
-    class __amf__:
-        static = ('level', 'code', 'type', 'details', 'description')
 
     def __init__(self, *args, **kwargs):
         self.code = kwargs.get('code', '')
@@ -330,28 +324,36 @@ class BaseFault(object):
         """
         raise get_exception_from_fault(self), self.description, None
 
+pyamf.register_class(BaseFault,
+    attrs=['level', 'code', 'type', 'details', 'description'])
 
 class ErrorFault(BaseFault):
     """
     I represent an error level fault.
     """
-
     level = 'error'
 
+pyamf.register_class(ErrorFault)
 
 def _read_header(stream, decoder, strict=False):
     """
-    Read AMF L{Message} header from the stream.
+    Read AMF L{Message} header.
 
-    @type stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
-    @param decoder: An AMF0 decoder.
-    @param strict: Use strict decoding policy. Default is C{False}. Will raise a
-        L{pyamf.DecodeError} if the data that was read from the stream does not
-        match the header length.
-    @return: A C{tuple} containing the name of the header, a C{bool}
-        determining if understanding this header is required and the decoded
-        data.
-    @note: Quite what understanding required headers actually means is unknown.
+    @type   stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
+    @param  stream: AMF data.
+    @type   decoder: L{amf0.Decoder<pyamf.amf0.Decoder>}
+    @param  decoder: AMF decoder instance
+    @type strict: C{bool}
+    @param strict: Use strict decoding policy. Default is C{False}.
+    @raise DecodeError: The data that was read from the stream
+    does not match the header length.
+
+    @rtype: C{tuple}
+    @return:
+     - Name of the header.
+     - A C{bool} determining if understanding this header is
+     required.
+     - Value of the header.
     """
     name_len = stream.read_ushort()
     name = stream.read_utf8_string(name_len)
@@ -369,19 +371,23 @@ def _read_header(stream, decoder, strict=False):
 
     return (name, required, data)
 
-
 def _write_header(name, header, required, stream, encoder, strict=False):
     """
     Write AMF message header.
 
-    @param name: Name of the header.
-    @param header: Header value.
-    @param required: Whether understanding this header is required (?).
-    @param stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>} that
-        will receive the encoded header.
-    @param encoder: An encoder capable of encoding C{AMF0}.
-    @param strict: Use strict encoding policy. Default is C{False}. Will write
-        the correct header length after writing the header.
+    @type   name: C{str}
+    @param  name: Name of the header.
+    @type   header:
+    @param  header: Raw header data.
+    @type   required: L{bool}
+    @param  required: Required header.
+    @type   stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
+    @param  stream: AMF data.
+    @type   encoder: L{amf0.Encoder<pyamf.amf0.Encoder>}
+    or L{amf3.Encoder<pyamf.amf3.Encoder>}
+    @param  encoder: AMF encoder instance.
+    @type strict: C{bool}
+    @param strict: Use strict encoding policy. Default is C{False}.
     """
     stream.write_ushort(len(name))
     stream.write_utf8_string(name)
@@ -399,36 +405,30 @@ def _write_header(name, header, required, stream, encoder, strict=False):
         stream.write_ulong(new_pos - old_pos)
         stream.seek(new_pos)
 
-
-def _read_body(stream, decoder, strict=False, logger=None):
+def _read_body(stream, decoder, strict=False):
     """
-    Read an AMF message body from the stream.
+    Read AMF message body.
 
-    @type stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
-    @param decoder: An AMF0 decoder.
-    @param strict: Use strict decoding policy. Default is `False`.
-    @param logger: Used to log interesting events whilst reading a remoting
-        body.
-    @type logger: A C{logging.Logger} instance or C{None}.
-    @return: A C{tuple} containing the C{id} of the request and the L{Request}
-        or L{Response}
+    @type   stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
+    @param  stream: AMF data.
+    @type   decoder: L{amf0.Decoder<pyamf.amf0.Decoder>}
+    @param  decoder: AMF decoder instance.
+    @type strict: C{bool}
+    @param strict: Use strict decoding policy. Default is C{False}.
+    @raise DecodeError: Data read from stream does not match body length.
+
+    @rtype: C{tuple}
+    @return: A C{tuple} containing:
+        - ID of the request
+        - L{Request} or L{Response}
     """
     def _read_args():
-        # we have to go through this insanity because it seems that amf0
-        # does not keep the array of args in the object references lookup
-        type_byte = stream.peek(1)
-
-        if type_byte == '\x11':
-            if not decoder.use_amf3:
-                raise pyamf.DecodeError(
-                    "Unexpected AMF3 type with incorrect message type")
-
-            return decoder.readElement()
-
-        if type_byte != '\x0a':
+        """
+        @raise pyamf.DecodeError: Array type required for request body.
+        """
+        if stream.read(1) != '\x0a':
             raise pyamf.DecodeError("Array type required for request body")
 
-        stream.read(1)
         x = stream.read_ulong()
 
         return [decoder.readElement() for i in xrange(x)]
@@ -439,16 +439,11 @@ def _read_body(stream, decoder, strict=False, logger=None):
     status = STATUS_OK
     is_request = True
 
-    for code, s in STATUS_CODES.iteritems():
-        if not target.endswith(s):
-            continue
-
-        is_request = False
-        status = code
-        target = target[:0 - len(s)]
-
-    if logger:
-        logger.debug('Remoting target: %r' % (target,))
+    for (code, s) in STATUS_CODES.iteritems():
+        if target.endswith(s):
+            is_request = False
+            status = code
+            target = target[:0 - len(s)]
 
     data_len = stream.read_ulong()
     pos = stream.tell()
@@ -463,23 +458,28 @@ def _read_body(stream, decoder, strict=False, logger=None):
             "length (%d != %d)" % (pos + data_len, stream.tell(),))
 
     if is_request:
-        return response, Request(target, body=data)
+        return (response, Request(target, body=data))
+    else:
+        if status == STATUS_ERROR and isinstance(data, pyamf.ASObject):
+            data = get_fault(data)
 
-    if status == STATUS_ERROR and isinstance(data, pyamf.ASObject):
-        data = get_fault(data)
-
-    return target, Response(data, status)
-
+        return (target, Response(data, status))
 
 def _write_body(name, message, stream, encoder, strict=False):
     """
     Write AMF message body.
 
     @param name: The name of the request.
-    @param message: The AMF L{Message}
+    @type name: C{basestring}
+    @param message: The AMF payload.
+    @type message: L{Request} or L{Response}
     @type stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
-    @param encoder: An AMF0 encoder.
-    @param strict: Use strict encoding policy. Default is `False`.
+    @type encoder: L{amf0.Encoder<pyamf.amf0.Encoder>}
+    @param encoder: Encoder to use.
+    @type strict: C{bool}
+    @param strict: Use strict encoding policy. Default is C{False}.
+
+    @raise TypeError: Unknown message type for C{message}.
     """
     def _encode_body(message):
         if isinstance(message, Response):
@@ -518,40 +518,40 @@ def _write_body(name, message, stream, encoder, strict=False):
     if not strict:
         stream.write_ulong(0)
         _encode_body(message)
+    else:
+        write_pos = stream.tell()
+        stream.write_ulong(0)
+        old_pos = stream.tell()
 
-        return
+        _encode_body(message)
+        new_pos = stream.tell()
 
-    write_pos = stream.tell()
-    stream.write_ulong(0)
-    old_pos = stream.tell()
-
-    _encode_body(message)
-    new_pos = stream.tell()
-
-    stream.seek(write_pos)
-    stream.write_ulong(new_pos - old_pos)
-    stream.seek(new_pos)
-
+        stream.seek(write_pos)
+        stream.write_ulong(new_pos - old_pos)
+        stream.seek(new_pos)
 
 def _get_status(status):
     """
     Get status code.
 
+    @type status: C{str}
+    @raise ValueError: The status code is unknown.
+    @return: Status code.
     @see: L{STATUS_CODES}
     """
-    if status not in STATUS_CODES:
+    if status not in STATUS_CODES.keys():
         # TODO print that status code..
         raise ValueError("Unknown status code")
 
     return STATUS_CODES[status]
 
-
 def get_fault_class(level, **kwargs):
+    code = kwargs.get('code', '')
+
     if level == 'error':
         return ErrorFault
 
     return BaseFault
-
 
 def get_fault(data):
     try:
@@ -570,33 +570,30 @@ def get_fault(data):
 
     return get_fault_class(level, **e)(**e)
 
-
-def decode(stream, strict=False, logger=None, timezone_offset=None):
+def decode(stream, context=None, strict=False):
     """
-    Decodes the incoming stream as a remoting message.
+    Decodes the incoming stream.
 
-    @type stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
-    @param strict: Enforce strict decoding. Default is `False`.
-    @param logger: Used to log interesting events whilst decoding a remoting
-        message.
-    @type logger: U{logging.Logger<http://
-        docs.python.org/library/logging.html#loggers>}
-    @param timezone_offset: The difference between the current timezone and
-        UTC. Date/times should always be handled in UTC to avoid confusion but
-        this is required for legacy systems.
-    @type timezone_offset: U{datetime.datetime.timedelta<http://
-        docs.python.org/library/datetime.html#datetime.timedelta}
+    @type   stream: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
+    @param  stream: AMF data.
+    @type   context: L{amf0.Context<pyamf.amf0.Context>} or
+    L{amf3.Context<pyamf.amf3.Context>}
+    @param  context: Context.
+    @type strict: C{bool}
+    @param strict: Enforce strict encoding. Default is C{False}.
 
-    @return: Message L{envelope<Envelope>}.
+    @raise DecodeError: Malformed stream.
+    @raise RuntimeError: Decoder is unable to fully consume the
+    stream buffer.
+
+    @return: Message envelope.
+    @rtype: L{Envelope}
     """
     if not isinstance(stream, util.BufferedByteStream):
         stream = util.BufferedByteStream(stream)
 
-    if logger:
-        logger.debug('remoting.decode start')
-
     msg = Envelope()
-    msg.amfVersion = stream.read_ushort()
+    msg.amfVersion = stream.read_uchar()
 
     # see http://osflash.org/documentation/amf/envelopes/remoting#preamble
     # why we are doing this...
@@ -604,11 +601,14 @@ def decode(stream, strict=False, logger=None, timezone_offset=None):
         raise pyamf.DecodeError("Malformed stream (amfVersion=%d)" %
             msg.amfVersion)
 
-    decoder = pyamf.get_decoder(pyamf.AMF0, stream, strict=strict,
-        timezone_offset=timezone_offset)
-    context = decoder.context
+    if context is None:
+        context = pyamf.get_context(pyamf.AMF0)
+    else:
+        context = copy.copy(context)
 
-    decoder.use_amf3 = msg.amfVersion == pyamf.AMF3
+    decoder = pyamf._get_decoder_class(pyamf.AMF0)(stream, context=context, strict=strict)
+    msg.clientType = stream.read_uchar()
+
     header_count = stream.read_ushort()
 
     for i in xrange(header_count):
@@ -620,70 +620,73 @@ def decode(stream, strict=False, logger=None, timezone_offset=None):
 
     body_count = stream.read_short()
 
-    for i in xrange(body_count):
-        context.clear()
+    for i in range(body_count):
+        context.reset()
 
-        target, payload = _read_body(stream, decoder, strict, logger)
+        target, payload = _read_body(stream, decoder, strict)
         msg[target] = payload
 
     if strict and stream.remaining() > 0:
         raise RuntimeError("Unable to fully consume the buffer")
 
-    if logger:
-        logger.debug('remoting.decode end')
-
     return msg
 
-
-def encode(msg, strict=False, logger=None, timezone_offset=None):
+def encode(msg, context=None, strict=False):
     """
-    Encodes and returns the L{msg<Envelope>} as an AMF stream.
+    Encodes AMF stream and returns file object.
 
-    @param strict: Enforce strict encoding. Default is C{False}. Specifically
+    @type   msg: L{Envelope}
+    @param  msg: The message to encode.
+    @type   context: L{amf0.Context<pyamf.amf0.Context>} or
+        L{amf3.Context<pyamf.amf3.Context>}
+    @param  context: Context.
+    @type strict: C{bool}
+    @param strict: Determines whether encoding should be strict. Specifically
         header/body lengths will be written correctly, instead of the default 0.
-        Default is `False`. Introduced in 0.4.
-    @param logger: Used to log interesting events whilst decoding a remoting
-        message.
-    @type logger: U{logging.Logger<http://
-        docs.python.org/library/logging.html#loggers>}
-    @param timezone_offset: The difference between the current timezone and
-        UTC. Date/times should always be handled in UTC to avoid confusion but
-        this is required for legacy systems.
-    @type timezone_offset: U{datetime.datetime.timedelta<http://
-        docs.python.org/library/datetime.html#datetime.timedelta}
-    @rtype: L{BufferedByteStream<pyamf.util.BufferedByteStream>}
+        Default is C{False}. Introduced in 0.4.
+    @rtype: C{StringIO}
+    @return: File object.
     """
+    def getNewContext():
+        if context:
+            new_context = copy.copy(context)
+            new_context.reset()
+
+            return new_context
+        else:
+            return pyamf.get_context(pyamf.AMF0)
+
     stream = util.BufferedByteStream()
+    encoder = pyamf._get_encoder_class(pyamf.AMF0)(stream, strict=strict)
 
-    encoder = pyamf.get_encoder(pyamf.AMF0, stream, strict=strict,
-        timezone_offset=timezone_offset)
-
-    if msg.amfVersion == pyamf.AMF3:
+    if msg.clientType == pyamf.ClientTypes.Flash9:
         encoder.use_amf3 = True
 
-    stream.write_ushort(msg.amfVersion)
-    stream.write_ushort(len(msg.headers))
+    stream.write_uchar(msg.amfVersion)
+    stream.write_uchar(msg.clientType)
+    stream.write_short(len(msg.headers))
 
     for name, header in msg.headers.iteritems():
-        _write_header(name, header, int(msg.headers.is_required(name)),
+        _write_header(
+            name, header, msg.headers.is_required(name),
             stream, encoder, strict)
 
     stream.write_short(len(msg))
 
     for name, message in msg.iteritems():
-        encoder.context.clear()
+        encoder.context = getNewContext()
 
         _write_body(name, message, stream, encoder, strict)
 
-    stream.seek(0)
-
     return stream
-
 
 def get_exception_from_fault(fault):
     """
+    @raise RemotingError: Default exception from fault.
     """
-    return pyamf.ERROR_CLASS_MAP.get(fault.code, RemotingError)
-
-
-pyamf.register_class(ErrorFault)
+    # XXX nick: threading problems here?
+    try:
+        return pyamf.ERROR_CLASS_MAP[fault.code]
+    except KeyError:
+        # default to RemotingError
+        return RemotingError

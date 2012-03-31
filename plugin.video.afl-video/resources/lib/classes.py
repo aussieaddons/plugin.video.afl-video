@@ -129,7 +129,8 @@ class Video(object):
 		self.id = d['id']
 		self.title = d['title']
 		self.description = d['description']
-		self.duration = d['duration']
+		if d.has_key('duration'):
+			self.duration = d['duration']
 		self.category = d['category']
 		self.rating = d['rating']
 		timestamp = time.mktime(time.strptime(d['date'], '%d/%m/%Y %H:%M:%S'))

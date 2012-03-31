@@ -1,5 +1,5 @@
-# Copyright (c) The PyAMF Project.
-# See LICENSE.txt for details.
+# Copyright (c) 2007-2009 The PyAMF Project.
+# See LICENSE for details.
 
 """
 AMF0 Remoting support.
@@ -7,12 +7,10 @@ AMF0 Remoting support.
 @since: 0.1.0
 """
 
-import traceback
-import sys
+import traceback, sys
 
 from pyamf import remoting
 from pyamf.remoting import gateway
-
 
 class RequestProcessor(object):
     def __init__(self, gateway):
@@ -50,7 +48,7 @@ class RequestProcessor(object):
         else:
             cls, e, tb = sys.exc_info()
 
-        return remoting.Response(build_fault(cls, e, tb, self.gateway.debug),
+        return remoting.Response(build_fault(cls, e, tb),
             status=remoting.STATUS_ERROR)
 
     def _getBody(self, request, response, service_request, **kwargs):
@@ -75,7 +73,7 @@ class RequestProcessor(object):
         try:
             service_request = self.gateway.getServiceRequest(request,
                 request.target)
-        except gateway.UnknownServiceError:
+        except gateway.UnknownServiceError, e:
             return self.buildErrorResponse(request)
 
         # we have a valid service, now attempt authentication
@@ -113,23 +111,15 @@ class RequestProcessor(object):
         except:
             return self.buildErrorResponse(request)
 
-
-def build_fault(cls, e, tb, include_traceback=False):
+def build_fault(cls, e, tb):
     """
     Builds a L{ErrorFault<pyamf.remoting.ErrorFault>} object based on the last
     exception raised.
-
-    If include_traceback is C{False} then the traceback will not be added to
-    the L{remoting.ErrorFault}.
     """
     if hasattr(cls, '_amf_code'):
         code = cls._amf_code
     else:
         code = cls.__name__
 
-    details = None
-
-    if include_traceback:
-        details = traceback.format_exception(cls, e, tb)
-
-    return remoting.ErrorFault(code=code, description=unicode(e), details=details)
+    return remoting.ErrorFault(code=code, description=str(e),
+        details=str(traceback.format_exception(cls, e, tb)).replace("\\n", ''))

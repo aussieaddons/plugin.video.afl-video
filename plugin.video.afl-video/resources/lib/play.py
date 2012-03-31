@@ -9,26 +9,47 @@ from pyamf.remoting.client import RemotingService
 
 import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 
-__addon__ = xbmcaddon.Addon()
+# Only use addon functions if we're on a new enough XBMC
 
 def get_url(video_id):
 	utils.log("Fetching video URL for content ID %s..." % video_id)
-
 	client = RemotingService('http://afl.bigpondvideo.com/App/AmfPhp/gateway.php')
 	service = client.getService('SEOPlayer')
-	video_url = service.getMediaURL({'cid': video_id})
+	base_url = service.getMediaURL({'cid': video_id})
+	video_url = quality_url(base_url)
+	utils.log("Video URL found %s" % video_url)
+	return video_url
 
+
+def quality_url(base_url):
+	# Only if we support addons will we allow this quality setting
+	# or else we'll just hardcode it to high quality
+	__addon__ = xbmcaddon.Addon()
 	quality =  __addon__.getSetting('QUALITY')
 
 	utils.log("Quality setting: %s" % quality)
 
-	# Get the video URL based on the addon quality setting
-	if quality == '0':
-		video_url = re.sub("2[mM][bB]{,1}.mp4", "172K.mp4", video_url)
-	elif quality == '1':
-		video_url = re.sub("2[mM][bB]{,1}.mp4", "1M.mp4", video_url)
+	# 2m
+	if base_url.endswith("2m.mp4"):
+		if quality == '0':  	video_url = base_url.replace("2m.mp4", "172k.mp4")
+		elif quality == '1': video_url = base_url.replace("2m.mp4", "1m.mp4")
+	# 2M
+	elif base_url.endswith("2M.mp4"):
+		if quality == '0': 	video_url = base_url.replace("2M.mp4", "172K.mp4")
+		elif quality == '1': video_url = base_url.replace("2M.mp4", "1M.mp4")
+	# 2mb	
+	elif base_url.endswith("2mb.mp4"):
+		if quality == '0':   video_url = base_url.replace("2mb.mp4", "172kb.mp4")
+		elif quality == '1': video_url = base_url.replace("2mb.mp4", "1mb.mp4")
+	# 2MB	
+	elif base_url.endswith("2MB.mp4"):
+		if quality == '0':   video_url = base_url.replace("2MB.mp4", "172KB.mp4")
+		elif quality == '1': video_url = base_url.replace("2MB.mp4", "1M.mp4")
 
-	utils.log("Video URL found %s" % video_url)
+	# High Quality
+	if quality == '2':
+		video_url = base_url
+
 	return video_url
 
 def play(url):
@@ -36,8 +57,8 @@ def play(url):
 	v.parse_xbmc_url(url)
 
 	# Show a dialog
-	pDialog = xbmcgui.DialogProgress()
-	pDialog.create(config.NAME, 'Starting video...')
+	d = xbmcgui.DialogProgress()
+	d.create(config.NAME, 'Starting video...')
 
 	try:
 		video_url = get_url(v.id)	
@@ -48,6 +69,6 @@ def play(url):
 	except:
 		# user cancelled dialog or an error occurred
 		d = xbmcgui.Dialog()
-		d.ok('Error', 'Encountered an error:', '  %s (%d) - %s' % (sys.exc_info()[ 2 ].tb_frame.f_code.co_name, sys.exc_info()[ 2 ].tb_lineno, sys.exc_info()[ 1 ]) )
-		return None
-		print "ERROR: %s (%d) - %s" % ( sys.exc_info()[ 2 ].tb_frame.f_code.co_name, sys.exc_info()[ 2 ].tb_lineno, sys.exc_info()[ 1 ], )
+		message = utils.dialog_error("Unable to play video")
+		d.ok(*message)
+		utils.log_error();

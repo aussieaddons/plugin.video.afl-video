@@ -1,4 +1,7 @@
-[B]Version 0.1.0[/B]
+[B]Version 0.2[/B]
+- Implement quality setting
+
+[B]Version 0.1[/B]
 - Initial version of Addon
 
 Credits
