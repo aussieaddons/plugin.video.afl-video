@@ -2,7 +2,6 @@ import os
 import sys
 import config
 import utils
-import comm
 
 try:
 	import xbmc, xbmcgui, xbmcplugin
