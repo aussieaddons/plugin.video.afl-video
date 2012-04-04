@@ -3,7 +3,6 @@ import urllib2
 import config
 import re
 import datetime, time
-from BeautifulSoup import BeautifulStoneSoup
 import classes
 
 try: 
