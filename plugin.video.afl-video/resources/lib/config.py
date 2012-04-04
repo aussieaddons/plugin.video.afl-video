@@ -1,7 +1,7 @@
 import os
 
 NAME = 'AFL Video'
-VERSION = '0.3'
+VERSION = '0.4'
 
 # Video quality
 QUAL_LOW = 0
