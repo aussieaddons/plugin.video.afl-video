@@ -2,6 +2,7 @@
 <addon id="plugin.video.afl-video" name="AFL Video" version="0.3" provider-name="Andy Botting">
    <requires>
       <import addon="xbmc.python" version="1.0"/>
+      <import addon="script.module.simplejson" version="2.0.10"/>
    </requires>
    <extension point="xbmc.python.pluginsource" provides="video" library="default.py">
     <provides>video</provides>
