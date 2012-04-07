@@ -16,8 +16,6 @@
 #    along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import os
-
 NAME = 'AFL Video'
 VERSION = '0.5'
 
@@ -31,7 +29,7 @@ CHANNELS = [
 	{ 'name': 'Matches',     'id': '9' },
 	{ 'name': 'Newsdesk',    'id': '10' },
 	{ 'name': 'Highlights',  'id': '11' },
-	{ 'name': 'Panel Shows', 'id': '13'},
+	{ 'name': 'Panel Shows', 'id': '13' },
 ]
 
 # Team ID (or channel number) was discovered from http://bigpondvideo.com/
