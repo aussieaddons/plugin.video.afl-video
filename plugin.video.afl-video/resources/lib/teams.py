@@ -1,3 +1,21 @@
+#
+#    AFL Video XBMC Plugin
+#    Copyright (C) 2012 Andy Botting
+#
+#    AFL Video is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    AFL Video is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
+#
+
 import os
 import sys
 import config
@@ -14,7 +32,7 @@ def make_list():
 	try:
 		# Show a dialog
 		pDialog = xbmcgui.DialogProgress()
-		pDialog.create('AFL Video', 'Getting Episode List')
+		pDialog.create('AFL Video', 'Getting Team List')
 		pDialog.update(50)
 
 		teams = config.TEAMS
