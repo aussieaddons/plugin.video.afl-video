@@ -21,16 +21,14 @@ import classes, config, utils
 from pyamf.remoting.client import RemotingService
 import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 
-# Only use addon functions if we're on a new enough XBMC
 
 def get_url(video_id):
 	utils.log("Fetching video URL for content ID %s..." % video_id)
 	client = RemotingService('http://afl.bigpondvideo.com/App/AmfPhp/gateway.php')
 	service = client.getService('SEOPlayer')
 	base_url = service.getMediaURL({'cid': video_id})
-	video_url = quality_url(base_url)
-	utils.log("Video URL found %s" % video_url)
-	return video_url
+	utils.log("Base URL found: %s" % base_url)
+	return base_url
 
 
 def quality_url(base_url):
@@ -39,44 +37,62 @@ def quality_url(base_url):
 	__addon__ = xbmcaddon.Addon()
 	quality =  __addon__.getSetting('QUALITY')
 
-	utils.log("Quality setting: %s" % quality)
-
-	# 2m
-	if base_url.endswith("2m.mp4"):
-		if quality == '0':  	video_url = base_url.replace("2m.mp4", "172k.mp4")
-		elif quality == '1': video_url = base_url.replace("2m.mp4", "1m.mp4")
-	# 2M
-	elif base_url.endswith("2M.mp4"):
-		if quality == '0': 	video_url = base_url.replace("2M.mp4", "172K.mp4")
-		elif quality == '1': video_url = base_url.replace("2M.mp4", "1M.mp4")
-	# 2mb	
-	elif base_url.endswith("2mb.mp4"):
-		if quality == '0':   video_url = base_url.replace("2mb.mp4", "172kb.mp4")
-		elif quality == '1': video_url = base_url.replace("2mb.mp4", "1mb.mp4")
-	# 2MB	
-	elif base_url.endswith("2MB.mp4"):
-		if quality == '0':   video_url = base_url.replace("2MB.mp4", "172KB.mp4")
-		elif quality == '1': video_url = base_url.replace("2MB.mp4", "1M.mp4")
-
 	# High Quality
-	if quality == '2':
+	if quality == config.QUAL_HIGH:
 		video_url = base_url
+	else:
+		# 2m
+		if base_url.endswith("2m.mp4"):
+			if quality == config.QUAL_LOW:
+				video_url = base_url.replace("2m.mp4", "172k.mp4")
+			elif quality == config.QUAL_MED:
+				video_url = base_url.replace("2m.mp4", "1m.mp4")
+		# 2M
+		elif base_url.endswith("2M.mp4"):
+			if quality == config.QUAL_LOW:
+				video_url = base_url.replace("2M.mp4", "172K.mp4")
+			elif quality == config.QUAL_MED:
+				video_url = base_url.replace("2M.mp4", "1M.mp4")
+		# 2mb
+		elif base_url.endswith("2mb.mp4"):
+			if quality == config.QUAL_LOW:
+				video_url = base_url.replace("2mb.mp4", "172kb.mp4")
+			elif quality == config.QUAL_MED:
+				video_url = base_url.replace("2mb.mp4", "1mb.mp4")
+		# 2MB
+		elif base_url.endswith("2MB.mp4"):
+			if quality == config.QUAL_LOW:
+				video_url = base_url.replace("2MB.mp4", "172KB.mp4")
+			elif quality == config.QUAL_MED:
+				video_url = base_url.replace("2MB.mp4", "1MB.mp4")
+		else:
+			utils.log("Unknown video quality, playing default")
+			video_url = base_url
 
 	return video_url
 
+
 def play(url):
+	# Show a dialog
+	d = xbmcgui.DialogProgress()
+	d.create(config.NAME, '')
+	d.update(20, 'Fetching video parameters...')
+
 	v = classes.Video()
 	v.parse_xbmc_url(url)
 
-	# Show a dialog
-	d = xbmcgui.DialogProgress()
-	d.create(config.NAME, 'Starting video...')
-
 	try:
-		video_url = get_url(v.id)	
+		d.update(40, 'Fetching video URL...')
+		base_url = get_url(v.id)
+
+		d.update(60, 'Fetching video URL...')
+		video_url = quality_url(base_url)
+
+		d.update(80, 'Building playlist...')
 		listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
 		listitem.setInfo('video', v.get_xbmc_list_item())
 	
+		d.update(99, 'Starting video...')
 		xbmc.Player().play(video_url, listitem)
 	except:
 		# user cancelled dialog or an error occurred

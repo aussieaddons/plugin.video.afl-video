@@ -24,9 +24,6 @@ import urllib
 import time
 import config
 
-#import xbmcaddon
-#__addon__ = xbmcaddon.Addon(os.path.basename(os.getcwd()))
-
 class Video(object):
 
 	def __init__(self):
@@ -134,7 +131,9 @@ class Video(object):
 		url = "%s&%s=%s" % (url, "category", urllib.quote_plus(self.category))
 		url = "%s&%s=%s" % (url, "rating", self.rating)
 		url = "%s&%s=%s" % (url, "date", self.date.strftime("%d/%m/%Y %H:%M:%S"))
-		url = "%s&%s=%s" % (url, "thumbnail", urllib.quote_plus(self.thumbnail))
+		if self.thumbnail:
+			url = "%s&%s=%s" % (url, "thumbnail", urllib.quote_plus(self.thumbnail))
+
 		return url
 
 

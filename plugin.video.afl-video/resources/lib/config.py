@@ -17,42 +17,44 @@
 #
 
 NAME = 'AFL Video'
-VERSION = '0.5'
+VERSION = '0.6'
 
-# Video quality
-QUAL_LOW = 0
-QUAL_MED = 1
-QUAL_HIGH = 2
+# Video quality static definitions with match the setings.xml
+QUAL_LOW = '0'
+QUAL_MED = '1'
+QUAL_HIGH = '2'
 
-CHANNELS = [
-	{ 'name': 'Teams',       'id': 'teams' },
-	{ 'name': 'Matches',     'id': '9' },
-	{ 'name': 'Newsdesk',    'id': '10' },
-	{ 'name': 'Highlights',  'id': '11' },
-	{ 'name': 'Panel Shows', 'id': '13' },
-]
-
-# Team ID (or channel number) was discovered from http://bigpondvideo.com/
+# Standard Bigpond Sport/AFL channels
+# Channel number was discovered from http://bigpondvideo.com/
 # and using a web proxy, extract the AMF data when clicking each channel
 # to find its 'NavID' 
+# channel value matches with the teams list in the settings.xml
+CHANNELS = [
+	{ 'name': 'Teams',       'channel': 'teams' },
+	{ 'name': 'Matches',     'channel': '9' },
+	{ 'name': 'Newsdesk',    'channel': '10' },
+	{ 'name': 'Highlights',  'channel': '11' },
+	{ 'name': 'Panel Shows', 'channel': '13' },
+]
+
 TEAMS = [
-	{ 'name': 'Adelaide',            'id': '14',   'thumb': 'adel.gif' },
-	{ 'name': 'Brisbane',            'id': '22',   'thumb': 'bris.gif' },
-	{ 'name': 'Carlton',             'id': '30',   'thumb': 'carl.gif' },
-	{ 'name': 'Collingwood',         'id': '38',   'thumb': 'coll.gif' },
-	{ 'name': 'Essendon',            'id': '46',   'thumb': 'ess.gif'  },
-	{ 'name': 'Fremantle',           'id': '54',   'thumb': 'frem.gif' },
-	{ 'name': 'Gold Coast',          'id': '2734', 'thumb': 'gcfc.gif' },
-	{ 'name': 'Geelong',             'id': '62',   'thumb': 'geel.gif' },
-	{ 'name': 'Greater West Sydney', 'id': '3798', 'thumb': 'gws.gif'  },
-	{ 'name': 'Hawthorn',            'id': '70',   'thumb': 'haw.gif'  },
-	{ 'name': 'Melbourne',           'id': '86',   'thumb': 'melb.gif' },
-	{ 'name': 'North Melbourne',     'id': '78',   'thumb': 'nmfc.gif' },
-	{ 'name': 'Port Adelaide',       'id': '94',   'thumb': 'port.gif' },
-	{ 'name': 'Richmond',            'id': '102',  'thumb': 'rich.gif' },
-	{ 'name': 'St. Kilda',           'id': '110',  'thumb': 'stk.gif'  },
-	{ 'name': 'Sydney',              'id': '118',  'thumb': 'syd.gif'  },
-	{ 'name': 'West Coast',          'id': '126',  'thumb': 'wce.gif'  },
-	{ 'name': 'Western Bulldogs',    'id': '134',  'thumb': 'wb.gif'   },
+	{'id': '1',  'name': 'Adelaide',            'channel': '14',   'thumb': 'adel.gif' },
+	{'id': '2',  'name': 'Brisbane',            'channel': '22',   'thumb': 'bris.gif' },
+	{'id': '3',  'name': 'Carlton',             'channel': '30',   'thumb': 'carl.gif' },
+	{'id': '4',  'name': 'Collingwood',         'channel': '38',   'thumb': 'coll.gif' },
+	{'id': '5',  'name': 'Essendon',            'channel': '46',   'thumb': 'ess.gif'  },
+	{'id': '6',  'name': 'Fremantle',           'channel': '54',   'thumb': 'frem.gif' },
+	{'id': '7',  'name': 'Gold Coast',          'channel': '2734', 'thumb': 'gcfc.gif' },
+	{'id': '8',  'name': 'Geelong',             'channel': '62',   'thumb': 'geel.gif' },
+	{'id': '9',  'name': 'Greater West Sydney', 'channel': '3798', 'thumb': 'gws.gif'  },
+	{'id': '10', 'name': 'Hawthorn',            'channel': '70',   'thumb': 'haw.gif'  },
+	{'id': '11', 'name': 'Melbourne',           'channel': '86',   'thumb': 'melb.gif' },
+	{'id': '12', 'name': 'North Melbourne',     'channel': '78',   'thumb': 'nmfc.gif' },
+	{'id': '13', 'name': 'Port Adelaide',       'channel': '94',   'thumb': 'port.gif' },
+	{'id': '14', 'name': 'Richmond',            'channel': '102',  'thumb': 'rich.gif' },
+	{'id': '15', 'name': 'St. Kilda',           'channel': '110',  'thumb': 'stk.gif'  },
+	{'id': '16', 'name': 'Sydney',              'channel': '118',  'thumb': 'syd.gif'  },
+	{'id': '17', 'name': 'West Coast',          'channel': '126',  'thumb': 'wce.gif'  },
+	{'id': '18', 'name': 'Western Bulldogs',    'channel': '134',  'thumb': 'wb.gif'   },
 ]
 

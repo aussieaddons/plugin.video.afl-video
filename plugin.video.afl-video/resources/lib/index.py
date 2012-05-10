@@ -22,7 +22,7 @@ import config
 import utils
 
 try:
-	import xbmc, xbmcgui, xbmcplugin
+	import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 except ImportError:
 	pass 
 
@@ -31,9 +31,20 @@ def make_list():
 	try:
 		items = []
 
+		__addon__ = xbmcaddon.Addon()
+		favourite_team =  __addon__.getSetting('TEAM')
+
+		if favourite_team > 0:
+			for team in config.TEAMS:
+				if favourite_team == team['id']:
+					items.append({'name': team['name'], 'channel': team['channel']})
+
+
 		# Add the other feeds listed in the config file
 		for channel in config.CHANNELS:
-			items.append({'name': channel['name'], 'id': channel['id']})
+			items.append({'name': channel['name'], 'channel': channel['channel']})
+
+		items.append({'name': 'Settings', 'channel': 'settings'})
 
 		# fill media list
 		ok = fill_media_list(items)
@@ -52,8 +63,8 @@ def fill_media_list(items):
 		ok = True
 		# enumerate through the list of categories and add the item to the media list
 		for i in items:
-			url = "%s?channel=%s" % (sys.argv[0], i['id'])
-			#thumbnail = get_thumbnail(c.id)
+			url = "%s?channel=%s" % (sys.argv[0], i['channel'])
+			#thumbnail = get_thumbnail(c.channel)
 			icon = "defaultfolder.png"
 			listitem = xbmcgui.ListItem(i['name'], iconImage=icon)
 			#listitem.setInfo('video',{'episode':s.get_num_episodes()})

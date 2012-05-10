@@ -65,7 +65,7 @@ def fill_team_list(teams):
 			thumbnail = os.path.join(current_dir, "..", "..", "resources", "img", t['thumb'])
 			utils.log("Thumbnail: %s" % thumbnail)
 			listitem = xbmcgui.ListItem(label=t['name'], iconImage=thumbnail, thumbnailImage=thumbnail)
-			url = "%s?channel=%s" % (sys.argv[0], t['id'])
+			url = "%s?channel=%s" % (sys.argv[0], t['channel'])
 
 			# Add the item to the list
 			ok = xbmcplugin.addDirectoryItem(

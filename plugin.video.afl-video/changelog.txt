@@ -1,3 +1,8 @@
+[B]Version 0.6[/B]
+- Add 'Favourite Team' option
+- Add settings to main menu
+- Fix for some videos that failed to play
+
 [B]Version 0.5[/B]
 - Fix simplejson dependency
 
@@ -14,6 +19,7 @@
 [B]Version 0.1[/B]
 - Initial version of Addon
 
-Credits
-================
+[B]Credits[/B]
 Created by Andy Botting (andybz)
+Thanks to Tony Malloy for his photo 'The MCG From On High':
+http://www.flickr.com/photos/awmalloy/2813735672/

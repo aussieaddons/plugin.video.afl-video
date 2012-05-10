@@ -2,4 +2,5 @@
 <settings>
 	<!-- High Quality -->
 	<setting id="QUALITY" type="enum" label="10001" values="Low (172k/s)|Medium (1Mb/s)|High (2Mb/s)" default="2" />
+	<setting id="TEAM" type="enum" label="10002" values="None|Adelaide|Brisbane|Carlton|Collingwood|Essendon|Fremantle|Gold Coast|Geelong|Greater West Sydney|Hawthorn|Melbourne|North Melbourne|Port Adelaide|Richmond|St. Kilda|Sydney|West Coast|Western Bulldogs" default="0" />
 </settings>

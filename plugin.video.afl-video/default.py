@@ -19,6 +19,11 @@
 import os
 import sys
 
+try:
+	import xbmc, xbmcgui, xbmcplugin, xbmcaddon
+except ImportError:
+	pass
+
 # Add our resources/lib to the python path
 try:
 	current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +36,8 @@ import utils, config, index, teams, videos, play, pyamf
 
 utils.log('Initialised')
 
+__addon__ = xbmcaddon.Addon()
+
 if __name__ == "__main__" :
 	params_str = sys.argv[2]
 	params = utils.get_url(params_str)
@@ -41,6 +48,8 @@ if __name__ == "__main__" :
 		if params.has_key('channel'):
 			if params['channel'] == 'teams':
 				teams.make_list()
+			elif params['channel'] == 'settings':
+				__addon__.openSettings()
 			else:
 				videos.make_list(params_str)
 
