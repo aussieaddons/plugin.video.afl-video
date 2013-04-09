@@ -39,7 +39,7 @@ For AppleTV:
 
 ### Reporting an issue
 
-For any issues or bug reports, please file them on the [issues page]. [issues]
+For any issues or bug reports, please file them on the [issues page] [issues].
 
 Please include log output if possible, using Github Gist or Pastebin.com.
 
