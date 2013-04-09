@@ -10,9 +10,8 @@ internationally.
 
 Installation
 ------------
-This plugin is available as part of the XBMC CatchUp TV AU repository, but
-you'll always find the latest version at:
-  http://code.google.com/p/xbmc-catchuptv-au/downloads/list?q=label:Plugin-AFL_Video
+This plugin is available as part of the [XBMC CatchUp TV AU repository] [repository]
+but you'll always find the latest version [here] [download]
 
 Download the latest ZIP file from the downloads section, and put it into your
 'addons' directory of XBMC. This will differ between platforms.
@@ -71,3 +70,6 @@ For AppleTV:
 Contact Me
 ----------
 For anything else, you can contact me by email at andy#andybotting.com
+
+[repository]: http://code.google.com/p/xbmc-catchuptv-au
+[download]: http://code.google.com/p/xbmc-catchuptv-au/downloads/list?q=label:Plugin-AFL_Video
