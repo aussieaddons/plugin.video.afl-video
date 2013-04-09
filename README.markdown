@@ -39,9 +39,7 @@ For AppleTV:
 
 ### Reporting an issue
 
-For any issues or bug reports, please file them at the GitHub issues part of
-this project:
-https://github.com/andybotting/xbmc-addon-afl-video/issues
+For any issues or bug reports, please file them on the [issues page]. [issues]
 
 Please include log output if possible, using Github Gist or Pastebin.com.
 
@@ -73,3 +71,4 @@ For anything else, you can contact me by email at andy#andybotting.com
 
 [repository]: http://code.google.com/p/xbmc-catchuptv-au
 [download]: http://code.google.com/p/xbmc-catchuptv-au/downloads/list?q=label:Plugin-AFL_Video
+[issues]: https://github.com/andybotting/xbmc-addon-afl-video/issues
