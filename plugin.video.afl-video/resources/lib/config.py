@@ -17,12 +17,18 @@
 #
 
 NAME = 'AFL Video'
-VERSION = '0.6'
+VERSION = '0.7'
 
 # Video quality static definitions with match the setings.xml
 QUAL_LOW = '0'
 QUAL_MED = '1'
 QUAL_HIGH = '2'
+
+# These values match the bitrate given in the video data
+VIDEO_QUALITY = { '0': 172000,
+                  '1': 1024000,
+                  '2': 2048000 }
+
 
 # Standard Bigpond Sport/AFL channels
 # Channel number was discovered from http://bigpondvideo.com/

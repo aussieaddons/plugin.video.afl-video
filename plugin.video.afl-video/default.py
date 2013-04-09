@@ -32,7 +32,7 @@ except:
 
 sys.path.append( os.path.join( current_dir, "resources", "lib" ) )
 
-import utils, config, index, teams, videos, play, pyamf
+import utils, config, comm, index, teams, videos, play, pyamf
 
 utils.log('Initialised')
 

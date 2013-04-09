@@ -1,68 +1,31 @@
 #
-#    AFL Video XBMC Plugin
-#    Copyright (C) 2012 Andy Botting
+#	 AFL Video XBMC Plugin
+#	 Copyright (C) 2012 Andy Botting
 #
-#    AFL Video is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#	 AFL Video is free software: you can redistribute it and/or modify
+#	 it under the terms of the GNU General Public License as published by
+#	 the Free Software Foundation, either version 3 of the License, or
+#	 (at your option) any later version.
 #
-#    AFL Video is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#	 AFL Video is distributed in the hope that it will be useful,
+#	 but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	 GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
-#    along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
+#	 You should have received a copy of the GNU General Public License
+#	 along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 import sys
 import config
 import utils
 import classes
+import comm
 
 try:
 	import xbmc, xbmcgui, xbmcplugin
 except ImportError:
 	pass
-
-from pyamf.remoting.client import RemotingService
-
-def parse_video(video_item):
-	v = video_item['content']
-	new_video = classes.Video()
-	new_video.id = v['contentId']
-	new_video.title = v['title']
-	new_video.description = v['description']
-	new_video.duration = v['duration']
-	new_video.thumbnail = v['imageUrl']
-	return new_video
-
-
-def get_videos(channel_id):
-	videos = []
-	client = RemotingService('http://afl.bigpondvideo.com/App/AmfPhp/gateway.php')
-	service = client.getService('Miscellaneous')
-	params = {
-		'navId': channel_id, 
-		'startRecord': '0', 
-		'howMany': '50', 
-		'platformId': '1', 
-		'phpFunction': 'getClipList', 
-		'asFunction': 'publishClipList'
-	}
-	
-	videos_list = service.getClipList(params)
-	if videos_list:
-		for video_item in videos_list[0]['items']:
-			video = parse_video(video_item)
-			videos.append(video)
-		return videos
-	else:
-		d = xbmcgui.Dialog()
-		msg = utils.dialog_message("Video list returned no results.")
-		d.ok(*msg)
-		return
 
 def make_list(url):
 	params = utils.get_url(url)
@@ -74,7 +37,7 @@ def make_list(url):
 	pDialog = xbmcgui.DialogProgress()
 	pDialog.create(config.NAME, 'Fetching video list...')
 
-	videos = get_videos(channel)
+	videos = comm.get_videos(channel)
 
 	utils.log("Found %s videos" % len(videos))
 
@@ -91,6 +54,7 @@ def fill_video_list(videos):
 		for v in videos:
 			listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
 			listitem.setInfo('video', v.get_xbmc_list_item())
+			listitem.addStreamInfo('video', v.get_xbmc_stream_info())
 	
 			# Build the URL for the program, including the list_info
 			url = "%s?%s" % (sys.argv[0], v.make_xbmc_url())

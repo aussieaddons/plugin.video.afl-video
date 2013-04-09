@@ -27,16 +27,16 @@ import config
 class Video(object):
 
 	def __init__(self):
-		self.id = -1
+		self.id = None
 		self.title = ''
 		self.category = 'Sport'
-		self.keywords = []
 		self.rating = 'PG'
-		self.description = None
-		self.duration = None
+		self.description = ''
+		self.duration = 0
 		self.season = None
 		self.date = datetime.datetime.now()
-		self.thumbnail = None
+		self.thumbnail = ''
+		self.url = None
 
 	def __repr__(self):
 		return self.title
@@ -70,7 +70,8 @@ class Video(object):
 		""" Return a string representing the duration of the program.
 			E.g. 00:30 (30 minutes)
 		"""
-		return self.duration
+		seconds = int(self.duration)
+		return seconds
 
 	def get_date(self):
 		""" Return a string of the date in the format 2010-02-28
@@ -78,63 +79,59 @@ class Video(object):
 		"""
 		return self.date.strftime("%Y-%m-%d")
 
-	def get_year(self):
-		""" Return an integer of the year of publish date
-		"""
-		return self.date.year
-
-	def get_season(self):
-		""" Return an integer of the Series, discovered by a regular
-			expression from the orginal title, unless its not available,
-			then a 0 will be returned.
-		"""
-		if self.season is None:
-			return self.get_year()
-		return int(self.season)
-
 	def get_thumbnail(self):
-		""" Return a full URL of the thumbnail for the video.
-			In many cases, a high-res URL is available, but we can't really
-			tell if it exists or not without checking for a 200 response.
+		""" Returns the thumbnail
 		"""
-		thumbnail_standard = "http://bigpondvideo.com/web/images/content/%s" % self.thumbnail
-		thumbnail_highres = thumbnail_standard.replace('89x50.jpg', '326x184.jpg')
-		return thumbnail_highres
+		if self.thumbnail:
+			thumb = utils.descape(self.thumbnail)
+			thumb = thumb.replace(' ','%20')
+			return thumb
+		return ''
+
+	def get_url(self):
+		return self.url
 
 	def get_xbmc_list_item(self):
 		""" Returns a dict of program information, in the format which
 			XBMC requires for video metadata.
 		"""
-		info_dict = {
-			'title': self.get_title(),
-			'description': self.get_description(),
-			'genre': self.get_category(), 
-		}
-
-		if self.duration: 
-			info_dict['duration'] = self.get_duration()
-		
-		if self.description:
+		info_dict = {}
+		if self.get_title():
+			info_dict['title'] = self.get_title()
+		if self.get_description():
 			info_dict['plot'] = self.get_description()
+		if self.get_description():
+			info_dict['plotoutline'] = self.get_description()
+		if self.get_duration():
+			info_dict['duration'] = self.get_duration() / 60 # XBMC uses minutes
+		if self.get_date():
+			info_dict['aired'] = self.get_date()
+		return info_dict
 
+
+	def get_xbmc_stream_info(self):
+		"""
+			Return a stream info dict
+		"""
+		info_dict = {}
+		if self.get_duration():
+			info_dict['duration'] = self.get_duration()
 		return info_dict
 
 	def make_xbmc_url(self):
 		""" Returns a string which represents the program object, but in
 			a format suitable for passing as a URL.
 		"""
-		url = "%s=%s" % ("id", self.id)
-		url = "%s&%s=%s" % (url, "title", urllib.quote_plus(self.title))
-		url = "%s&%s=%s" % (url, "description", urllib.quote_plus(self.description.encode('ascii','replace')))
-		if self.duration:
-			url = "%s&%s=%s" % (url, "duration", urllib.quote_plus(self.duration))
-		url = "%s&%s=%s" % (url, "category", urllib.quote_plus(self.category))
-		url = "%s&%s=%s" % (url, "rating", self.rating)
-		url = "%s&%s=%s" % (url, "date", self.date.strftime("%d/%m/%Y %H:%M:%S"))
-		if self.thumbnail:
-			url = "%s&%s=%s" % (url, "thumbnail", urllib.quote_plus(self.thumbnail))
+		d = {}
+		if self.id:            d['id'] = self.id
+		if self.title:         d['title'] = self.title
+		if self.description:   d['description'] = self.description
+		if self.duration:      d['duration'] = self.duration
+		if self.date:          d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
+		if self.thumbnail:     d['thumbnail'] = self.thumbnail
+		if self.url:           d['url'] = self.url
 
-		return url
+		return utils.make_url(d)
 
 
 	def parse_xbmc_url(self, string):
@@ -142,14 +139,15 @@ class Video(object):
 			program object
 		"""
 		d = utils.get_url(string)
-		self.id = d['id']
-		self.title = d['title']
-		self.description = d['description']
-		if d.has_key('duration'):
-			self.duration = d['duration']
-		self.category = d['category']
-		self.rating = d['rating']
-		timestamp = time.mktime(time.strptime(d['date'], '%d/%m/%Y %H:%M:%S'))
-		self.date = datetime.date.fromtimestamp(timestamp)
-		self.thumbnail = d['thumbnail']
+		self.id            = d.get('id')
+		self.title         = d.get('title')
+		self.description   = d.get('description')
+		self.duration      = d.get('duration')
+		self.rating        = d.get('rating')
+		self.url           = urllib.unquote_plus(d.get('url'))
+		self.thumbnail     = urllib.unquote_plus(d.get('thumbnail'))
+		if d.has_key('date'):
+			timestamp = time.mktime(time.strptime(d['date'], '%Y-%m-%d %H:%M:%S'))
+			self.date = datetime.date.fromtimestamp(timestamp)
+
 
