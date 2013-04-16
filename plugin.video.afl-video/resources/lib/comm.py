@@ -65,7 +65,9 @@ def parse_amf_video(video_item):
 		new_video.duration = 3600*h + 60*m + s
 
 	# Replace to higher res thumbnails
-	new_video.thumbnail = v['imageUrl'].replace('89x50.jpg', '326x184.jpg')
+	if v['imageUrl']:
+		new_video.thumbnail = v['imageUrl'].replace('89x50.jpg', '326x184.jpg')
+
 	return new_video
 
 def parse_json_video(video_data):
