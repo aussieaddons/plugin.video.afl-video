@@ -46,9 +46,12 @@ if __name__ == "__main__" :
 		index.make_list()
 	else:
 		if params.has_key('channel'):
-			if params['channel'] == 'teams':
+			videos.make_list(params_str)
+
+		elif params.has_key('category'):
+			if params['category'] == 'Club Video':
 				teams.make_list()
-			elif params['channel'] == 'settings':
+			elif params['category'] == 'Settings':
 				__addon__.openSettings()
 			else:
 				videos.make_list(params_str)

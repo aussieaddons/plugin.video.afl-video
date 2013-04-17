@@ -28,28 +28,27 @@ except ImportError:
 	pass
 
 def make_list(url):
-	params = utils.get_url(url)
-	channel = params['channel']
 
-	utils.log("Fetching video list for channel %s..." % channel)
-
-	# Show a dialog
-	pDialog = xbmcgui.DialogProgress()
-	pDialog.create(config.NAME, 'Fetching video list...')
-
-	videos = comm.get_videos(channel)
-
-	utils.log("Found %s videos" % len(videos))
-
-	# fill media list
-	ok = fill_video_list(videos)
-
-	# send notification we're finished, successfully or unsuccessfully
-	xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-
-
-def fill_video_list(videos):
 	try:
+		params = utils.get_url(url)
+
+		# Show a dialog
+		d = xbmcgui.DialogProgress()
+		d.create(config.NAME, '')
+		d.update(50, 'Fetching video list...')
+
+		# Old-style video index (used for team video)
+		if params.has_key('channel'):
+			channel = params['channel']
+			videos = comm.get_videos(channel)
+		# New-style video index
+		elif params.has_key('category'):
+			category = params['category']
+			videos = comm.get_videos_new(category)
+
+		utils.log("Found %s videos" % len(videos))
+
+		# fill media list
 		ok = True
 		for v in videos:
 			listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
@@ -61,6 +60,8 @@ def fill_video_list(videos):
 
 			# Add the program item to the list
 			ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=listitem, isFolder=False)
+
+		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 		xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
 	except:
 		# user cancelled dialog or an error occurred
@@ -68,5 +69,3 @@ def fill_video_list(videos):
 		msg = utils.dialog_error("Unable to fetch video list")
 		d.ok(*msg)
 		utils.log_error();
-	return ok
-

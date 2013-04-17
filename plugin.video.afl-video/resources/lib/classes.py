@@ -34,8 +34,8 @@ class Video(object):
 		self.description = ''
 		self.duration = 0
 		self.season = None
-		self.date = datetime.datetime.now()
-		self.thumbnail = ''
+		self.date = None
+		self.thumbnail = None
 		self.url = None
 
 	def __repr__(self):
@@ -47,8 +47,7 @@ class Video(object):
 	def get_title(self):
 		""" Return a string of the title, nicely formatted for XBMC list
 		"""
-		title = self.title
-		return title
+		return self.title
 
 	def get_description(self):
 		""" Return a string the program description, after running it through
@@ -77,7 +76,9 @@ class Video(object):
 		""" Return a string of the date in the format 2010-02-28
 			which is useful for XBMC labels.
 		"""
-		return self.date.strftime("%Y-%m-%d")
+		if self.date:
+			return self.date.strftime("%Y-%m-%d")
+		return None
 
 	def get_thumbnail(self):
 		""" Returns the thumbnail
@@ -96,18 +97,12 @@ class Video(object):
 			XBMC requires for video metadata.
 		"""
 		info_dict = {}
-		if self.get_title():
-			info_dict['title'] = self.get_title()
-		if self.get_description():
-			info_dict['plot'] = self.get_description()
-		if self.get_description():
-			info_dict['plotoutline'] = self.get_description()
-		if self.get_duration():
-			info_dict['duration'] = self.get_duration() / 60 # XBMC uses minutes
-		if self.get_date():
-			info_dict['aired'] = self.get_date()
+		if self.get_title():       info_dict['title'] = self.get_title()
+		if self.get_description(): info_dict['plot'] = self.get_description()
+		if self.get_description(): info_dict['plotoutline'] = self.get_description()
+		if self.get_duration():    info_dict['duration'] = self.get_duration() / 60 # XBMC uses minutes
+		if self.get_date():        info_dict['aired'] = self.get_date()
 		return info_dict
-
 
 	def get_xbmc_stream_info(self):
 		"""
@@ -123,13 +118,13 @@ class Video(object):
 			a format suitable for passing as a URL.
 		"""
 		d = {}
-		if self.id:            d['id'] = self.id
-		if self.title:         d['title'] = self.title
-		if self.description:   d['description'] = self.description
-		if self.duration:      d['duration'] = self.duration
-		if self.date:          d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
-		if self.thumbnail:     d['thumbnail'] = self.thumbnail
-		if self.url:           d['url'] = self.url
+		if self.id:          d['id'] = self.id
+		if self.title:       d['title'] = self.title
+		if self.description: d['description'] = self.description
+		if self.duration:    d['duration'] = self.duration
+		if self.date:        d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
+		if self.thumbnail:   d['thumbnail'] = self.thumbnail
+		if self.url:         d['url'] = self.url
 
 		return utils.make_url(d)
 
@@ -139,13 +134,12 @@ class Video(object):
 			program object
 		"""
 		d = utils.get_url(string)
-		self.id            = d.get('id')
-		self.title         = d.get('title')
-		self.description   = d.get('description')
-		self.duration      = d.get('duration')
-		self.rating        = d.get('rating')
-		self.url           = urllib.unquote_plus(d.get('url'))
-		self.thumbnail     = urllib.unquote_plus(d.get('thumbnail'))
+		if d.has_key('id'):          self.id          = d.get('id')
+		if d.has_key('title'):       self.title       = d.get('title')
+		if d.has_key('description'): self.description = d.get('description')
+		if d.has_key('duration'):    self.duration    = d.get('duration')
+		if d.has_key('url'):         self.url         = urllib.unquote_plus(d.get('url'))
+		if d.has_key('thumbnail'):   self.thumbnail   = urllib.unquote_plus(d.get('thumbnail'))
 		if d.has_key('date'):
 			timestamp = time.mktime(time.strptime(d['date'], '%Y-%m-%d %H:%M:%S'))
 			self.date = datetime.date.fromtimestamp(timestamp)

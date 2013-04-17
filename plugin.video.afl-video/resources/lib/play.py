@@ -23,24 +23,26 @@ import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 
 def play(url):
 
-	params = utils.get_url(url)
-	print params
-	video_id = params['id']
-
-	# Show a dialog
-	d = xbmcgui.DialogProgress()
-	d.create(config.NAME, '')
-	d.update(20, 'Fetching video parameters...')
-
 	try:
-		d.update(50, 'Fetching video URL...')
-		v = comm.get_video(video_id)
+		params = utils.get_url(url)
+
+		if params.has_key('id'):
+			video_id = params['id']
+			v = comm.get_video(video_id)
+		elif params.has_key('url'):
+			# New style
+			v = classes.Video()
+			v.parse_xbmc_url(url)
+
+		# Show a dialog
+		d = xbmcgui.DialogProgress()
+		d.create(config.NAME, '')
+		d.update(50, 'Starting video...')
 
 		listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
 		listitem.addStreamInfo('video', v.get_xbmc_stream_info())
 		listitem.setInfo('video', v.get_xbmc_list_item())
 	
-		d.update(99, 'Starting video...')
 		xbmc.Player().play(v.get_url(), listitem)
 	except:
 		# user cancelled dialog or an error occurred

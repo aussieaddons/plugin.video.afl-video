@@ -17,7 +17,7 @@
 #
 
 NAME = 'AFL Video'
-VERSION = '0.7'
+VERSION = '0.8'
 
 # Video quality static definitions with match the setings.xml
 QUAL_LOW = '0'
@@ -25,23 +25,37 @@ QUAL_MED = '1'
 QUAL_HIGH = '2'
 
 # These values match the bitrate given in the video data
-VIDEO_QUALITY = { '0': 172000,
-                  '1': 1024000,
-                  '2': 2048000 }
+VIDEO_QUALITY = { '0': 172,
+                  '1': 1024,
+                  '2': 2048  }
 
+# This URL returns a token if POST'ed to. The token is required in the header to any
+# reqeusts against the API
+TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
+
+# The API URL for listing videos
+VIDEO_LIST_URL = 'http://api.afl.com.au/cfs/afl/video'
+
+# Categories existing on the new content system
+CATEGORIES = [
+	'Match Replays',
+	'Club Video',
+	'Access All Areas',
+	'Editorial Highlights',
+	'Gen Y Footy Show',
+	'Media Conferences',
+	'News',
+	'The Grill',
+	'Settings'
+]
 
 # Standard Bigpond Sport/AFL channels
 # Channel number was discovered from http://bigpondvideo.com/
 # and using a web proxy, extract the AMF data when clicking each channel
 # to find its 'NavID' 
 # channel value matches with the teams list in the settings.xml
-CHANNELS = [
-	{ 'name': 'Teams',       'channel': 'teams' },
-	{ 'name': 'Matches',     'channel': '9' },
-	{ 'name': 'Newsdesk',    'channel': '10' },
-	{ 'name': 'Highlights',  'channel': '11' },
-	{ 'name': 'Panel Shows', 'channel': '13' },
-]
+# NOTE: Now only used for 'Club Video'. Everything else moved to new API feed
+CHANNELS = []
 
 TEAMS = [
 	{'id': '1',  'name': 'Adelaide',            'channel': '14',   'thumb': 'adel.gif' },

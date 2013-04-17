@@ -24,16 +24,20 @@ try:
 except ImportError:
 	pass # for PC debugging
 
-
 def fetch_url(url, token=None):
-	"""
-		Simple function that fetches a URL using urllib2.
-		An exception is raised if an error (e.g. 404) occurs.
-	"""
-	utils.log("Fetching URL: %s" % url)
+   """
+      Simple function that fetches a URL using urllib2.
+      An exception is raised if an error (e.g. 404) occurs.
+   """
+   utils.log("Fetching URL: %s" % url)
 
-	request = urllib2.Request(url, None)
-	return urllib2.urlopen(request).read()
+   # Token headers
+   headers = {}
+   if token:
+      headers = {'x-media-mis-token': token}
+
+   request = urllib2.Request(url, headers=headers)
+   return urllib2.urlopen(request).read()
 
 
 def fetch_token():
@@ -70,6 +74,7 @@ def parse_amf_video(video_item):
 
 	return new_video
 
+
 def parse_json_video(video_data):
 	"""
 		Parse the JSON data and construct a video object from it.
@@ -79,6 +84,34 @@ def parse_json_video(video_data):
 	new_video.description = video_data['description']
 	new_video.thumbnail = video_data['media$thumbnails'][0]['plfile$url']
 	return new_video
+
+
+def parse_json_video_new(video_data):
+	"""
+		Parse the JSON data and construct a video object from it for a list
+		of videos
+	"""
+	# Find our quality setting and fetch the URL
+	__addon__ = xbmcaddon.Addon()
+	qual = __addon__.getSetting('QUALITY')
+
+	video = classes.Video()
+	video.title = video_data['title']
+	video.description = video_data['description']
+	video.thumbnail = video_data['thumbnailPath']
+	timestamp = time.mktime(time.strptime(video_data['customPublishDate'], '%Y-%m-%dT%H:%M:%S.%f+0000'))
+	video.date = datetime.date.fromtimestamp(timestamp)
+
+	video_format = None
+	for v in video_data['mediaFormats']:
+		if int(v['bitRate']) == config.VIDEO_QUALITY[qual]:
+			video_format = v
+			break
+
+	video.url = video_format['sourceUrl']
+	video.duration = video_format['duration']
+
+	return video
 
 def get_videos(channel_id):
 	"""
@@ -139,7 +172,8 @@ def get_video(video_id):
 	playlist = None
 	for video_entry in video_data['media$content']:
 		# Match the video for the quality in the addon settings
-		if video_entry['plfile$bitrate'] == config.VIDEO_QUALITY[qual]:
+		# The value should look like 1024000, but we only store 1024 in config
+		if video_entry['plfile$bitrate'] == config.VIDEO_QUALITY[qual] * 1000:
 			playlist = video_entry['plfile$url']
 
 	smil = fetch_url(playlist)
@@ -154,46 +188,21 @@ def get_videos_new(category):
 	"""
 		New function for listing videos, not yet in use
 	"""
-
 	video_list = []
 
 	# Get a token. TODO: Cache this
 	token = fetch_token()
 
-	url = config.VIDEO_LIST_URL
+	# Category names are URL encoded
+	category_encoded = urllib.quote(category)
+	url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
 
-	if category != 'All Videos':
-		# Category names are URL encoded
-		category_encoded = urllib.quote(category)
-		url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
-
-	data = fetch_url(url, token)
-
+	data = fetch_url(url, token=token)
 	json_data = json.loads(data)
-
 	video_assets = json_data['videos'][0]['videos']
 
 	for video_asset in video_assets:
-
-		video = classes.Video()
-
-		video.title = video_asset['title']
-		#video.date = video_asset['customPublishDate'] # 2013-03-21T23:39:48.000+0000
-		video.description = video_asset['description']
-		video.thumbnail = video_asset['thumbnailPath']
-
-		timestamp = time.mktime(time.strptime(video_asset['customPublishDate'], '%Y-%m-%dT%H:%M:%S.%f+0000'))
-		video.date = datetime.date.fromtimestamp(timestamp)
-
-		video_format = None
-		for v in video_asset['mediaFormats']:
-			# TODO: Look this value up
-			if v['bitRate'] == '2048':
-				video_format = v
-		
-		video.url = video_format['sourceUrl']
-		video.duration = video_format['duration']
-
+		video = parse_json_video_new(video_asset)
 		video_list.append(video)
 
 	return video_list	
