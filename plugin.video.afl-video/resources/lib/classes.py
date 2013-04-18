@@ -29,7 +29,7 @@ class Video(object):
 	def __init__(self):
 		self.id = None
 		self.title = ''
-		self.category = 'Sport'
+		self.genre = 'Sport'
 		self.rating = 'PG'
 		self.description = ''
 		self.duration = 0
@@ -55,19 +55,19 @@ class Video(object):
 		"""
 		return utils.descape(self.description)
 
-	def get_category(self):
-		""" Return a string of the category. E.g. Comedy
+	def get_genre(self):
+		""" Return a string of the genre. E.g. Comedy
 		"""
-		return utils.descape(self.category)
+		return utils.descape(self.genre)
 
 	def get_rating(self):
 		""" Return a string of the rating. E.g. PG, MA
 		"""
-		return utils.descape(self.category)
+		return utils.descape(self.rating)
 
 	def get_duration(self):
-		""" Return a string representing the duration of the program.
-			E.g. 00:30 (30 minutes)
+		""" Return a the duration of the video in seconds. This is only useful
+			 for the addStreamInfo method
 		"""
 		seconds = int(self.duration)
 		return seconds
@@ -79,6 +79,12 @@ class Video(object):
 		if self.date:
 			return self.date.strftime("%Y-%m-%d")
 		return None
+
+	def get_season(self):
+		season = datetime.datetime.now().year
+		if self.season:
+			season = self.season
+		return season
 
 	def get_thumbnail(self):
 		""" Returns the thumbnail
@@ -99,9 +105,9 @@ class Video(object):
 		info_dict = {}
 		if self.get_title():       info_dict['title'] = self.get_title()
 		if self.get_description(): info_dict['plot'] = self.get_description()
-		if self.get_description(): info_dict['plotoutline'] = self.get_description()
-		if self.get_duration():    info_dict['duration'] = self.get_duration() / 60 # XBMC uses minutes
+		if self.get_genre():       info_dict['genre'] = self.get_genre()
 		if self.get_date():        info_dict['aired'] = self.get_date()
+		if self.get_season():      info_dict['season'] = self.get_season()
 		return info_dict
 
 	def get_xbmc_stream_info(self):
@@ -121,7 +127,9 @@ class Video(object):
 		if self.id:          d['id'] = self.id
 		if self.title:       d['title'] = self.title
 		if self.description: d['description'] = self.description
+		if self.genre:       d['genre'] = self.genre
 		if self.duration:    d['duration'] = self.duration
+		if self.season:      d['season'] = self.season
 		if self.date:        d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
 		if self.thumbnail:   d['thumbnail'] = self.thumbnail
 		if self.url:         d['url'] = self.url
@@ -137,6 +145,8 @@ class Video(object):
 		if d.has_key('id'):          self.id          = d.get('id')
 		if d.has_key('title'):       self.title       = d.get('title')
 		if d.has_key('description'): self.description = d.get('description')
+		if d.has_key('genre'):       self.genre       = d.get('genre')
+		if d.has_key('season'):      self.season      = d.get('season')
 		if d.has_key('duration'):    self.duration    = d.get('duration')
 		if d.has_key('url'):         self.url         = urllib.unquote_plus(d.get('url'))
 		if d.has_key('thumbnail'):   self.thumbnail   = urllib.unquote_plus(d.get('thumbnail'))

@@ -51,7 +51,7 @@ def make_list(url):
 		# fill media list
 		ok = True
 		for v in videos:
-			listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
+			listitem = xbmcgui.ListItem(label=v.get_title(), thumbnailImage=v.get_thumbnail())
 			listitem.setInfo('video', v.get_xbmc_list_item())
 			listitem.addStreamInfo('video', v.get_xbmc_stream_info())
 	
