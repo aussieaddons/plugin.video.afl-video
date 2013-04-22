@@ -29,6 +29,14 @@ import config
 
 pattern = re.compile("&(\w+?);")
 
+def get_team(squad_id):
+	"""
+		Return the team from a given Squad ID
+	"""
+	for t in config.TEAMS:
+		if t['squad'] == squad_id:
+			return t
+
 def descape_entity(m, defs=htmlentitydefs.entitydefs):
 	# callback: translate one entity to its ISO Latin value
 	try:
@@ -65,7 +73,7 @@ def make_url(d):
 	return "&".join(pairs)
 
 def log(s):
-   print "[%s v%s] %s" % (config.NAME, config.VERSION, s)
+	print "[%s v%s] %s" % (config.NAME, config.VERSION, s)
 
 def log_error(message=None):
 	exc_type, exc_value, exc_traceback = sys.exc_info()

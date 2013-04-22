@@ -32,7 +32,7 @@ except:
 
 sys.path.append( os.path.join( current_dir, "resources", "lib" ) )
 
-import utils, config, comm, index, teams, videos, play, pyamf
+import utils, config, comm, index, teams, rounds, matches, videos, play_replay, play, pyamf
 
 utils.log('Initialised')
 
@@ -49,12 +49,29 @@ if __name__ == "__main__" :
 			videos.make_list(params_str)
 
 		elif params.has_key('category'):
-			if params['category'] == 'Club Video':
-				teams.make_list()
-			elif params['category'] == 'Settings':
+			# Settings
+			if params['category'] == 'Settings':
 				__addon__.openSettings()
+
+			# Team video list
+			elif params['category'] == 'Club Video':
+				teams.make_list()
+
+			# Match replay round list
+			elif params['category'] == 'Match Replays':
+				rounds.make_list()
+
 			else:
-				videos.make_list(params_str)
+				videos.make_list(params['category'])
+
+		# List of videos (quarters) for a match
+		elif params.has_key('match_id'):
+			#replay.play(params['round_id'], params['match_id'])
+			play_replay.make_list(params['round_id'], params['match_id'])
+
+		# Match list for a round
+		elif params.has_key('round_id'):
+			matches.make_list(params['round_id'])
 
 		elif params.has_key("title"):
 			play.play(params_str)

@@ -161,6 +161,9 @@ def get_video(video_id):
 
 	json_data = json.loads(data)
 
+	if len(json_data['entries']) == 0:
+		raise IOError('Video URL not found')
+
 	# Only one entry with this function
 	video_data = json_data['entries'][0]
 	video = parse_json_video(video_data)
@@ -169,7 +172,10 @@ def get_video(video_id):
 	__addon__ = xbmcaddon.Addon()
 	qual = __addon__.getSetting('QUALITY')
 
-	playlist = None
+	# Set the last video entry (usually highest qual) as a default fallback
+	# in case we don't make a match below
+	playlist = video_data['media$content'][0]['plfile$url']
+
 	for video_entry in video_data['media$content']:
 		# Match the video for the quality in the addon settings
 		# The value should look like 1024000, but we only store 1024 in config
