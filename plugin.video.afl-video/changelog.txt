@@ -1,3 +1,9 @@
+[B]Version 1.0[/B]
+- Fix for some video categories not playing
+
+[B]Version 0.9[/B]
+- Refactor game replays
+
 [B]Version 0.8[/B]
 - Switched for new 2013 video feeds
 - Fixes for club videos

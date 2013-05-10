@@ -62,7 +62,7 @@ if __name__ == "__main__" :
 				rounds.make_list()
 
 			else:
-				videos.make_list(params['category'])
+				videos.make_list(params_str)
 
 		# List of videos (quarters) for a match
 		elif params.has_key('match_id'):
