@@ -45,7 +45,9 @@ def make_list(round_id, match_id):
 			ok = True
 			for v in videos:
 				listitem = xbmcgui.ListItem(label=v['name'])	
-				xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=v['url'], listitem=listitem, isFolder=False)
+				# I think this might help prevent the stream from closing early
+				url = v['url'] + '?start=0'
+				xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=listitem, isFolder=False)
 			xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 		else:
 			d = xbmcgui.Dialog()
