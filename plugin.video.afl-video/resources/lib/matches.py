@@ -39,6 +39,7 @@ def make_list(round_id):
 		matches = comm.get_round(round_id)
 		utils.log("Found %s matches" % len(matches))
 
+		ok = True
 		for m in matches:
 
 			listitem = xbmcgui.ListItem(label=m['name'])
