@@ -24,6 +24,7 @@ import htmlentitydefs
 import cgi
 import unicodedata
 import urllib
+import textwrap
 
 import config
 
@@ -84,16 +85,17 @@ def log_error(message=None):
 
 def dialog_error(msg):
 	# Generate a list of lines for use in XBMC dialog
+	content = []
 	exc_type, exc_value, exc_traceback = sys.exc_info()
-	string = "%s v%s Error\n%s (%d) - %s\n%s" % (
-		config.NAME, config.VERSION, exc_traceback.tb_frame.f_code.co_name, 
-		exc_traceback.tb_lineno, msg, exc_value
-	)
-	return string.split("\n")
+	content.append("%s v%s Error" % (config.NAME, config.VERSION))
+	content.append("%s (%d) - %s" % (exc_traceback.tb_frame.f_code.co_name, exc_traceback.tb_lineno, msg))
+	content.append(str(exc_value))
+	return content
 
 def dialog_message(msg, title=None):
 	if not title:
 		title = "%s v%s" % (config.NAME, config.VERSION)
-	string = "%s\n%s" % (title, msg)
-	return string.split("\n")[:4]
-
+	# Add title to the first pos of the textwrap list
+	content = textwrap.wrap(msg, 60)
+	content.insert(0, title)
+	return content
