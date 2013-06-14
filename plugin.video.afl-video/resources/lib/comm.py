@@ -1,3 +1,21 @@
+#
+#	 AFL Video XBMC Plugin
+#	 Copyright (C) 2012 Andy Botting
+#
+#	 AFL Video is free software: you can redistribute it and/or modify
+#	 it under the terms of the GNU General Public License as published by
+#	 the Free Software Foundation, either version 3 of the License, or
+#	 (at your option) any later version.
+#
+#	 AFL Video is distributed in the hope that it will be useful,
+#	 but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	 GNU General Public License for more details.
+#
+#	 You should have received a copy of the GNU General Public License
+#	 along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
+#
+
 import urllib, urllib2
 import config
 import classes
@@ -8,8 +26,8 @@ import time
 # AMF services
 from pyamf.remoting.client import RemotingService
 
-# 
-import xml.etree.ElementTree as ET
+# Use local etree to get v1.3.0
+import etree.ElementTree as ET
 
 # Parsing SMIL data
 from BeautifulSoup import BeautifulStoneSoup
@@ -25,19 +43,19 @@ except ImportError:
 	pass # for PC debugging
 
 def fetch_url(url, token=None):
-   """
-      Simple function that fetches a URL using urllib2.
-      An exception is raised if an error (e.g. 404) occurs.
-   """
-   utils.log("Fetching URL: %s" % url)
+	"""
+		Simple function that fetches a URL using urllib2.
+		An exception is raised if an error (e.g. 404) occurs.
+	"""
+	utils.log("Fetching URL: %s" % url)
 
-   # Token headers
-   headers = {}
-   if token:
-      headers = {'x-media-mis-token': token}
+	# Token headers
+	headers = {}
+	if token:
+		headers = {'x-media-mis-token': token}
 
-   request = urllib2.Request(url, headers=headers)
-   return urllib2.urlopen(request).read()
+	request = urllib2.Request(url, headers=headers)
+	return urllib2.urlopen(request).read()
 
 
 def fetch_token():
