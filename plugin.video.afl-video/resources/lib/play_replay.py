@@ -51,7 +51,7 @@ def make_list(round_id, match_id):
 			xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 		else:
 			d = xbmcgui.Dialog()
-			msg = utils.dialog_message("No video found. Replays are only available 24-48 hours after match has been played. Please try again later.")
+			msg = utils.dialog_message("No videos found. Replays are only available 24-48 hours after match has been played. Please try again later.")
 			d.ok(*msg)
 	except:
 		# user cancelled dialog or an error occurred
