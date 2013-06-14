@@ -17,7 +17,7 @@
 #
 
 NAME = 'AFL Video'
-VERSION = '1.0'
+VERSION = '1.1'
 
 # Video quality static definitions with match the setings.xml
 QUAL_LOW = '0'
