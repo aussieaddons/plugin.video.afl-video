@@ -1,3 +1,4 @@
-[B]Version master[/B]
+[B]Version v1.2[/B]
+- Restructure plugin to use shared tools
 - Fix Round IDs for finals
 
