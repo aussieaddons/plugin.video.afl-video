@@ -113,6 +113,9 @@ ROUNDS = [
 	{'id': 'CD_R201301421', 'name': 'Round 21'},
 	{'id': 'CD_R201301422', 'name': 'Round 22'},
 	{'id': 'CD_R201301423', 'name': 'Round 23'},
-	{'id': 'CD_R201301424', 'name': 'Round 24'},
+	{'id': 'CD_R201301424', 'name': 'Finals Week 1'},
+	{'id': 'CD_R201301425', 'name': 'Finals Week 2'},
+	{'id': 'CD_R201301426', 'name': 'Finals Week 3'},
+	{'id': 'CD_R201301427', 'name': 'Grand Final'},
 ]
 
