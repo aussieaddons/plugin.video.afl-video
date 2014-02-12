@@ -1,6 +1,8 @@
 AFL Video plugin for XBMC
 ================================
 
+*UPDATE*: Now updated for 2014 season, including NAB Challenge matches
+
 This plugin provides a simple list of available programs from the AFL web site
 and allows you to stream them with.
 
@@ -10,34 +12,16 @@ internationally.
 
 Installation
 ------------
-This plugin is available as part of the [XBMC CatchUp TV AU repository] [repository]
-but you'll always find the latest version [here] [download]
+This plugin is available as part of the [XBMC CatchUp TV AU repository] [repository].
+Using the repository will mean you'll automatically get updates (*RECOMMENDED!*)
 
-Download the latest ZIP file from the downloads section, and put it into your
-'addons' directory of XBMC. This will differ between platforms.
+For the latest development version, you can grab the [GitHub generated ZIP file] [githubzip].
 
-For Windows:
-```
-%APPDATA%\XBMC\addons
-```
+Simply download the ZIP file to your XBMC device and install through the menu via
+System -> Settings -> Add-ons -> Install from zip file
 
-For Linux:
-```
-~/.xbmc/addons
-```
-
-For Mac OS X:
-```
-~/Library/Application Support/XBMC/addons
-```
-
-For AppleTV:
-```
-/Users/frontrow/Library/Application Support/XBMC/addons
-```
-
-
-### Reporting an issue
+Reporting an issue
+------------------
 
 For any issues or bug reports, please file them on the [issues page] [issues].
 
@@ -69,6 +53,7 @@ Contact Me
 ----------
 For anything else, you can contact me by email at andy#andybotting.com
 
-[repository]: http://code.google.com/p/xbmc-catchuptv-au
-[download]: http://code.google.com/p/xbmc-catchuptv-au/downloads/list?q=label:Plugin-AFL_Video
+[repository]: https://github.com/andybotting/xbmc-addon-afl-video
+[download]: https://github.com/xbmc-catchuptv-au/repo/tree/master/plugin.video.afl-video
+[githubzip]: https://github.com/andybotting/xbmc-addon-afl-video/archive/master.zip
 [issues]: https://github.com/andybotting/xbmc-addon-afl-video/issues
