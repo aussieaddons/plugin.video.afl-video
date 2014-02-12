@@ -1,4 +1,5 @@
-[B]Version master[/B]
+[B]Version 1.3[/B]
+- Update for Season 2014 inc. NAB Challenge
 - Update README
 
 [B]Version v1.2[/B]
