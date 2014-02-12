@@ -34,7 +34,7 @@ def make_list():
 		pDialog.create('AFL Video', 'Getting Round List')
 		pDialog.update(50)
 
-		for r in config.ROUNDS:
+		for r in config.ROUNDS_2014:
 			listitem = xbmcgui.ListItem(label=r['name'])
 			url = "%s?round_id=%s" % (sys.argv[0], r['id'])
 
@@ -44,7 +44,7 @@ def make_list():
 						url = url,
 						listitem = listitem,
 						isFolder = True,
-						totalItems = len(config.ROUNDS)
+						totalItems = len(config.ROUNDS_2014)
 					)
 
 		# send notification we're finished, successfully or unsuccessfully

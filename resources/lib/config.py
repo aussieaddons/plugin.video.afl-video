@@ -17,7 +17,6 @@
 #
 
 NAME = 'AFL Video'
-VERSION = '1.1'
 
 # Video quality static definitions with match the setings.xml
 QUAL_LOW = '0'
@@ -67,6 +66,7 @@ CATEGORIES = [
 CHANNELS = []
 
 # Channel is used for Bigpond Video and Squad is used in Round XML
+# http://www.afl.com.au/api/gas/afl/squad
 TEAMS = [
 	{'id': '1',  'name': 'Adelaide',            'squad': '10',   'channel': '14',   'thumb': 'adel.gif' },
 	{'id': '2',  'name': 'Brisbane',            'squad': '20',   'channel': '22',   'thumb': 'bris.gif' },
@@ -88,34 +88,65 @@ TEAMS = [
 	{'id': '18', 'name': 'Western Bulldogs',    'squad': '140',  'channel': '134',  'thumb': 'wb.gif'   },
 ]
 
-ROUNDS = [
+ROUNDS_2014 = [
 	{'id': 'latest',        'name': 'Current Round'},
-	{'id': 'CD_R201301401', 'name': 'Round 1'},
-	{'id': 'CD_R201301402', 'name': 'Round 2'},
-	{'id': 'CD_R201301403', 'name': 'Round 3'},
-	{'id': 'CD_R201301404', 'name': 'Round 4'},
-	{'id': 'CD_R201301405', 'name': 'Round 5'},
-	{'id': 'CD_R201301406', 'name': 'Round 6'},
-	{'id': 'CD_R201301407', 'name': 'Round 7'},
-	{'id': 'CD_R201301408', 'name': 'Round 8'},
-	{'id': 'CD_R201301409', 'name': 'Round 9'},
-	{'id': 'CD_R201301410', 'name': 'Round 10'},
-	{'id': 'CD_R201301411', 'name': 'Round 11'},
-	{'id': 'CD_R201301412', 'name': 'Round 12'},
-	{'id': 'CD_R201301413', 'name': 'Round 13'},
-	{'id': 'CD_R201301414', 'name': 'Round 14'},
-	{'id': 'CD_R201301415', 'name': 'Round 15'},
-	{'id': 'CD_R201301416', 'name': 'Round 16'},
-	{'id': 'CD_R201301417', 'name': 'Round 17'},
-	{'id': 'CD_R201301418', 'name': 'Round 18'},
-	{'id': 'CD_R201301419', 'name': 'Round 19'},
-	{'id': 'CD_R201301420', 'name': 'Round 20'},
-	{'id': 'CD_R201301421', 'name': 'Round 21'},
-	{'id': 'CD_R201301422', 'name': 'Round 22'},
-	{'id': 'CD_R201301423', 'name': 'Round 23'},
-	{'id': 'CD_R201301424', 'name': 'Finals Week 1'},
-	{'id': 'CD_R201301425', 'name': 'Finals Week 2'},
-	{'id': 'CD_R201301426', 'name': 'Finals Week 3'},
-	{'id': 'CD_R201301427', 'name': 'Grand Final'},
+	{'id': 'CD_R201410101', 'name': 'NAB Challenge'},
+	{'id': 'CD_R201401401', 'name': 'Round 1'},
+	{'id': 'CD_R201401402', 'name': 'Round 2'},
+	{'id': 'CD_R201401403', 'name': 'Round 3'},
+	{'id': 'CD_R201401404', 'name': 'Round 4'},
+	{'id': 'CD_R201401405', 'name': 'Round 5'},
+	{'id': 'CD_R201401406', 'name': 'Round 6'},
+	{'id': 'CD_R201401407', 'name': 'Round 7'},
+	{'id': 'CD_R201401408', 'name': 'Round 8'},
+	{'id': 'CD_R201401409', 'name': 'Round 9'},
+	{'id': 'CD_R201401410', 'name': 'Round 10'},
+	{'id': 'CD_R201401411', 'name': 'Round 11'},
+	{'id': 'CD_R201401412', 'name': 'Round 12'},
+	{'id': 'CD_R201401413', 'name': 'Round 13'},
+	{'id': 'CD_R201401414', 'name': 'Round 14'},
+	{'id': 'CD_R201401415', 'name': 'Round 15'},
+	{'id': 'CD_R201401416', 'name': 'Round 16'},
+	{'id': 'CD_R201401417', 'name': 'Round 17'},
+	{'id': 'CD_R201401418', 'name': 'Round 18'},
+	{'id': 'CD_R201401419', 'name': 'Round 19'},
+	{'id': 'CD_R201401420', 'name': 'Round 20'},
+	{'id': 'CD_R201401421', 'name': 'Round 21'},
+	{'id': 'CD_R201401422', 'name': 'Round 22'},
+	{'id': 'CD_R201401423', 'name': 'Round 23'},
+	{'id': 'CD_R201401424', 'name': 'Finals Week 1'},
+	{'id': 'CD_R201401425', 'name': 'Finals Week 2'},
+	{'id': 'CD_R201401426', 'name': 'Finals Week 3'},
+	{'id': 'CD_R201401427', 'name': 'Grand Final'},
 ]
 
+ROUNDS_2013 = [
+        {'id': 'latest',        'name': 'Current Round'},
+        {'id': 'CD_R201301401', 'name': 'Round 1'},
+        {'id': 'CD_R201301402', 'name': 'Round 2'},
+        {'id': 'CD_R201301403', 'name': 'Round 3'},
+        {'id': 'CD_R201301404', 'name': 'Round 4'},
+        {'id': 'CD_R201301405', 'name': 'Round 5'},
+        {'id': 'CD_R201301406', 'name': 'Round 6'},
+        {'id': 'CD_R201301407', 'name': 'Round 7'},
+        {'id': 'CD_R201301408', 'name': 'Round 8'},
+        {'id': 'CD_R201301409', 'name': 'Round 9'},
+        {'id': 'CD_R201301410', 'name': 'Round 10'},
+        {'id': 'CD_R201301411', 'name': 'Round 11'},
+        {'id': 'CD_R201301412', 'name': 'Round 12'},
+        {'id': 'CD_R201301413', 'name': 'Round 13'},
+        {'id': 'CD_R201301414', 'name': 'Round 14'},
+        {'id': 'CD_R201301415', 'name': 'Round 15'},
+        {'id': 'CD_R201301416', 'name': 'Round 16'},
+        {'id': 'CD_R201301417', 'name': 'Round 17'},
+        {'id': 'CD_R201301418', 'name': 'Round 18'},
+        {'id': 'CD_R201301419', 'name': 'Round 19'},
+        {'id': 'CD_R201301420', 'name': 'Round 20'},
+        {'id': 'CD_R201301421', 'name': 'Round 21'},
+        {'id': 'CD_R201301422', 'name': 'Round 22'},
+        {'id': 'CD_R201301423', 'name': 'Round 23'},
+        {'id': 'CD_R201301424', 'name': 'Finals Week 1'},
+        {'id': 'CD_R201301425', 'name': 'Finals Week 2'},
+        {'id': 'CD_R201301426', 'name': 'Finals Week 3'},
+        {'id': 'CD_R201301427', 'name': 'Grand Final'},
+]
