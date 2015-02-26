@@ -88,8 +88,39 @@ TEAMS = [
 	{'id': '18', 'name': 'Western Bulldogs',    'squad': '140',  'channel': '134',  'thumb': 'wb.gif'   },
 ]
 
-ROUNDS_2014 = [
+ROUNDS_2015 = [
 	{'id': 'latest',        'name': 'Current Round'},
+	{'id': 'CD_R201510101', 'name': 'NAB Challenge'},
+	{'id': 'CD_R201501401', 'name': 'Round 1'},
+	{'id': 'CD_R201501402', 'name': 'Round 2'},
+	{'id': 'CD_R201501403', 'name': 'Round 3'},
+	{'id': 'CD_R201501404', 'name': 'Round 4'},
+	{'id': 'CD_R201501405', 'name': 'Round 5'},
+	{'id': 'CD_R201501406', 'name': 'Round 6'},
+	{'id': 'CD_R201501407', 'name': 'Round 7'},
+	{'id': 'CD_R201501408', 'name': 'Round 8'},
+	{'id': 'CD_R201501409', 'name': 'Round 9'},
+	{'id': 'CD_R201501410', 'name': 'Round 10'},
+	{'id': 'CD_R201501411', 'name': 'Round 11'},
+	{'id': 'CD_R201501412', 'name': 'Round 12'},
+	{'id': 'CD_R201501413', 'name': 'Round 13'},
+	{'id': 'CD_R201501414', 'name': 'Round 14'},
+	{'id': 'CD_R201501415', 'name': 'Round 15'},
+	{'id': 'CD_R201501416', 'name': 'Round 16'},
+	{'id': 'CD_R201501417', 'name': 'Round 17'},
+	{'id': 'CD_R201501418', 'name': 'Round 18'},
+	{'id': 'CD_R201501419', 'name': 'Round 19'},
+	{'id': 'CD_R201501420', 'name': 'Round 20'},
+	{'id': 'CD_R201501421', 'name': 'Round 21'},
+	{'id': 'CD_R201501422', 'name': 'Round 22'},
+	{'id': 'CD_R201501423', 'name': 'Round 23'},
+	{'id': 'CD_R201501424', 'name': 'Finals Week 1'},
+	{'id': 'CD_R201501425', 'name': 'Finals Week 2'},
+	{'id': 'CD_R201501426', 'name': 'Finals Week 3'},
+	{'id': 'CD_R201501427', 'name': 'Grand Final'},
+]
+
+ROUNDS_2014 = [
 	{'id': 'CD_R201410101', 'name': 'NAB Challenge'},
 	{'id': 'CD_R201401401', 'name': 'Round 1'},
 	{'id': 'CD_R201401402', 'name': 'Round 2'},
@@ -121,7 +152,6 @@ ROUNDS_2014 = [
 ]
 
 ROUNDS_2013 = [
-        {'id': 'latest',        'name': 'Current Round'},
         {'id': 'CD_R201301401', 'name': 'Round 1'},
         {'id': 'CD_R201301402', 'name': 'Round 2'},
         {'id': 'CD_R201301403', 'name': 'Round 3'},
