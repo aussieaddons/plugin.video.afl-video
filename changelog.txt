@@ -1,3 +1,6 @@
+[B]Version master[/B]
+- Add match replay information for 2015
+
 [B]Version v1.3.1[/B]
 - Version 1.3.1
 - Require v2.1.0 of xbmc.python for Gotham

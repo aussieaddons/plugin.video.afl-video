@@ -21,20 +21,22 @@ import sys
 import config
 import utils
 
-try:
-	import xbmc, xbmcgui, xbmcplugin
-except ImportError:
-	pass # for PC debugging
+import xbmc
+import xbmcgui
+import xbmcplugin
 
-def make_list():
+def make_rounds(season=2015):
 
 	try:
+		# ROUNDS_2015 variable from config
+		rounds_config = getattr(config, 'ROUNDS_'+season)
+
 		# Show a dialog
 		pDialog = xbmcgui.DialogProgress()
 		pDialog.create('AFL Video', 'Getting Round List')
 		pDialog.update(50)
 
-		for r in config.ROUNDS_2015:
+		for r in rounds_config:
 			listitem = xbmcgui.ListItem(label=r['name'])
 			url = "%s?round_id=%s" % (sys.argv[0], r['id'])
 
@@ -44,7 +46,7 @@ def make_list():
 						url = url,
 						listitem = listitem,
 						isFolder = True,
-						totalItems = len(config.ROUNDS_2015)
+						totalItems = len(rounds_config)
 					)
 
 		# send notification we're finished, successfully or unsuccessfully

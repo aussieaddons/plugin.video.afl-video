@@ -58,8 +58,10 @@ if __name__ == "__main__" :
 				teams.make_list()
 
 			# Match replay round list
-			elif params['category'] == 'Match Replays':
-				rounds.make_list()
+			elif params['category'].startswith('Match Replays'):
+				# Pull season out from end of category name
+				season = params['category'].split()[-1]
+				rounds.make_rounds(season)
 
 			else:
 				videos.make_list(params_str)

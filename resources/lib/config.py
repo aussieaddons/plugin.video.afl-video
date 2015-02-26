@@ -46,14 +46,10 @@ VIDEO_LIST_URL = 'http://api.afl.com.au/cfs/afl/video'
 
 # Categories existing on the new content system
 CATEGORIES = [
-	'Match Replays',
+	'Match Replays 2015',
+	'Match Replays 2014',
+	'Match Replays 2013',
 	'Club Video',
-	'Access All Areas',
-	'Editorial Highlights',
-	'Gen Y Footy Show',
-	'Media Conferences',
-	'News',
-	'The Grill',
 	'Settings'
 ]
 
