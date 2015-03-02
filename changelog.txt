@@ -1,4 +1,5 @@
-[B]Version master[/B]
+[B]Version 1.4.0[/B]
+- Support multiple seasons for match replays and remove busted categories
 - Add match replay information for 2015
 
 [B]Version v1.3.1[/B]
