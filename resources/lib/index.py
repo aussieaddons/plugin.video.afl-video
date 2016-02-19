@@ -22,52 +22,52 @@ import config
 import utils
 
 try:
-	import xbmc, xbmcgui, xbmcplugin, xbmcaddon
+    import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 except ImportError:
-	pass 
+    pass
 
 def make_list():
 
-	try:
-		items = []
+    try:
+        items = []
 
-		__addon__ = xbmcaddon.Addon()
-		favourite_team =  __addon__.getSetting('TEAM')
+        __addon__ = xbmcaddon.Addon()
+        favourite_team =  __addon__.getSetting('TEAM')
 
         # Disabled until moved to new API
-		#if favourite_team > 0:
-		#	for team in config.TEAMS:
-		#		if favourite_team == team['id']:
-		#			items.append({'name': team['name'], 'channel': team['channel']})
+        #if favourite_team > 0:
+        #    for team in config.TEAMS:
+        #        if favourite_team == team['id']:
+        #            items.append({'name': team['name'], 'channel': team['channel']})
 
-		categories = config.CATEGORIES
+        categories = config.CATEGORIES
 
-		# enumerate through the list of categories and add the item to the media list
-		for i in items:
-			url = "%s?channel=%s" % (sys.argv[0], i['channel'])
-			listitem = xbmcgui.ListItem(i['name'])
+        # enumerate through the list of categories and add the item to the media list
+        for i in items:
+            url = "%s?channel=%s" % (sys.argv[0], i['channel'])
+            listitem = xbmcgui.ListItem(i['name'])
 
-			# add the item to the media list
-			ok = xbmcplugin.addDirectoryItem(
-						handle=int(sys.argv[1]), 
-						url=url, 
-						listitem=listitem, 
-						isFolder=True, 
-					)
+            # add the item to the media list
+            ok = xbmcplugin.addDirectoryItem(
+                        handle=int(sys.argv[1]),
+                        url=url,
+                        listitem=listitem,
+                        isFolder=True,
+                    )
 
-		for category in categories:
-			url = "%s?category=%s" % (sys.argv[0], category)
-			listitem = xbmcgui.ListItem(category)
+        for category in categories:
+            url = "%s?category=%s" % (sys.argv[0], category)
+            listitem = xbmcgui.ListItem(category)
 
-			# add the item to the media list
-			ok = xbmcplugin.addDirectoryItem(
-						handle=int(sys.argv[1]), 
-						url=url, 
-						listitem=listitem, 
-						isFolder=True, 
-						totalItems=len(config.CATEGORIES)
-					)
+            # add the item to the media list
+            ok = xbmcplugin.addDirectoryItem(
+                        handle=int(sys.argv[1]),
+                        url=url,
+                        listitem=listitem,
+                        isFolder=True,
+                        totalItems=len(config.CATEGORIES)
+                    )
 
-		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-	except:
-		utils.handle_error('Unable build video category list')
+        xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
+    except:
+        utils.handle_error('Unable build video category list')

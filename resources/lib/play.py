@@ -23,21 +23,21 @@ import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 
 def play(url):
 
-	try:
-		params = utils.get_url(url)
+    try:
+        params = utils.get_url(url)
 
-		if params.has_key('id'):
-			video_id = params['id']
-			v = comm.get_video(video_id)
-		elif params.has_key('url'):
-			# New style
-			v = classes.Video()
-			v.parse_xbmc_url(url)
+        if params.has_key('id'):
+            video_id = params['id']
+            v = comm.get_video(video_id)
+        elif params.has_key('url'):
+            # New style
+            v = classes.Video()
+            v.parse_xbmc_url(url)
 
-		listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
-		listitem.addStreamInfo('video', v.get_xbmc_stream_info())
-		listitem.setInfo('video', v.get_xbmc_list_item())
-	
-		xbmc.Player().play(v.get_url(), listitem)
-	except:
-		utils.handle_error('Unable to play video')
+        listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
+        listitem.addStreamInfo('video', v.get_xbmc_stream_info())
+        listitem.setInfo('video', v.get_xbmc_list_item())
+
+        xbmc.Player().play(v.get_url(), listitem)
+    except:
+        utils.handle_error('Unable to play video')

@@ -1,4 +1,5 @@
 [B]Version master[/B]
+- Add issue reporting, remove loading dialogs and club video
 - Add Season 2016
 
 [B]Version v1.4.0[/B]

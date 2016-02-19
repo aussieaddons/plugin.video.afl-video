@@ -22,33 +22,33 @@ import utils
 import comm
 
 try:
-	import xbmc, xbmcgui, xbmcplugin
+    import xbmc, xbmcgui, xbmcplugin
 except ImportError:
-	pass
+    pass
 
 
 def make_list(round_id):
-	utils.log("Fetching match list for round %s..." % round_id)
-	try:
-		matches = comm.get_round(round_id)
-		utils.log("Found %s matches" % len(matches))
+    utils.log("Fetching match list for round %s..." % round_id)
+    try:
+        matches = comm.get_round(round_id)
+        utils.log("Found %s matches" % len(matches))
 
-		ok = True
-		for m in matches:
+        ok = True
+        for m in matches:
 
-			listitem = xbmcgui.ListItem(label=m['name'])
-			url = "%s?round_id=%s&match_id=%s" % (sys.argv[0], m['round_id'], m['id'])
+            listitem = xbmcgui.ListItem(label=m['name'])
+            url = "%s?round_id=%s&match_id=%s" % (sys.argv[0], m['round_id'], m['id'])
 
-			# Add the item to the list
-			ok = xbmcplugin.addDirectoryItem(
-						handle = int(sys.argv[1]),
-						url = url,
-						listitem = listitem,
-						isFolder = True,
-						totalItems = len(matches)
-					)
+            # Add the item to the list
+            ok = xbmcplugin.addDirectoryItem(
+                        handle = int(sys.argv[1]),
+                        url = url,
+                        listitem = listitem,
+                        isFolder = True,
+                        totalItems = len(matches)
+                    )
 
-		# send notification we're finished, successfully or unsuccessfully
-		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-	except:
-		utils.handle_error('Unable to fetch match list')
+        # send notification we're finished, successfully or unsuccessfully
+        xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
+    except:
+        utils.handle_error('Unable to fetch match list')

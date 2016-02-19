@@ -27,24 +27,24 @@ import xbmcplugin
 
 def make_rounds(season=2016):
 
-	try:
-		# ROUNDS_2015 variable from config
-		rounds_config = getattr(config, 'ROUNDS_'+season)
+    try:
+        # ROUNDS_2015 variable from config
+        rounds_config = getattr(config, 'ROUNDS_'+season)
 
-		for r in rounds_config:
-			listitem = xbmcgui.ListItem(label=r['name'])
-			url = "%s?round_id=%s" % (sys.argv[0], r['id'])
+        for r in rounds_config:
+            listitem = xbmcgui.ListItem(label=r['name'])
+            url = "%s?round_id=%s" % (sys.argv[0], r['id'])
 
-			# Add the item to the list
-			ok = xbmcplugin.addDirectoryItem(
-						handle = int(sys.argv[1]),
-						url = url,
-						listitem = listitem,
-						isFolder = True,
-						totalItems = len(rounds_config)
-					)
+            # Add the item to the list
+            ok = xbmcplugin.addDirectoryItem(
+                        handle = int(sys.argv[1]),
+                        url = url,
+                        listitem = listitem,
+                        isFolder = True,
+                        totalItems = len(rounds_config)
+                    )
 
-		# send notification we're finished, successfully or unsuccessfully
-		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-	except:
-		utils.handle_error('Unable to fetch round list')
+        # send notification we're finished, successfully or unsuccessfully
+        xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
+    except:
+        utils.handle_error('Unable to fetch round list')

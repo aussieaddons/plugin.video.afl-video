@@ -22,34 +22,34 @@ import config
 import utils
 
 try:
-	import xbmc, xbmcgui, xbmcplugin
+    import xbmc, xbmcgui, xbmcplugin
 except ImportError:
-	pass # for PC debugging
+    pass # for PC debugging
 
 def make_list():
-	try:
-		for t in config.TEAMS:
-			# Add our resources/lib to the python path
-			try:
-				current_dir = os.path.dirname(os.path.abspath(__file__))
-			except:
-				current_dir = os.getcwd()
+    try:
+        for t in config.TEAMS:
+            # Add our resources/lib to the python path
+            try:
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+            except:
+                current_dir = os.getcwd()
 
-			thumbnail = os.path.join(current_dir, "..", "..", "resources", "img", t['thumb'])
-			listitem = xbmcgui.ListItem(label=t['name'], iconImage=thumbnail, thumbnailImage=thumbnail)
-			url = "%s?channel=%s" % (sys.argv[0], t['channel'])
+            thumbnail = os.path.join(current_dir, "..", "..", "resources", "img", t['thumb'])
+            listitem = xbmcgui.ListItem(label=t['name'], iconImage=thumbnail, thumbnailImage=thumbnail)
+            url = "%s?channel=%s" % (sys.argv[0], t['channel'])
 
-			# Add the item to the list
-			ok = xbmcplugin.addDirectoryItem(
-						handle = int(sys.argv[1]),
-						url = url,
-						listitem = listitem,
-						isFolder = True,
-						totalItems = len(config.TEAMS)
-					)
-					
+            # Add the item to the list
+            ok = xbmcplugin.addDirectoryItem(
+                        handle = int(sys.argv[1]),
+                        url = url,
+                        listitem = listitem,
+                        isFolder = True,
+                        totalItems = len(config.TEAMS)
+                    )
 
-		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-		xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
-	except:
-		utils.handle_error('Unable to fetch video list')
+
+        xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
+        xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
+    except:
+        utils.handle_error('Unable to fetch video list')

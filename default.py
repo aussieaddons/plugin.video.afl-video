@@ -20,15 +20,15 @@ import os
 import sys
 
 try:
-	import xbmc, xbmcgui, xbmcplugin, xbmcaddon
+    import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 except ImportError:
-	pass
+    pass
 
 # Add our resources/lib to the python path
 try:
-	current_dir = os.path.dirname(os.path.abspath(__file__))
+    current_dir = os.path.dirname(os.path.abspath(__file__))
 except:
-	current_dir = os.getcwd()
+    current_dir = os.getcwd()
 
 sys.path.append( os.path.join( current_dir, "resources", "lib" ) )
 
@@ -39,42 +39,42 @@ utils.log('Initialised')
 __addon__ = xbmcaddon.Addon()
 
 if __name__ == "__main__" :
-	params_str = sys.argv[2]
-	params = utils.get_url(params_str)
+    params_str = sys.argv[2]
+    params = utils.get_url(params_str)
 
-	if (len(params) == 0):
-		index.make_list()
-	else:
-		if params.has_key('channel'):
-			videos.make_list(params_str)
+    if (len(params) == 0):
+        index.make_list()
+    else:
+        if params.has_key('channel'):
+            videos.make_list(params_str)
 
-		elif params.has_key('category'):
-			# Settings
-			if params['category'] == 'Settings':
-				__addon__.openSettings()
+        elif params.has_key('category'):
+            # Settings
+            if params['category'] == 'Settings':
+                __addon__.openSettings()
 
-			# Team video list -- disabled until moved to new API
-			#elif params['category'] == 'Club Video':
-			#	teams.make_list()
+            # Team video list -- disabled until moved to new API
+            #elif params['category'] == 'Club Video':
+            #    teams.make_list()
 
-			# Match replay round list
-			elif params['category'].startswith('Match Replays'):
-				# Pull season out from end of category name
-				season = params['category'].split()[-1]
-				rounds.make_rounds(season)
+            # Match replay round list
+            elif params['category'].startswith('Match Replays'):
+                # Pull season out from end of category name
+                season = params['category'].split()[-1]
+                rounds.make_rounds(season)
 
-			else:
-				videos.make_list(params_str)
+            else:
+                videos.make_list(params_str)
 
-		# List of videos (quarters) for a match
-		elif params.has_key('match_id'):
-			#replay.play(params['round_id'], params['match_id'])
-			play_replay.make_list(params['round_id'], params['match_id'])
+        # List of videos (quarters) for a match
+        elif params.has_key('match_id'):
+            #replay.play(params['round_id'], params['match_id'])
+            play_replay.make_list(params['round_id'], params['match_id'])
 
-		# Match list for a round
-		elif params.has_key('round_id'):
-			matches.make_list(params['round_id'])
+        # Match list for a round
+        elif params.has_key('round_id'):
+            matches.make_list(params['round_id'])
 
-		elif params.has_key("title"):
-			play.play(params_str)
+        elif params.has_key("title"):
+            play.play(params_str)
 

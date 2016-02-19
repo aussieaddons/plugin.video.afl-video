@@ -26,132 +26,132 @@ import config
 
 class Video(object):
 
-	def __init__(self):
-		self.id = None
-		self.title = ''
-		self.genre = 'Sport'
-		self.rating = 'PG'
-		self.description = ''
-		self.duration = 0
-		self.season = None
-		self.date = None
-		self.thumbnail = None
-		self.url = None
+    def __init__(self):
+        self.id = None
+        self.title = ''
+        self.genre = 'Sport'
+        self.rating = 'PG'
+        self.description = ''
+        self.duration = 0
+        self.season = None
+        self.date = None
+        self.thumbnail = None
+        self.url = None
 
-	def __repr__(self):
-		return self.title
+    def __repr__(self):
+        return self.title
 
-	def __cmp__(self, other):
-		return cmp(self.title, other.title)
+    def __cmp__(self, other):
+        return cmp(self.title, other.title)
 
-	def get_title(self):
-		""" Return a string of the title, nicely formatted for XBMC list
-		"""
-		return self.title
+    def get_title(self):
+        """ Return a string of the title, nicely formatted for XBMC list
+        """
+        return self.title
 
-	def get_description(self):
-		""" Return a string the program description, after running it through
-			the descape.
-		"""
-		return utils.descape(self.description)
+    def get_description(self):
+        """ Return a string the program description, after running it through
+            the descape.
+        """
+        return utils.descape(self.description)
 
-	def get_genre(self):
-		""" Return a string of the genre. E.g. Comedy
-		"""
-		return utils.descape(self.genre)
+    def get_genre(self):
+        """ Return a string of the genre. E.g. Comedy
+        """
+        return utils.descape(self.genre)
 
-	def get_rating(self):
-		""" Return a string of the rating. E.g. PG, MA
-		"""
-		return utils.descape(self.rating)
+    def get_rating(self):
+        """ Return a string of the rating. E.g. PG, MA
+        """
+        return utils.descape(self.rating)
 
-	def get_duration(self):
-		""" Return a the duration of the video in seconds. This is only useful
-			 for the addStreamInfo method
-		"""
-		seconds = int(self.duration)
-		return seconds
+    def get_duration(self):
+        """ Return a the duration of the video in seconds. This is only useful
+             for the addStreamInfo method
+        """
+        seconds = int(self.duration)
+        return seconds
 
-	def get_date(self):
-		""" Return a string of the date in the format 2010-02-28
-			which is useful for XBMC labels.
-		"""
-		if self.date:
-			return self.date.strftime("%Y-%m-%d")
-		return None
+    def get_date(self):
+        """ Return a string of the date in the format 2010-02-28
+            which is useful for XBMC labels.
+        """
+        if self.date:
+            return self.date.strftime("%Y-%m-%d")
+        return None
 
-	def get_season(self):
-		season = datetime.datetime.now().year
-		if self.season:
-			season = self.season
-		return season
+    def get_season(self):
+        season = datetime.datetime.now().year
+        if self.season:
+            season = self.season
+        return season
 
-	def get_thumbnail(self):
-		""" Returns the thumbnail
-		"""
-		if self.thumbnail:
-			thumb = utils.descape(self.thumbnail)
-			thumb = thumb.replace(' ','%20')
-			return thumb
-		return ''
+    def get_thumbnail(self):
+        """ Returns the thumbnail
+        """
+        if self.thumbnail:
+            thumb = utils.descape(self.thumbnail)
+            thumb = thumb.replace(' ','%20')
+            return thumb
+        return ''
 
-	def get_url(self):
-		return self.url
+    def get_url(self):
+        return self.url
 
-	def get_xbmc_list_item(self):
-		""" Returns a dict of program information, in the format which
-			XBMC requires for video metadata.
-		"""
-		info_dict = {}
-		if self.get_title():       info_dict['title'] = self.get_title()
-		if self.get_description(): info_dict['plot'] = self.get_description()
-		if self.get_genre():       info_dict['genre'] = self.get_genre()
-		if self.get_date():        info_dict['aired'] = self.get_date()
-		if self.get_season():      info_dict['season'] = self.get_season()
-		return info_dict
+    def get_xbmc_list_item(self):
+        """ Returns a dict of program information, in the format which
+            XBMC requires for video metadata.
+        """
+        info_dict = {}
+        if self.get_title():       info_dict['title'] = self.get_title()
+        if self.get_description(): info_dict['plot'] = self.get_description()
+        if self.get_genre():       info_dict['genre'] = self.get_genre()
+        if self.get_date():        info_dict['aired'] = self.get_date()
+        if self.get_season():      info_dict['season'] = self.get_season()
+        return info_dict
 
-	def get_xbmc_stream_info(self):
-		"""
-			Return a stream info dict
-		"""
-		info_dict = {}
-		if self.get_duration():
-			info_dict['duration'] = self.get_duration()
-		return info_dict
+    def get_xbmc_stream_info(self):
+        """
+            Return a stream info dict
+        """
+        info_dict = {}
+        if self.get_duration():
+            info_dict['duration'] = self.get_duration()
+        return info_dict
 
-	def make_xbmc_url(self):
-		""" Returns a string which represents the program object, but in
-			a format suitable for passing as a URL.
-		"""
-		d = {}
-		if self.id:          d['id'] = self.id
-		if self.title:       d['title'] = self.title
-		if self.description: d['description'] = self.description
-		if self.genre:       d['genre'] = self.genre
-		if self.duration:    d['duration'] = self.duration
-		if self.season:      d['season'] = self.season
-		if self.date:        d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
-		if self.thumbnail:   d['thumbnail'] = self.thumbnail
-		if self.url:         d['url'] = self.url
+    def make_xbmc_url(self):
+        """ Returns a string which represents the program object, but in
+            a format suitable for passing as a URL.
+        """
+        d = {}
+        if self.id:          d['id'] = self.id
+        if self.title:       d['title'] = self.title
+        if self.description: d['description'] = self.description
+        if self.genre:       d['genre'] = self.genre
+        if self.duration:    d['duration'] = self.duration
+        if self.season:      d['season'] = self.season
+        if self.date:        d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
+        if self.thumbnail:   d['thumbnail'] = self.thumbnail
+        if self.url:         d['url'] = self.url
 
-		return utils.make_url(d)
+        return utils.make_url(d)
 
 
-	def parse_xbmc_url(self, string):
-		""" Takes a string input which is a URL representation of the 
-			program object
-		"""
-		d = utils.get_url(string)
-		if d.has_key('id'):          self.id          = d.get('id')
-		if d.has_key('title'):       self.title       = d.get('title')
-		if d.has_key('description'): self.description = d.get('description')
-		if d.has_key('genre'):       self.genre       = d.get('genre')
-		if d.has_key('season'):      self.season      = d.get('season')
-		if d.has_key('duration'):    self.duration    = d.get('duration')
-		if d.has_key('url'):         self.url         = urllib.unquote_plus(d.get('url'))
-		if d.has_key('thumbnail'):   self.thumbnail   = urllib.unquote_plus(d.get('thumbnail'))
-		if d.has_key('date'):
-			timestamp = time.mktime(time.strptime(d['date'], '%Y-%m-%d %H:%M:%S'))
-			self.date = datetime.date.fromtimestamp(timestamp)
+    def parse_xbmc_url(self, string):
+        """ Takes a string input which is a URL representation of the
+            program object
+        """
+        d = utils.get_url(string)
+        if d.has_key('id'):          self.id          = d.get('id')
+        if d.has_key('title'):       self.title       = d.get('title')
+        if d.has_key('description'): self.description = d.get('description')
+        if d.has_key('genre'):       self.genre       = d.get('genre')
+        if d.has_key('season'):      self.season      = d.get('season')
+        if d.has_key('duration'):    self.duration    = d.get('duration')
+        if d.has_key('url'):         self.url         = urllib.unquote_plus(d.get('url'))
+        if d.has_key('thumbnail'):   self.thumbnail   = urllib.unquote_plus(d.get('thumbnail'))
+        if d.has_key('date'):
+            timestamp = time.mktime(time.strptime(d['date'], '%Y-%m-%d %H:%M:%S'))
+            self.date = datetime.date.fromtimestamp(timestamp)
 
 
