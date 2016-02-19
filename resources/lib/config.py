@@ -46,6 +46,7 @@ VIDEO_LIST_URL = 'http://api.afl.com.au/cfs/afl/video'
 
 # Categories existing on the new content system
 CATEGORIES = [
+	'Match Replays 2016',
 	'Match Replays 2015',
 	'Match Replays 2014',
 	'Match Replays 2013',
@@ -83,6 +84,39 @@ TEAMS = [
 	{'id': '17', 'name': 'West Coast',          'squad': '150',  'channel': '126',  'thumb': 'wce.gif'  },
 	{'id': '18', 'name': 'Western Bulldogs',    'squad': '140',  'channel': '134',  'thumb': 'wb.gif'   },
 ]
+
+ROUNDS_2016 = [
+	{'id': 'latest',        'name': 'Current Round'},
+	{'id': 'CD_R201610101', 'name': 'NAB Challenge'},
+	{'id': 'CD_R201601401', 'name': 'Round 1'},
+	{'id': 'CD_R201601402', 'name': 'Round 2'},
+	{'id': 'CD_R201601403', 'name': 'Round 3'},
+	{'id': 'CD_R201601404', 'name': 'Round 4'},
+	{'id': 'CD_R201601405', 'name': 'Round 5'},
+	{'id': 'CD_R201601406', 'name': 'Round 6'},
+	{'id': 'CD_R201601407', 'name': 'Round 7'},
+	{'id': 'CD_R201601408', 'name': 'Round 8'},
+	{'id': 'CD_R201601409', 'name': 'Round 9'},
+	{'id': 'CD_R201601410', 'name': 'Round 10'},
+	{'id': 'CD_R201601411', 'name': 'Round 11'},
+	{'id': 'CD_R201601412', 'name': 'Round 12'},
+	{'id': 'CD_R201601413', 'name': 'Round 13'},
+	{'id': 'CD_R201601414', 'name': 'Round 14'},
+	{'id': 'CD_R201601415', 'name': 'Round 15'},
+	{'id': 'CD_R201601416', 'name': 'Round 16'},
+	{'id': 'CD_R201601417', 'name': 'Round 17'},
+	{'id': 'CD_R201601418', 'name': 'Round 18'},
+	{'id': 'CD_R201601419', 'name': 'Round 19'},
+	{'id': 'CD_R201601420', 'name': 'Round 20'},
+	{'id': 'CD_R201601421', 'name': 'Round 21'},
+	{'id': 'CD_R201601422', 'name': 'Round 22'},
+	{'id': 'CD_R201601423', 'name': 'Round 23'},
+	{'id': 'CD_R201601424', 'name': 'Finals Week 1'},
+	{'id': 'CD_R201601425', 'name': 'Finals Week 2'},
+	{'id': 'CD_R201601426', 'name': 'Finals Week 3'},
+	{'id': 'CD_R201601427', 'name': 'Grand Final'},
+]
+
 
 ROUNDS_2015 = [
 	{'id': 'latest',        'name': 'Current Round'},
