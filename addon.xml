@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><addon id="plugin.video.afl-video" name="AFL Video" provider-name="Andy Botting" version="1.4.0-3-gb2a39e4">
+<?xml version="1.0" ?><addon id="plugin.video.afl-video" name="AFL Video" provider-name="Andy Botting" version="1.4.0-4-g487d938">
    <requires>
       <import addon="xbmc.python" version="2.1.0"/>
       <import addon="script.module.beautifulsoup"/>
@@ -8,8 +8,8 @@
   </extension>
    <extension point="xbmc.addon.metadata">
       <summary>AFL Video</summary>
-      <description>Watch the latest AFL replays and post match press reports.</description>
-      <disclaimer>This plugin is not affiliated with the AFL or Bigpond Video in any way.</disclaimer>
+      <description>Watch the latest AFL replays. Club video/Match reports are unavailable for now.</description>
+      <disclaimer>This plugin is not affiliated with the AFL in any way.</disclaimer>
       <provides>video</provides>
       <platform>all</platform>
       <license>GPL 3</license>
