@@ -1,20 +1,18 @@
-[B]Version master[/B]
+[B]Version 1.5.0[/B]
+- Update addon readme to reflect no club video
 - Update license header
 - Switch coding from tabs to spaces
 - Add issue reporting, remove loading dialogs and club video
 - Add Season 2016
 
 [B]Version v1.4.0[/B]
-- Version 1.4.0
 - Support multiple seasons for match replays and remove busted categories
 - Add match replay information for 2015
 
 [B]Version v1.3.1[/B]
-- Version 1.3.1
 - Require v2.1.0 of xbmc.python for Gotham
 
 [B]Version v1.3[/B]
-- Version 1.3
 - Update for Season 2014 inc. NAB Challenge
 - Update README
 
