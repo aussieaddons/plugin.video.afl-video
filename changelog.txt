@@ -1,3 +1,6 @@
+[B]Version master[/B]
+- Add Season 2016
+
 [B]Version v1.4.0[/B]
 - Version 1.4.0
 - Support multiple seasons for match replays and remove busted categories

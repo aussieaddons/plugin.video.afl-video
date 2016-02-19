@@ -28,13 +28,7 @@ except ImportError:
 
 
 def make_list(round_id):
-
 	utils.log("Fetching match list for round %s..." % round_id)
-
-	# Show a dialog
-	pDialog = xbmcgui.DialogProgress()
-	pDialog.create(config.NAME, 'Fetching match list...')
-
 	try:
 		matches = comm.get_round(round_id)
 		utils.log("Found %s matches" % len(matches))
@@ -57,9 +51,4 @@ def make_list(round_id):
 		# send notification we're finished, successfully or unsuccessfully
 		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		msg = utils.dialog_error("Unable to fetch match list")
-		d.ok(*msg)
-		utils.log_error();
-
+		utils.handle_error('Unable to fetch match list')

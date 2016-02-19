@@ -28,11 +28,6 @@ except ImportError:
 
 def make_list():
 	try:
-		# Show a dialog
-		pDialog = xbmcgui.DialogProgress()
-		pDialog.create('AFL Video', 'Getting Team List')
-		pDialog.update(50)
-
 		for t in config.TEAMS:
 			# Add our resources/lib to the python path
 			try:
@@ -57,9 +52,4 @@ def make_list():
 		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 		xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		msg = utils.dialog_error("Unable to fetch video list")
-		d.ok(*msg)
-		utils.log_error();
-
+		utils.handle_error('Unable to fetch video list')

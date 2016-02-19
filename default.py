@@ -53,9 +53,9 @@ if __name__ == "__main__" :
 			if params['category'] == 'Settings':
 				__addon__.openSettings()
 
-			# Team video list
-			elif params['category'] == 'Club Video':
-				teams.make_list()
+			# Team video list -- disabled until moved to new API
+			#elif params['category'] == 'Club Video':
+			#	teams.make_list()
 
 			# Match replay round list
 			elif params['category'].startswith('Match Replays'):

@@ -32,11 +32,6 @@ def make_list(url):
 	try:
 		params = utils.get_url(url)
 
-		# Show a dialog
-		d = xbmcgui.DialogProgress()
-		d.create(config.NAME, '')
-		d.update(50, 'Fetching video list...')
-
 		# Old-style video index (used for team video)
 		if params.has_key('channel'):
 			channel = params['channel']
@@ -64,8 +59,4 @@ def make_list(url):
 		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 		xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		msg = utils.dialog_error("Unable to fetch video list")
-		d.ok(*msg)
-		utils.log_error();
+		utils.handle_error('Unable to fetch video list')

@@ -25,16 +25,11 @@ import xbmc
 import xbmcgui
 import xbmcplugin
 
-def make_rounds(season=2015):
+def make_rounds(season=2016):
 
 	try:
 		# ROUNDS_2015 variable from config
 		rounds_config = getattr(config, 'ROUNDS_'+season)
-
-		# Show a dialog
-		pDialog = xbmcgui.DialogProgress()
-		pDialog.create('AFL Video', 'Getting Round List')
-		pDialog.update(50)
 
 		for r in rounds_config:
 			listitem = xbmcgui.ListItem(label=r['name'])
@@ -52,8 +47,4 @@ def make_rounds(season=2015):
 		# send notification we're finished, successfully or unsuccessfully
 		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		message = utils.dialog_error("Unable to fetch round list")
-		d.ok(*message)
-		utils.log_error();
+		utils.handle_error('Unable to fetch round list')

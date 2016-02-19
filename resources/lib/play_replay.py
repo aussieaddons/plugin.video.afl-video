@@ -33,18 +33,13 @@ def make_list(round_id, match_id):
 	quality = __addon__.getSetting('QUALITY')
 
 	utils.log("Fetching video list for %s..." % match_id)
-
-	# Show a dialog
-	pDialog = xbmcgui.DialogProgress()
-	pDialog.create(config.NAME, 'Fetching video list...')
-
 	try:
 		# fill media list
 		videos = comm.get_match_video(round_id, match_id, quality)
 		if videos:
 			ok = True
 			for v in videos:
-				listitem = xbmcgui.ListItem(label=v['name'])	
+				listitem = xbmcgui.ListItem(label=v['name'])
 				# I think this might help prevent the stream from closing early
 				url = v['url'] + '?start=0'
 				xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=listitem, isFolder=False)
@@ -54,8 +49,4 @@ def make_list(round_id, match_id):
 			msg = utils.dialog_message("No videos found. Replays are only available 24-48 hours after match has been played. Please try again later.")
 			d.ok(*msg)
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		msg = utils.dialog_error("Unable to fetch video list")
-		d.ok(*msg)
-		utils.log_error();
+		utils.handle_error('Unable to fetch program list')

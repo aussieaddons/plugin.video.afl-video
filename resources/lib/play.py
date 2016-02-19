@@ -34,19 +34,10 @@ def play(url):
 			v = classes.Video()
 			v.parse_xbmc_url(url)
 
-		# Show a dialog
-		d = xbmcgui.DialogProgress()
-		d.create(config.NAME, '')
-		d.update(50, 'Starting video...')
-
 		listitem = xbmcgui.ListItem(label=v.get_title(), iconImage=v.get_thumbnail(), thumbnailImage=v.get_thumbnail())
 		listitem.addStreamInfo('video', v.get_xbmc_stream_info())
 		listitem.setInfo('video', v.get_xbmc_list_item())
 	
 		xbmc.Player().play(v.get_url(), listitem)
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		message = utils.dialog_error("Unable to play video")
-		d.ok(*message)
-		utils.log_error();
+		utils.handle_error('Unable to play video')

@@ -34,14 +34,11 @@ def make_list():
 		__addon__ = xbmcaddon.Addon()
 		favourite_team =  __addon__.getSetting('TEAM')
 
-		if favourite_team > 0:
-			for team in config.TEAMS:
-				if favourite_team == team['id']:
-					items.append({'name': team['name'], 'channel': team['channel']})
-
-		# Add the other feeds listed in the config file
-		for channel in config.CHANNELS:
-			items.append({'name': channel['name'], 'channel': channel['channel']})
+        # Disabled until moved to new API
+		#if favourite_team > 0:
+		#	for team in config.TEAMS:
+		#		if favourite_team == team['id']:
+		#			items.append({'name': team['name'], 'channel': team['channel']})
 
 		categories = config.CATEGORIES
 
@@ -56,7 +53,6 @@ def make_list():
 						url=url, 
 						listitem=listitem, 
 						isFolder=True, 
-						totalItems=len(config.CHANNELS) + 1
 					)
 
 		for category in categories:
@@ -74,9 +70,4 @@ def make_list():
 
 		xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
 	except:
-		# user cancelled dialog or an error occurred
-		d = xbmcgui.Dialog()
-		msg = utils.dialog_error("Unable build video category list")
-		d.ok(*msg)
-		utils.log_error();
-	return ok
+		utils.handle_error('Unable build video category list')

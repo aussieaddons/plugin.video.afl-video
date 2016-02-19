@@ -16,12 +16,17 @@
 #    along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-NAME = 'AFL Video'
+import os
+import version
 
-# Video quality static definitions with match the setings.xml
-QUAL_LOW = '0'
-QUAL_MED = '1'
-QUAL_HIGH = '2'
+NAME = 'AFL Video'
+ADDON_ID = 'plugin.video.afl-video'
+VERSION = version.VERSION
+
+GITHUB_API_URL = 'https://api.github.com/repos/andybotting/xbmc-addon-afl-video'
+ISSUE_API_URL = GITHUB_API_URL + '/issues'
+ISSUE_API_AUTH = 'eGJtY2JvdDo1OTQxNTJjMTBhZGFiNGRlN2M0YWZkZDYwZGQ5NDFkNWY4YmIzOGFj'
+GIST_API_URL = 'https://api.github.com/gists'
 
 # These values match the bitrate given in the video data
 VIDEO_QUALITY = { '0': 172,
@@ -50,17 +55,9 @@ CATEGORIES = [
 	'Match Replays 2015',
 	'Match Replays 2014',
 	'Match Replays 2013',
-	'Club Video',
+	#'Club Video',
 	'Settings'
 ]
-
-# Standard Bigpond Sport/AFL channels
-# Channel number was discovered from http://bigpondvideo.com/
-# and using a web proxy, extract the AMF data when clicking each channel
-# to find its 'NavID' 
-# channel value matches with the teams list in the settings.xml
-# NOTE: Now only used for 'Club Video'. Everything else moved to new API feed
-CHANNELS = []
 
 # Channel is used for Bigpond Video and Squad is used in Round XML
 # http://www.afl.com.au/api/gas/afl/squad
