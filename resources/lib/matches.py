@@ -1,6 +1,6 @@
 #
-#    AFL Video XBMC Plugin
-#    Copyright (C) 2012 Andy Botting
+#    AFL Video Kodi Add-on
+#    Copyright (C) 2016 Andy Botting
 #
 #    AFL Video is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with AFL Video.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
 import sys
