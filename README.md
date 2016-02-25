@@ -31,7 +31,7 @@ Contact Me
 ----------
 For anything else, you can contact me by email at andy#andybotting.com
 
-[repository]: https://github.com/andybotting/xbmc-addon-afl-video
+[repository]: https://github.com/xbmc-catchuptv-au/repo
 [download]: https://github.com/xbmc-catchuptv-au/repo/tree/master/plugin.video.afl-video
 [githubzip]: https://github.com/andybotting/xbmc-addon-afl-video/archive/master.zip
 [issues]: https://github.com/andybotting/xbmc-addon-afl-video/issues
