@@ -1,7 +1,7 @@
 AFL Video plugin for XBMC
 ================================
 
-*UPDATE*: Now updated for 2014 season, including NAB Challenge matches
+*UPDATE*: Now updated for 2016 season, including NAB Challenge matches.
 
 This plugin provides a simple list of available programs from the AFL web site
 and allows you to stream them with.
@@ -26,28 +26,6 @@ Reporting an issue
 For any issues or bug reports, please file them on the [issues page] [issues].
 
 Please include log output if possible, using Github Gist or Pastebin.com.
-
-The location of your XBMC log file will depend on your platform.
-
-For Windows:
-```
-%APPDATA%\XBMC\temp\xbmc.log
-```
-
-For Linux (and Raspberry Pi):
-```
-~/.xbmc/temp/xbmc.log
-```
-
-For Mac OS X:
-```
-~/Library/Application Support/XBMC/temp/xbmc.log
-```
-
-For AppleTV:
-```
-/Users/frontrow/Library/Application Support/XBMC/temp/xbmc.log
-```
 
 Contact Me
 ----------
