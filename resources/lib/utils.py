@@ -48,14 +48,12 @@ def get_team(squad_id):
         if t['squad'] == squad_id:
             return t
 
-
 def descape_entity(m, defs=htmlentitydefs.entitydefs):
     # callback: translate one entity to its ISO Latin value
     try:
         return defs[m.group(1)]
     except KeyError:
-        return m.group(0) # use as is
-
+        return m.group(0)  # use as is
 
 def descape(string):
     # Fix the hack back from parsing with BeautifulSoup
@@ -63,37 +61,34 @@ def descape(string):
 
     return pattern.sub(descape_entity, string)
 
-
 def get_url(s):
     dict = {}
     pairs = s.lstrip("?").split("&")
     for pair in pairs:
-        if len(pair) < 3: continue
-        kv = pair.split("=",1)
+        if len(pair) < 3:
+            continue
+        kv = pair.split("=", 1)
         k = kv[0]
         v = urllib.unquote_plus(kv[1])
         dict[k] = v
     return dict
 
-
 def make_url(d):
     pairs = []
-    for k,v in d.iteritems():
+    for k, v in d.iteritems():
         k = urllib.quote_plus(k)
         # Values can possibly be - UTF-8 as an ASCII str, ASCII as an ASCII
         # str, or unicode. Want clean ASCII for URL.
         if not isinstance(v, unicode):
             v = str(v)
             v = v.decode("utf-8")
-        v = unicodedata.normalize('NFC', v).encode('ascii','ignore')
+        v = unicodedata.normalize('NFC', v).encode('ascii', 'ignore')
         v = urllib.quote_plus(v)
-        pairs.append("%s=%s" % (k,v))
+        pairs.append("%s=%s" % (k, v))
     return "&".join(pairs)
-
 
 def log(s):
     print "[%s v%s] %s" % (config.NAME, config.VERSION, s)
-
 
 def log_error(message=None):
     exc_type, exc_value, exc_tb = sys.exc_info()
@@ -103,7 +98,6 @@ def log_error(message=None):
                                             exc_tb.tb_frame.f_code.co_name,
                                             exc_tb.tb_lineno, exc_value)
     print traceback.print_exc()
-
 
 def dialog_error(err=None):
     # Generate a list of lines for use in XBMC dialog
@@ -118,7 +112,6 @@ def dialog_error(err=None):
                                    exc_tb.tb_lineno, msg))
     return content
 
-
 def dialog_message(msg, title=None):
     if not title:
         title = "%s v%s" % (config.NAME, config.VERSION)
@@ -126,7 +119,6 @@ def dialog_message(msg, title=None):
     content = textwrap.wrap(msg, 60)
     content.insert(0, title)
     return content
-
 
 def get_platform():
     """ Work through a list of possible platform types and return the first
@@ -152,10 +144,8 @@ def get_platform():
             return platform
     return "Unknown"
 
-
 def get_xbmc_build():
     return xbmc.getInfoLabel("System.BuildVersion")
-
 
 def get_xbmc_version():
     build = get_xbmc_build()
@@ -163,13 +153,11 @@ def get_xbmc_version():
     version = build.split(' ')[0]
     return version
 
-
 def get_xbmc_major_version():
     """ Return the major version number of the running XBMC
     """
     version = get_xbmc_version().split('.')[0]
     return int(version)
-
 
 def log_xbmc_platform_version():
     """ Log our XBMC version and platform for debugging
@@ -177,7 +165,6 @@ def log_xbmc_platform_version():
     version = get_xbmc_version()
     platform = get_platform()
     log("XBMC/Kodi %s running on %s" % (version, platform))
-
 
 def get_file_dir():
     """ Make our addon working directory if it doesn't exist and
@@ -189,7 +176,6 @@ def get_file_dir():
         os.mkdir(filedir)
     return filedir
 
-
 def save_last_error_report(trace):
     """ Save a copy of our last error report
     """
@@ -199,7 +185,6 @@ def save_last_error_report(trace):
             f.write(trace)
     except:
         log("Error writing error report file")
-
 
 def can_send_error(trace):
     """ Check to see if our new error message is different from the last
@@ -222,7 +207,6 @@ def can_send_error(trace):
     log("Not allowing error report. Last report matches this one")
     return False
 
-
 def handle_error(err=None):
     traceback_str = traceback.format_exc()
     log(traceback_str)
@@ -243,7 +227,7 @@ def handle_error(err=None):
         if ((traceback_str.find('The read operation timed out') > 0) or
             (traceback_str.find('IncompleteRead') > 0) or
             (traceback_str.find('HTTP Error 404: Not Found') > 0)):
-            send_error = False
+                send_error = False
 
         if send_error:
             latest_version = issue_reporter.get_latest_version()

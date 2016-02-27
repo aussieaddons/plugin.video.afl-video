@@ -16,31 +16,18 @@
 #     along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import urllib, urllib2
+import urllib
+import urllib2
 import config
 import classes
 import utils
 import datetime
 import time
-
-# AMF services
-from pyamf.remoting.client import RemotingService
-
-# Use local etree to get v1.3.0
-import etree.ElementTree as ET
-
-# Parsing SMIL data
+import json
+import xbmcaddon
+import xml.etree.ElementTree as ET
 from BeautifulSoup import BeautifulStoneSoup
 
-try:
-    import simplejson as json
-except ImportError:
-    import json
-
-try:
-    import xbmc, xbmcgui, xbmcplugin, xbmcaddon
-except ImportError:
-    pass # for PC debugging
 
 def fetch_url(url, token=None):
     """
@@ -71,40 +58,7 @@ def fetch_token():
     return json_result['token']
 
 
-def parse_amf_video(video_item):
-    """
-        Parse the AMF video item and construct a video object from it.
-    """
-    v = video_item['content']
-    new_video = classes.Video()
-    new_video.id = v['contentId']
-    new_video.title = v['title']
-    new_video.description = v['description']
-
-    # Convert h:m:s to seconds
-    if v.has_key('duration') and v['duration'] is not None:
-        h, m, s = [int(i) for i in v['duration'].split(':')]
-        new_video.duration = 3600*h + 60*m + s
-
-    # Replace to higher res thumbnails
-    if v['imageUrl']:
-        new_video.thumbnail = v['imageUrl'].replace('89x50.jpg', '326x184.jpg')
-
-    return new_video
-
-
 def parse_json_video(video_data):
-    """
-        Parse the JSON data and construct a video object from it.
-    """
-    new_video = classes.Video()
-    new_video.title = video_data['title']
-    new_video.description = video_data['description']
-    new_video.thumbnail = video_data['media$thumbnails'][0]['plfile$url']
-    return new_video
-
-
-def parse_json_video_new(video_data):
     """
         Parse the JSON data and construct a video object from it for a list
         of videos
@@ -117,8 +71,12 @@ def parse_json_video_new(video_data):
     video.title = video_data['title']
     video.description = video_data['description']
     video.thumbnail = video_data['thumbnailPath']
-    timestamp = time.mktime(time.strptime(video_data['customPublishDate'], '%Y-%m-%dT%H:%M:%S.%f+0000'))
-    video.date = datetime.date.fromtimestamp(timestamp)
+    try:
+        timestamp = time.mktime(time.strptime(video_data['customPublishDate'],
+                                              '%Y-%m-%dT%H:%M:%S.%f+0000'))
+        video.date = datetime.date.fromtimestamp(timestamp)
+    except:
+        pass
 
     video_format = None
     for v in video_data['mediaFormats']:
@@ -131,42 +89,8 @@ def parse_json_video_new(video_data):
 
     return video
 
-def get_videos(channel_id):
-    """
-        Get the list of videos from the AMF service.
-    """
-    videos = []
-    client = RemotingService('http://afl.bigpondvideo.com/App/AmfPhp/gateway.php')
-    service = client.getService('Miscellaneous')
-    params = {
-        'navId': channel_id,
-        'startRecord': '0',
-        'howMany': '50',
-        'platformId': '1',
-        'phpFunction': 'getClipList',
-        'asFunction': 'publishClipList'
-    }
-
-    videos_list = service.getClipList(params)
-
-    for video_item in videos_list[0]['items']:
-        video = parse_amf_video(video_item)
-        videos.append(video)
-    return videos
-
 
 def get_url_from_smil(data):
-
-    """
-    <smil xmlns="http://www.w3.org/2005/SMIL21/Language">
-        <head></head>
-        <body>
-            <seq>
-                <video src="http://bponlinewoc2264.ngcdn.telstra.com/PlatformRelease/487/684/GEEL_PRESSER.mp4" [other stuff]></video>
-            </seq>
-        </body>
-    </smil>
-    """
     soup = BeautifulStoneSoup(data)
     src = soup.find('video')['src']
     return src
@@ -208,9 +132,9 @@ def get_video(video_id):
     return video
 
 
-def get_videos_new(category):
+def get_videos(category):
     """
-        New function for listing videos, not yet in use
+        Get all videos by category
     """
     video_list = []
 
@@ -226,7 +150,7 @@ def get_videos_new(category):
     video_assets = json_data['videos'][0]['videos']
 
     for video_asset in video_assets:
-        video = parse_json_video_new(video_asset)
+        video = parse_json_video(video_asset)
         video_list.append(video)
 
     return video_list
@@ -277,7 +201,8 @@ def get_match_video(round_id, match_id, quality):
         match = matches.find('match[@FixtureId="%s"]' % match_id)
 
         qualities = match.find('qualities')
-        quality = qualities.find('quality[@name="%s"]' % config.REPLAY_QUALITY[quality])
+        quality = qualities.find('quality[@name="%s"]' %
+                                 config.REPLAY_QUALITY[quality])
         periods = quality.find('periods')
 
         for qtr in periods.getchildren():
@@ -287,4 +212,3 @@ def get_match_video(round_id, match_id, quality):
         return None
 
     return match_video
-

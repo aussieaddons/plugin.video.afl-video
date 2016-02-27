@@ -21,32 +21,25 @@ import config
 import utils
 import classes
 import comm
+import xbmcgui
+import xbmcplugin
 
-try:
-    import xbmc, xbmcgui, xbmcplugin
-except ImportError:
-    pass
 
 def make_list(url):
 
     try:
         params = utils.get_url(url)
 
-        # Old-style video index (used for team video)
-        if params.has_key('channel'):
-            channel = params['channel']
-            videos = comm.get_videos(channel)
-        # New-style video index
-        elif params.has_key('category'):
-            category = params['category']
-            videos = comm.get_videos_new(category)
+        category = params.get('category')
+        videos = comm.get_videos(category)
 
         utils.log("Found %s videos" % len(videos))
 
         # fill media list
         ok = True
         for v in videos:
-            listitem = xbmcgui.ListItem(label=v.get_title(), thumbnailImage=v.get_thumbnail())
+            listitem = xbmcgui.ListItem(label=v.get_title(),
+                                        thumbnailImage=v.get_thumbnail())
             listitem.setInfo('video', v.get_xbmc_list_item())
             listitem.addStreamInfo('video', v.get_xbmc_stream_info())
 
@@ -54,7 +47,10 @@ def make_list(url):
             url = "%s?%s" % (sys.argv[0], v.make_xbmc_url())
 
             # Add the program item to the list
-            ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=listitem, isFolder=False)
+            ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),
+                                             url=url,
+                                             listitem=listitem,
+                                             isFolder=False)
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')

@@ -20,11 +20,9 @@ import os
 import sys
 import config
 import utils
+import xbmcgui
+import xbmcplugin
 
-try:
-    import xbmc, xbmcgui, xbmcplugin
-except ImportError:
-    pass # for PC debugging
 
 def make_list():
     try:
@@ -35,19 +33,20 @@ def make_list():
             except:
                 current_dir = os.getcwd()
 
-            thumbnail = os.path.join(current_dir, "..", "..", "resources", "img", t['thumb'])
-            listitem = xbmcgui.ListItem(label=t['name'], iconImage=thumbnail, thumbnailImage=thumbnail)
+            thumbnail = os.path.join(current_dir, "..", "..", "resources",
+                                     "img", t['thumb'])
+            listitem = xbmcgui.ListItem(label=t['name'],
+                                        iconImage=thumbnail,
+                                        thumbnailImage=thumbnail)
             url = "%s?channel=%s" % (sys.argv[0], t['channel'])
 
             # Add the item to the list
             ok = xbmcplugin.addDirectoryItem(
-                        handle = int(sys.argv[1]),
-                        url = url,
-                        listitem = listitem,
-                        isFolder = True,
-                        totalItems = len(config.TEAMS)
-                    )
-
+                        handle=int(sys.argv[1]),
+                        url=url,
+                        listitem=listitem,
+                        isFolder=True,
+                        totalItems=len(config.TEAMS))
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')

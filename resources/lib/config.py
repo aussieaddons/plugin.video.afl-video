@@ -29,14 +29,14 @@ ISSUE_API_AUTH = 'eGJtY2JvdDo1OTQxNTJjMTBhZGFiNGRlN2M0YWZkZDYwZGQ5NDFkNWY4YmIzOG
 GIST_API_URL = 'https://api.github.com/gists'
 
 # These values match the bitrate given in the video data
-VIDEO_QUALITY = { '0': 172,
-                  '1': 1024,
-                  '2': 2048  }
+VIDEO_QUALITY = {'0': 172,
+                 '1': 1024,
+                 '2': 2048}
 
 # These are the strings used for selecting quality via the smart replay system.
-REPLAY_QUALITY = { '0': 'low',
-                   '1': 'med',
-                   '2': 'high'  }
+REPLAY_QUALITY = {'0': 'low',
+                  '1': 'med',
+                  '2': 'high'}
 
 # Round URL, which lists the games of the round if they've had their Videos uploaded
 # This URL can also take a 'Round ID' added to the end (e.g CD_R201301401)
@@ -55,7 +55,6 @@ CATEGORIES = [
     'Match Replays 2015',
     'Match Replays 2014',
     'Match Replays 2013',
-    #'Club Video',
     'Editorial Highlights',
     'Media Conferences',
     'News',
@@ -65,24 +64,24 @@ CATEGORIES = [
 # Channel is used for Bigpond Video and Squad is used in Round XML
 # http://www.afl.com.au/api/gas/afl/squad
 TEAMS = [
-    {'id': '1',  'name': 'Adelaide',            'squad': '10',   'channel': '14',   'thumb': 'adel.gif' },
-    {'id': '2',  'name': 'Brisbane',            'squad': '20',   'channel': '22',   'thumb': 'bris.gif' },
-    {'id': '3',  'name': 'Carlton',             'squad': '30',   'channel': '30',   'thumb': 'carl.gif' },
-    {'id': '4',  'name': 'Collingwood',         'squad': '40',   'channel': '38',   'thumb': 'coll.gif' },
-    {'id': '5',  'name': 'Essendon',            'squad': '50',   'channel': '46',   'thumb': 'ess.gif'  },
-    {'id': '6',  'name': 'Fremantle',           'squad': '60',   'channel': '54',   'thumb': 'frem.gif' },
-    {'id': '7',  'name': 'Gold Coast',          'squad': '1000', 'channel': '2734', 'thumb': 'gcfc.gif' },
-    {'id': '8',  'name': 'Geelong',             'squad': '70',   'channel': '62',   'thumb': 'geel.gif' },
-    {'id': '9',  'name': 'Greater West Sydney', 'squad': '1010', 'channel': '3798', 'thumb': 'gws.gif'  },
-    {'id': '10', 'name': 'Hawthorn',            'squad': '80',   'channel': '70',   'thumb': 'haw.gif'  },
-    {'id': '11', 'name': 'Melbourne',           'squad': '90',   'channel': '86',   'thumb': 'melb.gif' },
-    {'id': '12', 'name': 'North Melbourne',     'squad': '100',  'channel': '78',   'thumb': 'nmfc.gif' },
-    {'id': '13', 'name': 'Port Adelaide',       'squad': '110',  'channel': '94',   'thumb': 'port.gif' },
-    {'id': '14', 'name': 'Richmond',            'squad': '120',  'channel': '102',  'thumb': 'rich.gif' },
-    {'id': '15', 'name': 'St. Kilda',           'squad': '130',  'channel': '110',  'thumb': 'stk.gif'  },
-    {'id': '16', 'name': 'Sydney',              'squad': '160',  'channel': '118',  'thumb': 'syd.gif'  },
-    {'id': '17', 'name': 'West Coast',          'squad': '150',  'channel': '126',  'thumb': 'wce.gif'  },
-    {'id': '18', 'name': 'Western Bulldogs',    'squad': '140',  'channel': '134',  'thumb': 'wb.gif'   },
+    {'id': '1',  'name': 'Adelaide',            'squad': '10',   'channel': '14',   'thumb': 'adel.gif'},
+    {'id': '2',  'name': 'Brisbane',            'squad': '20',   'channel': '22',   'thumb': 'bris.gif'},
+    {'id': '3',  'name': 'Carlton',             'squad': '30',   'channel': '30',   'thumb': 'carl.gif'},
+    {'id': '4',  'name': 'Collingwood',         'squad': '40',   'channel': '38',   'thumb': 'coll.gif'},
+    {'id': '5',  'name': 'Essendon',            'squad': '50',   'channel': '46',   'thumb': 'ess.gif'},
+    {'id': '6',  'name': 'Fremantle',           'squad': '60',   'channel': '54',   'thumb': 'frem.gif'},
+    {'id': '7',  'name': 'Gold Coast',          'squad': '1000', 'channel': '2734', 'thumb': 'gcfc.gif'},
+    {'id': '8',  'name': 'Geelong',             'squad': '70',   'channel': '62',   'thumb': 'geel.gif'},
+    {'id': '9',  'name': 'Greater West Sydney', 'squad': '1010', 'channel': '3798', 'thumb': 'gws.gif'},
+    {'id': '10', 'name': 'Hawthorn',            'squad': '80',   'channel': '70',   'thumb': 'haw.gif'},
+    {'id': '11', 'name': 'Melbourne',           'squad': '90',   'channel': '86',   'thumb': 'melb.gif'},
+    {'id': '12', 'name': 'North Melbourne',     'squad': '100',  'channel': '78',   'thumb': 'nmfc.gif'},
+    {'id': '13', 'name': 'Port Adelaide',       'squad': '110',  'channel': '94',   'thumb': 'port.gif'},
+    {'id': '14', 'name': 'Richmond',            'squad': '120',  'channel': '102',  'thumb': 'rich.gif'},
+    {'id': '15', 'name': 'St. Kilda',           'squad': '130',  'channel': '110',  'thumb': 'stk.gif'},
+    {'id': '16', 'name': 'Sydney',              'squad': '160',  'channel': '118',  'thumb': 'syd.gif'},
+    {'id': '17', 'name': 'West Coast',          'squad': '150',  'channel': '126',  'thumb': 'wce.gif'},
+    {'id': '18', 'name': 'Western Bulldogs',    'squad': '140',  'channel': '134',  'thumb': 'wb.gif'},
 ]
 
 ROUNDS_2016 = [

@@ -18,11 +18,7 @@
 
 import os
 import sys
-
-try:
-    import xbmc, xbmcgui, xbmcplugin, xbmcaddon
-except ImportError:
-    pass
+import xbmcaddon
 
 # Add our resources/lib to the python path
 try:
@@ -30,32 +26,41 @@ try:
 except:
     current_dir = os.getcwd()
 
-sys.path.append( os.path.join( current_dir, "resources", "lib" ) )
+sys.path.append(os.path.join(current_dir, "resources", "lib"))
 
-import utils, config, comm, index, teams, rounds, matches, videos, play_replay, play, pyamf
+import utils
+import config
+import comm
+import index
+import teams
+import rounds
+import matches
+import videos
+import play_replay
+import play
 
 utils.log('Initialised')
 
 __addon__ = xbmcaddon.Addon()
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
 
     if (len(params) == 0):
         index.make_list()
     else:
-        if params.has_key('channel'):
+        if 'channel' in params:
             videos.make_list(params_str)
 
-        elif params.has_key('category'):
+        elif 'category' in params:
             # Settings
             if params['category'] == 'Settings':
                 __addon__.openSettings()
 
             # Team video list -- disabled until moved to new API
-            #elif params['category'] == 'Club Video':
-            #    teams.make_list()
+            # elif params['category'] == 'Club Video':
+            #     teams.make_list()
 
             # Match replay round list
             elif params['category'].startswith('Match Replays'):
@@ -67,14 +72,12 @@ if __name__ == "__main__" :
                 videos.make_list(params_str)
 
         # List of videos (quarters) for a match
-        elif params.has_key('match_id'):
-            #replay.play(params['round_id'], params['match_id'])
+        elif 'match_id' in params:
             play_replay.make_list(params['round_id'], params['match_id'])
 
         # Match list for a round
-        elif params.has_key('round_id'):
+        elif 'round_id' in params:
             matches.make_list(params['round_id'])
 
-        elif params.has_key("title"):
+        elif 'title' in params:
             play.play(params_str)
-

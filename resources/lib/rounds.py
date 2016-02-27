@@ -20,15 +20,14 @@ import os
 import sys
 import config
 import utils
-
 import xbmc
 import xbmcgui
 import xbmcplugin
 
-def make_rounds(season=2016):
 
+def make_rounds(season=2016):
     try:
-        # ROUNDS_2015 variable from config
+        # ROUNDS_2016 variable from config
         rounds_config = getattr(config, 'ROUNDS_'+season)
 
         for r in rounds_config:
@@ -37,12 +36,11 @@ def make_rounds(season=2016):
 
             # Add the item to the list
             ok = xbmcplugin.addDirectoryItem(
-                        handle = int(sys.argv[1]),
-                        url = url,
-                        listitem = listitem,
-                        isFolder = True,
-                        totalItems = len(rounds_config)
-                    )
+                        handle=int(sys.argv[1]),
+                        url=url,
+                        listitem=listitem,
+                        isFolder=True,
+                        totalItems=len(rounds_config))
 
         # send notification we're finished, successfully or unsuccessfully
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)

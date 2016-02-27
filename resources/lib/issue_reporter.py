@@ -17,16 +17,16 @@
 #
 #
 
-import os, re, sys
-import urllib2, socket
-import base64
-import config, utils
-import xbmc, xbmcplugin
-
-try:
-    import simplejson as json
-except ImportError:
-    import json
+import os
+import re
+import sys
+import json
+import urllib2
+import socket
+import config
+import utils
+import xbmc
+import xbmcplugin
 
 # Filter out username and passwords from log files
 LOG_FILTERS = (
@@ -34,6 +34,7 @@ LOG_FILTERS = (
     ('<user>.+?</user>', '<user>[FILTERED_USER]</user>'),
     ('<pass>.+?</pass>', '<pass>[FILTERED_PASSWORD]</pass>'),
 )
+
 
 def make_request(url):
     """
@@ -133,7 +134,6 @@ def get_versions():
         Assemble a list of version from the tags, and split them into lists
     """
     tags = fetch_tags()
-    #utils.log('Version check: found tags: %s' % tags)
     tag_names = map(lambda tag: tag['name'], tags)
     versions = filter(lambda tag: re.match(r'v(\d+)\.(\d+)(?:\.(\d+))?', tag),
                       tag_names)
@@ -152,7 +152,8 @@ def get_latest_version():
 
 def is_latest_version(current_version, latest_version):
     """
-        Compare current_version (x.x.x string) and latest_version ([x,x,x] list)
+        Compare current_version (x.x.x string) and
+        latest_version ([x,x,x] list)
     """
     if current_version.startswith('v'):
         current_version = current_version[1::]
@@ -206,14 +207,15 @@ def upload_log():
 
     utils.log("Uploading log file")
     try:
-        response = urllib2.urlopen(make_request(config.GIST_API_URL),
-                                   json.dumps({
+        data = {
             "files": {
                 "xbmc.log": {
                     "content": log_content
                 }
             }
-        }))
+        }
+        response = urllib2.urlopen(make_request(config.GIST_API_URL),
+                                   json.dumps(data))
     except urllib2.HTTPError as e:
         print e
         utils.log("Failed to save log: HTTPError %s" % e.code)
@@ -236,11 +238,12 @@ def report_issue(issue_data):
     utils.log("Issue Body: %s" % issue_body)
 
     try:
-        response = urllib2.urlopen(make_request(config.ISSUE_API_URL),
-                                   json.dumps({
+        data = {
             "title": "End-user bug report",
             "body": issue_body
-        }))
+        }
+        response = urllib2.urlopen(make_request(config.ISSUE_API_URL),
+                                   json.dumps(data))
     except urllib2.HTTPError as e:
         utils.log("Failed to report issue: HTTPError %s" % e.code)
         return False
