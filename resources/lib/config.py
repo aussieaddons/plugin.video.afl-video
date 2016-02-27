@@ -56,6 +56,9 @@ CATEGORIES = [
     'Match Replays 2014',
     'Match Replays 2013',
     #'Club Video',
+    'Editorial Highlights',
+    'Media Conferences',
+    'News',
     'Settings'
 ]
 
@@ -116,7 +119,6 @@ ROUNDS_2016 = [
 
 
 ROUNDS_2015 = [
-    {'id': 'latest',        'name': 'Current Round'},
     {'id': 'CD_R201510101', 'name': 'NAB Challenge'},
     {'id': 'CD_R201501401', 'name': 'Round 1'},
     {'id': 'CD_R201501402', 'name': 'Round 2'},
