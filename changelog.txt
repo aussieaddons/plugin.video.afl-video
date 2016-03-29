@@ -1,4 +1,12 @@
-[B]Version 1.5.0[/B]
+[B]Version 1.6.0[/B]
+- Update description for news, etc inclusion
+- Big code cleanup, pep8 fixes
+- Remove third party modules
+- Add news, etc categories back as they still work
+- Update README.md
+- Update README.md
+
+[B]Version v1.5.0[/B]
 - Update addon readme to reflect no club video
 - Update license header
 - Switch coding from tabs to spaces
