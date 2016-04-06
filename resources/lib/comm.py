@@ -25,8 +25,10 @@ import datetime
 import time
 import json
 import xbmcaddon
-import xml.etree.ElementTree as ET
 from BeautifulSoup import BeautifulStoneSoup
+
+# Use local etree to get v1.3.0
+import etree.ElementTree as ET
 
 
 def fetch_url(url, token=None):
