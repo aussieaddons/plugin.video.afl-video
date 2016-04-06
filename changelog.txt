@@ -1,4 +1,7 @@
-[B]Version 1.6.0[/B]
+[B]Version 1.6.1[/B]
+- Revert removal of local version of ElementTree
+
+[B]Version v1.6.0[/B]
 - Update description for news, etc inclusion
 - Big code cleanup, pep8 fixes
 - Remove third party modules
