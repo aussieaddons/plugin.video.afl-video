@@ -70,9 +70,9 @@ def parse_json_video(video_data):
     qual = __addon__.getSetting('QUALITY')
 
     video = classes.Video()
-    video.title = video_data['title']
-    video.description = video_data['description']
-    video.thumbnail = video_data['thumbnailPath']
+    video.title = video_data.get('title')
+    video.description = video_data.get('description')
+    video.thumbnail = video_data.get('thumbnailPath')
     try:
         timestamp = time.mktime(time.strptime(video_data['customPublishDate'],
                                               '%Y-%m-%dT%H:%M:%S.%f+0000'))
@@ -81,15 +81,23 @@ def parse_json_video(video_data):
         pass
 
     video_format = None
-    for v in video_data['mediaFormats']:
+    media_formats = video_data.get('mediaFormats')
+    if not media_formats:
+        return
+
+    for v in media_formats:
         if int(v['bitRate']) == config.VIDEO_QUALITY[qual]:
             video_format = v
             break
 
-    video.url = video_format['sourceUrl']
-    video.duration = video_format['duration']
+    if not video_format:
+        return
 
-    return video
+    if 'sourceUrl' in video_format:
+        video.url = video_format.get('sourceUrl')
+        video.duration = video_format.get('duration')
+
+        return video
 
 
 def get_url_from_smil(data):
@@ -144,8 +152,11 @@ def get_videos(category):
     token = fetch_token()
 
     # Category names are URL encoded
-    category_encoded = urllib.quote(category)
-    url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
+    if category == 'All Videos':
+        url = config.VIDEO_LIST_URL
+    else:
+        category_encoded = urllib.quote(category)
+        url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
 
     data = fetch_url(url, token=token)
     json_data = json.loads(data)
@@ -153,7 +164,8 @@ def get_videos(category):
 
     for video_asset in video_assets:
         video = parse_json_video(video_asset)
-        video_list.append(video)
+        if video:
+            video_list.append(video)
 
     return video_list
 

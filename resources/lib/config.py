@@ -55,6 +55,7 @@ CATEGORIES = [
     'Match Replays 2015',
     'Match Replays 2014',
     'Match Replays 2013',
+    'Auto-generated Highlights',
     'Editorial Highlights',
     'Media Conferences',
     'News',
