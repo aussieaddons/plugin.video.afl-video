@@ -57,6 +57,9 @@ if __name__ == "__main__":
             # Settings
             if params['category'] == 'Settings':
                 __addon__.openSettings()
+                
+            #elif params['category'] == 'Live Matches':
+             #   matches.make_livelist()
 
             # Team video list -- disabled until moved to new API
             # elif params['category'] == 'Club Video':

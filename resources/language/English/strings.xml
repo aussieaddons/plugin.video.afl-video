@@ -5,5 +5,11 @@
     <!--Settings-->
     <string id="10001">Video Quality</string>
     <string id="10002">Favourite Team</string>
+	
+	<string id="10003">Username</string>
+	<string id="10004">Password</string>
+	<string id="10005">AFL Live Pass Login</string>
+	<string id="10006">Live Video Quality</string>
+	
     
 </strings>

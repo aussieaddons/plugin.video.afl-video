@@ -99,6 +99,25 @@ def parse_json_video(video_data):
 
         return video
 
+def parse_json_live(video_data):
+    """
+        Parse the JSON data for live match and construct a video object from it
+        for a list of videos
+    """
+    if not video_data['videoStream']:
+        return
+    
+    if 'customAttributes' not in video_data['videoStream']:
+        return
+
+    video = classes.Video()
+    video.title = '[COLOR green]LIVE NOW - {0}[/COLOR]'.format(video_data.get('title'))
+    video.thumbnail = video_data['videoStream'].get('thumbnailURL')
+    video.description = video_data.get('title')
+    video.ooyalaid = video_data['videoStream']['customAttributes'][0].get('attrValue')
+    
+    return video
+
 
 def get_url_from_smil(data):
     soup = BeautifulStoneSoup(data)
@@ -154,23 +173,45 @@ def get_videos(category):
     # Category names are URL encoded
     if category == 'All Videos':
         url = config.VIDEO_LIST_URL
+    elif category == 'Live Matches':
+        url = config.LIVE_LIST_URL
     else:
         category_encoded = urllib.quote(category)
         url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
 
     data = fetch_url(url, token=token)
     json_data = json.loads(data)
-    video_assets = json_data['videos'][0]['videos']
+    
+    if category == 'Live Matches':
+        video_assets = json_data
+        
+        for video_asset in video_assets:
+            #if video_asset['title'] == 'AFL.TV':
+            #    continue
+            video = parse_json_live(video_asset)
 
-    for video_asset in video_assets:
-        video = parse_json_video(video_asset)
-        if video:
-            video_list.append(video)
+            if video:
+                video_list.append(video)
+        
+        upcoming_videos = get_round('latest', True)
+        for match in upcoming_videos:
+            v = classes.Video()
+            v.title = match['name']
+            v.isdummy = True
+            v.url = 'null'
+            video_list.append(v)
+        
+    else:
+        video_assets = json_data['videos'][0]['videos']
+        for video_asset in video_assets:
+            video = parse_json_video(video_asset)
+            if video:
+                video_list.append(video)
 
     return video_list
 
 
-def get_round(round_id):
+def get_round(round_id, live=False):
     """
         Fetch the round and return the results
     """
@@ -196,6 +237,23 @@ def get_round(round_id):
             match['name'] = "%s v %s" % (home_team, away_team)
             match['id'] = d['FixtureId']
             match['round_id'] = dict(rnd.items())['id']
+            
+            # special formatting for the 'upcoming games' list in the live menu
+            if live == True:
+                now = datetime.datetime.now()
+                timestamp = d['dateTime']
+                timezone = d['timezone']
+                ts = datetime.datetime.fromtimestamp(
+                    time.mktime(time.strptime(timestamp,
+                     "%Y-%m-%dT%H:%M:%S")))
+                delta = now - ts
+                #remove games that have already been played               
+                if delta > datetime.timedelta(hours=3):
+                    continue
+                airTime = ts.strftime(" - %A @ %I:%M %p A") 
+                match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
+                                    match['name'],airTime,timezone)
+            
             # Add date/time
             round_matches.append(match)
 
