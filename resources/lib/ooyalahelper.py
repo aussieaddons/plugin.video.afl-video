@@ -60,7 +60,7 @@ def fetch_nrl_xml(url, data):
 
 def get_nrl_user_token(username, password):
     """send user login info and retrieve user id for session"""
-    loginXml = fetch_nrl_xml(config.LOGIN_URL,
+    loginXml = fetch_nrl_xml(config.LOGIN_URL, 
                          config.LOGIN_DATA.format(username, password))
     tree = ET.fromstring(loginXml)
     if not tree.find('ErrorCode') == None:
@@ -71,7 +71,7 @@ def get_nrl_user_token(username, password):
     return tree.find('UserToken').text
 
 def create_nrl_userid_xml(userId):
-    """ create a small xml file to send with http POST
+    """ create a small xml file to send with http POST 
         when starting a new video request"""
     root = ET.Element('Subscription')
     ut = ET.SubElement(root, 'UserToken')
@@ -100,7 +100,7 @@ def get_nrl_hds_url(encryptedSmil):
 
 def get_nrl_embed_token(userToken, videoId):
     """send our user token to get our embed token, including api key"""
-    xml = fetch_nrl_xml(config.EMBED_TOKEN_URL.format(videoId),
+    xml = fetch_nrl_xml(config.EMBED_TOKEN_URL.format(videoId), 
                     create_nrl_userid_xml(userToken))
     tree = ET.fromstring(xml)
     return tree.find('Token').text
@@ -117,7 +117,6 @@ def fetch_afl_json(url, data):
 
 def get_afl_user_token():
     """send user login info and retrieve user id for session"""
-<<<<<<< HEAD
     login_data = {
         'userIdentifier': addon.getSetting('LIVE_USERNAME'),
         'authToken': addon.getSetting('LIVE_PASSWORD'),
@@ -157,7 +156,7 @@ def get_afl_embed_token(userToken, videoId):
     return data.get('token')
 
 #common ooyala functions
-
+ 
 def get_secure_token(secureUrl, videoId):
     """send our embed token back with a few other url encoded parameters"""
     res = opener.open(secureUrl,None)
@@ -174,7 +173,7 @@ def get_m3u8_streams(secureTokenUrl):
 
 def parse_m3u8_streams(data, live, secureTokenUrl):
     """ Parse the retrieved m3u8 stream list into a list of dictionaries
-        then return the url for the highest quality stream. Different
+        then return the url for the highest quality stream. Different 
         handling is required of live m3u8 files as they seem to only contain
         the destination filename and not the domain/path."""
     if live == 'true':
@@ -185,30 +184,30 @@ def parse_m3u8_streams(data, live, secureTokenUrl):
     count = 1
     m3uList = []
     prependLive = secureTokenUrl[:secureTokenUrl.find('index-root')]
-
+    
     while count < len(data):
         line = data[count]
         line = line.strip('#EXT-X-STREAM-INF:')
         line = line.strip('PROGRAM-ID=1,')
         line = line[:line.find('CODECS')]
-
+        
         if line.endswith(','):
             line = line[:-1]
-
+        
         line = line.strip()
         line = line.split(',')
         linelist = [i.split('=') for i in line]
-
+        
         if live == 'false':
             linelist.append(['URL',data[count+1]])
         else:
             linelist.append(['URL',prependLive+data[count+1]])
-
+        
         m3uList.append(dict((i[0], i[1]) for i in linelist))
         count += 2
-
+    
     sorted_m3uList = sorted(m3uList, key=lambda k: int(k['BANDWIDTH']))
-    stream = sorted_m3uList[int(qual)]['URL'][:-2]
+    stream = sorted_m3uList[int(qual)]['URL'][:-2]   
     return stream
 
 def cookies_to_string(cookiejar):
@@ -219,18 +218,18 @@ def cookies_to_string(cookiejar):
         result += cookie.value
         result += ';'
     result = result[:-1]
-    return result
-
+    return result 
+    
 def get_m3u8_playlist(videoId, live, loginToken, mode):
     """ Main function to call other functions that will return us our m3u8 HLS
         playlist as a string, which we can then write to a file for Kodi
         to use"""
     if mode == 'AFL':
         embedToken = get_afl_embed_token(loginToken, videoId)
-
+        
     elif mode == 'NRL':
         embedToken = get_nrl_embed_token(loginToken, videoId)
-
+        
     authorizeUrl = config.AUTH_URL.format(config.PCODE, videoId, embedToken)
     secureTokenUrl = get_secure_token(authorizeUrl, videoId)
     m3u8Data = get_m3u8_streams(secureTokenUrl)
