@@ -38,6 +38,8 @@ class Video(object):
         self.date = None
         self.thumbnail = None
         self.url = None
+        self.ooyalaid = None
+        self.isdummy = None
 
     def __repr__(self):
         return self.title
@@ -148,6 +150,10 @@ class Video(object):
             d['thumbnail'] = self.thumbnail
         if self.url:
             d['url'] = self.url
+        if self.ooyalaid:
+            d['ooyalaid'] = self.ooyalaid
+        if self.isdummy:
+            d['isdummy'] = self.isdummy
 
         return utils.make_url(d)
 
@@ -176,3 +182,7 @@ class Video(object):
             ts = time.strptime(d.get('date'), '%Y-%m-%d %H:%M:%S')
             timestamp = time.mktime(ts)
             self.date = datetime.date.fromtimestamp(timestamp)
+        if 'ooyalaid' in d:
+            self.ooyalaid = d.get('ooyalaid')
+        if 'isdummy' in d:
+            self.isdummy = d.get('isdummy')

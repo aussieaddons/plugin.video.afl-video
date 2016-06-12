@@ -49,8 +49,34 @@ TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
 # The API URL for listing videos
 VIDEO_LIST_URL = 'http://api.afl.com.au/cfs/afl/video'
 
+# API URL for current live videos
+LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
+
+# Bigpond authentication URL
+LOGIN_URL = 'https://services.bigpond.com/rest/v1/AuthenticationService/authenticate'
+
+# This URL returns our user ID after authentication
+SESSION_URL = 'https://api.afl.com.au/cfs/users/session/subscriptions?sessionId={0}'
+
+# URL to retrieve Ooyala embed token from
+EMBED_TOKEN_URL = 'https://api.afl.com.au/cfs/users/{0}/token?embedCode={1}'
+
+# URL to send our embed token and retrieve playlist
+AUTH_URL =('http://player.ooyala.com/sas/player_api/v1/authorization/'
+            'embed_code/{0}/{1}?device=android_html&domain=http://'
+            'www.ooyala.com&embedToken={2}'
+            '&supportedFormats=wv_wvm,mp4,wv_hls,m3u8,wv_mp4')
+
+# Ooyala provider indentifier code used in contructing request uris 
+PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'
+
+# http headers required for accessing Bigpond authentication URL
+HEADERS = { 'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)', 
+            'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt' }
+
 # Categories existing on the new content system
 CATEGORIES = [
+    'Live Matches',
     'Match Replays 2016',
     'Match Replays 2015',
     'Match Replays 2014',
