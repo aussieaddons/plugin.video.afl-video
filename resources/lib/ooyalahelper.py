@@ -117,6 +117,7 @@ def fetch_afl_json(url, data):
 
 def get_afl_user_token():
     """send user login info and retrieve user id for session"""
+<<<<<<< HEAD
     login_data = {
         'userIdentifier': addon.getSetting('LIVE_USERNAME'),
         'authToken': addon.getSetting('LIVE_PASSWORD'),
