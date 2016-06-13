@@ -19,6 +19,7 @@
 import urllib
 import urllib2
 import cookielib
+import ssl
 
 import StringIO
 import time
@@ -37,6 +38,10 @@ cj = cookielib.CookieJar()
 handler = urllib2.HTTPCookieProcessor(cj)
 opener = urllib2.build_opener(handler)
 addon = xbmcaddon.Addon()
+
+#dodgy fix for python > 2.7.8 ssl verification errors
+if hasattr(ssl, '_create_unverified_context'):
+    ssl._create_default_https_context = ssl._create_unverified_context
 
 # NRL specific ooyala functions
 
