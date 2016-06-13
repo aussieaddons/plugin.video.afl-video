@@ -47,7 +47,6 @@ addon = xbmcaddon.Addon()
 if hasattr(ssl, '_create_unverified_context'):
     ssl._create_default_https_context = ssl._create_unverified_context
 
-
 # NRL specific ooyala functions
 
 def fetch_nrl_xml(url, data):
