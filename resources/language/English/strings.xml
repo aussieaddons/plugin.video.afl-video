@@ -1,15 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
     <string id="10000">AFL Video</string>
-    
-    <!--Settings-->
-    <string id="10001">Video Quality</string>
+
+    <!-- Categories -->
+    <string id="20001">General</string>
+    <string id="20002">AFL Live Pass</string>
+
+    <!-- General -->
     <string id="10002">Favourite Team</string>
-	
-	<string id="10003">Username</string>
-	<string id="10004">Password</string>
-	<string id="10005">AFL Live Pass Login</string>
-	<string id="10006">Live Video Quality</string>
-	
-    
+    <string id="10001">Video Quality</string>
+
+    <!-- AFL Live Pass subscription -->
+    <string id="10003">Username</string>
+    <string id="10004">Password</string>
+    <string id="10006">Video Quality</string>
 </strings>

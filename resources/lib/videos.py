@@ -38,6 +38,7 @@ def make_list(url):
         # fill media list
         ok = True
         for v in videos:
+
             listitem = xbmcgui.ListItem(label=v.get_title(),
                                         thumbnailImage=v.get_thumbnail())
             listitem.setInfo('video', v.get_xbmc_list_item())
@@ -55,5 +56,5 @@ def make_list(url):
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
-    except:
-        utils.handle_error('Unable to fetch video list')
+    except Exception, e:
+        utils.handle_error('Unable to fetch video list', exc=e)

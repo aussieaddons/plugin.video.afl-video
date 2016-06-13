@@ -106,16 +106,16 @@ def parse_json_live(video_data):
     """
     if not video_data['videoStream']:
         return
-    
+
     if 'customAttributes' not in video_data['videoStream']:
         return
 
     video = classes.Video()
-    video.title = '[COLOR green]LIVE NOW - {0}[/COLOR]'.format(video_data.get('title'))
+    video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(video_data.get('title'))
     video.thumbnail = video_data['videoStream'].get('thumbnailURL')
     video.description = video_data.get('title')
     video.ooyalaid = video_data['videoStream']['customAttributes'][0].get('attrValue')
-    
+
     return video
 
 
@@ -181,10 +181,10 @@ def get_videos(category):
 
     data = fetch_url(url, token=token)
     json_data = json.loads(data)
-    
+
     if category == 'Live Matches':
         video_assets = json_data
-        
+
         for video_asset in video_assets:
             #if video_asset['title'] == 'AFL.TV':
             #    continue
@@ -192,7 +192,7 @@ def get_videos(category):
 
             if video:
                 video_list.append(video)
-        
+
         upcoming_videos = get_round('latest', True)
         for match in upcoming_videos:
             v = classes.Video()
@@ -200,7 +200,7 @@ def get_videos(category):
             v.isdummy = True
             v.url = 'null'
             video_list.append(v)
-        
+
     else:
         video_assets = json_data['videos'][0]['videos']
         for video_asset in video_assets:
@@ -237,7 +237,7 @@ def get_round(round_id, live=False):
             match['name'] = "%s v %s" % (home_team, away_team)
             match['id'] = d['FixtureId']
             match['round_id'] = dict(rnd.items())['id']
-            
+
             # special formatting for the 'upcoming games' list in the live menu
             if live == True:
                 now = datetime.datetime.now()
@@ -247,13 +247,13 @@ def get_round(round_id, live=False):
                     time.mktime(time.strptime(timestamp,
                      "%Y-%m-%dT%H:%M:%S")))
                 delta = now - ts
-                #remove games that have already been played               
+                #remove games that have already been played
                 if delta > datetime.timedelta(hours=3):
                     continue
-                airTime = ts.strftime(" - %A @ %I:%M %p A") 
+                airTime = ts.strftime(" - %A @ %I:%M %p A")
                 match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
                                     match['name'],airTime,timezone)
-            
+
             # Add date/time
             round_matches.append(match)
 

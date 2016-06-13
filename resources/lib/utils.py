@@ -31,6 +31,7 @@ import xbmc
 import xbmcgui
 import config
 import issue_reporter
+from exception import AFLVideoException
 
 pattern = re.compile("&(\w+?);")
 
@@ -88,15 +89,15 @@ def make_url(d):
     return "&".join(pairs)
 
 def log(s):
-    print "[%s v%s] %s" % (config.NAME, config.VERSION, s)
+    xbmc.log("[%s v%s] %s" % (config.NAME, config.VERSION, s))
 
 def log_error(message=None):
     exc_type, exc_value, exc_tb = sys.exc_info()
     if message:
         exc_value = message
-    print "[%s v%s] ERROR: %s (%d) - %s" % (config.NAME, config.VERSION,
+    xbmc.log("[%s v%s] ERROR: %s (%d) - %s" % (config.NAME, config.VERSION,
                                             exc_tb.tb_frame.f_code.co_name,
-                                            exc_tb.tb_lineno, exc_value)
+                                            exc_tb.tb_lineno, exc_value))
     print traceback.print_exc()
 
 def dialog_error(err=None):
@@ -106,10 +107,10 @@ def dialog_error(err=None):
     exc_type, exc_value, exc_tb = sys.exc_info()
     content.append("%s v%s Error" % (config.NAME, config.VERSION))
     content.append(str(exc_value))
-    if err:
-        msg = " - %s" % err
-    content.append("%s (%d) %s" % (exc_tb.tb_frame.f_code.co_name,
-                                   exc_tb.tb_lineno, msg))
+    #if err:
+    #    msg = " - %s" % err
+    #content.append("%s (%d) %s" % (exc_tb.tb_frame.f_code.co_name,
+    #                               exc_tb.tb_lineno, msg))
     return content
 
 def dialog_message(msg, title=None):
@@ -207,7 +208,7 @@ def can_send_error(trace):
     log("Not allowing error report. Last report matches this one")
     return False
 
-def handle_error(err=None):
+def handle_error(msg, exc=None):
     traceback_str = traceback.format_exc()
     log(traceback_str)
     report_issue = False
@@ -218,7 +219,7 @@ def handle_error(err=None):
 
     d = xbmcgui.Dialog()
     if d:
-        message = dialog_error(err)
+        message = dialog_error(msg)
 
         # Work out if we should allow an error report
         send_error = can_send_error(traceback_str)
@@ -228,6 +229,10 @@ def handle_error(err=None):
             (traceback_str.find('IncompleteRead') > 0) or
             (traceback_str.find('HTTP Error 404: Not Found') > 0)):
                 send_error = False
+
+        # Any non-fatal errors, don't allow issue reporting
+        if isinstance(exc, AFLVideoException):
+            send_error = False
 
         if send_error:
             latest_version = issue_reporter.get_latest_version()
@@ -252,6 +257,7 @@ def handle_error(err=None):
         else:
             # Just show the message
             d.ok(*message)
+
     if report_issue:
         log("Reporting issue to GitHub...")
         issue_url = issue_reporter.report_issue(traceback_str)

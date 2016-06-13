@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-	<!-- High Quality -->
-	<setting id="QUALITY" type="enum" label="10001" values="Low (172k/s)|Medium (1Mb/s)|High (2Mb/s)" default="2" />
-	<setting id="LIVEQUALITY" type="enum" label="10006" values="Audio Only (57k/s) |Lowest (244k/s)|Low (368k/s) |Medium (522k/s)|Medium High (738k/s) |High (1Mb/s) |Highest (1.6Mb/s)" default="5" />
-	<setting id="TEAM" type="enum" label="10002" values="None|Adelaide|Brisbane|Carlton|Collingwood|Essendon|Fremantle|Gold Coast|Geelong|Greater West Sydney|Hawthorn|Melbourne|North Melbourne|Port Adelaide|Richmond|St. Kilda|Sydney|West Coast|Western Bulldogs" default="0" />
-	<setting label="10005" type="lsep"/>
-	<setting id="username" type="text" label="10003" default="" subsetting="true"/>
-	<setting id="password" type="text" label="10004" option="hidden" default="" subsetting="true"/>
-	
+    <category label="20001">
+		<setting id="QUALITY" type="enum" label="10001" values="Low (172k/s)|Medium (1Mb/s)|High (2Mb/s)" default="2" />
+		<setting id="TEAM" type="enum" label="10002" values="None|Adelaide|Brisbane|Carlton|Collingwood|Essendon|Fremantle|Gold Coast|Geelong|Greater Western Sydney|Hawthorn|Melbourne|North Melbourne|Port Adelaide|Richmond|St. Kilda|Sydney|West Coast|Western Bulldogs" default="0" />
+    </category>
+    <category label="20002">
+		<setting id="LIVE_QUALITY" type="enum" label="10006" values="Audio Only (57k/s)|Lowest (244k/s)|Low (368k/s)|Medium (522k/s)|Medium High (738k/s)|High (1Mb/s)|Highest (1.6Mb/s)" default="6" />
+		<setting id="LIVE_USERNAME" type="text" label="10003" default="" />
+		<setting id="LIVE_PASSWORD" type="text" label="10004" option="hidden" default="" />
+    </category>
 </settings>
