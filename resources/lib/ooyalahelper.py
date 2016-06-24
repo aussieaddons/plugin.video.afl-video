@@ -47,6 +47,7 @@ addon = xbmcaddon.Addon()
 if hasattr(ssl, '_create_unverified_context'):
     ssl._create_default_https_context = ssl._create_unverified_context
 
+
 # NRL specific ooyala functions
 
 def fetch_nrl_xml(url, data):
@@ -132,7 +133,12 @@ def get_afl_user_token():
     try:
         res = opener.open(config.SESSION_URL.format(urllib.quote(session_id)))
         data = json.loads(res.read())
-        return data['subscriptions'][0].get('uuid')
+        try:
+            return data['subscriptions'][0].get('uuid')
+        
+        except IndexError as e:
+            raise AFLVideoException('AFL Live Pass subscription has expired')
+         
     except urllib2.HTTPError as e:
         # Attempt to parse response even with a HTTP 400
         try:
@@ -152,7 +158,7 @@ def get_afl_embed_token(userToken, videoId):
     """send our user token to get our embed token, including api key"""
     res = opener.open(config.EMBED_TOKEN_URL.format(userToken, videoId))
     data = json.loads(res.read())
-    return data.get('token')
+    return urllib.quote(data.get('token'))
 
 #common ooyala functions
 
