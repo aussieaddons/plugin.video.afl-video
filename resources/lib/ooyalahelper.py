@@ -186,14 +186,13 @@ def parse_m3u8_streams(data, live, secureTokenUrl):
     else:
         qual = xbmcaddon.Addon().getSetting('HLSQUALITY')
 
-    count = 1
+    count = 2
     m3uList = []
     prependLive = secureTokenUrl[:secureTokenUrl.find('index-root')]
 
     while count < len(data):
         line = data[count]
         line = line.strip('#EXT-X-STREAM-INF:')
-        line = line.strip('PROGRAM-ID=1,')
         line = line[:line.find('CODECS')]
 
         if line.endswith(','):
@@ -212,7 +211,7 @@ def parse_m3u8_streams(data, live, secureTokenUrl):
         count += 2
 
     sorted_m3uList = sorted(m3uList, key=lambda k: int(k['BANDWIDTH']))
-    stream = sorted_m3uList[int(qual)]['URL'][:-2]
+    stream = sorted_m3uList[int(qual)]['URL'][:-1]
     return stream
 
 def cookies_to_string(cookiejar):
