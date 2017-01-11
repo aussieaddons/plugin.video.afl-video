@@ -89,16 +89,20 @@ def make_url(d):
     return "&".join(pairs)
 
 def log(s):
-    xbmc.log("[%s v%s] %s" % (config.NAME, config.VERSION, s))
+    xbmc.log("[%s v%s] %s" % (config.NAME, config.VERSION, s),
+             level=xbmc.LOGERROR)
+
 
 def log_error(message=None):
     exc_type, exc_value, exc_tb = sys.exc_info()
     if message:
         exc_value = message
-    xbmc.log("[%s v%s] ERROR: %s (%d) - %s" % (config.NAME, config.VERSION,
-                                            exc_tb.tb_frame.f_code.co_name,
-                                            exc_tb.tb_lineno, exc_value))
-    print traceback.print_exc()
+    xbmc.log("[%s v%s] ERROR: %s (%d) - %s" %
+             (config.NAME, config.VERSION,
+             exc_traceback.tb_frame.f_code.co_name, exc_traceback.tb_lineno,
+             exc_value), level=xbmc.LOGERROR)
+    xbmc.log(traceback.print_exc(), level=xbmc.LOGERROR)
+
 
 def dialog_error(err=None):
     # Generate a list of lines for use in XBMC dialog
@@ -107,10 +111,6 @@ def dialog_error(err=None):
     exc_type, exc_value, exc_tb = sys.exc_info()
     content.append("%s v%s Error" % (config.NAME, config.VERSION))
     content.append(str(exc_value))
-    #if err:
-    #    msg = " - %s" % err
-    #content.append("%s (%d) %s" % (exc_tb.tb_frame.f_code.co_name,
-    #                               exc_tb.tb_lineno, msg))
     return content
 
 def dialog_message(msg, title=None):
