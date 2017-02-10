@@ -78,15 +78,18 @@ def make_url(d):
     pairs = []
     for k, v in d.iteritems():
         k = urllib.quote_plus(k)
-        # Values can possibly be - UTF-8 as an ASCII str, ASCII as an ASCII
-        # str, or unicode. Want clean ASCII for URL.
-        if not isinstance(v, unicode):
-            v = str(v)
-            v = v.decode("utf-8")
-        v = unicodedata.normalize('NFC', v).encode('ascii', 'ignore')
+        v = ensure_ascii(v)
         v = urllib.quote_plus(v)
         pairs.append("%s=%s" % (k, v))
     return "&".join(pairs)
+
+
+def ensure_ascii(s):
+    if not isinstance(s, unicode):
+        s = str(s)
+        s = s.decode("utf-8")
+    return unicodedata.normalize('NFC', s).encode('ascii','ignore')
+
 
 def log(s):
     xbmc.log("[%s v%s] %s" % (config.NAME, config.VERSION, s),

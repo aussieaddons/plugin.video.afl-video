@@ -70,8 +70,8 @@ def parse_json_video(video_data):
     qual = __addon__.getSetting('QUALITY')
 
     video = classes.Video()
-    video.title = video_data.get('title')
-    video.description = video_data.get('description')
+    video.title = utils.ensure_ascii(video_data.get('title'))
+    video.description = utils.ensure_ascii(video_data.get('description'))
     video.thumbnail = video_data.get('thumbnailPath')
     try:
         timestamp = time.mktime(time.strptime(video_data['customPublishDate'],
@@ -111,9 +111,10 @@ def parse_json_live(video_data):
         return
 
     video = classes.Video()
-    video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(video_data.get('title'))
+    title = utils.ensure_ascii(video_data.get('title'))
+    video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(title)
+    video.description = title
     video.thumbnail = video_data['videoStream'].get('thumbnailURL')
-    video.description = video_data.get('title')
     video.ooyalaid = video_data['videoStream']['customAttributes'][0].get('attrValue')
 
     return video
