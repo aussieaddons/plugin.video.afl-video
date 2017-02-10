@@ -13,5 +13,7 @@
     <!-- AFL Live Pass subscription -->
     <string id="10003">Username</string>
     <string id="10004">Password</string>
+    <string id="10005">Phone Number</string>
     <string id="10006">Video Quality</string>
+    <string id="10007">Subscription Type</string>
 </strings>

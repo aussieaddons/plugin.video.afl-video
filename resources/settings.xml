@@ -6,7 +6,9 @@
     </category>
     <category label="20002">
 		<setting id="LIVE_QUALITY" type="enum" label="10006" values="Lowest (300k/s)|Low (450k/s)|Medium (660k/s)|High (1Mb/s)|Highest (1.6Mb/s)" default="4" />
+        <setting id="SUBSCRIPTION_TYPE" type="enum" label="10007" values="Paid|Free offer" default="1" />
 		<setting id="LIVE_USERNAME" type="text" label="10003" default="" />
 		<setting id="LIVE_PASSWORD" type="text" label="10004" option="hidden" default="" />
+        <setting id="LIVE_PHONE_NUMBER" type="text" label="10005" default="" />
     </category>
 </settings>
