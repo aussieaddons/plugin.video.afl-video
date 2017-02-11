@@ -8,30 +8,16 @@ import comm
 import utils
 from exception import AFLVideoException
 
-class SortedHTTPAdapter(requests.adapters.HTTPAdapter):
-    def add_headers(self, request, **kwargs):
-        if 'header_order' in globals():
-            header_list = request.headers.items()
-            for item in header_list: 
-                if item[0] not in header_order:
-                    header_list.remove(item)
-            request.headers = collections.OrderedDict(
-                sorted(header_list, key=lambda x: header_order.index(x[0])))
-
-        
 def get_token(username, password, phone_number):
     """ Obtain a valid token from Telstra, will be used to make requests for 
         Ooyala embed tokens"""
     session = requests.Session()
     session.verify = False
-    session.mount("https://", SortedHTTPAdapter())
-    global header_order
         
     # Send our first login request to AFL API, recieve (unactivated) token
     # and 'msisdn' URL
 
     session.headers = {'x-media-mis-token': comm.fetch_token()}
-    auth_resp = session.post('http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE')
     jsondata = json.loads(auth_resp.text)
     token = jsondata.get('uuid')
     spurl = config.SPORTSPASS_URL.format(token)
@@ -66,8 +52,8 @@ def get_token(username, password, phone_number):
     # Send the SAML login data and retrieve the auth token from the response
     session.headers = config.SAML_LOGIN_HEADERS
     session.cookies.set('saml_request_path', msisdn_url)
-    saml_login = session.post(config.SAML_LOGIN_URL, 
-                            data='SAMLResponse={0}'.format(saml_base64))
+    saml_data = 'SAMLResponse={0}'.format(saml_base64)
+    saml_login = session.post(config.SAML_LOGIN_URL, data=saml_data)
     confirm_url = saml_login.url
     start_index = saml_login.text.find('apiToken')+12
     end_index = saml_login.text[start_index:].find('"')+start_index

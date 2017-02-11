@@ -75,8 +75,7 @@ HEADERS = { 'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Buil
             'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt' }
 
 # New auth config for 2017        
-NEW_LOGIN_DATA1 = '<Subscriber><Type>MSISDN</Type><AdobeCheckResult>0</AdobeCheckResult></Subscriber>'
-NEW_LOGIN_DATA2 = '<Subscriber><Type>TOKEN</Type><User>{0}</User></Subscriber>'
+AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
 SIGNON_HEADERS = {'Host': 'signon.telstra.com', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0', 'Origin': 'https://signon.telstra.com', 'Upgrade-Insecure-Requests': '1', 
                         'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36', 
                         'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 
