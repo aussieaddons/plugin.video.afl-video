@@ -18,6 +18,7 @@ def get_token(username, password, phone_number):
     # and 'msisdn' URL
 
     session.headers = {'x-media-mis-token': comm.fetch_token()}
+    auth_resp = session.post(config.AFL_LOGIN_URL)
     jsondata = json.loads(auth_resp.text)
     token = jsondata.get('uuid')
     spurl = config.SPORTSPASS_URL.format(token)
