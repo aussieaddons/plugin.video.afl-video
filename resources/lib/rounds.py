@@ -25,9 +25,9 @@ import xbmcgui
 import xbmcplugin
 
 
-def make_rounds(season=2016):
+def make_rounds(season=2017):
     try:
-        # ROUNDS_2016 variable from config
+        # ROUNDS_2017 variable from config
         rounds_config = getattr(config, 'ROUNDS_'+season)
 
         for r in rounds_config:
