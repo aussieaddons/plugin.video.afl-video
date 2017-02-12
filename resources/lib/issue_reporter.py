@@ -185,6 +185,7 @@ def format_issue(issue_data):
         "**IP Address:** %s" % get_public_ip(),
         "**ISP :** %s" % get_isp(),
         "**Python Path:**\n```\n%s\n```" % '\n'.join(sys.path),
+        "**Kodi URL:**\n```\n%s\n```" % sys.argv[2],
         "\n## Traceback\n```\n%s\n```" % issue_data,
     ]
 
@@ -239,7 +240,7 @@ def report_issue(issue_data):
 
     try:
         data = {
-            "title": "End-user bug report",
+            "title": "[XBMCBOT] - %s" % issue_data.split('\n')[-2],
             "body": issue_body
         }
         response = urllib2.urlopen(make_request(config.ISSUE_API_URL),

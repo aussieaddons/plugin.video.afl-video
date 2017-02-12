@@ -25,7 +25,7 @@ import datetime
 import time
 import json
 import xbmcaddon
-from BeautifulSoup import BeautifulStoneSoup
+from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
