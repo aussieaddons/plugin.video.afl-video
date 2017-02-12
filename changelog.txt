@@ -1,4 +1,19 @@
-[B]Version 1.6.4[/B]
+[B]Version 1.7.0[/B]
+- Rename live pass subscription setting
+- Minor enhancements to issue_reporter
+- Update issue reporter, fix error in comm.py
+- Update to v1.7.0 and include beautifulsoup4
+- Cleanups for config.py and telstra_auth.py
+- Cleanups and flake8 compatibility for default.py
+- Code cleanups and flake8 fixes for Ooylahelper
+- Disable username/password if subscription type is free
+- fix missing line of code
+- Fix indentation
+- Style fixes, remove unused code
+- Fix live streaming and update for 2017 replays
+- Fix handling of non-ascii chars in titles
+
+[B]Version v1.6.4[/B]
 - Add better logging
 - Version 1.6.3
 - Fix live streaming
