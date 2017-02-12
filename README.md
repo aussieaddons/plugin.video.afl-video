@@ -1,7 +1,8 @@
 AFL Video plugin for XBMC
 ================================
 
-*UPDATE*: Now updated for 2016 season, including NAB Challenge matches.
+*UPDATE*: Now updated for 2017 season and we now support the free AFL Live Pass
+subscription from Telstra.
 
 This plugin provides a simple list of available programs from the AFL web site
 and allows you to stream them with.
