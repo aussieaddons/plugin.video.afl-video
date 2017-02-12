@@ -14,9 +14,10 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
-#
 
-import os
+# Ignore flake8 E501 line too long
+# flake8: noqa
+
 import version
 
 NAME = 'AFL Video'
@@ -46,57 +47,77 @@ ROUND_URL = 'http://www.afl.com.au/api/gas/afl/roundVideo'
 # reqeusts against the API
 TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
 
-# The API URL for listing videos
-VIDEO_LIST_URL = 'http://api.afl.com.au/cfs/afl/video'
-
 # API URL for current live videos
 LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
-
-# Bigpond authentication URL
-LOGIN_URL = 'https://services.bigpond.com/rest/v1/AuthenticationService/authenticate'
-
-# This URL returns our user ID after authentication
-SESSION_URL = 'http://api.sub.afl.com.au/cfs-premium/users/session?sessionId={0}'
 
 # URL to retrieve Ooyala embed token from
 EMBED_TOKEN_URL = 'https://api.afl.com.au/cfs/users/{0}/token?embedCode={1}'
 
 # URL to send our embed token and retrieve playlist
-AUTH_URL =('http://player.ooyala.com/sas/player_api/v1/authorization/'
-            'embed_code/{0}/{1}?device=android_html&domain=http://'
-            'www.ooyala.com&embedToken={2}'
-            '&supportedFormats=wv_wvm,mp4,wv_hls,m3u8,wv_mp4')
+AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/{0}/{1}?device=android_html&domain=http://www.ooyala.com&embedToken={2}&supportedFormats=wv_wvm,mp4,wv_hls,m3u8,wv_mp4'
 
-# Ooyala provider indentifier code used in contructing request uris 
+# Ooyala provider indentifier code used in contructing request uris
 PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'
 
-# http headers required for accessing Bigpond authentication URL
-HEADERS = { 'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)', 
-            'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt' }
-
-# New auth config for 2017        
+# New auth config for 2017
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
-SIGNON_HEADERS = {'Host': 'signon.telstra.com', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0', 'Origin': 'https://signon.telstra.com', 'Upgrade-Insecure-Requests': '1', 
-                        'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36', 
-                        'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 
-                        'Referer': 'https://signon.telstra.com/login?goto=https%3A%2F%2Fsignon.telstra.com%2Ffederation%2Fsaml2%3FSPID%3Dtelstramedia&gotoNoTok=', 'Accept-Encoding': 'gzip, deflate', 
-                        'Accept-Language': 'en-AU,en-US;q=0.8'}
+
+SIGNON_HEADERS = {'Host': 'signon.telstra.com',
+                  'Connection': 'keep-alive',
+                  'Cache-Control': 'max-age=0',
+                  'Origin': 'https://signon.telstra.com',
+                  'Upgrade-Insecure-Requests': '1',
+                  'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                  'Referer': 'https://signon.telstra.com/login?goto=https%3A%2F%2Fsignon.telstra.com%2Ffederation%2Fsaml2%3FSPID%3Dtelstramedia&gotoNoTok=',
+                  'Accept-Encoding': 'gzip,deflate',
+                  'Accept-Language': 'en-AU,en-US;q=0.8'}
+
 SIGNON_URL = 'https://signon.telstra.com/login'
-SIGNON_DATA = {'goto': 'https://signon.telstra.com/federation/saml2?SPID=telstramedia', 'gotoOnFail': '', 'username': None, 'password': None}
+
+SIGNON_DATA = {'goto': 'https://signon.telstra.com/federation/saml2?SPID=telstramedia',
+               'gotoOnFail': '',
+               'username': None,
+               'password': None}
+
 SAML_LOGIN_URL = 'https://hub.telstra.com.au/login/saml_login'
-SAML_LOGIN_HEADERS = {'Host': 'hub.telstra.com.au', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0', 'Origin': 'https://signon.telstra.com', 'Upgrade-Insecure-Requests': '1', 
-                        'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36', 
-                        'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 
-                        'Referer': 'https://signon.telstra.com/federation/saml2?SPID=telstramedia', 'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-AU,en-US;q=0.8', 'X-Requested-With': 'com.telstra.nrl'}
-MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json', 'Accept': 'application/json, text/plain, */*', 'Host': 'api.telstra.com', 'Connection': 'keep-alive', 'Origin': 'https://hub.telstra.com.au',
-                        'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36', 
-                        'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-AU,en-US;q=0.8', 'X-Requested-With': 'com.telstra.nrl'}
+
+SAML_LOGIN_HEADERS = {'Host': 'hub.telstra.com.au',
+                      'Connection': 'keep-alive',
+                      'Cache-Control': 'max-age=0',
+                      'Origin': 'https://signon.telstra.com',
+                      'Upgrade-Insecure-Requests': '1',
+                      'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                      'Referer': 'https://signon.telstra.com/federation/saml2?SPID=telstramedia',
+                      'Accept-Encoding': 'gzip, deflate',
+                      'Accept-Language': 'en-AU,en-US;q=0.8',
+                      'X-Requested-With': 'com.telstra.nrl'}
+
+MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
+                       'Accept': 'application/json, text/plain, */*',
+                       'Host': 'api.telstra.com',
+                       'Connection': 'keep-alive',
+                       'Origin': 'https://hub.telstra.com.au',
+                       'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
+                       'Accept-Encoding': 'gzip, deflate',
+                       'Accept-Language': 'en-AU,en-US;q=0.8',
+                       'X-Requested-With': 'com.telstra.nrl'}
+
 MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
+
 MEDIA_ORDER_JSON = '{{"serviceId":"{0}","serviceType":"MSISDN","offer":{{"id":"{1}"}},"pai":"{2}"}}'
 
-SPORTSPASS_URL= 'http://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
-SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36', 
-                        'Host': 'hub.telstra.com.au', 'Accept-Encoding': 'gzip, deflate', 'X-Requested-With': 'com.telstra.android.afl'}
+SPORTSPASS_URL = 'http://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
+
+SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application'
+                                '/xml;q=0.9,image/webp,*/*;q=0.8',
+                      'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
+                      'Host': 'hub.telstra.com.au',
+                      'Accept-Encoding': 'gzip, deflate',
+                      'X-Requested-With': 'com.telstra.android.afl'}
 
 # Categories existing on the new content system
 CATEGORIES = [
@@ -106,10 +127,10 @@ CATEGORIES = [
     'Match Replays 2015',
     'Match Replays 2014',
     'Match Replays 2013',
-    'Auto-generated Highlights',
-    'Editorial Highlights',
-    'Media Conferences',
-    'News',
+    # 'Auto-generated Highlights',
+    # 'Editorial Highlights',
+    # 'Media Conferences',
+    # 'News',
     'Settings'
 ]
 
@@ -264,31 +285,31 @@ ROUNDS_2014 = [
 ]
 
 ROUNDS_2013 = [
-        {'id': 'CD_R201301401', 'name': 'Round 1'},
-        {'id': 'CD_R201301402', 'name': 'Round 2'},
-        {'id': 'CD_R201301403', 'name': 'Round 3'},
-        {'id': 'CD_R201301404', 'name': 'Round 4'},
-        {'id': 'CD_R201301405', 'name': 'Round 5'},
-        {'id': 'CD_R201301406', 'name': 'Round 6'},
-        {'id': 'CD_R201301407', 'name': 'Round 7'},
-        {'id': 'CD_R201301408', 'name': 'Round 8'},
-        {'id': 'CD_R201301409', 'name': 'Round 9'},
-        {'id': 'CD_R201301410', 'name': 'Round 10'},
-        {'id': 'CD_R201301411', 'name': 'Round 11'},
-        {'id': 'CD_R201301412', 'name': 'Round 12'},
-        {'id': 'CD_R201301413', 'name': 'Round 13'},
-        {'id': 'CD_R201301414', 'name': 'Round 14'},
-        {'id': 'CD_R201301415', 'name': 'Round 15'},
-        {'id': 'CD_R201301416', 'name': 'Round 16'},
-        {'id': 'CD_R201301417', 'name': 'Round 17'},
-        {'id': 'CD_R201301418', 'name': 'Round 18'},
-        {'id': 'CD_R201301419', 'name': 'Round 19'},
-        {'id': 'CD_R201301420', 'name': 'Round 20'},
-        {'id': 'CD_R201301421', 'name': 'Round 21'},
-        {'id': 'CD_R201301422', 'name': 'Round 22'},
-        {'id': 'CD_R201301423', 'name': 'Round 23'},
-        {'id': 'CD_R201301424', 'name': 'Finals Week 1'},
-        {'id': 'CD_R201301425', 'name': 'Finals Week 2'},
-        {'id': 'CD_R201301426', 'name': 'Finals Week 3'},
-        {'id': 'CD_R201301427', 'name': 'Grand Final'},
+    {'id': 'CD_R201301401', 'name': 'Round 1'},
+    {'id': 'CD_R201301402', 'name': 'Round 2'},
+    {'id': 'CD_R201301403', 'name': 'Round 3'},
+    {'id': 'CD_R201301404', 'name': 'Round 4'},
+    {'id': 'CD_R201301405', 'name': 'Round 5'},
+    {'id': 'CD_R201301406', 'name': 'Round 6'},
+    {'id': 'CD_R201301407', 'name': 'Round 7'},
+    {'id': 'CD_R201301408', 'name': 'Round 8'},
+    {'id': 'CD_R201301409', 'name': 'Round 9'},
+    {'id': 'CD_R201301410', 'name': 'Round 10'},
+    {'id': 'CD_R201301411', 'name': 'Round 11'},
+    {'id': 'CD_R201301412', 'name': 'Round 12'},
+    {'id': 'CD_R201301413', 'name': 'Round 13'},
+    {'id': 'CD_R201301414', 'name': 'Round 14'},
+    {'id': 'CD_R201301415', 'name': 'Round 15'},
+    {'id': 'CD_R201301416', 'name': 'Round 16'},
+    {'id': 'CD_R201301417', 'name': 'Round 17'},
+    {'id': 'CD_R201301418', 'name': 'Round 18'},
+    {'id': 'CD_R201301419', 'name': 'Round 19'},
+    {'id': 'CD_R201301420', 'name': 'Round 20'},
+    {'id': 'CD_R201301421', 'name': 'Round 21'},
+    {'id': 'CD_R201301422', 'name': 'Round 22'},
+    {'id': 'CD_R201301423', 'name': 'Round 23'},
+    {'id': 'CD_R201301424', 'name': 'Finals Week 1'},
+    {'id': 'CD_R201301425', 'name': 'Finals Week 2'},
+    {'id': 'CD_R201301426', 'name': 'Finals Week 3'},
+    {'id': 'CD_R201301427', 'name': 'Grand Final'},
 ]
