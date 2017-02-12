@@ -21,162 +21,74 @@ import urllib2
 import cookielib
 import ssl
 
-import StringIO
-import time
-import os
-
-from urlparse import parse_qsl
-import xml.etree.ElementTree as ET
 import json
 import base64
-
-import config
-import utils
 import comm
+import config
 import xbmcaddon
-import xbmc
+
+import utils
+import telstra_auth
 
 from exception import AFLVideoException
+
 
 cj = cookielib.CookieJar()
 handler = urllib2.HTTPCookieProcessor(cj)
 opener = urllib2.build_opener(handler)
 addon = xbmcaddon.Addon()
 
-#dodgy fix for python > 2.7.8 ssl verification errors
+
+# Fix for python > 2.7.8 ssl verification errors
 if hasattr(ssl, '_create_unverified_context'):
     ssl._create_default_https_context = ssl._create_unverified_context
 
-
-# NRL specific ooyala functions
-
-def fetch_nrl_xml(url, data):
-    """ send http POST and return the xml response as string
-        remove first 3 characters as these are junk??"""
-    req = urllib2.Request(url, data, config.HEADERS)
-    xbmc.log("Fetching URL: {0}".format(url))
-    res = urllib2.urlopen(req)
-    return res.read()[3:]
-
-def get_nrl_user_token(username, password):
-    """send user login info and retrieve user id for session"""
-    loginXml = fetch_nrl_xml(config.LOGIN_URL,
-                         config.LOGIN_DATA.format(username, password))
-    tree = ET.fromstring(loginXml)
-    if not tree.find('ErrorCode') == None:
-        if tree.find('ErrorCode').text == '1':
-            return 'invalid'
-        elif tree.find('ErrorCode').text == 'MIS_EMPTY':
-            return 'nosub'
-    return tree.find('UserToken').text
-
-def create_nrl_userid_xml(userId):
-    """ create a small xml file to send with http POST
-        when starting a new video request"""
-    root = ET.Element('Subscription')
-    ut = ET.SubElement(root, 'UserToken')
-    ut.text = userId
-    fakefile = StringIO.StringIO()
-    tree = ET.ElementTree(root)
-    tree.write(fakefile, encoding='UTF-8')
-    output = fakefile.getvalue()
-    return output
-
-def fetch_nrl_smil(videoId):
-    """ contact ooyala server and retrieve smil data to be decoded"""
-    url = config.SMIL_URL.format(videoId)
-    xbmc.log("Fetching URL: {0}".format(url))
-    res = urllib2.urlopen(url)
-    return res.read()
-
-def get_nrl_hds_url(encryptedSmil):
-    """ decrypt smil data and return HDS url from the xml data"""
-    from ooyala import ooyalaCrypto
-    decrypt = ooyalaCrypto.ooyalaCrypto()
-    smilXml = decrypt.ooyalaDecrypt(encryptedSmil)
-    tree = ET.fromstring(smilXml)
-    return tree.find('content').find('video').find('httpDynamicStreamUrl').text
-
-
-def get_nrl_embed_token(userToken, videoId):
-    """send our user token to get our embed token, including api key"""
-    xml = fetch_nrl_xml(config.EMBED_TOKEN_URL.format(videoId),
-                    create_nrl_userid_xml(userToken))
-    tree = ET.fromstring(xml)
-    return tree.find('Token').text
-
-# AFL ooyala functions
 
 def fetch_afl_json(url, data):
     """ send http POST and return the json response data"""
     data = urllib.urlencode(data)
     req = urllib2.Request(url, data, config.HEADERS)
     res = urllib2.urlopen(req)
-    xbmc.log("Fetching URL: {0}".format(url))
+    utils.log("Fetching URL: {0}".format(url))
     return res.read()
 
+
 def get_afl_user_token():
-    """send user login info and retrieve user id for session"""
-    login_data = {
-        'userIdentifier': addon.getSetting('LIVE_USERNAME'),
-        'authToken': addon.getSetting('LIVE_PASSWORD'),
-        'userIdentifierType': 'EMAIL',
-    }
+    if addon.getSetting('LIVE_SUBSCRIPTION') == 'true':
+        api_token = comm.fetch_token()
+        opener.addheaders = [('x-media-mis-token', api_token)]
+        username = addon.getSetting('LIVE_USERNAME')
+        password = addon.getSetting('LIVE_PASSWORD')
+        phone_number = addon.getSetting('LIVE_PHONE_NUMBER')
+        return telstra_auth.get_token(username, password, phone_number)
+    else:
+        raise AFLVideoException('AFL Live Pass subscription is required.')
 
-    login_json = fetch_afl_json(config.LOGIN_URL, login_data)
-    data = json.loads(login_json)
-    session_id = data['data'].get('artifactValue')
 
-    api_token = comm.fetch_token()
-    opener.addheaders = [('x-media-mis-token', api_token)]
-
-    try:
-        res = opener.open(config.SESSION_URL.format(urllib.quote(session_id)))
-        data = json.loads(res.read())
-        try:
-            return data['subscriptions'][0].get('uuid')
-        
-        except IndexError as e:
-            raise AFLVideoException('AFL Live Pass subscription has expired')
-         
-    except urllib2.HTTPError as e:
-        # Attempt to parse response even with a HTTP 400
-        try:
-            data = json.loads(e.read())
-            if 'techMessage' in data:
-                raise AFLVideoException('Failed to fetch live streaming '
-                                        'token: %s' % data.get('techMessage'))
-            if 'userMessage' in data:
-                raise AFLVideoException('Failed to fetch live streaming '
-                                        'token: %s' % data.get('userMessage'))
-        except Exception as e:
-            raise e
-
-    raise Exception('Failed to fetch AFL Live streaming token')
-
-def get_afl_embed_token(userToken, videoId):
+def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
-    res = opener.open(config.EMBED_TOKEN_URL.format(userToken, videoId))
+    res = opener.open(config.EMBED_TOKEN_URL.format(user_token, video_id))
     data = json.loads(res.read())
     return urllib.quote(data.get('token'))
 
-#common ooyala functions
 
-def get_secure_token(secureUrl, videoId):
+def get_secure_token(secure_url, video_id):
     """send our embed token back with a few other url encoded parameters"""
-    res = opener.open(secureUrl,None)
+    res = opener.open(secure_url, None)
     data = res.read()
     parsed_json = json.loads(data)
-    iosToken =  parsed_json['authorization_data'][videoId]['streams'][0]['url']['data']
-    return base64.b64decode(iosToken)
+    ios_token = parsed_json['authorization_data'][video_id]['streams'][0]['url']['data']  # noqa
+    return base64.b64decode(ios_token)
 
-def get_m3u8_streams(secureTokenUrl):
+
+def get_m3u8_streams(secure_token_url):
     """ fetch our m3u8 file which contains streams of various qualities"""
-    res = opener.open(secureTokenUrl, None)
+    res = opener.open(secure_token_url, None)
     data = res.readlines()
     return data
 
-def parse_m3u8_streams(data, live, secureTokenUrl):
+
+def parse_m3u8_streams(data, live, secure_token_url):
     """ Parse the retrieved m3u8 stream list into a list of dictionaries
         then return the url for the highest quality stream. Different
         handling is required of live m3u8 files as they seem to only contain
@@ -185,14 +97,15 @@ def parse_m3u8_streams(data, live, secureTokenUrl):
         qual = xbmcaddon.Addon().getSetting('LIVE_QUALITY')
     else:
         qual = xbmcaddon.Addon().getSetting('HLSQUALITY')
-
-    count = 2
-    m3uList = []
-    prependLive = secureTokenUrl[:secureTokenUrl.find('index-root')]
-
+    if '#EXT-X-VERSION:3\n' in data:
+        data.remove('#EXT-X-VERSION:3\n')
+    count = 1
+    m3u_list = []
+    prepend_live = secure_token_url[:secure_token_url.find('index-root')]
     while count < len(data):
         line = data[count]
         line = line.strip('#EXT-X-STREAM-INF:')
+        line = line.strip('PROGRAM-ID=1,')
         line = line[:line.find('CODECS')]
 
         if line.endswith(','):
@@ -203,56 +116,30 @@ def parse_m3u8_streams(data, live, secureTokenUrl):
         linelist = [i.split('=') for i in line]
 
         if live == 'false':
-            linelist.append(['URL',data[count+1]])
+            linelist.append(['URL', data[count + 1]])
         else:
-            linelist.append(['URL',prependLive+data[count+1]])
+            linelist.append(['URL', prepend_live + data[count + 1]])
 
-        m3uList.append(dict((i[0], i[1]) for i in linelist))
+        m3u_list.append(dict((i[0], i[1]) for i in linelist))
         count += 2
-
-    sorted_m3uList = sorted(m3uList, key=lambda k: int(k['BANDWIDTH']))
-    stream = sorted_m3uList[int(qual)]['URL'][:-1]
+    sorted_m3u_list = sorted(m3u_list, key=lambda k: int(k['BANDWIDTH']))
+    stream = sorted_m3u_list[int(qual)]['URL'][:-1]
     return stream
 
-def cookies_to_string(cookiejar):
-    result = "|Cookie=Cookie: "
-    for cookie in cookiejar:
-        result += cookie.name
-        result += '='
-        result += cookie.value
-        result += ';'
-    result = result[:-1]
-    return result
 
-def get_m3u8_playlist(videoId, live, loginToken, mode):
+def get_m3u8_playlist(video_id, live, login_token, mode):
     """ Main function to call other functions that will return us our m3u8 HLS
         playlist as a string, which we can then write to a file for Kodi
         to use"""
-    if mode == 'AFL':
-        embedToken = get_afl_embed_token(loginToken, videoId)
 
-    elif mode == 'NRL':
-        embedToken = get_nrl_embed_token(loginToken, videoId)
+    embed_token = get_afl_embed_token(login_token, video_id)
 
-    authorizeUrl = config.AUTH_URL.format(config.PCODE, videoId, embedToken)
-    secureTokenUrl = get_secure_token(authorizeUrl, videoId)
-    m3u8Data = get_m3u8_streams(secureTokenUrl)
-    m3u8PlaylistUrl = parse_m3u8_streams(m3u8Data, live, secureTokenUrl)
-    pipe = cookies_to_string(cj)
-    return m3u8PlaylistUrl+pipe
+    authorize_url = config.AUTH_URL.format(config.PCODE, video_id, embed_token)
+    secure_token_url = get_secure_token(authorize_url, video_id)
 
+    if 'chunklist.m3u8' in secure_token_url:
+        return secure_token_url
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    m3u8_data = get_m3u8_streams(secure_token_url)
+    m3u8_playlist_url = parse_m3u8_streams(m3u8_data, live, secure_token_url)
+    return m3u8_playlist_url

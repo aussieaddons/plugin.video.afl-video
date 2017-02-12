@@ -28,20 +28,15 @@ except:
 
 sys.path.append(os.path.join(current_dir, "resources", "lib"))
 
-import utils
-import config
-import comm
-import index
-import teams
-import rounds
-import matches
-import videos
-import play_replay
-import play
+import utils  # noqa: E402
+import index  # noqa: E402
+import rounds  # noqa: E402
+import matches  # noqa: E402
+import videos  # noqa: E402
+import play_replay  # noqa: E402
+import play  # noqa: E402
 
-utils.log('Initialised')
-
-__addon__ = xbmcaddon.Addon()
+utils.log_xbmc_platform_version()
 
 if __name__ == "__main__":
     params_str = sys.argv[2]
@@ -50,37 +45,23 @@ if __name__ == "__main__":
     if (len(params) == 0):
         index.make_list()
     else:
-        if 'channel' in params:
-            videos.make_list(params_str)
-
-        elif 'category' in params:
+        utils.log("Loading add-on with params: %s" % params)
+        if 'category' in params:
             # Settings
             if params['category'] == 'Settings':
-                __addon__.openSettings()
-                
-            #elif params['category'] == 'Live Matches':
-             #   matches.make_livelist()
-
-            # Team video list -- disabled until moved to new API
-            # elif params['category'] == 'Club Video':
-            #     teams.make_list()
-
+                xbmcaddon.Addon().openSettings()
             # Match replay round list
             elif params['category'].startswith('Match Replays'):
                 # Pull season out from end of category name
                 season = params['category'].split()[-1]
                 rounds.make_rounds(season)
-
             else:
                 videos.make_list(params_str)
-
-        # List of videos (quarters) for a match
         elif 'match_id' in params:
+            # List of videos (quarters) for a match
             play_replay.make_list(params['round_id'], params['match_id'])
-
-        # Match list for a round
         elif 'round_id' in params:
+            # Match list for a round
             matches.make_list(params['round_id'])
-
         elif 'title' in params:
             play.play(params_str)

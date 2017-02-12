@@ -1,14 +1,15 @@
-<?xml version="1.0" ?><addon id="plugin.video.afl-video" name="AFL Video" provider-name="Andy Botting" version="1.6.4">
+<?xml version="1.0" ?><addon id="plugin.video.afl-video" name="AFL Video" provider-name="Andy Botting" version="1.7.0">
    <requires>
       <import addon="xbmc.python" version="2.1.0"/>
-      <import addon="script.module.beautifulsoup"/>
+      <import addon="script.module.beautifulsoup4"/>
+      <import addon="script.module.requests"/>
    </requires>
    <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
     <provides>video</provides>
   </extension>
    <extension point="xbmc.addon.metadata">
       <summary>AFL Video</summary>
-      <description>Watch the latest AFL replays, news and match reports. Club video unavailable for now.</description>
+      <description>Watch the latest AFL replays, news and match reports. Live streaming available with a valid AFL Live Pass</description>
       <disclaimer>This plugin is not affiliated with the AFL in any way.</disclaimer>
       <provides>video</provides>
       <platform>all</platform>
