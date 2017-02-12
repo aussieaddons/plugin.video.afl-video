@@ -159,7 +159,10 @@ TEAMS = [
 
 ROUNDS_2017 = [
     {'id': 'latest',        'name': 'Current Round'},
-    {'id': 'CD_R201710101', 'name': 'NAB Challenge'},
+    {'id': 'CD_R201710101', 'name': 'JLT Community Series Week 1'},
+    {'id': 'CD_R201710102', 'name': 'JLT Community Series Week 2'},
+    {'id': 'CD_R201710103', 'name': 'JLT Community Series Week 3'},
+    {'id': 'CD_R201710104', 'name': 'JLT Community Series Week 4'},
     {'id': 'CD_R201701401', 'name': 'Round 1'},
     {'id': 'CD_R201701402', 'name': 'Round 2'},
     {'id': 'CD_R201701403', 'name': 'Round 3'},
