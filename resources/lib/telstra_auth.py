@@ -45,7 +45,7 @@ def get_token(username, password, phone_number):
 
     # Sign in to telstra.com to recieve cookies, get the SAML auth, and
     # modify the escape characters so we can send it back later
-    utils.log('Signing in to: {}'.format(config.SIGNON_URL))
+    utils.log('Signing in to: {0}'.format(config.SIGNON_URL))
     session.headers = config.SIGNON_HEADERS
     signon_data = config.SIGNON_DATA
     signon_data.update({'username': username, 'password': password})
@@ -78,14 +78,14 @@ def get_token(username, password, phone_number):
     session.headers = config.SAML_LOGIN_HEADERS
     session.cookies.set('saml_request_path', msisdn_url)
     saml_data = 'SAMLResponse=' + saml_base64
-    utils.log('Fetching stream auth token: {}'.format(config.SAML_LOGIN_URL))
+    utils.log('Fetching stream auth token: {0}'.format(config.SAML_LOGIN_URL))
     saml_login = session.post(config.SAML_LOGIN_URL, data=saml_data)
 
     confirm_url = saml_login.url
     auth_token_match = re.search('apiToken = "(\w+)"', saml_login.text)
     if auth_token_match:
         auth_token = auth_token_match.group(1)
-        utils.log('Found auth token: {}'.format(auth_token))
+        utils.log('Found auth token: {0}'.format(auth_token))
     else:
         raise TelstraAuthException('Could not obtain authorisation token')
 
@@ -98,7 +98,7 @@ def get_token(username, password, phone_number):
         raise TelstraAuthException('Could not find streaming offer ID')
 
     media_order_hdrs = config.MEDIA_ORDER_HEADERS
-    media_order_hdrs.update({'Authorization': 'Bearer {}'.format(auth_token),
+    media_order_hdrs.update({'Authorization': 'Bearer {0}'.format(auth_token),
                              'Referer': confirm_url})
     session.headers = media_order_hdrs
 
