@@ -26,7 +26,6 @@ import socket
 import config
 import utils
 import xbmc
-import xbmcplugin
 
 # Filter out username and passwords from log files
 LOG_FILTERS = (
@@ -95,7 +94,6 @@ def get_xbmc_log():
     """
     log_path = xbmc.translatePath('special://logpath')
 
-    test_path = os.path.join(log_path, 'kodi.log')
     if os.path.isfile(os.path.join(log_path, 'kodi.log')):
         log_file_path = os.path.join(log_path, 'kodi.log')
     elif os.path.isfile(os.path.join(log_path, 'xbmc.log')):
@@ -146,7 +144,6 @@ def get_latest_version():
         Sort the list, and get the latest version
     """
     versions = get_versions()
-    utils.log('Version check found versions: %s' % versions)
     return sorted(versions, reverse=True)[0]
 
 
@@ -158,8 +155,6 @@ def is_latest_version(current_version, latest_version):
     if current_version.startswith('v'):
         current_version = current_version[1::]
     current_version = map(lambda v: int(v), current_version.split('.'))
-    utils.log('Version check: Latest version: %s, Current version: %s'
-              % (latest_version, current_version))
     return current_version == latest_version
 
 
@@ -176,16 +171,16 @@ def format_issue(issue_data):
 
     content = [
         "*Automatic bug report from end-user.*\n## Environment\n"
-        "**Plugin Name:** %s" % config.NAME,
-        "**Plugin ID:** %s" % config.ADDON_ID,
-        "**Plugin Version:** %s" % config.VERSION,
-        "**XBMC/Kodi Version:** %s" % get_xbmc_version(),
+        "**Add-on Name:** %s" % config.NAME,
+        "**Add-on ID:** %s" % config.ADDON_ID,
+        "**Add-on Version:** %s" % config.VERSION,
+        "**Kodi Version:** %s" % get_xbmc_version(),
         "**Python Version:** %s" % sys.version.replace('\n', ''),
-        "**Operating System:** [%s] %s" % (sys.platform, os_string),
+        "**Operating System:** %s %s" % (sys.platform, os_string),
         "**IP Address:** %s" % get_public_ip(),
-        "**ISP :** %s" % get_isp(),
+        "**ISP:** %s" % get_isp(),
+        "**Kodi URL:** %s" % sys.argv[2],
         "**Python Path:**\n```\n%s\n```" % '\n'.join(sys.path),
-        "**Kodi URL:**\n```\n%s\n```" % sys.argv[2],
         "\n## Traceback\n```\n%s\n```" % issue_data,
     ]
 
@@ -236,7 +231,6 @@ def report_issue(issue_data):
         Report our issue to GitHub
     """
     issue_body = format_issue(issue_data)
-    utils.log("Issue Body: %s" % issue_body)
 
     try:
         data = {
