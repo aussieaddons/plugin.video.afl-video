@@ -1,5 +1,5 @@
-AFL Video plugin for XBMC
-================================
+AFL Video plugin for Kodi
+=========================
 
 *UPDATE*: Now updated for 2017 season and we now support the free AFL Live Pass
 subscription from Telstra.
