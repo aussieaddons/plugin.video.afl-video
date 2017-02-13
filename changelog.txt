@@ -1,8 +1,13 @@
-[B]Version 1.7.0[/B]
+[B]Version 1.7.1[/B]
+- Remove current round from 2016
+- NAB Challenge now JLT. Renamed and added new rounds
+- Fix for 'zero length field name in format' on Python < 2.7
+- Update README.md
+
+[B]Version v1.7.0[/B]
 - Rename live pass subscription setting
 - Minor enhancements to issue_reporter
 - Update issue reporter, fix error in comm.py
-- Update to v1.7.0 and include beautifulsoup4
 - Cleanups for config.py and telstra_auth.py
 - Cleanups and flake8 compatibility for default.py
 - Code cleanups and flake8 fixes for Ooylahelper
