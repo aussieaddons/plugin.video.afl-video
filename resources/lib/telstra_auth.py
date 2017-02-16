@@ -5,11 +5,14 @@ import comm
 import re
 import utils
 import urllib
+import ssl
 
 from bs4 import BeautifulSoup
 
 import requests
+from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from requests.packages.urllib3.poolmanager import PoolManager
 
 
 # Ignore InsecureRequestWarning warnings
@@ -23,10 +26,19 @@ class TelstraAuthException(Exception):
     pass
 
 
+class TLSv1Adapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = PoolManager(num_pools=connections,
+                                       maxsize=maxsize,
+                                       block=block,
+                                       ssl_version=ssl.PROTOCOL_TLSv1)
+
+
 def get_token(username, password, phone_number):
     """ Obtain a valid token from Telstra, will be used to make requests for
         Ooyala embed tokens"""
     session = requests.Session()
+    session.mount('https://', TLSv1Adapter())
     session.verify = False
 
     # Send our first login request to AFL API, recieve (unactivated) token
