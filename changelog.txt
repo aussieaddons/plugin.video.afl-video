@@ -1,4 +1,7 @@
-[B]Version 1.7.1[/B]
+[B]Version 1.7.2[/B]
+- Fix SSL erros
+
+[B]Version v1.7.1[/B]
 - Remove current round from 2016
 - NAB Challenge now JLT. Renamed and added new rounds
 - Fix for 'zero length field name in format' on Python < 2.7
