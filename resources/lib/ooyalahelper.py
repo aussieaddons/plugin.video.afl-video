@@ -60,8 +60,7 @@ def get_afl_user_token():
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
         if int(addon.getSetting('SUBSCRIPTION_TYPE')):
-            phone_number = addon.getSetting('LIVE_PHONE_NUMBER')
-            return telstra_auth.get_token(username, password, phone_number)
+            return telstra_auth.get_token(username, password)
         
         login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
                 'authToken': addon.getSetting('LIVE_PASSWORD'),

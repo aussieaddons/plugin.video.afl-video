@@ -106,6 +106,10 @@ SAML_LOGIN_HEADERS = {'Host': 'hub.telstra.com.au',
                       'Accept-Language': 'en-AU,en-US;q=0.8',
                       'X-Requested-With': 'com.telstra.nrl'}
 
+OFFERS_URL = 'https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
+
+HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
+
 MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
                        'Accept': 'application/json, text/plain, */*',
                        'Host': 'api.telstra.com',
