@@ -34,7 +34,7 @@ class TLSv1Adapter(HTTPAdapter):
                                        ssl_version=ssl.PROTOCOL_TLSv1)
 
 
-def get_token(username, password, phone_number):
+def get_token(username, password):
     """ Obtain a valid token from Telstra, will be used to make requests for
         Ooyala embed tokens"""
     session = requests.Session()
@@ -113,13 +113,33 @@ def get_token(username, password, phone_number):
     media_order_hdrs.update({'Authorization': 'Bearer {0}'.format(auth_token),
                              'Referer': confirm_url})
     session.headers = media_order_hdrs
-
-    media_order_data = config.MEDIA_ORDER_JSON.format(phone_number,
+    
+    # First check if there are any eligible services attached to the account
+    offers = session.get('https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl')
+    try:
+        offers.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            message = json.loads(e.response.text).get('userMessage')
+            message += (' Please visit {0} '.format(config.HUB_URL) +
+                        'for further instructions to link your mobile '
+                        'service to the supplied Telstra ID')
+            raise TelstraAuthException(message)
+        else:
+            raise TelstraAuthException(e.response.status_code)
+    try:
+        offer_data = json.loads(offers.text)
+        offers_list = offer_data['data']['offers']
+        for offer in offers_list:
+            if offer.get('name') != 'AFL Live Pass':
+                continue
+            data = offer.get('productOfferingAttributes')
+            ph_no = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
+    except:
+        raise TelstraAuthException('Unable to determine eligible services')
+    
+    media_order_data = config.MEDIA_ORDER_JSON.format(ph_no,
                                                       offer_id,
                                                       token)
     media_order = session.post(config.MEDIA_ORDER_URL, media_order_data)
-
-    if media_order.status_code == 400:
-        raise TelstraAuthException('Invalid phone number in settings')
-
     return token
