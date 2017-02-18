@@ -1,4 +1,7 @@
-[B]Version 1.7.2[/B]
+[B]Version 1.7.3[/B]
+- Support for paid subscriptions from afl.com.au
+
+[B]Version v1.7.2[/B]
 - Fix SSL erros
 
 [B]Version v1.7.1[/B]
