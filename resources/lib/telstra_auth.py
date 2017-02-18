@@ -115,7 +115,7 @@ def get_token(username, password):
     session.headers = media_order_hdrs
     
     # First check if there are any eligible services attached to the account
-    offers = session.get('https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl')
+    offers = session.get(config.OFFERS_URL)
     try:
         offers.raise_for_status()
     except requests.exceptions.HTTPError as e:

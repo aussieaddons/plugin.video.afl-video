@@ -106,6 +106,10 @@ SAML_LOGIN_HEADERS = {'Host': 'hub.telstra.com.au',
                       'Accept-Language': 'en-AU,en-US;q=0.8',
                       'X-Requested-With': 'com.telstra.nrl'}
 
+OFFERS_URL = 'https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
+
+HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
+
 MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
                        'Accept': 'application/json, text/plain, */*',
                        'Host': 'api.telstra.com',
@@ -121,8 +125,6 @@ MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
 MEDIA_ORDER_JSON = '{{"serviceId":"{0}","serviceType":"MSISDN","offer":{{"id":"{1}"}},"pai":"{2}"}}'
 
 SPORTSPASS_URL = 'http://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
-
-HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
 
 SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                       'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
