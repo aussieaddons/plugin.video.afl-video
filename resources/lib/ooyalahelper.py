@@ -59,15 +59,58 @@ def get_afl_user_token():
         opener.addheaders = [('x-media-mis-token', api_token)]
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
-        phone_number = addon.getSetting('LIVE_PHONE_NUMBER')
-        return telstra_auth.get_token(username, password, phone_number)
+        if int(addon.getSetting('SUBSCRIPTION_TYPE')):
+            phone_number = addon.getSetting('LIVE_PHONE_NUMBER')
+            return telstra_auth.get_token(username, password, phone_number)
+        
+        login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
+                'authToken': addon.getSetting('LIVE_PASSWORD'),
+                'userIdentifierType': 'EMAIL',}
+        login_json = fetch_afl_json(config.LOGIN_URL, login_data)
+        data = json.loads(login_json)
+        session_id = data['data'].get('artifactValue')
+        
+        try:
+            session_url = config.SESSION_URL.format(urllib.quote(session_id))
+            res = opener.open(session_url)
+            data = json.loads(res.read())
+            try:
+                return data['subscriptions'][0].get('uuid')
+            
+            except IndexError as e:
+                raise AFLVideoException('AFL Live Pass subscription expired')
+             
+        except urllib2.HTTPError as e:
+            # Attempt to parse response even with a HTTP 400
+            try:
+                data = json.loads(e.read())
+                if 'techMessage' in data:
+                    raise AFLVideoException('Failed to fetch live streaming '
+                                            'token: %s' 
+                                            % data.get('techMessage'))
+                if 'userMessage' in data:
+                    raise AFLVideoException('Failed to fetch live streaming '
+                                            'token: %s' 
+                                            % data.get('userMessage'))
+            except Exception as e:
+                raise e
+    
+        raise Exception('Failed to fetch AFL Live streaming token')
     else:
         raise AFLVideoException('AFL Live Pass subscription is required.')
 
 
 def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
-    res = opener.open(config.EMBED_TOKEN_URL.format(user_token, video_id))
+    try:
+        res = opener.open(config.EMBED_TOKEN_URL.format(user_token, video_id))
+    except urllib2.HTTPError as e:
+        try:
+            data = json.loads(e.read())
+            utils.log(data)
+            raise Exception
+        except Exception as e:
+            raise e
     data = json.loads(res.read())
     return urllib.quote(data.get('token'))
 
