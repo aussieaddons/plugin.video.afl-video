@@ -17,7 +17,7 @@
 # This module contains functions for interacting with the Ooyala API
 
 import urllib
-import urllib2
+import requests
 import cookielib
 import ssl
 
@@ -32,31 +32,40 @@ import telstra_auth
 
 from exception import AFLVideoException
 
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from requests.packages.urllib3.poolmanager import PoolManager
 
-cj = cookielib.CookieJar()
-handler = urllib2.HTTPCookieProcessor(cj)
-opener = urllib2.build_opener(handler)
+
+class TLSv1Adapter(HTTPAdapter):
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = PoolManager(num_pools=connections,
+                                       maxsize=maxsize,
+                                       block=block,
+                                       ssl_version=ssl.PROTOCOL_TLSv1)
+
+
+# Ignore InsecureRequestWarning warnings
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+session = requests.Session()
+session.mount('https://', TLSv1Adapter())
+session.verify = False
 addon = xbmcaddon.Addon()
-
-
-# Fix for python > 2.7.8 ssl verification errors
-if hasattr(ssl, '_create_unverified_context'):
-    ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def fetch_afl_json(url, data):
     """ send http POST and return the json response data"""
     data = urllib.urlencode(data)
-    req = urllib2.Request(url, data, config.HEADERS)
-    res = urllib2.urlopen(req)
+    session.headers = config.HEADERS
     utils.log("Fetching URL: {0}".format(url))
-    return res.read()
+    res = session.post(url, data)
+    return res.text
 
 
 def get_afl_user_token():
     if addon.getSetting('LIVE_SUBSCRIPTION') == 'true':
         api_token = comm.fetch_token()
-        opener.addheaders = [('x-media-mis-token', api_token)]
+        session.headers.update({'x-media-mis-token': api_token})
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
         if int(addon.getSetting('SUBSCRIPTION_TYPE')):
@@ -71,15 +80,16 @@ def get_afl_user_token():
         
         try:
             session_url = config.SESSION_URL.format(urllib.quote(session_id))
-            res = opener.open(session_url)
-            data = json.loads(res.read())
+            res = session.get(session_url)
+            res.raise_for_status()
+            data = json.loads(res.text)
             try:
                 return data['subscriptions'][0].get('uuid')
             
             except IndexError as e:
                 raise AFLVideoException('AFL Live Pass subscription expired')
              
-        except urllib2.HTTPError as e:
+        except requests.exceptions.HTTPError as e:
             # Attempt to parse response even with a HTTP 400
             try:
                 data = json.loads(e.read())
@@ -102,31 +112,31 @@ def get_afl_user_token():
 def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
     try:
-        res = opener.open(config.EMBED_TOKEN_URL.format(user_token, video_id))
-    except urllib2.HTTPError as e:
+        res = session.get(config.EMBED_TOKEN_URL.format(user_token, video_id))
+        res.raise_for_status()
+    except requests.exceptions.HTTPError as e:
         try:
-            data = json.loads(e.read())
+            data = json.loads(e.text)
             utils.log(data)
-            raise Exception
+            raise e
         except Exception as e:
             raise e
-    data = json.loads(res.read())
+    data = json.loads(res.text)
     return urllib.quote(data.get('token'))
 
 
 def get_secure_token(secure_url, video_id):
     """send our embed token back with a few other url encoded parameters"""
-    res = opener.open(secure_url, None)
-    data = res.read()
-    parsed_json = json.loads(data)
+    res = session.get(secure_url)
+    parsed_json = json.loads(res.text)
     ios_token = parsed_json['authorization_data'][video_id]['streams'][0]['url']['data']  # noqa
     return base64.b64decode(ios_token)
 
 
 def get_m3u8_streams(secure_token_url):
     """ fetch our m3u8 file which contains streams of various qualities"""
-    res = opener.open(secure_token_url, None)
-    data = res.readlines()
+    res = session.get(secure_token_url)
+    data = res.text.splitlines()
     return data
 
 
@@ -139,8 +149,8 @@ def parse_m3u8_streams(data, live, secure_token_url):
         qual = xbmcaddon.Addon().getSetting('LIVE_QUALITY')
     else:
         qual = xbmcaddon.Addon().getSetting('HLSQUALITY')
-    if '#EXT-X-VERSION:3\n' in data:
-        data.remove('#EXT-X-VERSION:3\n')
+    if '#EXT-X-VERSION:3' in data:
+        data.remove('#EXT-X-VERSION:3')
     count = 1
     m3u_list = []
     prepend_live = secure_token_url[:secure_token_url.find('index-root')]
@@ -165,7 +175,7 @@ def parse_m3u8_streams(data, live, secure_token_url):
         m3u_list.append(dict((i[0], i[1]) for i in linelist))
         count += 2
     sorted_m3u_list = sorted(m3u_list, key=lambda k: int(k['BANDWIDTH']))
-    stream = sorted_m3u_list[int(qual)]['URL'][:-1]
+    stream = sorted_m3u_list[int(qual)]['URL']
     return stream
 
 
