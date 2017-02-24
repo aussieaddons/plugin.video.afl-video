@@ -1,4 +1,7 @@
-[B]Version 1.7.4[/B]
+[B]Version 1.7.5[/B]
+- Remove forced TLSv1 from Ooyala
+
+[B]Version v1.7.4[/B]
 - ooyalahelper now using requests instead of urllib2
 - Improve login process (#822)
 
