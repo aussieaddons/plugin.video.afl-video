@@ -37,19 +37,11 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.packages.urllib3.poolmanager import PoolManager
 
 
-class TLSv1Adapter(HTTPAdapter):
-    def init_poolmanager(self, connections, maxsize, block=False):
-        self.poolmanager = PoolManager(num_pools=connections,
-                                       maxsize=maxsize,
-                                       block=block,
-                                       ssl_version=ssl.PROTOCOL_TLSv1)
-
-
-# Ignore InsecureRequestWarning warnings
+## Ignore InsecureRequestWarning warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 session = requests.Session()
-session.mount('https://', TLSv1Adapter())
 session.verify = False
+
 addon = xbmcaddon.Addon()
 
 
@@ -112,7 +104,9 @@ def get_afl_user_token():
 def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
     try:
-        res = session.get(config.EMBED_TOKEN_URL.format(user_token, video_id))
+        embed_token_url = config.EMBED_TOKEN_URL.format(user_token, video_id)
+        utils.log("Fetching embed token: {0}".format(embed_token_url))
+        res = session.get(embed_token_url)
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
         try:
