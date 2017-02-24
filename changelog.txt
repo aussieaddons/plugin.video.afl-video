@@ -1,4 +1,8 @@
-[B]Version 1.7.3[/B]
+[B]Version 1.7.4[/B]
+- ooyalahelper now using requests instead of urllib2
+- Improve login process (#822)
+
+[B]Version v1.7.3[/B]
 - Support for paid subscriptions from afl.com.au
 
 [B]Version v1.7.2[/B]
