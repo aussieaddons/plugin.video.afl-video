@@ -16,15 +16,16 @@
 #     along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import urllib
-import requests
-import config
 import classes
-import utils
+import config
 import datetime
-import time
 import json
+import requests
+import time
+import urllib
+import utils
 import xbmcaddon
+
 from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
@@ -33,15 +34,15 @@ import etree.ElementTree as ET
 
 def fetch_url(url, request_token=False):
     """
-        Simple function that fetches a URL using requests.
-        An exception is raised if an error (e.g. 404) occurs.
+    Simple function that fetches a URL using requests.
+    An exception is raised if an error (e.g. 404) occurs.
     """
     utils.log("Fetching URL: %s" % url)
     with requests.Session() as session:
         # Token headers
         if request_token:
             update_token(session)
-    
+
         request = session.get(url)
         data = request.text
     return data
@@ -50,14 +51,14 @@ def fetch_url(url, request_token=False):
 def update_token(session):
     """
         This functions performs a HTTP POST to the token URL
-        and it will update the requests session with a token 
+        and it will update the requests session with a token
         required for API calls
     """
     res = requests.post(config.TOKEN_URL)
     try:
         token = json.loads(res.text).get('token')
-    except:
-        raise Exception('Failed to retrieve API token')
+    except Exception as e:
+        raise Exception('Failed to retrieve API token: {0}'.format(e))
     session.headers.update({'x-media-mis-token': token})
 
 
@@ -78,7 +79,7 @@ def parse_json_video(video_data):
         timestamp = time.mktime(time.strptime(video_data['customPublishDate'],
                                               '%Y-%m-%dT%H:%M:%S.%f+0000'))
         video.date = datetime.date.fromtimestamp(timestamp)
-    except:
+    except Exception:
         pass
 
     video_format = None
@@ -99,6 +100,7 @@ def parse_json_video(video_data):
         video.duration = video_format.get('duration')
 
         return video
+
 
 def parse_json_live(video_data):
     """
@@ -185,8 +187,6 @@ def get_videos(category):
         video_assets = json_data
 
         for video_asset in video_assets:
-            #if video_asset['title'] == 'AFL.TV':
-            #    continue
             video = parse_json_live(video_asset)
 
             if video:
@@ -238,20 +238,20 @@ def get_round(round_id, live=False):
             match['round_id'] = dict(rnd.items())['id']
 
             # special formatting for the 'upcoming games' list in the live menu
-            if live == True:
+            if live:
                 now = datetime.datetime.now()
                 timestamp = d['dateTime']
                 timezone = d['timezone']
                 ts = datetime.datetime.fromtimestamp(
                     time.mktime(time.strptime(timestamp,
-                     "%Y-%m-%dT%H:%M:%S")))
+                                              "%Y-%m-%dT%H:%M:%S")))
                 delta = now - ts
-                #remove games that have already been played
+                # remove games that have already been played
                 if delta > datetime.timedelta(hours=3):
                     continue
                 airTime = ts.strftime(" - %A @ %I:%M %p A")
                 match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
-                                    match['name'],airTime,timezone)
+                                    match['name'], airTime, timezone)
 
             # Add date/time
             round_matches.append(match)
@@ -279,7 +279,7 @@ def get_match_video(round_id, match_id, quality):
         for qtr in periods.getchildren():
             qtr_dict = dict(qtr.items())
             match_video.append(qtr_dict)
-    except:
+    except Exception:
         return None
 
     return match_video

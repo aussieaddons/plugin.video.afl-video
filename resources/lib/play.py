@@ -36,6 +36,7 @@ def play(url):
             v.parse_xbmc_url(url)
         
         if 'ooyalaid' in params:
+
             login_token = ooyalahelper.get_afl_user_token()
             stream_url = ooyalahelper.get_m3u8_playlist(params['ooyalaid'],
                                                         'true', login_token,

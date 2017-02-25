@@ -66,7 +66,7 @@ AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/
 PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'
 
 # http headers required for accessing Bigpond authentication URL
-HEADERS = {'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)', 
+HEADERS = {'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)',
            'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt',
            'Content-Type': 'application/x-www-form-urlencoded'}
 

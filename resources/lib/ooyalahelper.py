@@ -16,35 +16,29 @@
 
 # This module contains functions for interacting with the Ooyala API
 
-import urllib
-import requests
-import cookielib
-import ssl
 
-import json
 import base64
 import comm
 import config
+import json
+import requests
+import sys
+import urllib
 import xbmcaddon
 
-import utils
 import telstra_auth
+import utils
 
 from exception import AFLVideoException
 
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from requests.packages.urllib3.poolmanager import PoolManager
 
-
-## Ignore InsecureRequestWarning warnings
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+# Ignore InsecureRequestWarning warnings
+requests.packages.urllib3.disable_warnings()
 session = requests.Session()
 session.verify = False
 
 addon = xbmcaddon.Addon()
 free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
-
 
 def fetch_session_id(url, data):
     """ send http POST and return the json response data"""
@@ -65,10 +59,10 @@ def get_afl_user_token():
     if addon.getSetting('LIVE_SUBSCRIPTION') == 'true':
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
-        
+
         if free_subscription:
             return telstra_auth.get_token(username, password)
-        
+
         login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
                       'authToken': addon.getSetting('LIVE_PASSWORD'),
                       'userIdentifierType': 'EMAIL'}
@@ -78,7 +72,7 @@ def get_afl_user_token():
             raise AFLVideoException('Invalid login/password for paid'
                                     ' afl.com.au subscription.')
         session_id = data['data'].get('artifactValue')
-        
+
         try:
             session.headers.update({'Authorization': None})
             session_url = config.SESSION_URL.format(urllib.quote(session_id))
@@ -97,6 +91,13 @@ def get_afl_user_token():
 
 def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
+
+    # Need TLSv1.2 in at least Python 2.7
+    if sys.version_info < (2,7):
+        raise AFLVideoException('Your version of Python included with '
+                                'Kodi is too old for live streaming. '
+                                'Please upgrade to at least Kodi v15.')
+
     try:
         comm.update_token(session)
         embed_token_url = config.EMBED_TOKEN_URL.format(user_token, video_id)
