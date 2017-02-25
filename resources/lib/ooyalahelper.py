@@ -91,27 +91,24 @@ def get_afl_user_token():
 
 def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
-
-    # Need TLSv1.2 in at least Python 2.7
-    if sys.version_info < (2,7):
-        raise AFLVideoException('Your version of Python included with '
-                                'Kodi is too old for live streaming. '
-                                'Please upgrade to at least Kodi v15.')
-
     try:
         comm.update_token(session)
         embed_token_url = config.EMBED_TOKEN_URL.format(user_token, video_id)
         utils.log("Fetching embed token: {0}".format(embed_token_url))
-        res = session.get(embed_token_url)
+        try:
+            res = session.get(embed_token_url)
+        except requests.exceptions.SSLError:
+            raise AFLVideoException('Your version of Kodi is too old for live '
+                                    'streaming. Please upgrade to the latest '
+                                    'version of Kodi.')
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        try:
-            if not free_subscription:
-                raise AFLVideoException('Paid subscription not found for '
+        if not free_subscription:
+            raise AFLVideoException('Paid subscription not found for '
                                         'supplied username/password. Please '
                                         'check the subscription type in '
                                         'settings is correct.')
-        except Exception as e:
+        else:
             utils.log(res.text)
             raise e
     data = json.loads(res.text)
