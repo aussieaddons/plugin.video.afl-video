@@ -31,7 +31,7 @@ from bs4 import BeautifulStoneSoup
 import etree.ElementTree as ET
 
 
-def fetch_url(url, token=None):
+def fetch_url(url, request_token=False):
     """
         Simple function that fetches a URL using requests.
         An exception is raised if an error (e.g. 404) occurs.
@@ -39,11 +39,10 @@ def fetch_url(url, token=None):
     utils.log("Fetching URL: %s" % url)
     with requests.Session() as session:
         # Token headers
-        headers = {}
-        if token:
+        if request_token:
             update_token(session)
     
-        request = session.get(url, headers=headers)
+        request = session.get(url)
         data = request.text
     return data
 
@@ -55,8 +54,11 @@ def update_token(session):
         required for API calls
     """
     res = requests.post(config.TOKEN_URL)
-    json_result = json.loads(res.text)
-    session.headers.update({'x-media-mis-token': json_result['token']})
+    try:
+        token = json.loads(res.text).get('token')
+    except:
+        raise Exception('Failed to retrieve API token')
+    session.headers.update({'x-media-mis-token': token})
 
 
 def parse_json_video(video_data):
@@ -176,7 +178,7 @@ def get_videos(category):
         category_encoded = urllib.quote(category)
         url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
 
-    data = fetch_url(url, token=True)
+    data = fetch_url(url, request_token=True)
     json_data = json.loads(data)
 
     if category == 'Live Matches':
