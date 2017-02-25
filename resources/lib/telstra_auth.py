@@ -43,7 +43,7 @@ def get_token(username, password):
 
     # Send our first login request to AFL API, recieve (unactivated) token
     # and 'msisdn' URL
-    session.headers = {'x-media-mis-token': comm.fetch_token()}
+    comm.update_token(session)
     auth_resp = session.post(config.AFL_LOGIN_URL)
     jsondata = json.loads(auth_resp.text)
     token = jsondata.get('uuid')

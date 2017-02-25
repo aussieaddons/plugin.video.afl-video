@@ -43,60 +43,54 @@ session = requests.Session()
 session.verify = False
 
 addon = xbmcaddon.Addon()
+free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
 
 
-def fetch_afl_json(url, data):
+def fetch_session_id(url, data):
     """ send http POST and return the json response data"""
     data = urllib.urlencode(data)
     session.headers = config.HEADERS
+    comm.update_token(session)
     utils.log("Fetching URL: {0}".format(url))
     res = session.post(url, data)
+    try:
+        res.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        utils.log(res.text)
+        raise Exception(e)
     return res.text
 
 
 def get_afl_user_token():
     if addon.getSetting('LIVE_SUBSCRIPTION') == 'true':
-        api_token = comm.fetch_token()
-        session.headers.update({'x-media-mis-token': api_token})
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
-        if int(addon.getSetting('SUBSCRIPTION_TYPE')):
+        
+        if free_subscription:
             return telstra_auth.get_token(username, password)
         
         login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
-                'authToken': addon.getSetting('LIVE_PASSWORD'),
-                'userIdentifierType': 'EMAIL',}
-        login_json = fetch_afl_json(config.LOGIN_URL, login_data)
+                      'authToken': addon.getSetting('LIVE_PASSWORD'),
+                      'userIdentifierType': 'EMAIL'}
+        login_json = fetch_session_id(config.LOGIN_URL, login_data)
         data = json.loads(login_json)
+        if data.get('responseCode') != 0:
+            raise AFLVideoException('Invalid login/password for paid'
+                                    ' afl.com.au subscription.')
         session_id = data['data'].get('artifactValue')
         
         try:
+            session.headers.update({'Authorization': None})
             session_url = config.SESSION_URL.format(urllib.quote(session_id))
             res = session.get(session_url)
             res.raise_for_status()
             data = json.loads(res.text)
-            try:
-                return data['subscriptions'][0].get('uuid')
-            
-            except IndexError as e:
-                raise AFLVideoException('AFL Live Pass subscription expired')
-             
+            return data.get('uuid')
+
         except requests.exceptions.HTTPError as e:
-            # Attempt to parse response even with a HTTP 400
-            try:
-                data = json.loads(e.read())
-                if 'techMessage' in data:
-                    raise AFLVideoException('Failed to fetch live streaming '
-                                            'token: %s' 
-                                            % data.get('techMessage'))
-                if 'userMessage' in data:
-                    raise AFLVideoException('Failed to fetch live streaming '
-                                            'token: %s' 
-                                            % data.get('userMessage'))
-            except Exception as e:
-                raise e
-    
-        raise Exception('Failed to fetch AFL Live streaming token')
+            utils.log(res.text)
+            raise e
+
     else:
         raise AFLVideoException('AFL Live Pass subscription is required.')
 
@@ -104,16 +98,20 @@ def get_afl_user_token():
 def get_afl_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
     try:
+        comm.update_token(session)
         embed_token_url = config.EMBED_TOKEN_URL.format(user_token, video_id)
         utils.log("Fetching embed token: {0}".format(embed_token_url))
         res = session.get(embed_token_url)
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
         try:
-            data = json.loads(e.text)
-            utils.log(data)
-            raise e
+            if not free_subscription:
+                raise AFLVideoException('Paid subscription not found for '
+                                        'supplied username/password. Please '
+                                        'check the subscription type in '
+                                        'settings is correct.')
         except Exception as e:
+            utils.log(res.text)
             raise e
     data = json.loads(res.text)
     return urllib.quote(data.get('token'))

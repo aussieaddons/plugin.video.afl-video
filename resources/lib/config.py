@@ -54,7 +54,7 @@ LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
 LOGIN_URL = 'https://services.bigpond.com/rest/v1/AuthenticationService/authenticate'
 
 # This URL returns our user ID after authentication
-SESSION_URL = 'https://api.afl.com.au/cfs/users/session/subscriptions?sessionId={0}'
+SESSION_URL = 'http://api.sub.afl.com.au/cfs-premium/users/session?sessionId={0}'
 
 # URL to retrieve Ooyala embed token from
 EMBED_TOKEN_URL = 'https://api.afl.com.au/cfs/users/{0}/token?embedCode={1}'
@@ -66,8 +66,9 @@ AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/
 PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'
 
 # http headers required for accessing Bigpond authentication URL
-HEADERS = { 'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)', 
-'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt' }
+HEADERS = {'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)', 
+           'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt',
+           'Content-Type': 'application/x-www-form-urlencoded'}
 
 # New auth config for 2017
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'

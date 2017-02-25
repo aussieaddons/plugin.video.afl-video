@@ -17,7 +17,7 @@
 #
 
 import urllib
-import urllib2
+import requests
 import config
 import classes
 import utils
@@ -33,31 +33,30 @@ import etree.ElementTree as ET
 
 def fetch_url(url, token=None):
     """
-        Simple function that fetches a URL using urllib2.
+        Simple function that fetches a URL using requests.
         An exception is raised if an error (e.g. 404) occurs.
     """
     utils.log("Fetching URL: %s" % url)
+    with requests.Session() as session:
+        # Token headers
+        headers = {}
+        if token:
+            update_token(session)
+    
+        request = session.get(url, headers=headers)
+        data = request.text
+    return data
 
-    # Token headers
-    headers = {}
-    if token:
-        headers = {'x-media-mis-token': token}
 
-    request = urllib2.Request(url, headers=headers)
-    return urllib2.urlopen(request).read()
-
-
-def fetch_token():
+def update_token(session):
     """
         This functions performs a HTTP POST to the token URL
-        and it will return a token required for API calls
+        and it will update the requests session with a token 
+        required for API calls
     """
-    req = urllib2.Request(config.TOKEN_URL, '')
-    res = urllib2.urlopen(req)
-    json_result = json.loads(res.read())
-    res.close()
-
-    return json_result['token']
+    res = requests.post(config.TOKEN_URL)
+    json_result = json.loads(res.text)
+    session.headers.update({'x-media-mis-token': json_result['token']})
 
 
 def parse_json_video(video_data):
@@ -168,9 +167,6 @@ def get_videos(category):
     """
     video_list = []
 
-    # Get a token. TODO: Cache this
-    token = fetch_token()
-
     # Category names are URL encoded
     if category == 'All Videos':
         url = config.VIDEO_LIST_URL
@@ -180,7 +176,7 @@ def get_videos(category):
         category_encoded = urllib.quote(category)
         url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
 
-    data = fetch_url(url, token=token)
+    data = fetch_url(url, token=True)
     json_data = json.loads(data)
 
     if category == 'Live Matches':
