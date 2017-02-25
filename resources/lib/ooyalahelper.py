@@ -98,23 +98,17 @@ def get_afl_embed_token(user_token, video_id):
         try:
             res = session.get(embed_token_url)
         except requests.exceptions.SSLError:
-            if utils.get_xbmc_major_version() < 15:
-                raise AFLVideoException('Your version of Kodi is too old for '
-                                        'live streaming. Please upgrade to at '
-                                        'least Kodi v15.')
-            else:
-                raise Exception('Your version of Kodi is too old for '
-                                'live streaming. Please upgrade to at '
-                                'least Kodi v17.')
+            raise AFLVideoException('Your version of Kodi is too old for live '
+                                    'streaming. Please upgrade to the latest '
+                                    'version of Kodi.')
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        try:
-            if not free_subscription:
-                raise AFLVideoException('Paid subscription not found for '
+        if not free_subscription:
+            raise AFLVideoException('Paid subscription not found for '
                                         'supplied username/password. Please '
                                         'check the subscription type in '
                                         'settings is correct.')
-        except Exception as e:
+        else:
             utils.log(res.text)
             raise e
     data = json.loads(res.text)
