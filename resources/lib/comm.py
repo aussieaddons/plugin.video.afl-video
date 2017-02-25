@@ -118,7 +118,9 @@ def parse_json_live(video_data):
     video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(title)
     video.description = title
     video.thumbnail = video_data['videoStream'].get('thumbnailURL')
-    video.ooyalaid = video_data['videoStream']['customAttributes'][0].get('attrValue')
+    atrbs = video_data['videoStream'].get('customAttributes')
+    id = [x['attrValue'] for x in atrbs if x['attrName'] == 'ooyala embed code']
+    video.ooyalaid = id[0]
 
     return video
 
