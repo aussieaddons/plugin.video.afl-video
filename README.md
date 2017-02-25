@@ -28,11 +28,13 @@ For any issues or bug reports, please file them on the [issues page] [issues].
 
 Please include log output if possible, using Github Gist or Pastebin.com.
 
-Contact Me
-----------
-For anything else, you can contact me by email at andy#andybotting.com
+Contact
+-------
+For help and support, feel free to register on our Slack channel [slack].
 
 [repository]: https://github.com/xbmc-catchuptv-au/repo
 [download]: https://github.com/xbmc-catchuptv-au/repo/tree/master/plugin.video.afl-video
 [githubzip]: https://github.com/andybotting/xbmc-addon-afl-video/archive/master.zip
 [issues]: https://github.com/andybotting/xbmc-addon-afl-video/issues
+[slack]: http://slack-invite.aussieaddons.com/
+
