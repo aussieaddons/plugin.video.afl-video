@@ -30,7 +30,7 @@ Please include log output if possible, using Github Gist or Pastebin.com.
 
 Contact
 -------
-For help and support, feel free to register on our Slack channel [slack].
+For help and support, feel free to register on our [Slack channel] [slack].
 
 [repository]: https://github.com/xbmc-catchuptv-au/repo
 [download]: https://github.com/xbmc-catchuptv-au/repo/tree/master/plugin.video.afl-video
