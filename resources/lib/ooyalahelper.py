@@ -22,7 +22,6 @@ import comm
 import config
 import json
 import requests
-import ssl
 import sys
 import urllib
 import xbmcaddon
@@ -98,7 +97,7 @@ def get_afl_embed_token(user_token, video_id):
         utils.log("Fetching embed token: {0}".format(embed_token_url))
         try:
             res = session.get(embed_token_url)
-        except ssl.SSLError:
+        except requests.exceptions.SSLError:
             if utils.get_xbmc_major_version() < 15:
                 raise AFLVideoException('Your version of Kodi is too old for '
                                         'live streaming. Please upgrade to at '
