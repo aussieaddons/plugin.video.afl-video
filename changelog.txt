@@ -1,4 +1,9 @@
-[B]Version 1.7.5[/B]
+[B]Version 1.7.6[/B]
+- Code cleanups and error if trying live streaming on Python < 2.7
+- update comm.py
+- Fix broken paid subscriptions
+
+[B]Version v1.7.5[/B]
 - Remove forced TLSv1 from Ooyala
 
 [B]Version v1.7.4[/B]
