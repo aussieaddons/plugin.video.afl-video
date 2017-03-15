@@ -43,7 +43,7 @@ def fetch_url(url, request_token=False):
         if request_token:
             update_token(session)
 
-        request = session.get(url)
+        request = session.get(url, verify=False)
         data = request.text
     return data
 
@@ -82,25 +82,11 @@ def parse_json_video(video_data):
     except Exception:
         pass
 
-    video_format = None
-    media_formats = video_data.get('mediaFormats')
-    if not media_formats:
-        return
+    data = video_data.get('customAttributes')
+    video.ooyalaid = [x['attrValue'] for x in data if x['attrName'] == 'ooyala embed code'][0]
+    video.live = False
 
-    for v in media_formats:
-        if int(v['bitRate']) == config.VIDEO_QUALITY[qual]:
-            video_format = v
-            break
-
-    if not video_format:
-        return
-
-    if 'sourceUrl' in video_format:
-        video.url = video_format.get('sourceUrl')
-        video.duration = video_format.get('duration')
-
-        return video
-
+    return video
 
 def parse_json_live(video_data):
     """
@@ -121,6 +107,7 @@ def parse_json_live(video_data):
     atrbs = video_data['videoStream'].get('customAttributes')
     id = [x['attrValue'] for x in atrbs if x['attrName'] == 'ooyala embed code']
     video.ooyalaid = id[0]
+    video.live = True
 
     return video
 
@@ -179,11 +166,13 @@ def get_videos(category):
     elif category == 'Live Matches':
         url = config.LIVE_LIST_URL
     else:
-        category_encoded = urllib.quote(category)
-        url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
+        url = config.VIDEO_LIST_URL + '?categories=' + category
 
     data = fetch_url(url, request_token=True)
-    json_data = json.loads(data)
+    try:
+        json_data = json.loads(data)
+    except ValueError:
+        utils.log('Failed to load JSON. Data is: {0}'.format(data))
 
     if category == 'Live Matches':
         video_assets = json_data
@@ -203,11 +192,12 @@ def get_videos(category):
             video_list.append(v)
 
     else:
-        video_assets = json_data['videos'][0]['videos']
-        for video_asset in video_assets:
-            video = parse_json_video(video_asset)
-            if video:
-                video_list.append(video)
+        for category in json_data['categories']:
+            video_assets = category['videos']
+            for video_asset in video_assets:
+                video = parse_json_video(video_asset)
+                if video:
+                    video_list.append(video)
 
     return video_list
 

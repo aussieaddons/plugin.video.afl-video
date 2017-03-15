@@ -14,7 +14,10 @@
     <string id="10003">Username</string>
     <string id="10004">Password</string>
     <string id="10005">Phone Number</string>
-    <string id="10006">Video Quality</string>
+    <string id="10006">Live Video Quality</string>
+    <string id="10009">On Demand Video Quality</string>
     <string id="10007">AFL Live Pass Subscription</string>
     <string id="10008">Subscription Type</string>
+    <string id="10010">Debugging</string>
+    <string id="10011">Remove Stored Login Token</string>
 </strings>

@@ -40,6 +40,7 @@ class Video(object):
         self.url = None
         self.ooyalaid = None
         self.isdummy = None
+        self.live = None
 
     def __repr__(self):
         return self.title
@@ -154,6 +155,8 @@ class Video(object):
             d['ooyalaid'] = self.ooyalaid
         if self.isdummy:
             d['isdummy'] = self.isdummy
+        if self.live:
+            d['live'] = self.live
 
         return utils.make_url(d)
 
@@ -186,3 +189,5 @@ class Video(object):
             self.ooyalaid = d.get('ooyalaid')
         if 'isdummy' in d:
             self.isdummy = d.get('isdummy')
+        if 'live' in d:
+            self.live = d.get('live')

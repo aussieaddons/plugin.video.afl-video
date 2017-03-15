@@ -6,6 +6,7 @@ import re
 import utils
 import urllib
 import ssl
+import xbmcgui
 
 from bs4 import BeautifulSoup
 
@@ -41,6 +42,10 @@ def get_token(username, password):
     session.mount('https://', TLSv1Adapter())
     session.verify = False
 
+    prog_dialog = xbmcgui.DialogProgress()
+    prog_dialog.create('Logging in with Telstra ID')
+    prog_dialog.update(1, 'Obtaining user token')
+
     # Send our first login request to AFL API, recieve (unactivated) token
     # and 'msisdn' URL
     comm.update_token(session)
@@ -54,6 +59,7 @@ def get_token(username, password):
     session.headers = config.SPORTSPASS_HEADERS
     sp = session.get(spurl)
     msisdn_url = sp.url
+    prog_dialog.update(20, 'Signing on to telstra.com')
 
     # Sign in to telstra.com to recieve cookies, get the SAML auth, and
     # modify the escape characters so we can send it back later
@@ -85,6 +91,7 @@ def get_token(username, password):
     soup = BeautifulSoup(signon.text, 'html.parser')
     saml_response = soup.find(attrs={'name': 'SAMLResponse'}).get('value')
     saml_base64 = urllib.quote(saml_response)
+    prog_dialog.update(40, 'Obtaining API token')
 
     # Send the SAML login data and retrieve the auth token from the response
     session.headers = config.SAML_LOGIN_HEADERS
@@ -100,6 +107,7 @@ def get_token(username, password):
         utils.log('Found auth token: {0}'.format(auth_token))
     else:
         raise TelstraAuthException('Could not obtain authorisation token')
+    prog_dialog.update(60, 'Determining eligible services')
 
     # 'Order' the subscription package to activate our token/login
     msisdn_pieces = urlparse.urlsplit(msisdn_url)
@@ -137,9 +145,13 @@ def get_token(username, password):
             ph_no = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
     except:
         raise TelstraAuthException('Unable to determine eligible services')
+    prog_dialog.update(80, 'Obtaining Live Pass')
     
     media_order_data = config.MEDIA_ORDER_JSON.format(ph_no,
                                                       offer_id,
                                                       token)
     media_order = session.post(config.MEDIA_ORDER_URL, media_order_data)
+    prog_dialog.update(100, 'Finished!')
+    prog_dialog.close()
+    session.close()
     return token

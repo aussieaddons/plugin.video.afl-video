@@ -35,6 +35,7 @@ import matches  # noqa: E402
 import videos  # noqa: E402
 import play_replay  # noqa: E402
 import play  # noqa: E402
+import ooyalahelper  # noqa: E402
 
 utils.log_xbmc_platform_version()
 
@@ -65,3 +66,6 @@ if __name__ == "__main__":
             matches.make_list(params['round_id'])
         elif 'title' in params:
             play.play(params_str)
+        elif 'action' in params:
+            if params['action'] == 'cleartoken':
+                ooyalahelper.clear_token()

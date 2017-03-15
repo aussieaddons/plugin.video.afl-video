@@ -31,6 +31,12 @@ import utils
 
 from exception import AFLVideoException
 
+try:
+   import StorageServer
+except:
+    utils.log("script.common.plugin.cache not found!")
+    import storageserverdummy as StorageServer
+cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
 # Ignore InsecureRequestWarning warnings
 requests.packages.urllib3.disable_warnings()
@@ -39,6 +45,10 @@ session.verify = False
 
 addon = xbmcaddon.Addon()
 free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
+
+def clear_token():
+    """Remove stored token from cache storage"""
+    cache.delete('AFLTOKEN')
 
 def fetch_session_id(url, data):
     """ send http POST and return the json response data"""
@@ -55,41 +65,50 @@ def fetch_session_id(url, data):
     return res.text
 
 
-def get_afl_user_token():
+def get_user_token():
+    """ Send user login info and retrieve token for session"""
+    stored_token = cache.get('AFLTOKEN')
+    if stored_token != '':
+        utils.log('Using token: {0}******'.format(stored_token[:-6]))
+        return stored_token
+    
     if addon.getSetting('LIVE_SUBSCRIPTION') == 'true':
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
 
         if free_subscription:
-            return telstra_auth.get_token(username, password)
-
-        login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
-                      'authToken': addon.getSetting('LIVE_PASSWORD'),
-                      'userIdentifierType': 'EMAIL'}
-        login_json = fetch_session_id(config.LOGIN_URL, login_data)
-        data = json.loads(login_json)
-        if data.get('responseCode') != 0:
-            raise AFLVideoException('Invalid login/password for paid'
-                                    ' afl.com.au subscription.')
-        session_id = data['data'].get('artifactValue')
-
-        try:
-            session.headers.update({'Authorization': None})
-            session_url = config.SESSION_URL.format(urllib.quote(session_id))
-            res = session.get(session_url)
-            res.raise_for_status()
-            data = json.loads(res.text)
-            return data.get('uuid')
-
-        except requests.exceptions.HTTPError as e:
-            utils.log(res.text)
-            raise e
-
+            token = telstra_auth.get_token(username, password)
+        else:
+            login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
+                          'authToken': addon.getSetting('LIVE_PASSWORD'),
+                          'userIdentifierType': 'EMAIL'}
+            login_json = fetch_session_id(config.LOGIN_URL, login_data)
+            data = json.loads(login_json)
+            if data.get('responseCode') != 0:
+                raise AFLVideoException('Invalid login/password for paid'
+                                        ' afl.com.au subscription.')
+            session_id = data['data'].get('artifactValue')
+    
+            try:
+                session.headers.update({'Authorization': None})
+                encoded_session_id = urllib.quote(session_id)
+                session_url = config.SESSION_URL.format(encoded_session_id)
+                res = session.get(session_url)
+                res.raise_for_status()
+                data = json.loads(res.text)
+                token = data.get('uuid')
+    
+            except requests.exceptions.HTTPError as e:
+                utils.log(res.text)
+                raise e
+        cache.set('AFLTOKEN', token)
+        utils.log('Using token: {0}******'.format(token[:-6]))
+        return token
     else:
         raise AFLVideoException('AFL Live Pass subscription is required.')
 
 
-def get_afl_embed_token(user_token, video_id):
+def get_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
     try:
         comm.update_token(session)
@@ -98,18 +117,21 @@ def get_afl_embed_token(user_token, video_id):
         try:
             res = session.get(embed_token_url)
         except requests.exceptions.SSLError:
+            cache.delete('AFLTOKEN')
             raise AFLVideoException('Your version of Kodi is too old for live '
                                     'streaming. Please upgrade to the latest '
                                     'version of Kodi.')
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
         if not free_subscription:
+            cache.delete('AFLTOKEN')
             raise AFLVideoException('Paid subscription not found for '
                                         'supplied username/password. Please '
                                         'check the subscription type in '
                                         'settings is correct.')
         else:
             utils.log(res.text)
+            cache.delete('AFLTOKEN')
             raise e
     data = json.loads(res.text)
     return urllib.quote(data.get('token'))
@@ -118,7 +140,10 @@ def get_afl_embed_token(user_token, video_id):
 def get_secure_token(secure_url, video_id):
     """send our embed token back with a few other url encoded parameters"""
     res = session.get(secure_url)
-    parsed_json = json.loads(res.text)
+    try:
+        parsed_json = json.loads(res.text)
+    except ValueError:
+        utils.log('Failed to load JSON. Data is: {0}'.format(res.text))
     ios_token = parsed_json['authorization_data'][video_id]['streams'][0]['url']['data']  # noqa
     return base64.b64decode(ios_token)
 
@@ -135,10 +160,15 @@ def parse_m3u8_streams(data, live, secure_token_url):
         then return the url for the highest quality stream. Different
         handling is required of live m3u8 files as they seem to only contain
         the destination filename and not the domain/path."""
-    if live == 'true':
-        qual = xbmcaddon.Addon().getSetting('LIVE_QUALITY')
+    if live:
+        qual = int(xbmcaddon.Addon().getSetting('LIVE_QUALITY'))
+        if qual == config.MAX_LIVE_QUAL:
+            qual = -1
     else:
-        qual = xbmcaddon.Addon().getSetting('HLSQUALITY')
+        qual = int(xbmcaddon.Addon().getSetting('REPLAYQUALITY'))
+        if qual == config.MAX_REPLAY_QUAL:
+            qual = -1
+
     if '#EXT-X-VERSION:3' in data:
         data.remove('#EXT-X-VERSION:3')
     count = 1
@@ -157,7 +187,7 @@ def parse_m3u8_streams(data, live, secure_token_url):
         line = line.split(',')
         linelist = [i.split('=') for i in line]
 
-        if live == 'false':
+        if not live:
             linelist.append(['URL', data[count + 1]])
         else:
             linelist.append(['URL', prepend_live + data[count + 1]])
@@ -165,16 +195,16 @@ def parse_m3u8_streams(data, live, secure_token_url):
         m3u_list.append(dict((i[0], i[1]) for i in linelist))
         count += 2
     sorted_m3u_list = sorted(m3u_list, key=lambda k: int(k['BANDWIDTH']))
-    stream = sorted_m3u_list[int(qual)]['URL']
+    stream = sorted_m3u_list[qual]['URL']
     return stream
 
 
-def get_m3u8_playlist(video_id, live, login_token, mode):
+def get_m3u8_playlist(video_id, live, login_token):
     """ Main function to call other functions that will return us our m3u8 HLS
         playlist as a string, which we can then write to a file for Kodi
         to use"""
 
-    embed_token = get_afl_embed_token(login_token, video_id)
+    embed_token = get_embed_token(login_token, video_id)
 
     authorize_url = config.AUTH_URL.format(config.PCODE, video_id, embed_token)
     secure_token_url = get_secure_token(authorize_url, video_id)
