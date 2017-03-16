@@ -26,6 +26,7 @@ import urllib
 import utils
 import xbmcaddon
 
+from requests.adapters import HTTPAdapter
 from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
@@ -39,11 +40,14 @@ def fetch_url(url, request_token=False):
     """
     utils.log("Fetching URL: %s" % url)
     with requests.Session() as session:
+        session.mount('http://', HTTPAdapter(max_retries=5))
+        session.mount('https://', HTTPAdapter(max_retries=5))
         # Token headers
         if request_token:
             update_token(session)
 
-        request = session.get(url)
+        request = session.get(url, verify=False)
+        request.raise_for_status()
         data = request.text
     return data
 
@@ -58,7 +62,8 @@ def update_token(session):
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:
-        raise Exception('Failed to retrieve API token: {0}'.format(e))
+        raise Exception('Failed to retrieve API token: {0} '
+                        'Service may be currently unavailable.'.format(e))
     session.headers.update({'x-media-mis-token': token})
 
 
@@ -82,25 +87,11 @@ def parse_json_video(video_data):
     except Exception:
         pass
 
-    video_format = None
-    media_formats = video_data.get('mediaFormats')
-    if not media_formats:
-        return
+    data = video_data.get('customAttributes')
+    video.ooyalaid = [x['attrValue'] for x in data if x['attrName'] == 'ooyala embed code'][0]
+    video.live = False
 
-    for v in media_formats:
-        if int(v['bitRate']) == config.VIDEO_QUALITY[qual]:
-            video_format = v
-            break
-
-    if not video_format:
-        return
-
-    if 'sourceUrl' in video_format:
-        video.url = video_format.get('sourceUrl')
-        video.duration = video_format.get('duration')
-
-        return video
-
+    return video
 
 def parse_json_live(video_data):
     """
@@ -121,6 +112,7 @@ def parse_json_live(video_data):
     atrbs = video_data['videoStream'].get('customAttributes')
     id = [x['attrValue'] for x in atrbs if x['attrName'] == 'ooyala embed code']
     video.ooyalaid = id[0]
+    video.live = True
 
     return video
 
@@ -179,11 +171,15 @@ def get_videos(category):
     elif category == 'Live Matches':
         url = config.LIVE_LIST_URL
     else:
-        category_encoded = urllib.quote(category)
-        url = config.VIDEO_LIST_URL + '?categories=' + category_encoded
+        url = config.VIDEO_LIST_URL + '?categories=' + category
 
     data = fetch_url(url, request_token=True)
-    json_data = json.loads(data)
+    try:
+        json_data = json.loads(data)
+    except ValueError:
+        utils.log('Failed to load JSON. Data is: {0}'.format(data))
+        raise Exception('Failed to retrieve video data. Service may be '
+                        'currently unavailable.')
 
     if category == 'Live Matches':
         video_assets = json_data
@@ -203,11 +199,12 @@ def get_videos(category):
             video_list.append(v)
 
     else:
-        video_assets = json_data['videos'][0]['videos']
-        for video_asset in video_assets:
-            video = parse_json_video(video_asset)
-            if video:
-                video_list.append(video)
+        for category in json_data['categories']:
+            video_assets = category['videos']
+            for video_asset in video_assets:
+                video = parse_json_video(video_asset)
+                if video:
+                    video_list.append(video)
 
     return video_list
 
@@ -224,7 +221,12 @@ def get_round(round_id, live=False):
         round_url = "%s/%s" % (round_url, round_id)
 
     xml = fetch_url(round_url)
-    rnd = ET.fromstring(xml)
+    try:
+        rnd = ET.fromstring(xml)
+    except ET.ParseError:
+        utils.log('Could not parse XML. Data is: {0}'.format(xml))
+        raise Exception('Could not parse XML. Service may be '
+                        'currently unavailable.')
 
     matches = rnd.find('matches').getchildren()
 

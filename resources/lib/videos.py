@@ -30,7 +30,7 @@ def make_list(url):
     try:
         params = utils.get_url(url)
 
-        category = params.get('category')
+        category = config.CATEGORY_LOOKUP[params.get('category')]
         videos = comm.get_videos(category)
 
         utils.log("Found %s videos" % len(videos))

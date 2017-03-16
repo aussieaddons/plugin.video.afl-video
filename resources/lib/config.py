@@ -39,6 +39,10 @@ REPLAY_QUALITY = {'0': 'low',
                   '1': 'med',
                   '2': 'high'}
 
+# Maximum video quality for Ooyala m3u8 playlists.
+MAX_LIVE_QUAL = 4
+MAX_REPLAY_QUAL = 6
+
 # Round URL, which lists the games of the round if they've had their Videos uploaded
 # This URL can also take a 'Round ID' added to the end (e.g CD_R201301401)
 ROUND_URL = 'http://www.afl.com.au/api/gas/afl/roundVideo'
@@ -50,6 +54,8 @@ TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
 # API URL for current live videos
 LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
 
+VIDEO_LIST_URL = 'https://api.afl.com.au/cfs/afl/videos'
+
 # Bigpond authentication URL
 LOGIN_URL = 'https://services.bigpond.com/rest/v1/AuthenticationService/authenticate'
 
@@ -60,7 +66,7 @@ SESSION_URL = 'http://api.sub.afl.com.au/cfs-premium/users/session?sessionId={0}
 EMBED_TOKEN_URL = 'https://api.afl.com.au/cfs/users/{0}/token?embedCode={1}'
 
 # URL to send our embed token and retrieve playlist
-AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/{0}/{1}?device=android_html&domain=http://www.ooyala.com&embedToken={2}&supportedFormats=wv_wvm,mp4,wv_hls,m3u8,wv_mp4'
+AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/{0}/{1}?device=html5&domain=http://www.ooyala.com&embedToken={2}&supportedFormats=m3u8'
 
 # Ooyala provider indentifier code used in contructing request uris
 PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'
@@ -134,19 +140,42 @@ SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml
                       'X-Requested-With': 'com.telstra.android.afl'}
 
 # Categories existing on the new content system
+
 CATEGORIES = [
     'Live Matches',
+    'Recent Match Replays',
     'Match Replays 2017',
     'Match Replays 2016',
     'Match Replays 2015',
     'Match Replays 2014',
     'Match Replays 2013',
-    # 'Auto-generated Highlights',
-    # 'Editorial Highlights',
-    # 'Media Conferences',
-    # 'News',
+    'Auto-generated Highlights',
+    'Editorial Highlights',
+    'Media Conferences',
+    'Match Day',
+    'Shows',
+    'Mark and Goal',
+    'News',
     'Settings'
 ]
+
+CATEGORY_LOOKUP = {
+    'Live Matches': 'Live Matches',
+    'Recent Match Replays': 'Match Replays&pageSize=50',
+    'Match Replays 2017': 'Match Replays 2017',
+    'Match Replays 2016': 'Match Replays 2016',
+    'Match Replays 2015': 'Match Replays 2015',
+    'Match Replays 2014': 'Match Replays 2014',
+    'Match Replays 2013': 'Match Replays 2013',
+    'Auto-generated Highlights': 'Auto-generated Highlights&pageSize=50',
+    'Editorial Highlights': 'Editorial Highlights&pageSize=50',
+    'Media Conferences': 'Media Conferences&pageSize=50',
+    'Match Day': 'The 10,Auto-generated Highlights,Media Conferences',
+    'Shows': 'Access All Areas,The 10,Where It All Began,Pick A Winner,Friday Front Bar,In the moment,Versus,Round Rewind,Special Features',
+    'Mark and Goal': 'Mark of the Year,Goal of the Year&pageSize=20',
+    'News': 'News&pageSize=50',
+    'Settings': 'Settings'
+}
 
 # Channel is used for Bigpond Video and Squad is used in Round XML
 # http://www.afl.com.au/api/gas/afl/squad
