@@ -39,7 +39,7 @@ def get_token(username, password):
     """ Obtain a valid token from Telstra, will be used to make requests for
         Ooyala embed tokens"""
     session = requests.Session()
-    session.mount('https://', TLSv1Adapter())
+    session.mount('https://', TLSv1Adapter(max_retries=5))
     session.verify = False
 
     prog_dialog = xbmcgui.DialogProgress()

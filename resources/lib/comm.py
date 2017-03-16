@@ -26,6 +26,7 @@ import urllib
 import utils
 import xbmcaddon
 
+from requests.adapters import HTTPAdapter
 from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
@@ -39,11 +40,14 @@ def fetch_url(url, request_token=False):
     """
     utils.log("Fetching URL: %s" % url)
     with requests.Session() as session:
+        session.mount('http://', HTTPAdapter(max_retries=5))
+        session.mount('https://', HTTPAdapter(max_retries=5))
         # Token headers
         if request_token:
             update_token(session)
 
         request = session.get(url, verify=False)
+        request.raise_for_status()
         data = request.text
     return data
 
@@ -58,7 +62,8 @@ def update_token(session):
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:
-        raise Exception('Failed to retrieve API token: {0}'.format(e))
+        raise Exception('Failed to retrieve API token: {0} '
+                        'Service may be currently unavailable.'.format(e))
     session.headers.update({'x-media-mis-token': token})
 
 
@@ -173,6 +178,8 @@ def get_videos(category):
         json_data = json.loads(data)
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(data))
+        raise Exception('Failed to retrieve video data. Service may be '
+                        'currently unavailable.')
 
     if category == 'Live Matches':
         video_assets = json_data
@@ -214,7 +221,12 @@ def get_round(round_id, live=False):
         round_url = "%s/%s" % (round_url, round_id)
 
     xml = fetch_url(round_url)
-    rnd = ET.fromstring(xml)
+    try:
+        rnd = ET.fromstring(xml)
+    except ET.ParseError:
+        utils.log('Could not parse XML. Data is: {0}'.format(xml))
+        raise Exception('Could not parse XML. Service may be '
+                        'currently unavailable.')
 
     matches = rnd.find('matches').getchildren()
 
