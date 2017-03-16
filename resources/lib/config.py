@@ -76,6 +76,8 @@ HEADERS = {'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build
            'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt',
            'Content-Type': 'application/x-www-form-urlencoded'}
 
+VIDEO_FEED_URL = "http://feed.theplatform.com/f/gqvPBC/AFLProd_Online_H264?byGuid={0}&form=json"
+
 # New auth config for 2017
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
 
@@ -139,6 +141,7 @@ SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml
                       'Accept-Encoding': 'gzip, deflate',
                       'X-Requested-With': 'com.telstra.android.afl'}
 
+
 # Categories existing on the new content system
 
 CATEGORIES = [
@@ -149,7 +152,6 @@ CATEGORIES = [
     'Match Replays 2015',
     'Match Replays 2014',
     'Match Replays 2013',
-    'Auto-generated Highlights',
     'Editorial Highlights',
     'Media Conferences',
     'Match Day',
@@ -167,7 +169,6 @@ CATEGORY_LOOKUP = {
     'Match Replays 2015': 'Match Replays 2015',
     'Match Replays 2014': 'Match Replays 2014',
     'Match Replays 2013': 'Match Replays 2013',
-    'Auto-generated Highlights': 'Auto-generated Highlights&pageSize=50',
     'Editorial Highlights': 'Editorial Highlights&pageSize=50',
     'Media Conferences': 'Media Conferences&pageSize=50',
     'Match Day': 'The 10,Auto-generated Highlights,Media Conferences',

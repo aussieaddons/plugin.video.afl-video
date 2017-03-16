@@ -21,9 +21,7 @@ import sys
 import re
 import traceback
 import time
-import datetime
 import htmlentitydefs
-import cgi
 import unicodedata
 import urllib
 import textwrap
@@ -31,6 +29,7 @@ import xbmc
 import xbmcgui
 import config
 import issue_reporter
+
 from exception import AFLVideoException
 
 pattern = re.compile("&(\w+?);")
@@ -49,6 +48,7 @@ def get_team(squad_id):
         if t['squad'] == squad_id:
             return t
 
+
 def descape_entity(m, defs=htmlentitydefs.entitydefs):
     # callback: translate one entity to its ISO Latin value
     try:
@@ -56,11 +56,13 @@ def descape_entity(m, defs=htmlentitydefs.entitydefs):
     except KeyError:
         return m.group(0)  # use as is
 
+
 def descape(string):
     # Fix the hack back from parsing with BeautifulSoup
     string = string.replace('&#38;', '&amp;')
 
     return pattern.sub(descape_entity, string)
+
 
 def get_url(s):
     dict = {}
@@ -73,6 +75,7 @@ def get_url(s):
         v = urllib.unquote_plus(kv[1])
         dict[k] = v
     return dict
+
 
 def make_url(d):
     pairs = []
@@ -88,7 +91,7 @@ def ensure_ascii(s):
     if not isinstance(s, unicode):
         s = str(s)
         s = s.decode("utf-8")
-    return unicodedata.normalize('NFC', s).encode('ascii','ignore')
+    return unicodedata.normalize('NFC', s).encode('ascii', 'ignore')
 
 
 def log(s):
@@ -102,9 +105,8 @@ def log_error(message=None):
         exc_value = message
     xbmc.log("[%s v%s] ERROR: %s (%d) - %s" %
              (config.NAME, config.VERSION,
-             exc_traceback.tb_frame.f_code.co_name, exc_traceback.tb_lineno,
-             exc_value), level=xbmc.LOGERROR)
-    xbmc.log(traceback.print_exc(), level=xbmc.LOGERROR)
+              exc_tb.tb_frame.f_code.co_name, exc_tb.tb_lineno, exc_value),
+              level=xbmc.LOGERROR)
 
 
 def dialog_error(err=None):
@@ -233,8 +235,8 @@ def handle_error(msg, exc=None):
             (traceback_str.find('HTTP Error 404: Not Found') > 0)):
                 send_error = False
 
-        # Any non-fatal errors, don't allow issue reporting
-        if isinstance(exc, AFLVideoException):
+        # Don't allow reporting for these (mostly) user or service errors
+        if type(exc).__name__ in ['AFLVideoException', 'TelstraAuthException']:
             send_error = False
 
         if send_error:

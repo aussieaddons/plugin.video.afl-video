@@ -22,9 +22,10 @@ import datetime
 import json
 import requests
 import time
-import urllib
 import utils
 import xbmcaddon
+
+from exception import AFLVideoException
 
 from requests.adapters import HTTPAdapter
 from bs4 import BeautifulStoneSoup
@@ -47,7 +48,10 @@ def fetch_url(url, request_token=False):
             update_token(session)
 
         request = session.get(url, verify=False)
-        request.raise_for_status()
+        try:
+            request.raise_for_status()
+        except Exception as e:
+            raise AFLVideoException(e)
         data = request.text
     return data
 
@@ -62,8 +66,9 @@ def update_token(session):
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:
-        raise Exception('Failed to retrieve API token: {0} '
-                        'Service may be currently unavailable.'.format(e))
+        raise AFLVideoException('Failed to retrieve API token: {0}\n'
+                                'Service may be currently '
+                                'unavailable.'.format(e))
     session.headers.update({'x-media-mis-token': token})
 
 
@@ -72,10 +77,6 @@ def parse_json_video(video_data):
         Parse the JSON data and construct a video object from it for a list
         of videos
     """
-    # Find our quality setting and fetch the URL
-    __addon__ = xbmcaddon.Addon()
-    qual = __addon__.getSetting('QUALITY')
-
     video = classes.Video()
     video.title = utils.ensure_ascii(video_data.get('title'))
     video.description = utils.ensure_ascii(video_data.get('description'))
@@ -88,10 +89,11 @@ def parse_json_video(video_data):
         pass
 
     data = video_data.get('customAttributes')
-    video.ooyalaid = [x['attrValue'] for x in data if x['attrName'] == 'ooyala embed code'][0]
+    video.ooyalaid = [x['attrValue'] for x in data
+                      if x['attrName'] == 'ooyala embed code'][0]
     video.live = False
-
     return video
+
 
 def parse_json_live(video_data):
     """
@@ -109,9 +111,10 @@ def parse_json_live(video_data):
     video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(title)
     video.description = title
     video.thumbnail = video_data['videoStream'].get('thumbnailURL')
-    atrbs = video_data['videoStream'].get('customAttributes')
-    id = [x['attrValue'] for x in atrbs if x['attrName'] == 'ooyala embed code']
-    video.ooyalaid = id[0]
+    attrs = video_data['videoStream'].get('customAttributes')
+    video_id = [x['attrValue'] for x in attrs
+                if x['attrName'] == 'ooyala embed code']
+    video.ooyalaid = video_id[0]
     video.live = True
 
     return video
@@ -125,7 +128,7 @@ def get_url_from_smil(data):
 
 def get_video(video_id):
 
-    url = "http://feed.theplatform.com/f/gqvPBC/AFLProd_Online_H264?byGuid=%s&form=json" % video_id
+    url = config.VIDEO_FEED_URL.format(video_id)
     data = fetch_url(url)
 
     json_data = json.loads(data)

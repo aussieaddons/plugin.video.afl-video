@@ -22,7 +22,6 @@ import comm
 import config
 import json
 import requests
-import sys
 import urllib
 import xbmcaddon
 
@@ -32,7 +31,7 @@ import utils
 from exception import AFLVideoException
 
 try:
-   import StorageServer
+    import StorageServer
 except:
     utils.log("script.common.plugin.cache not found!")
     import storageserverdummy as StorageServer
@@ -46,9 +45,11 @@ session.verify = False
 addon = xbmcaddon.Addon()
 free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
 
+
 def clear_token():
     """Remove stored token from cache storage"""
     cache.delete('AFLTOKEN')
+
 
 def fetch_session_id(url, data):
     """ send http POST and return the json response data"""
@@ -71,7 +72,7 @@ def get_user_token():
     if stored_token != '':
         utils.log('Using token: {0}******'.format(stored_token[:-6]))
         return stored_token
-    
+
     if addon.getSetting('LIVE_SUBSCRIPTION') == 'true':
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
@@ -85,10 +86,10 @@ def get_user_token():
             login_json = fetch_session_id(config.LOGIN_URL, login_data)
             data = json.loads(login_json)
             if data.get('responseCode') != 0:
-                raise AFLVideoException('Invalid login/password for paid'
-                                        ' afl.com.au subscription.')
+                raise AFLVideoException('Invalid login/password for paid '
+                                        'afl.com.au subscription.')
             session_id = data['data'].get('artifactValue')
-    
+
             try:
                 session.headers.update({'Authorization': None})
                 encoded_session_id = urllib.quote(session_id)
@@ -97,7 +98,7 @@ def get_user_token():
                 res.raise_for_status()
                 data = json.loads(res.text)
                 token = data.get('uuid')
-    
+
             except requests.exceptions.HTTPError as e:
                 utils.log(res.text)
                 raise e
@@ -118,17 +119,17 @@ def get_embed_token(user_token, video_id):
             res = session.get(embed_token_url)
         except requests.exceptions.SSLError:
             cache.delete('AFLTOKEN')
-            raise AFLVideoException('Your version of Kodi is too old for live '
-                                    'streaming. Please upgrade to the latest '
-                                    'version of Kodi.')
+            raise AFLVideoException('Your version of Kodi is too old to '
+                                    'support live streaming. Please upgrade '
+                                    'to the latest version.')
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
         if not free_subscription:
             cache.delete('AFLTOKEN')
-            raise AFLVideoException('Paid subscription not found for '
-                                        'supplied username/password. Please '
-                                        'check the subscription type in '
-                                        'settings is correct.')
+            raise AFLVideoException('Paid subscription not found for supplied '
+                                    'username and password. Please check the '
+                                    'subscription type in settings is '
+                                    'correct.')
         else:
             utils.log(res.text)
             cache.delete('AFLTOKEN')

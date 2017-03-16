@@ -75,18 +75,10 @@ def get_token(username, password):
     utils.log('Sign-on result: %s' % signon_query)
 
     if 'errorcode' in signon_query:
-        if signon_query['errorcode'] == '0':
-            raise TelstraAuthException('Please enter your username '
-                                       'in the settings')
-        if signon_query['errorcode'] == '1':
-            raise TelstraAuthException('Please enter your password '
-                                       'in the settings')
-        if signon_query['errorcode'] == '2':
-            raise TelstraAuthException('Please enter your username and '
-                                       'password in the settings')
-        if signon_query['errorcode'] == '3':
-            raise TelstraAuthException('Please check your username and '
-                                       'password in the settings')
+        if signon_query['errorcode'] in ['0', '1', '2', '3']:
+            raise TelstraAuthException('Error signing in.\n'
+                                       'Please check your username and '
+                                       'password in the settings are correct.')
 
     soup = BeautifulSoup(signon.text, 'html.parser')
     saml_response = soup.find(attrs={'name': 'SAMLResponse'}).get('value')
@@ -134,7 +126,7 @@ def get_token(username, password):
                         'service to the supplied Telstra ID')
             raise TelstraAuthException(message)
         else:
-            raise TelstraAuthException(e.response.status_code)
+            raise TelstraAuthException(e)
     try:
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
