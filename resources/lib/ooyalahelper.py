@@ -32,9 +32,11 @@ from exception import AFLVideoException
 
 try:
     import StorageServer
-except:
-    utils.log("script.common.plugin.cache not found!")
+except ImportError:
+    utils.log("Cache plugin 'script.common.plugin.cache' not found. "
+              "Caching will not be available.")
     import storageserverdummy as StorageServer
+
 cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
 # Ignore InsecureRequestWarning warnings
@@ -43,7 +45,6 @@ session = requests.Session()
 session.verify = False
 
 addon = xbmcaddon.Addon()
-free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
 
 
 def clear_token():
@@ -52,7 +53,7 @@ def clear_token():
 
 
 def fetch_session_id(url, data):
-    """ send http POST and return the json response data"""
+    """Send http POST and return the json response data"""
     data = urllib.urlencode(data)
     session.headers = config.HEADERS
     comm.update_token(session)
@@ -67,7 +68,7 @@ def fetch_session_id(url, data):
 
 
 def get_user_token():
-    """ Send user login info and retrieve token for session"""
+    """Send user login info and retrieve token for session"""
     stored_token = cache.get('AFLTOKEN')
     if stored_token != '':
         utils.log('Using token: {0}******'.format(stored_token[:-6]))
@@ -77,6 +78,7 @@ def get_user_token():
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
 
+        free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
         if free_subscription:
             token = telstra_auth.get_token(username, password)
         else:
@@ -110,7 +112,7 @@ def get_user_token():
 
 
 def get_embed_token(user_token, video_id):
-    """send our user token to get our embed token, including api key"""
+    """Send our user token to get our embed token, including api key"""
     try:
         comm.update_token(session)
         embed_token_url = config.EMBED_TOKEN_URL.format(user_token, video_id)
@@ -124,6 +126,7 @@ def get_embed_token(user_token, video_id):
                                     'to the latest version.')
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
+        free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
         if not free_subscription:
             cache.delete('AFLTOKEN')
             raise AFLVideoException('Paid subscription not found for supplied '
@@ -139,7 +142,7 @@ def get_embed_token(user_token, video_id):
 
 
 def get_secure_token(secure_url, video_id):
-    """send our embed token back with a few other url encoded parameters"""
+    """Send our embed token back with a few other url encoded parameters"""
     res = session.get(secure_url)
     try:
         parsed_json = json.loads(res.text)
@@ -150,17 +153,20 @@ def get_secure_token(secure_url, video_id):
 
 
 def get_m3u8_streams(secure_token_url):
-    """ fetch our m3u8 file which contains streams of various qualities"""
+    """Fetch our m3u8 file which contains streams of various qualities"""
     res = session.get(secure_token_url)
     data = res.text.splitlines()
     return data
 
 
 def parse_m3u8_streams(data, live, secure_token_url):
-    """ Parse the retrieved m3u8 stream list into a list of dictionaries
-        then return the url for the highest quality stream. Different
-        handling is required of live m3u8 files as they seem to only contain
-        the destination filename and not the domain/path."""
+    """Parse m3u8 stream
+
+    Parse the retrieved m3u8 stream list into a list of dictionaries
+    then return the url for the highest quality stream. Different
+    handling is required of live m3u8 files as they seem to only contain
+    the destination filename and not the domain/path.
+    """
     if live:
         qual = int(xbmcaddon.Addon().getSetting('LIVE_QUALITY'))
         if qual == config.MAX_LIVE_QUAL:
@@ -201,9 +207,12 @@ def parse_m3u8_streams(data, live, secure_token_url):
 
 
 def get_m3u8_playlist(video_id, live, login_token):
-    """ Main function to call other functions that will return us our m3u8 HLS
-        playlist as a string, which we can then write to a file for Kodi
-        to use"""
+    """Get m3u8 playlist
+
+    Main function to call other functions that will return us our m3u8 HLS
+    playlist as a string, which we can then write to a file for Kodi
+    to use
+    """
 
     embed_token = get_embed_token(login_token, video_id)
 

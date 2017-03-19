@@ -17,15 +17,16 @@
 #
 #
 
+import config
+import json
 import os
 import re
-import sys
-import json
-import urllib2
 import socket
-import config
+import sys
+import urllib2
 import utils
 import xbmc
+
 
 # Filter out username and passwords from log files
 LOG_FILTERS = (
@@ -36,9 +37,7 @@ LOG_FILTERS = (
 
 
 def make_request(url):
-    """
-        Make our JSON request to GitHub
-    """
+    """Make our JSON request to GitHub"""
     return urllib2.Request(url, headers={
         "Authorization": "Basic %s" % config.ISSUE_API_AUTH,
         "Content-Type": "application/json",
@@ -47,51 +46,51 @@ def make_request(url):
 
 
 def get_public_ip():
-    """
-        Try and fetch the public IP of the reporter for logging
-        and reporting purposes
+    """Get public IP address of user
+
+    Try and fetch the public IP of the reporter for logging
+    and reporting purposes
     """
     try:
         result = urllib2.urlopen('http://ipecho.net/plain', timeout=5)
         data = str(result.read())
-    except:
+    except Exception:
         return "Unknown (lookup failure)"
 
     try:
         ip = re.compile(r'(\d+\.\d+\.\d+\.\d+)').search(data).group(1)
-    except:
+    except Exception:
         return "Unknown (parse failure)"
 
     try:
         hostname = socket.gethostbyaddr(ip)[0]
         return "%s (%s)" % (ip, hostname)
-    except:
+    except Exception:
         return ip
 
 
 def get_isp():
-    """
-        Try and fetch the ISP of the reporter for logging
-        and reporting purposes
+    """Get ISP of user
+
+    Try and fetch the ISP of the reporter for logging
+    and reporting purposes
     """
     try:
         result = urllib2.urlopen('http://www.whoismyisp.org', timeout=5)
         data = str(result.read())
-    except:
+    except Exception:
         return "Unknown (lookup failure)"
 
     try:
         isp = re.compile(r'<h1>(.*)</h1>').search(data).group(1)
-    except:
+    except Exception:
         return "Unknown (parse failure)"
 
     return isp
 
 
 def get_xbmc_log():
-    """
-        Fetch and read the XBMC log
-    """
+    """Fetch and read the XBMC log"""
     log_path = xbmc.translatePath('special://logpath')
 
     if os.path.isfile(os.path.join(log_path, 'kodi.log')):
@@ -111,25 +110,22 @@ def get_xbmc_log():
 
 
 def get_xbmc_version():
-    """
-        Fetch the XBMC build version
-    """
+    """Fetch the XBMC build version"""
     try:
         return xbmc.getInfoLabel("System.BuildVersion")
-    except:
+    except Exception:
         return 'Unknown'
 
 
 def fetch_tags():
-    """
-        Fetch the version tags from GitHub
-    """
+    """Fetch the version tags from GitHub"""
     return json.load(urllib2.urlopen("%s/tags" % config.GITHUB_API_URL))
 
 
 def get_versions():
-    """
-        Assemble a list of version from the tags, and split them into lists
+    """Get addon version tags
+
+    Assemble a list of version from the tags, and split them into lists
     """
     tags = fetch_tags()
     tag_names = map(lambda tag: tag['name'], tags)
@@ -140,17 +136,16 @@ def get_versions():
 
 
 def get_latest_version():
-    """
-        Sort the list, and get the latest version
-    """
+    """Sort the list, and get the latest version"""
     versions = get_versions()
     return sorted(versions, reverse=True)[0]
 
 
 def is_latest_version(current_version, latest_version):
-    """
-        Compare current_version (x.x.x string) and
-        latest_version ([x,x,x] list)
+    """Test is running latest version
+
+    Compare current_version (x.x.x string) and
+    latest_version ([x,x,x] list)
     """
     if current_version.startswith('v'):
         current_version = current_version[1::]
@@ -159,9 +154,7 @@ def is_latest_version(current_version, latest_version):
 
 
 def format_issue(issue_data):
-    """
-        Build our formatted GitHub issue string
-    """
+    """Build our formatted GitHub issue string"""
     # os.uname() is not available on Windows, so we make this optional.
     try:
         uname = os.uname()
@@ -192,9 +185,7 @@ def format_issue(issue_data):
 
 
 def upload_log():
-    """
-        Upload our full XBMC log as a GitHub gist
-    """
+    """Upload our full XBMC log as a GitHub gist"""
     try:
         log_content = get_xbmc_log()
     except Exception as e:
@@ -213,23 +204,19 @@ def upload_log():
         response = urllib2.urlopen(make_request(config.GIST_API_URL),
                                    json.dumps(data))
     except urllib2.HTTPError as e:
-        print e
         utils.log("Failed to save log: HTTPError %s" % e.code)
         return False
     except urllib2.URLError as e:
-        print e
         utils.log("Failed to save log: URLError %s" % e.reason)
         return False
     try:
         return json.load(response)["html_url"]
-    except:
+    except Exception:
         utils.log("Failed to parse API response: %s" % response.read())
 
 
 def report_issue(issue_data):
-    """
-        Report our issue to GitHub
-    """
+    """Report our issue to GitHub"""
     issue_body = format_issue(issue_data)
 
     try:
@@ -247,5 +234,5 @@ def report_issue(issue_data):
         return False
     try:
         return json.load(response)["html_url"]
-    except:
+    except Exception:
         utils.log("Failed to parse API response: %s" % response.read())

@@ -27,15 +27,16 @@ import xbmcaddon
 
 from exception import AFLVideoException
 
-from requests.adapters import HTTPAdapter
 from bs4 import BeautifulStoneSoup
+from requests.adapters import HTTPAdapter
 
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
 
 
 def fetch_url(url, request_token=False):
-    """
+    """Fetch URL
+
     Simple function that fetches a URL using requests.
     An exception is raised if an error (e.g. 404) occurs.
     """
@@ -57,10 +58,11 @@ def fetch_url(url, request_token=False):
 
 
 def update_token(session):
-    """
-        This functions performs a HTTP POST to the token URL
-        and it will update the requests session with a token
-        required for API calls
+    """Update token
+
+    This functions performs a HTTP POST to the token URL
+    and it will update the requests session with a token
+    required for API calls
     """
     res = requests.post(config.TOKEN_URL)
     try:
@@ -73,9 +75,10 @@ def update_token(session):
 
 
 def parse_json_video(video_data):
-    """
-        Parse the JSON data and construct a video object from it for a list
-        of videos
+    """Parse video data from a JSON string
+
+    Parse the JSON data and construct a video object from it for a list
+    of videos
     """
     video = classes.Video()
     video.title = utils.ensure_ascii(video_data.get('title'))
@@ -96,9 +99,10 @@ def parse_json_video(video_data):
 
 
 def parse_json_live(video_data):
-    """
-        Parse the JSON data for live match and construct a video object from it
-        for a list of videos
+    """Parse live video data from a JSON string
+
+    Parse the JSON data for live match and construct a video object from it
+    for a list of videos
     """
     if not video_data['videoStream']:
         return
@@ -163,9 +167,7 @@ def get_video(video_id):
 
 
 def get_videos(category):
-    """
-        Get all videos by category
-    """
+    """Get all videos by category"""
     video_list = []
 
     # Category names are URL encoded
@@ -213,9 +215,7 @@ def get_videos(category):
 
 
 def get_round(round_id, live=False):
-    """
-        Fetch the round and return the results
-    """
+    """Fetch the round and return the results"""
     round_matches = []
     round_url = config.ROUND_URL
 
@@ -258,7 +258,7 @@ def get_round(round_id, live=False):
                     continue
                 airTime = ts.strftime(" - %A @ %I:%M %p A")
                 match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
-                                    match['name'], airTime, timezone)
+                    match['name'], airTime, timezone)
 
             # Add date/time
             round_matches.append(match)

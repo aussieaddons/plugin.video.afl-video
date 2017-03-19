@@ -16,9 +16,9 @@
 #    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
+import config
 import os
 import sys
-import config
 import utils
 import xbmcgui
 import xbmcplugin
@@ -30,7 +30,7 @@ def make_list():
             # Add our resources/lib to the python path
             try:
                 current_dir = os.path.dirname(os.path.abspath(__file__))
-            except:
+            except Exception:
                 current_dir = os.getcwd()
 
             thumbnail = os.path.join(current_dir, "..", "..", "resources",
@@ -42,13 +42,13 @@ def make_list():
 
             # Add the item to the list
             ok = xbmcplugin.addDirectoryItem(
-                        handle=int(sys.argv[1]),
-                        url=url,
-                        listitem=listitem,
-                        isFolder=True,
-                        totalItems=len(config.TEAMS))
+                handle=int(sys.argv[1]),
+                url=url,
+                listitem=listitem,
+                isFolder=True,
+                totalItems=len(config.TEAMS))
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
-    except:
+    except Exception:
         utils.handle_error('Unable to fetch video list')

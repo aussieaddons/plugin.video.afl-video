@@ -16,11 +16,9 @@
 #     along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sys
-import config
-import utils
-import classes
 import comm
+import sys
+import utils
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
@@ -52,5 +50,5 @@ def make_list(round_id, match_id):
                                        "hours after match has been played. "
                                        "Please try again later.")
             d.ok(*msg)
-    except:
+    except Exception:
         utils.handle_error('Unable to fetch program list')

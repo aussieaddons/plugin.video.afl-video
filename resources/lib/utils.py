@@ -16,23 +16,21 @@
 #  along with this plugin. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import os
-import sys
-import re
-import traceback
-import time
+import config
 import htmlentitydefs
+import issue_reporter
+import os
+import re
+import sys
+import textwrap
+import time
+import traceback
 import unicodedata
 import urllib
-import textwrap
 import xbmc
 import xbmcgui
-import config
-import issue_reporter
 
-from exception import AFLVideoException
-
-pattern = re.compile("&(\w+?);")
+PATTERN = re.compile("&(\w+?);")
 
 # This is a throwaway variable to deal with a python bug with strptime:
 #   ImportError: Failed to import _strptime because the import lockis
@@ -41,9 +39,7 @@ throwaway = time.strptime('20140101', '%Y%m%d')
 
 
 def get_team(squad_id):
-    """
-        Return the team from a given Squad ID
-    """
+    """Return the team from a given Squad ID"""
     for t in config.TEAMS:
         if t['squad'] == squad_id:
             return t
@@ -61,7 +57,7 @@ def descape(string):
     # Fix the hack back from parsing with BeautifulSoup
     string = string.replace('&#38;', '&amp;')
 
-    return pattern.sub(descape_entity, string)
+    return PATTERN.sub(descape_entity, string)
 
 
 def get_url(s):
@@ -104,19 +100,20 @@ def log_error(message=None):
     if message:
         exc_value = message
     xbmc.log("[%s v%s] ERROR: %s (%d) - %s" %
-             (config.NAME, config.VERSION,
-              exc_tb.tb_frame.f_code.co_name, exc_tb.tb_lineno, exc_value),
-              level=xbmc.LOGERROR)
+             (config.NAME, config.VERSION, exc_tb.tb_frame.f_code.co_name,
+              exc_tb.tb_lineno, exc_value), level=xbmc.LOGERROR)
 
 
 def dialog_error(err=None):
     # Generate a list of lines for use in XBMC dialog
-    msg = ''
     content = []
     exc_type, exc_value, exc_tb = sys.exc_info()
     content.append("%s v%s Error" % (config.NAME, config.VERSION))
+    if err:
+        content.append(err)
     content.append(str(exc_value))
     return content
+
 
 def dialog_message(msg, title=None):
     if not title:
@@ -126,12 +123,15 @@ def dialog_message(msg, title=None):
     content.insert(0, title)
     return content
 
-def get_platform():
-    """ Work through a list of possible platform types and return the first
-        match. Ordering of items is important as some match more thant one
-        type.
 
-        E.g. Android will match both Android and Linux
+def get_platform():
+    """Get platform information
+
+    Work through a list of possible platform types and return the first
+    match. Ordering of items is important as some match more thant one
+    type.
+
+    E.g. Android will match both Android and Linux
     """
     platforms = [
         "Android",
@@ -146,12 +146,14 @@ def get_platform():
     ]
 
     for platform in platforms:
-        if xbmc.getCondVisibility('System.Platform.'+platform):
+        if xbmc.getCondVisibility('System.Platform.' + platform):
             return platform
     return "Unknown"
 
+
 def get_xbmc_build():
     return xbmc.getInfoLabel("System.BuildVersion")
+
 
 def get_xbmc_version():
     build = get_xbmc_build()
@@ -159,22 +161,25 @@ def get_xbmc_version():
     version = build.split(' ')[0]
     return version
 
+
 def get_xbmc_major_version():
-    """ Return the major version number of the running XBMC
-    """
+    """Return the major version number of the running XBMC"""
     version = get_xbmc_version().split('.')[0]
     return int(version)
 
+
 def log_xbmc_platform_version():
-    """ Log our XBMC version and platform for debugging
-    """
+    """Log our XBMC version and platform for debugging"""
     version = get_xbmc_version()
     platform = get_platform()
     log("XBMC/Kodi %s running on %s" % (version, platform))
 
+
 def get_file_dir():
-    """ Make our addon working directory if it doesn't exist and
-        return it.
+    """Get addon working directory
+
+    Make our addon working directory if it doesn't exist and
+    return it.
     """
     filedir = os.path.join(xbmc.translatePath('special://temp/'),
                            config.ADDON_ID)
@@ -182,20 +187,23 @@ def get_file_dir():
         os.mkdir(filedir)
     return filedir
 
+
 def save_last_error_report(trace):
-    """ Save a copy of our last error report
-    """
+    """Save a copy of our last error report"""
     try:
         rfile = os.path.join(get_file_dir(), 'last_report_error.txt')
         with open(rfile, 'w') as f:
             f.write(trace)
-    except:
+    except Exception:
         log("Error writing error report file")
 
+
 def can_send_error(trace):
-    """ Check to see if our new error message is different from the last
-        successful error report. If it is, or the file doesn't exist, then
-        we'll return True
+    """Test if last reported error matches current one
+
+    Check to see if our new error message is different from the last
+    successful error report. If it is, or the file doesn't exist, then
+    we'll return True
     """
     try:
         rfile = os.path.join(get_file_dir(), 'last_report_error.txt')
@@ -207,11 +215,12 @@ def can_send_error(trace):
             report = f.read()
             if report != trace:
                 return True
-    except:
+    except Exception:
         log("Error checking error report file")
 
     log("Not allowing error report. Last report matches this one")
     return False
+
 
 def handle_error(msg, exc=None):
     traceback_str = traceback.format_exc()
@@ -232,7 +241,7 @@ def handle_error(msg, exc=None):
         # Some transient network errors we don't want any reports about
         if ((traceback_str.find('The read operation timed out') > 0) or
             (traceback_str.find('IncompleteRead') > 0) or
-            (traceback_str.find('HTTP Error 404: Not Found') > 0)):
+                (traceback_str.find('HTTP Error 404: Not Found') > 0)):
                 send_error = False
 
         # Don't allow reporting for these (mostly) user or service errors
@@ -255,7 +264,7 @@ def handle_error(msg, exc=None):
                 message.append("Would you like to automatically "
                                "report this error?")
                 report_issue = d.yesno(*message)
-            except:
+            except Exception:
                 message.append("If this error continues to occur, "
                                "please report it to our issue tracker.")
                 d.ok(*message)

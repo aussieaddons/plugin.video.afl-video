@@ -16,11 +16,10 @@
 #     along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sys
-import config
-import utils
-import classes
 import comm
+import config
+import sys
+import utils
 import xbmcgui
 import xbmcplugin
 
@@ -56,5 +55,5 @@ def make_list(url):
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
-    except Exception, e:
+    except Exception as e:
         utils.handle_error('Unable to fetch video list', exc=e)

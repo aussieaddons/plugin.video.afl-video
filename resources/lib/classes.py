@@ -16,13 +16,10 @@
 #    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import os
-import re
-import utils
 import datetime
-import urllib
 import time
-import config
+import urllib
+import utils
 
 
 class Video(object):
@@ -49,37 +46,28 @@ class Video(object):
         return cmp(self.title, other.title)
 
     def get_title(self):
-        """ Return a string of the title, nicely formatted for XBMC list
-        """
+        """Return a string of the title, nicely formatted for XBMC list"""
         return self.title
 
     def get_description(self):
-        """ Return a string the program description, after running it through
-            the descape.
-        """
+        """Return a string the program description after descape"""
         return utils.descape(self.description)
 
     def get_genre(self):
-        """ Return a string of the genre. E.g. Comedy
-        """
+        """Return a string of the genre. E.g. Comedy"""
         return utils.descape(self.genre)
 
     def get_rating(self):
-        """ Return a string of the rating. E.g. PG, MA
-        """
+        """Return a string of the rating. E.g. PG, MA"""
         return utils.descape(self.rating)
 
     def get_duration(self):
-        """ Return a the duration of the video in seconds. This is only useful
-             for the addStreamInfo method
-        """
+        """Return a the duration of the video in seconds"""
         seconds = int(self.duration)
         return seconds
 
     def get_date(self):
-        """ Return a string of the date in the format 2010-02-28
-            which is useful for XBMC labels.
-        """
+        """Return a string of the date in the format 2010-02-28"""
         if self.date:
             return self.date.strftime("%Y-%m-%d")
         return None
@@ -91,8 +79,7 @@ class Video(object):
         return season
 
     def get_thumbnail(self):
-        """ Returns the thumbnail
-        """
+        """Returns the thumbnail"""
         if self.thumbnail:
             thumb = utils.descape(self.thumbnail)
             thumb = thumb.replace(' ', '%20')
@@ -103,9 +90,7 @@ class Video(object):
         return self.url
 
     def get_xbmc_list_item(self):
-        """ Returns a dict of program information, in the format which
-            XBMC requires for video metadata.
-        """
+        """Returns a dict of program information XBMC requires for metadata"""
         info_dict = {}
         if self.get_title():
             info_dict['title'] = self.get_title()
@@ -120,18 +105,14 @@ class Video(object):
         return info_dict
 
     def get_xbmc_stream_info(self):
-        """
-            Return a stream info dict
-        """
+        """Return a stream info dict"""
         info_dict = {}
         if self.get_duration():
             info_dict['duration'] = self.get_duration()
         return info_dict
 
     def make_xbmc_url(self):
-        """ Returns a string which represents the program object, but in
-            a format suitable for passing as a URL.
-        """
+        """Returns an encoded string which represents the program object"""
         d = {}
         if self.id:
             d['id'] = self.id
@@ -161,9 +142,7 @@ class Video(object):
         return utils.make_url(d)
 
     def parse_xbmc_url(self, string):
-        """ Takes a string input which is a URL representation of the
-            program object
-        """
+        """Build an object from a given url"""
         d = utils.get_url(string)
         if 'id' in d:
             self.id = d.get('id')

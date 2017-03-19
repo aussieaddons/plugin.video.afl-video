@@ -23,23 +23,23 @@ import xbmcaddon
 # Add our resources/lib to the python path
 try:
     current_dir = os.path.dirname(os.path.abspath(__file__))
-except:
+except Exception:
     current_dir = os.getcwd()
 
 sys.path.append(os.path.join(current_dir, "resources", "lib"))
 
-import utils  # noqa: E402
-import index  # noqa: E402
-import rounds  # noqa: E402
-import matches  # noqa: E402
-import videos  # noqa: E402
-import play_replay  # noqa: E402
-import play  # noqa: E402
-import ooyalahelper  # noqa: E402
+import index
+import matches
+import ooyalahelper
+import play
+import play_replay
+import rounds
+import utils
+import videos
 
 utils.log_xbmc_platform_version()
 
-if __name__ == "__main__":
+def main():
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
 
@@ -69,3 +69,6 @@ if __name__ == "__main__":
         elif 'action' in params:
             if params['action'] == 'cleartoken':
                 ooyalahelper.clear_token()
+
+if __name__ == "__main__":
+    main()

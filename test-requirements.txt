@@ -1,0 +1,5 @@
+requests-mock
+beautifulsoup4
+pytest
+mock
+-e git://github.com/romanvm/Kodistubs.git#egg=kodistubs

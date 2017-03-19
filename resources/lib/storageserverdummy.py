@@ -1,10 +1,5 @@
-'''
-     StorageServer override.
-     Version: 1.0
-'''
+class StorageServer(object):
 
-
-class StorageServer:
     def __init__(self, table, timeout=24):
         return None
 

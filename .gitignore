@@ -7,3 +7,8 @@
 
 # no zip files
 *.zip
+
+# testing
+.cache/
+.tox/
+__pycache__

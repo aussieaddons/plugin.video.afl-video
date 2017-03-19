@@ -16,10 +16,9 @@
 #    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sys
 import config
+import sys
 import utils
-import xbmcaddon
 import xbmcgui
 import xbmcplugin
 
@@ -56,13 +55,12 @@ def make_list():
 
             # add the item to the media list
             ok = xbmcplugin.addDirectoryItem(
-                        handle=int(sys.argv[1]),
-                        url=url,
-                        listitem=listitem,
-                        isFolder=True,
-                        totalItems=len(config.CATEGORIES)
-                    )
+                handle=int(sys.argv[1]),
+                url=url,
+                listitem=listitem,
+                isFolder=True,
+                totalItems=len(config.CATEGORIES))
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-    except:
+    except Exception:
         utils.handle_error('Unable build video category list')
