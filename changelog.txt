@@ -1,4 +1,8 @@
-[B]Version 1.7.8[/B]
+[B]Version 1.7.9[/B]
+- Remove debugging
+- Fix for Ooyala video ID discovery on live matches
+
+[B]Version v1.7.8[/B]
 - Cleanups and better exception handling
 - Cache token, add other live pass videos, more logging. (#1542)
 
