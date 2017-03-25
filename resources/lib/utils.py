@@ -24,8 +24,6 @@ import time
 import htmlentitydefs
 import unicodedata
 import urllib
-import requests
-import json
 import textwrap
 import xbmc
 import xbmcgui
@@ -128,11 +126,6 @@ def dialog_message(msg, title=None):
     content.insert(0, title)
     return content
 
-def get_ip_country():
-    res = requests.get('http://ipinfo.io/json')
-    data = json.loads(res.text)
-    return data.get('country')
-
 def get_platform():
     """ Work through a list of possible platform types and return the first
         match. Ordering of items is important as some match more thant one
@@ -228,12 +221,6 @@ def handle_error(msg, exc=None):
     # Don't show any dialogs when user cancels
     if traceback_str.find('SystemExit') > 0:
         return
-
-    # Check country of IP address, don't allow issue reporting outside AU
-    if get_ip_country() != 'AU':
-        message.append('This add-on is not supported outside of Australia.')
-        xbmcgui.Dialog().ok(*message)
-        send_error = False
 
     d = xbmcgui.Dialog()
     if d:
