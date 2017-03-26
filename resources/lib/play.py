@@ -20,7 +20,6 @@ import sys
 import classes
 import utils
 import comm
-import xbmc
 import xbmcgui
 import xbmcplugin
 import ooyalahelper
@@ -36,7 +35,10 @@ def play(url):
             v.parse_xbmc_url(url)
         
         if 'ooyalaid' in params:
-            login_token = ooyalahelper.get_user_token()
+            login_token = None
+            if params.get('subscription_required') == 'True':
+                login_token = ooyalahelper.get_user_token()
+
             stream_url = ooyalahelper.get_m3u8_playlist(params['ooyalaid'],
                                                         v.live, login_token)
         else:

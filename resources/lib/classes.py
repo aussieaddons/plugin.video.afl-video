@@ -41,6 +41,7 @@ class Video(object):
         self.ooyalaid = None
         self.isdummy = None
         self.live = None
+        self.subscription_required = False
 
     def __repr__(self):
         return self.title
@@ -57,7 +58,10 @@ class Video(object):
         """ Return a string the program description, after running it through
             the descape.
         """
-        return utils.descape(self.description)
+        if self.description:
+            return utils.descape(self.description)
+        else:
+            return self.get_title()
 
     def get_genre(self):
         """ Return a string of the genre. E.g. Comedy
@@ -157,8 +161,10 @@ class Video(object):
             d['isdummy'] = self.isdummy
         if self.live:
             d['live'] = self.live
-
+        if self.subscription_required:
+            d['subscription_required'] = self.subscription_required
         return utils.make_url(d)
+
 
     def parse_xbmc_url(self, string):
         """ Takes a string input which is a URL representation of the
@@ -191,3 +197,6 @@ class Video(object):
             self.isdummy = d.get('isdummy')
         if 'live' in d:
             self.live = d.get('live')
+        if 'subscription_required' in d:
+            if d.get('subscription_required') == 'True':
+                self.subscription_required = True

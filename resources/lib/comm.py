@@ -33,8 +33,13 @@ from bs4 import BeautifulStoneSoup
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
 
+# Ignore InsecureRequestWarning warnings
+requests.packages.urllib3.disable_warnings()
 
-def fetch_url(url, request_token=False):
+__addon__ = xbmcaddon.Addon()
+
+
+def fetch_url(url, data=None, headers=None, request_token=False):
     """
     Simple function that fetches a URL using requests.
     An exception is raised if an error (e.g. 404) occurs.
@@ -43,11 +48,20 @@ def fetch_url(url, request_token=False):
     with requests.Session() as session:
         session.mount('http://', HTTPAdapter(max_retries=5))
         session.mount('https://', HTTPAdapter(max_retries=5))
+        session.verify = False
+
+        if headers:
+            session.headers.update(headers)
+
         # Token headers
         if request_token:
             update_token(session)
 
-        request = session.get(url, verify=False)
+        if data:
+            request = session.post(url, data)
+        else:
+            request = session.get(url)
+
         try:
             request.raise_for_status()
         except Exception as e:
@@ -67,9 +81,15 @@ def update_token(session):
         token = json.loads(res.text).get('token')
     except Exception as e:
         raise AFLVideoException('Failed to retrieve API token: {0}\n'
-                                'Service may be currently '
-                                'unavailable.'.format(e))
+                                'Service may be currently unavailable.'
+                                ''.format(e))
     session.headers.update({'x-media-mis-token': token})
+
+
+def get_attr(attrs, key):
+    for attr in attrs:
+        if attr.get('attrName') == key:
+            return attr.get('attrValue')
 
 
 def parse_json_video(video_data):
@@ -77,6 +97,10 @@ def parse_json_video(video_data):
         Parse the JSON data and construct a video object from it for a list
         of videos
     """
+    attrs = video_data.get('customAttributes')
+    if not attrs:
+        return
+
     video = classes.Video()
     video.title = utils.ensure_ascii(video_data.get('title'))
     video.description = utils.ensure_ascii(video_data.get('description'))
@@ -88,9 +112,20 @@ def parse_json_video(video_data):
     except Exception:
         pass
 
-    data = video_data.get('customAttributes')
-    video.ooyalaid = [x['attrValue'] for x in data
-                      if x['attrName'] == 'ooyala embed code'][0]
+    if video_data.get('entitlement'):
+        video.subscription_required = True
+
+    state = __addon__.getSetting('STATE')
+    video_id = get_attr(attrs, 'state-' + state)
+    if not video_id:
+        video_id = get_attr(attrs, 'ooyala embed code')
+
+    if not video_id:
+        utils.log('Unable to find video ID from stream data: {0}'.format(
+                  video_data))
+        raise AFLVideoException('Unable to find video ID from stream data.')
+
+    video.ooyalaid = video_id
     video.live = False
     return video
 
@@ -100,23 +135,36 @@ def parse_json_live(video_data):
         Parse the JSON data for live match and construct a video object from it
         for a list of videos
     """
-    if not video_data['videoStream']:
+    video_stream = video_data.get('videoStream')
+    if not video_stream:
         return
 
-    if 'customAttributes' not in video_data['videoStream']:
+    attrs = video_stream.get('customAttributes')
+    if not attrs:
         return
 
     video = classes.Video()
     title = utils.ensure_ascii(video_data.get('title'))
     video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(title)
-    video.description = title
-    video.thumbnail = video_data['videoStream'].get('thumbnailURL')
-    attrs = video_data['videoStream'].get('customAttributes')
-    video_id = [x['attrValue'] for x in attrs
-                if x['attrName'] in ['ooyala embed code', 'state-VIC']]
-    video.ooyalaid = video_id[0]
-    video.live = True
+    video.thumbnail = video_stream.get('thumbnailURL')
 
+    if video_stream.get('entitlement'):
+        utils.log('Entitlement: %s' % video_stream.get('entitlement'))
+        video.subscription_required = True
+
+    state = __addon__.getSetting('STATE')
+    video_id = get_attr(attrs, 'state-' + state)
+    if not video_id:
+        video_id = get_attr(attrs, 'ooyala embed code')
+
+    if not video_id:
+        utils.log('Unable to find video ID from stream data: {0}'.format(
+                  video_data))
+        raise AFLVideoException('Unable to find video ID from stream data.')
+
+    video.ooyalaid = video_id
+    video.live = True
+    utils.log(video.__dict__)
     return video
 
 
@@ -141,7 +189,6 @@ def get_video(video_id):
     video = parse_json_video(video_data)
 
     # Find our quality setting and fetch the URL
-    __addon__ = xbmcaddon.Addon()
     qual = __addon__.getSetting('QUALITY')
 
     # Set the last video entry (usually highest qual) as a default fallback

@@ -48,7 +48,10 @@ free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
 
 def clear_token():
     """Remove stored token from cache storage"""
-    cache.delete('AFLTOKEN')
+    try:
+        cache.delete('AFLTOKEN')
+    except AttributeError:
+        pass
 
 
 def fetch_session_id(url, data):
@@ -69,7 +72,7 @@ def fetch_session_id(url, data):
 def get_user_token():
     """ Send user login info and retrieve token for session"""
     stored_token = cache.get('AFLTOKEN')
-    if stored_token != '':
+    if stored_token:
         utils.log('Using token: {0}******'.format(stored_token[:-6]))
         return stored_token
 
@@ -145,8 +148,26 @@ def get_secure_token(secure_url, video_id):
         parsed_json = json.loads(res.text)
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(res.text))
-    ios_token = parsed_json['authorization_data'][video_id]['streams'][0]['url']['data']  # noqa
-    return base64.b64decode(ios_token)
+
+    if parsed_json.get('authorized') == False:
+        raise AFLVideoException('Failed to get authorization token: {0}'
+                                ''.format(parsed_json.get('message')))
+
+    auth_data = parsed_json.get('authorization_data')
+
+    utils.log('auth_data: %s' % auth_data)
+    video = auth_data.get(video_id)
+
+    if video.get('authorized') == False:
+        raise AFLVideoException('Failed to obtain secure token: {0}.\n'
+                                'Check your subscription is valid.'.format(
+                                video.get('message')))
+    try:
+        streams = video.get('streams')
+        ios_token = streams[0]['url']['data']
+        return base64.b64decode(ios_token)
+    except Exception as e:
+        raise AFLVideoException('Failed to get stream URL: {0}'.format(e))
 
 
 def get_m3u8_streams(secure_token_url):
@@ -200,15 +221,18 @@ def parse_m3u8_streams(data, live, secure_token_url):
     return stream
 
 
-def get_m3u8_playlist(video_id, live, login_token):
+def get_m3u8_playlist(video_id, live, login_token=None):
     """ Main function to call other functions that will return us our m3u8 HLS
         playlist as a string, which we can then write to a file for Kodi
         to use"""
 
-    embed_token = get_embed_token(login_token, video_id)
+    auth_url = config.AUTH_URL.format(config.PCODE, video_id)
 
-    authorize_url = config.AUTH_URL.format(config.PCODE, video_id, embed_token)
-    secure_token_url = get_secure_token(authorize_url, video_id)
+    if login_token:
+        embed_token = get_embed_token(login_token, video_id)
+        auth_url = auth_url + '&embedToken=' + embed_token
+
+    secure_token_url = get_secure_token(auth_url, video_id)
 
     if 'chunklist.m3u8' in secure_token_url:
         return secure_token_url
