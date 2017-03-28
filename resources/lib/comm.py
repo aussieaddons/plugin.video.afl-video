@@ -115,15 +115,17 @@ def parse_json_video(video_data):
     if video_data.get('entitlement'):
         video.subscription_required = True
 
-    state = __addon__.getSetting('STATE')
-    video_id = get_attr(attrs, 'state-' + state)
-    if not video_id:
-        video_id = get_attr(attrs, 'ooyala embed code')
+    # Look for 'national' stream (e.g. Foxtel)
+    video_id = get_attr(attrs, 'ooyala embed code')
 
     if not video_id:
-        utils.log('Unable to find video ID from stream data: {0}'.format(
-                  video_data))
-        raise AFLVideoException('Unable to find video ID from stream data.')
+        # Look for configured state stream
+        state = __addon__.getSetting('STATE')
+        video_id = get_attr(attrs, 'state-' + state)
+
+    if not video_id:
+        # Fall back to the VIC stream
+        video_id = get_attr(attrs, 'state-VIC')
 
     video.ooyalaid = video_id
     video.live = False
@@ -149,13 +151,19 @@ def parse_json_live(video_data):
     video.thumbnail = video_stream.get('thumbnailURL')
 
     if video_stream.get('entitlement'):
-        utils.log('Entitlement: %s' % video_stream.get('entitlement'))
         video.subscription_required = True
 
-    state = __addon__.getSetting('STATE')
-    video_id = get_attr(attrs, 'state-' + state)
+    # Look for 'national' stream (e.g. Foxtel)
+    video_id = get_attr(attrs, 'ooyala embed code')
+
     if not video_id:
-        video_id = get_attr(attrs, 'ooyala embed code')
+        # Look for configured state stream
+        state = __addon__.getSetting('STATE')
+        video_id = get_attr(attrs, 'state-' + state)
+
+    if not video_id:
+        # Fall back to the VIC stream
+        video_id = get_attr(attrs, 'state-VIC')
 
     if not video_id:
         utils.log('Unable to find video ID from stream data: {0}'.format(
@@ -164,7 +172,6 @@ def parse_json_live(video_data):
 
     video.ooyalaid = video_id
     video.live = True
-    utils.log(video.__dict__)
     return video
 
 
