@@ -30,12 +30,14 @@ def make_list(url):
     try:
         params = utils.get_url(url)
 
-        category = config.CATEGORY_LOOKUP[params.get('category')]
-        videos = comm.get_videos(category)
+        if 'team' in params:
+            videos = comm.get_team_videos(params.get('team'))
+        elif params.get('category') == 'Live Matches':
+            videos = comm.get_live_videos()
+        else:
+            category = config.CATEGORY_LOOKUP[params.get('category')]
+            videos = comm.get_category_videos(category)
 
-        utils.log("Found %s videos" % len(videos))
-
-        # fill media list
         ok = True
         for v in videos:
 

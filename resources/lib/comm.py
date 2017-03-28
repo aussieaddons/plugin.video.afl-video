@@ -216,20 +216,19 @@ def get_video(video_id):
     return video
 
 
-def get_videos(category):
-    """
-        Get all videos by category
-    """
+def get_team_videos(team_id):
+    url = config.VIDEO_LIST_URL + '?pageSize=50&teamIds=CD_T' + team_id
+    return get_videos(url)
+
+
+def get_category_videos(category):
+    url = config.VIDEO_LIST_URL + '?categories=' + category
+    return get_videos(url)
+
+
+def get_videos(url):
+    """Get videos from a given URL"""
     video_list = []
-
-    # Category names are URL encoded
-    if category == 'All Videos':
-        url = config.VIDEO_LIST_URL
-    elif category == 'Live Matches':
-        url = config.LIVE_LIST_URL
-    else:
-        url = config.VIDEO_LIST_URL + '?categories=' + category
-
     data = fetch_url(url, request_token=True)
     try:
         json_data = json.loads(data)
@@ -238,31 +237,39 @@ def get_videos(category):
         raise Exception('Failed to retrieve video data. Service may be '
                         'currently unavailable.')
 
-    if category == 'Live Matches':
-        video_assets = json_data
-
+    for category in json_data['categories']:
+        video_assets = category['videos']
         for video_asset in video_assets:
-            video = parse_json_live(video_asset)
-
+            video = parse_json_video(video_asset)
             if video:
                 video_list.append(video)
 
-        upcoming_videos = get_round('latest', True)
-        for match in upcoming_videos:
-            v = classes.Video()
-            v.title = match['name']
-            v.isdummy = True
-            v.url = 'null'
-            video_list.append(v)
+    return video_list
 
-    else:
-        for category in json_data['categories']:
-            video_assets = category['videos']
-            for video_asset in video_assets:
-                video = parse_json_video(video_asset)
-                if video:
-                    video_list.append(video)
 
+def get_live_videos():
+    video_list = []
+    data = fetch_url(config.LIVE_LIST_URL, request_token=True)
+    try:
+        video_data = json.loads(data)
+    except ValueError:
+        utils.log('Failed to load JSON. Data is: {0}'.format(data))
+        raise Exception('Failed to retrieve video data. Service may be '
+                        'currently unavailable.')
+
+    for video_asset in video_data:
+        video = parse_json_live(video_asset)
+
+        if video:
+            video_list.append(video)
+
+    upcoming_videos = get_round('latest', True)
+    for match in upcoming_videos:
+        v = classes.Video()
+        v.title = match['name']
+        v.isdummy = True
+        v.url = 'null'
+        video_list.append(v)
     return video_list
 
 

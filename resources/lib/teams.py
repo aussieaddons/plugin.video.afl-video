@@ -38,7 +38,7 @@ def make_list():
             listitem = xbmcgui.ListItem(label=t['name'],
                                         iconImage=thumbnail,
                                         thumbnailImage=thumbnail)
-            url = "%s?channel=%s" % (sys.argv[0], t['channel'])
+            url = "%s?team=%s" % (sys.argv[0], t['team_id'])
 
             # Add the item to the list
             ok = xbmcplugin.addDirectoryItem(

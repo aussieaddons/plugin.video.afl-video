@@ -1,6 +1,6 @@
 #
-#  SBS On Demand Kodi Add-on
-#  Copyright (C) 2015 Andy Botting
+#  AFL Video Kodi Add-on
+#  Copyright (C) 2017 Andy Botting
 #
 #  This plugin is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -40,12 +40,10 @@ pattern = re.compile("&(\w+?);")
 throwaway = time.strptime('20140101', '%Y%m%d')
 
 
-def get_team(squad_id):
-    """
-        Return the team from a given Squad ID
-    """
+def get_team(team_id):
+    """Return the team from a given team ID"""
     for t in config.TEAMS:
-        if t['squad'] == squad_id:
+        if t['team_id'] == team_id:
             return t
 
 
