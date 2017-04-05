@@ -1,4 +1,11 @@
-[B]Version 1.7.9[/B]
+[B]Version 1.8.0[/B]
+- Add Auto-generated Highlights back
+- Added team video channels back
+- Move JLT Series matches to the bottom
+- Use VIC as the fallback state for live streams
+- Don't require subscription for on-demand videos
+
+[B]Version v1.7.9[/B]
 - Remove debugging
 - Fix for Ooyala video ID discovery on live matches
 
