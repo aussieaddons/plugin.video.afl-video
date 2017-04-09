@@ -4,13 +4,11 @@ env:
     - secure: "Kr8u6+XIWIo7oVzjV20xBYlz0atAjzHBEwsJAfEE3LNXbrJxTiq+jwvaZjQtNDTJdJR0HF6jI7oDx7VaD/zuCssUUQ4FiNED1u7oZvM8mEwpiUyNOAOuxyoDP3YQpM9WsClK+ZpPkRRWidNUdOCJ6IjW4gfeVh9rjF0bvmL/YcLOByGjbr8uRqQ1QDuqD0sobddxw+9rJXHnxcOwG+g3UmQkAul1sctU3fHte+Z4nffSFZF5nMHCG8bN8ShHdAqA+C2XvD3Hr9DPZg4QTT8TcAI0lhlgDXL1vQ1ncjE1/Fe4nydoSsWqWG7N/HRot9V2ENFsqCdz3tq35n7JUtZ+J1EUf4L8Le36YO3kocaT0swSelMn1jqHBOAQfn4f7FmxMLxEeXx2U2iBU+WzpDuXrdcB3cixum+CEvBEI+M7MCPGwJxCdU0uCp8Bg0AuVeTbBPvoLj9bTUfu7ao830FIezOgrPxo4dXZ4cOAgiIvpLbLEDu5axyepHz3EoPI9NGLDEsqKqbDb3Qp/Lb1pL70hEc6F6nb7qdMzlQELreReS0UXXME/GJM3Jysob2Yqkxk8pFclHXepoqq/UNiB6dq9jRlGx5fxI8hiyQ18HQTXUgRZ1ayQb/a8MrZ5WOVSTGUnIgc3C/Wk2fKgjTh8iTdo2IinmMHBvb90d0OLHX9fyo="
 install:
   - pip install GitPython
-  - export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
-  - mkdir .deploy
-  - cd .deploy
-  - git clone https://github.com/xbmc-catchuptv-au/repo-devel.git repo-devel
+  - export TRAVIS_COMMIT_MSG="$TRAVIS_REPO_SLUG - $(git log --format=%B --no-merges -n 1)"
+  - git clone https://github.com/xbmc-catchuptv-au/repo-devel.git .deploy
 script:
-  - cd repo-devel
-  - ./manage_repo.py ../../
+  - cd .deploy
+  - ./manage_repo.py ../
 after_script:
   - git config --global user.email 'aussieaddons@aussieaddons.com'
   - git config --global user.name 'Aussie Add-ons Bot'
@@ -18,5 +16,4 @@ after_script:
   - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
   - git add .
   - git commit --allow-empty -m "$TRAVIS_COMMIT_MSG"
-  - echo "Pushing changes"
-  - git push https://github.com/xbmc-catchuptv-au/repo-devel.git
+  - git push
