@@ -18,23 +18,19 @@
 
 import classes
 import config
+import custom_session
 import datetime
 import json
-import requests
 import time
 import utils
 import xbmcaddon
 
 from exception import AFLVideoException
 
-from requests.adapters import HTTPAdapter
 from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
-
-# Ignore InsecureRequestWarning warnings
-requests.packages.urllib3.disable_warnings()
 
 __addon__ = xbmcaddon.Addon()
 
@@ -45,10 +41,7 @@ def fetch_url(url, data=None, headers=None, request_token=False):
     An exception is raised if an error (e.g. 404) occurs.
     """
     utils.log("Fetching URL: %s" % url)
-    with requests.Session() as session:
-        session.mount('http://', HTTPAdapter(max_retries=5))
-        session.mount('https://', HTTPAdapter(max_retries=5))
-        session.verify = False
+    with custom_session.Session() as session:
 
         if headers:
             session.headers.update(headers)
@@ -62,10 +55,6 @@ def fetch_url(url, data=None, headers=None, request_token=False):
         else:
             request = session.get(url)
 
-        try:
-            request.raise_for_status()
-        except Exception as e:
-            raise AFLVideoException(e)
         data = request.text
     return data
 
@@ -76,7 +65,7 @@ def update_token(session):
         and it will update the requests session with a token
         required for API calls
     """
-    res = requests.post(config.TOKEN_URL)
+    res = session.post(config.TOKEN_URL)
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:

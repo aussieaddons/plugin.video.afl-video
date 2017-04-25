@@ -52,5 +52,5 @@ def make_list(round_id, match_id):
                                        "hours after match has been played. "
                                        "Please try again later.")
             d.ok(*msg)
-    except:
-        utils.handle_error('Unable to fetch program list')
+    except Exception as e:
+        utils.handle_error('Unable to play replay', exc=e)

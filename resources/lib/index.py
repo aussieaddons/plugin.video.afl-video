@@ -53,5 +53,5 @@ def make_list():
                     )
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-    except:
-        utils.handle_error('Unable build video category list')
+    except Exception as e:
+        utils.handle_error('Unable build video category list', exc=e)

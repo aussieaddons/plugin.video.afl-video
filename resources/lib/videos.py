@@ -58,5 +58,5 @@ def make_list(url):
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
-    except Exception, e:
+    except Exception as e:
         utils.handle_error('Unable to fetch video list', exc=e)

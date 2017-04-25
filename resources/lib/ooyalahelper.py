@@ -20,6 +20,7 @@
 import base64
 import comm
 import config
+import custom_session
 import json
 import requests
 import urllib
@@ -32,18 +33,15 @@ from exception import AFLVideoException
 
 try:
     import StorageServer
-except:
-    utils.log("script.common.plugin.cache not found!")
+except ImportError:
     import storageserverdummy as StorageServer
-cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
-# Ignore InsecureRequestWarning warnings
-requests.packages.urllib3.disable_warnings()
-session = requests.Session()
-session.verify = False
+cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
 addon = xbmcaddon.Addon()
 free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
+
+session = custom_session.Session()
 
 
 def clear_token():
@@ -55,11 +53,10 @@ def clear_token():
 
 
 def fetch_session_id(url, data):
-    """ send http POST and return the json response data"""
+    """send http POST and return the json response data"""
     data = urllib.urlencode(data)
     session.headers = config.HEADERS
     comm.update_token(session)
-    utils.log("Fetching URL: {0}".format(url))
     res = session.post(url, data)
     try:
         res.raise_for_status()
@@ -70,7 +67,7 @@ def fetch_session_id(url, data):
 
 
 def get_user_token():
-    """ Send user login info and retrieve token for session"""
+    """Send user login info and retrieve token for session"""
     stored_token = cache.get('AFLTOKEN')
     if stored_token:
         utils.log('Using token: {0}******'.format(stored_token[:-6]))
@@ -149,7 +146,7 @@ def get_secure_token(secure_url, video_id):
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(res.text))
 
-    if parsed_json.get('authorized') == False:
+    if parsed_json.get('authorized') is False:
         raise AFLVideoException('Failed to get authorization token: {0}'
                                 ''.format(parsed_json.get('message')))
 
@@ -158,10 +155,10 @@ def get_secure_token(secure_url, video_id):
     utils.log('auth_data: %s' % auth_data)
     video = auth_data.get(video_id)
 
-    if video.get('authorized') == False:
+    if video.get('authorized') is False:
         raise AFLVideoException('Failed to obtain secure token: {0}.\n'
-                                'Check your subscription is valid.'.format(
-                                video.get('message')))
+                                'Check your subscription is valid.'
+                                ''.format(video.get('message')))
     try:
         streams = video.get('streams')
         ios_token = streams[0]['url']['data']
@@ -171,17 +168,21 @@ def get_secure_token(secure_url, video_id):
 
 
 def get_m3u8_streams(secure_token_url):
-    """ fetch our m3u8 file which contains streams of various qualities"""
+    """fetch our m3u8 file which contains streams of various qualities"""
     res = session.get(secure_token_url)
     data = res.text.splitlines()
     return data
 
 
 def parse_m3u8_streams(data, live, secure_token_url):
-    """ Parse the retrieved m3u8 stream list into a list of dictionaries
-        then return the url for the highest quality stream. Different
-        handling is required of live m3u8 files as they seem to only contain
-        the destination filename and not the domain/path."""
+    """Parse m3u8 stream
+
+    Parse the retrieved m3u8 stream list into a list of dictionaries
+    then return the url for the highest quality stream. Different
+    handling is required of live m3u8 files as they seem to only contain
+    the destination filename and not the domain/path.
+    """
+
     if live:
         qual = int(xbmcaddon.Addon().getSetting('LIVE_QUALITY'))
         if qual == config.MAX_LIVE_QUAL:
@@ -222,9 +223,12 @@ def parse_m3u8_streams(data, live, secure_token_url):
 
 
 def get_m3u8_playlist(video_id, live, login_token=None):
-    """ Main function to call other functions that will return us our m3u8 HLS
-        playlist as a string, which we can then write to a file for Kodi
-        to use"""
+    """Get m3u8 playlist
+
+    Main function to call other functions that will return us our m3u8 HLS
+    playlist as a string, which we can then write to a file for Kodi
+    to use
+    """
 
     auth_url = config.AUTH_URL.format(config.PCODE, video_id)
 

@@ -1,46 +1,33 @@
-import json
-import urlparse
-import config
 import comm
+import config
+import custom_session
+import json
 import re
-import utils
+import requests
 import urllib
-import ssl
+import urlparse
+import utils
 import xbmcgui
 
 from bs4 import BeautifulSoup
 
-import requests
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from requests.packages.urllib3.poolmanager import PoolManager
-
-
-# Ignore InsecureRequestWarning warnings
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
 
 class TelstraAuthException(Exception):
-    """ A Not Fatal Exception is used for certain conditions where we do not
-        want to give users an option to send an error report
+    """Telstra Auth custom exception
+
+    A Not Fatal Exception is used for certain conditions where we do not
+    want to give users an option to send an error report
     """
     pass
 
 
-class TLSv1Adapter(HTTPAdapter):
-    def init_poolmanager(self, connections, maxsize, block=False):
-        self.poolmanager = PoolManager(num_pools=connections,
-                                       maxsize=maxsize,
-                                       block=block,
-                                       ssl_version=ssl.PROTOCOL_TLSv1)
-
-
 def get_token(username, password):
-    """ Obtain a valid token from Telstra, will be used to make requests for
-        Ooyala embed tokens"""
-    session = requests.Session()
-    session.mount('https://', TLSv1Adapter(max_retries=5))
-    session.verify = False
+    """Fetch token for Telstra auth
+
+    Obtain a valid token from Telstra, will be used to make requests for
+    Ooyala embed tokens
+    """
+    session = custom_session.Session(force_tlsv1=True)
 
     prog_dialog = xbmcgui.DialogProgress()
     prog_dialog.create('Logging in with Telstra ID')
@@ -113,7 +100,7 @@ def get_token(username, password):
     media_order_hdrs.update({'Authorization': 'Bearer {0}'.format(auth_token),
                              'Referer': confirm_url})
     session.headers = media_order_hdrs
-    
+
     # First check if there are any eligible services attached to the account
     offers = session.get(config.OFFERS_URL)
     try:
@@ -135,14 +122,14 @@ def get_token(username, password):
                 continue
             data = offer.get('productOfferingAttributes')
             ph_no = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
-    except:
+    except Exception:
         raise TelstraAuthException('Unable to determine eligible services')
     prog_dialog.update(80, 'Obtaining Live Pass')
-    
+
     media_order_data = config.MEDIA_ORDER_JSON.format(ph_no,
                                                       offer_id,
                                                       token)
-    media_order = session.post(config.MEDIA_ORDER_URL, media_order_data)
+    session.post(config.MEDIA_ORDER_URL, media_order_data)
     prog_dialog.update(100, 'Finished!')
     prog_dialog.close()
     session.close()
