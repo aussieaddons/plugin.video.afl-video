@@ -20,6 +20,7 @@
 import base64
 import comm
 import config
+import custom_session
 import json
 import requests
 import urllib
@@ -32,31 +33,30 @@ from exception import AFLVideoException
 
 try:
     import StorageServer
-except:
-    utils.log("script.common.plugin.cache not found!")
+except ImportError:
     import storageserverdummy as StorageServer
-cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
-# Ignore InsecureRequestWarning warnings
-requests.packages.urllib3.disable_warnings()
-session = requests.Session()
-session.verify = False
+cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
 addon = xbmcaddon.Addon()
 free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
 
+session = custom_session.Session()
+
 
 def clear_token():
     """Remove stored token from cache storage"""
-    cache.delete('AFLTOKEN')
+    try:
+        cache.delete('AFLTOKEN')
+    except AttributeError:
+        pass
 
 
 def fetch_session_id(url, data):
-    """ send http POST and return the json response data"""
+    """send http POST and return the json response data"""
     data = urllib.urlencode(data)
     session.headers = config.HEADERS
     comm.update_token(session)
-    utils.log("Fetching URL: {0}".format(url))
     res = session.post(url, data)
     try:
         res.raise_for_status()
@@ -67,9 +67,9 @@ def fetch_session_id(url, data):
 
 
 def get_user_token():
-    """ Send user login info and retrieve token for session"""
+    """Send user login info and retrieve token for session"""
     stored_token = cache.get('AFLTOKEN')
-    if stored_token != '':
+    if stored_token:
         utils.log('Using token: {0}******'.format(stored_token[:-6]))
         return stored_token
 
@@ -145,22 +145,44 @@ def get_secure_token(secure_url, video_id):
         parsed_json = json.loads(res.text)
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(res.text))
-    ios_token = parsed_json['authorization_data'][video_id]['streams'][0]['url']['data']  # noqa
-    return base64.b64decode(ios_token)
+
+    if parsed_json.get('authorized') is False:
+        raise AFLVideoException('Failed to get authorization token: {0}'
+                                ''.format(parsed_json.get('message')))
+
+    auth_data = parsed_json.get('authorization_data')
+
+    utils.log('auth_data: %s' % auth_data)
+    video = auth_data.get(video_id)
+
+    if video.get('authorized') is False:
+        raise AFLVideoException('Failed to obtain secure token: {0}.\n'
+                                'Check your subscription is valid.'
+                                ''.format(video.get('message')))
+    try:
+        streams = video.get('streams')
+        ios_token = streams[0]['url']['data']
+        return base64.b64decode(ios_token)
+    except Exception as e:
+        raise AFLVideoException('Failed to get stream URL: {0}'.format(e))
 
 
 def get_m3u8_streams(secure_token_url):
-    """ fetch our m3u8 file which contains streams of various qualities"""
+    """fetch our m3u8 file which contains streams of various qualities"""
     res = session.get(secure_token_url)
     data = res.text.splitlines()
     return data
 
 
 def parse_m3u8_streams(data, live, secure_token_url):
-    """ Parse the retrieved m3u8 stream list into a list of dictionaries
-        then return the url for the highest quality stream. Different
-        handling is required of live m3u8 files as they seem to only contain
-        the destination filename and not the domain/path."""
+    """Parse m3u8 stream
+
+    Parse the retrieved m3u8 stream list into a list of dictionaries
+    then return the url for the highest quality stream. Different
+    handling is required of live m3u8 files as they seem to only contain
+    the destination filename and not the domain/path.
+    """
+
     if live:
         qual = int(xbmcaddon.Addon().getSetting('LIVE_QUALITY'))
         if qual == config.MAX_LIVE_QUAL:
@@ -200,15 +222,21 @@ def parse_m3u8_streams(data, live, secure_token_url):
     return stream
 
 
-def get_m3u8_playlist(video_id, live, login_token):
-    """ Main function to call other functions that will return us our m3u8 HLS
-        playlist as a string, which we can then write to a file for Kodi
-        to use"""
+def get_m3u8_playlist(video_id, live, login_token=None):
+    """Get m3u8 playlist
 
-    embed_token = get_embed_token(login_token, video_id)
+    Main function to call other functions that will return us our m3u8 HLS
+    playlist as a string, which we can then write to a file for Kodi
+    to use
+    """
 
-    authorize_url = config.AUTH_URL.format(config.PCODE, video_id, embed_token)
-    secure_token_url = get_secure_token(authorize_url, video_id)
+    auth_url = config.AUTH_URL.format(config.PCODE, video_id)
+
+    if login_token:
+        embed_token = get_embed_token(login_token, video_id)
+        auth_url = auth_url + '&embedToken=' + embed_token
+
+    secure_token_url = get_secure_token(auth_url, video_id)
 
     if 'chunklist.m3u8' in secure_token_url:
         return secure_token_url

@@ -30,12 +30,14 @@ def make_list(url):
     try:
         params = utils.get_url(url)
 
-        category = config.CATEGORY_LOOKUP[params.get('category')]
-        videos = comm.get_videos(category)
+        if 'team' in params:
+            videos = comm.get_team_videos(params.get('team'))
+        elif params.get('category') == 'Live Matches':
+            videos = comm.get_live_videos()
+        else:
+            category = config.CATEGORY_LOOKUP[params.get('category')]
+            videos = comm.get_category_videos(category)
 
-        utils.log("Found %s videos" % len(videos))
-
-        # fill media list
         ok = True
         for v in videos:
 
@@ -56,5 +58,5 @@ def make_list(url):
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
-    except Exception, e:
+    except Exception as e:
         utils.handle_error('Unable to fetch video list', exc=e)

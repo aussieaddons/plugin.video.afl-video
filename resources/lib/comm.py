@@ -18,40 +18,43 @@
 
 import classes
 import config
+import custom_session
 import datetime
 import json
-import requests
 import time
 import utils
 import xbmcaddon
 
 from exception import AFLVideoException
 
-from requests.adapters import HTTPAdapter
 from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
 
+__addon__ = xbmcaddon.Addon()
 
-def fetch_url(url, request_token=False):
+
+def fetch_url(url, data=None, headers=None, request_token=False):
     """
     Simple function that fetches a URL using requests.
     An exception is raised if an error (e.g. 404) occurs.
     """
     utils.log("Fetching URL: %s" % url)
-    with requests.Session() as session:
-        session.mount('http://', HTTPAdapter(max_retries=5))
-        session.mount('https://', HTTPAdapter(max_retries=5))
+    with custom_session.Session() as session:
+
+        if headers:
+            session.headers.update(headers)
+
         # Token headers
         if request_token:
             update_token(session)
 
-        request = session.get(url, verify=False)
-        try:
-            request.raise_for_status()
-        except Exception as e:
-            raise AFLVideoException(e)
+        if data:
+            request = session.post(url, data)
+        else:
+            request = session.get(url)
+
         data = request.text
     return data
 
@@ -62,14 +65,20 @@ def update_token(session):
         and it will update the requests session with a token
         required for API calls
     """
-    res = requests.post(config.TOKEN_URL)
+    res = session.post(config.TOKEN_URL)
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:
         raise AFLVideoException('Failed to retrieve API token: {0}\n'
-                                'Service may be currently '
-                                'unavailable.'.format(e))
+                                'Service may be currently unavailable.'
+                                ''.format(e))
     session.headers.update({'x-media-mis-token': token})
+
+
+def get_attr(attrs, key):
+    for attr in attrs:
+        if attr.get('attrName') == key:
+            return attr.get('attrValue')
 
 
 def parse_json_video(video_data):
@@ -77,6 +86,10 @@ def parse_json_video(video_data):
         Parse the JSON data and construct a video object from it for a list
         of videos
     """
+    attrs = video_data.get('customAttributes')
+    if not attrs:
+        return
+
     video = classes.Video()
     video.title = utils.ensure_ascii(video_data.get('title'))
     video.description = utils.ensure_ascii(video_data.get('description'))
@@ -88,9 +101,22 @@ def parse_json_video(video_data):
     except Exception:
         pass
 
-    data = video_data.get('customAttributes')
-    video.ooyalaid = [x['attrValue'] for x in data
-                      if x['attrName'] == 'ooyala embed code'][0]
+    if video_data.get('entitlement'):
+        video.subscription_required = True
+
+    # Look for 'national' stream (e.g. Foxtel)
+    video_id = get_attr(attrs, 'ooyala embed code')
+
+    if not video_id:
+        # Look for configured state stream
+        state = __addon__.getSetting('STATE')
+        video_id = get_attr(attrs, 'state-' + state)
+
+    if not video_id:
+        # Fall back to the VIC stream
+        video_id = get_attr(attrs, 'state-VIC')
+
+    video.ooyalaid = video_id
     video.live = False
     return video
 
@@ -100,23 +126,41 @@ def parse_json_live(video_data):
         Parse the JSON data for live match and construct a video object from it
         for a list of videos
     """
-    if not video_data['videoStream']:
+    video_stream = video_data.get('videoStream')
+    if not video_stream:
         return
 
-    if 'customAttributes' not in video_data['videoStream']:
+    attrs = video_stream.get('customAttributes')
+    if not attrs:
         return
 
     video = classes.Video()
     title = utils.ensure_ascii(video_data.get('title'))
     video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(title)
-    video.description = title
-    video.thumbnail = video_data['videoStream'].get('thumbnailURL')
-    attrs = video_data['videoStream'].get('customAttributes')
-    video_id = [x['attrValue'] for x in attrs
-                if x['attrName'] == 'ooyala embed code']
-    video.ooyalaid = video_id[0]
-    video.live = True
+    video.thumbnail = video_stream.get('thumbnailURL')
 
+    if video_stream.get('entitlement'):
+        video.subscription_required = True
+
+    # Look for 'national' stream (e.g. Foxtel)
+    video_id = get_attr(attrs, 'ooyala embed code')
+
+    if not video_id:
+        # Look for configured state stream
+        state = __addon__.getSetting('STATE')
+        video_id = get_attr(attrs, 'state-' + state)
+
+    if not video_id:
+        # Fall back to the VIC stream
+        video_id = get_attr(attrs, 'state-VIC')
+
+    if not video_id:
+        utils.log('Unable to find video ID from stream data: {0}'.format(
+                  video_data))
+        raise AFLVideoException('Unable to find video ID from stream data.')
+
+    video.ooyalaid = video_id
+    video.live = True
     return video
 
 
@@ -141,7 +185,6 @@ def get_video(video_id):
     video = parse_json_video(video_data)
 
     # Find our quality setting and fetch the URL
-    __addon__ = xbmcaddon.Addon()
     qual = __addon__.getSetting('QUALITY')
 
     # Set the last video entry (usually highest qual) as a default fallback
@@ -162,20 +205,19 @@ def get_video(video_id):
     return video
 
 
-def get_videos(category):
-    """
-        Get all videos by category
-    """
+def get_team_videos(team_id):
+    url = config.VIDEO_LIST_URL + '?pageSize=50&teamIds=CD_T' + team_id
+    return get_videos(url)
+
+
+def get_category_videos(category):
+    url = config.VIDEO_LIST_URL + '?categories=' + category
+    return get_videos(url)
+
+
+def get_videos(url):
+    """Get videos from a given URL"""
     video_list = []
-
-    # Category names are URL encoded
-    if category == 'All Videos':
-        url = config.VIDEO_LIST_URL
-    elif category == 'Live Matches':
-        url = config.LIVE_LIST_URL
-    else:
-        url = config.VIDEO_LIST_URL + '?categories=' + category
-
     data = fetch_url(url, request_token=True)
     try:
         json_data = json.loads(data)
@@ -184,31 +226,39 @@ def get_videos(category):
         raise Exception('Failed to retrieve video data. Service may be '
                         'currently unavailable.')
 
-    if category == 'Live Matches':
-        video_assets = json_data
-
+    for category in json_data['categories']:
+        video_assets = category['videos']
         for video_asset in video_assets:
-            video = parse_json_live(video_asset)
-
+            video = parse_json_video(video_asset)
             if video:
                 video_list.append(video)
 
-        upcoming_videos = get_round('latest', True)
-        for match in upcoming_videos:
-            v = classes.Video()
-            v.title = match['name']
-            v.isdummy = True
-            v.url = 'null'
-            video_list.append(v)
+    return video_list
 
-    else:
-        for category in json_data['categories']:
-            video_assets = category['videos']
-            for video_asset in video_assets:
-                video = parse_json_video(video_asset)
-                if video:
-                    video_list.append(video)
 
+def get_live_videos():
+    video_list = []
+    data = fetch_url(config.LIVE_LIST_URL, request_token=True)
+    try:
+        video_data = json.loads(data)
+    except ValueError:
+        utils.log('Failed to load JSON. Data is: {0}'.format(data))
+        raise Exception('Failed to retrieve video data. Service may be '
+                        'currently unavailable.')
+
+    for video_asset in video_data:
+        video = parse_json_live(video_asset)
+
+        if video:
+            video_list.append(video)
+
+    upcoming_videos = get_round('latest', True)
+    for match in upcoming_videos:
+        v = classes.Video()
+        v.title = match['name']
+        v.isdummy = True
+        v.url = 'null'
+        video_list.append(v)
     return video_list
 
 

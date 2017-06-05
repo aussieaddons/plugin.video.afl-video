@@ -1,6 +1,6 @@
 #
-#  SBS On Demand Kodi Add-on
-#  Copyright (C) 2015 Andy Botting
+#  AFL Video Kodi Add-on
+#  Copyright (C) 2017 Andy Botting
 #
 #  This plugin is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@ import xbmcgui
 import config
 import issue_reporter
 
-from exception import AFLVideoException
 
 pattern = re.compile("&(\w+?);")
 
@@ -40,12 +39,10 @@ pattern = re.compile("&(\w+?);")
 throwaway = time.strptime('20140101', '%Y%m%d')
 
 
-def get_team(squad_id):
-    """
-        Return the team from a given Squad ID
-    """
+def get_team(team_id):
+    """Return the team from a given team ID"""
     for t in config.TEAMS:
-        if t['squad'] == squad_id:
+        if t['team_id'] == team_id:
             return t
 
 
@@ -219,7 +216,7 @@ def handle_error(msg, exc=None):
     report_issue = False
 
     # Don't show any dialogs when user cancels
-    if traceback_str.find('SystemExit') > 0:
+    if 'SystemExit' in traceback_str:
         return
 
     d = xbmcgui.Dialog()
@@ -230,10 +227,15 @@ def handle_error(msg, exc=None):
         send_error = can_send_error(traceback_str)
 
         # Some transient network errors we don't want any reports about
-        if ((traceback_str.find('The read operation timed out') > 0) or
-            (traceback_str.find('IncompleteRead') > 0) or
-            (traceback_str.find('HTTP Error 404: Not Found') > 0)):
-                send_error = False
+        ignore_errors = ['The read operation timed out',
+                         'IncompleteRead',
+                         'getaddrinfo failed',
+                         'No address associated with hostname',
+                         'Connection reset by peer',
+                         'HTTP Error 404: Not Found']
+
+        if any(s in traceback_str for s in ignore_errors):
+            send_error = False
 
         # Don't allow reporting for these (mostly) user or service errors
         if type(exc).__name__ in ['AFLVideoException', 'TelstraAuthException']:
@@ -255,7 +257,7 @@ def handle_error(msg, exc=None):
                 message.append("Would you like to automatically "
                                "report this error?")
                 report_issue = d.yesno(*message)
-            except:
+            except Exception:
                 message.append("If this error continues to occur, "
                                "please report it to our issue tracker.")
                 d.ok(*message)

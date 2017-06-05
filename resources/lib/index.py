@@ -38,17 +38,6 @@ def make_list():
         #
         # enumerate through the list of categories and add the item
         # to the media list
-        # for i in items:
-        #     url = "%s?channel=%s" % (sys.argv[0], i['channel'])
-        #     listitem = xbmcgui.ListItem(i['name'])
-        #
-        #     # add the item to the media list
-        #     ok = xbmcplugin.addDirectoryItem(
-        #                 handle=int(sys.argv[1]),
-        #                 url=url,
-        #                 listitem=listitem,
-        #                 isFolder=True,
-        #             )
 
         for category in config.CATEGORIES:
             url = "%s?category=%s" % (sys.argv[0], category)
@@ -64,5 +53,5 @@ def make_list():
                     )
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-    except:
-        utils.handle_error('Unable build video category list')
+    except Exception as e:
+        utils.handle_error('Unable build video category list', exc=e)

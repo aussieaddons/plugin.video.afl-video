@@ -48,5 +48,5 @@ def make_list(round_id):
 
         # send notification we're finished, successfully or unsuccessfully
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-    except:
-        utils.handle_error('Unable to fetch match list')
+    except Exception as e:
+        utils.handle_error('Unable to fetch match list', exc=e)

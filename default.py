@@ -36,6 +36,7 @@ import videos  # noqa: E402
 import play_replay  # noqa: E402
 import play  # noqa: E402
 import ooyalahelper  # noqa: E402
+import teams  # noqa: E402
 
 utils.log_xbmc_platform_version()
 
@@ -48,16 +49,18 @@ if __name__ == "__main__":
     else:
         utils.log("Loading add-on with params: %s" % params)
         if 'category' in params:
-            # Settings
             if params['category'] == 'Settings':
                 xbmcaddon.Addon().openSettings()
-            # Match replay round list
+            elif params['category'] == 'Team Video':
+                teams.make_list()
             elif params['category'].startswith('Match Replays'):
                 # Pull season out from end of category name
                 season = params['category'].split()[-1]
                 rounds.make_rounds(season)
             else:
                 videos.make_list(params_str)
+        elif 'team' in params:
+            videos.make_list(params_str)
         elif 'match_id' in params:
             # List of videos (quarters) for a match
             play_replay.make_list(params['round_id'], params['match_id'])

@@ -17,6 +17,9 @@ class StorageServer:
     def get(self, name):
         return ""
 
+    def delete(self, name):
+        return ""
+
     def setMulti(self, name, data):
         return ""
 
