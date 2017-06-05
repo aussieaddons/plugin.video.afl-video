@@ -145,7 +145,12 @@ def get_secure_token(secure_url, video_id):
         parsed_json = json.loads(res.text)
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(res.text))
-
+        if '<html' in res.text:  # smart DNS redirects
+            raise AFLVideoException('Failed to get authorization token. '
+                                    'Please ensure any smart DNS service '
+                                    'is disabled.')
+        else:
+            raise Exception('Failed to get authorization token.')
     if parsed_json.get('authorized') is False:
         raise AFLVideoException('Failed to get authorization token: {0}'
                                 ''.format(parsed_json.get('message')))
