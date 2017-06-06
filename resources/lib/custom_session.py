@@ -57,6 +57,8 @@ class Session(requests.Session):
                                     'an old version of Kodi. Please upgrade '
                                     'to at least Kodi v17 or later.'
                                     ''.format(e))
+        except requests.exceptions.HTTPError as e:
+            raise e
         except Exception as e:
             raise AFLVideoException('Error: {0}'.format(e))
 

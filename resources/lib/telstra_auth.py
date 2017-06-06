@@ -102,9 +102,8 @@ def get_token(username, password):
     session.headers = media_order_hdrs
 
     # First check if there are any eligible services attached to the account
-    offers = session.get(config.OFFERS_URL)
     try:
-        offers.raise_for_status()
+        offers = session.get(config.OFFERS_URL)
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
             message = json.loads(e.response.text).get('userMessage')
@@ -117,13 +116,20 @@ def get_token(username, password):
     try:
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
+        ph_no = None
         for offer in offers_list:
             if offer.get('name') != 'AFL Live Pass':
                 continue
             data = offer.get('productOfferingAttributes')
             ph_no = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
-    except Exception:
-        raise TelstraAuthException('Unable to determine eligible services')
+        if not ph_no:
+            raise TelstraAuthException(
+                'Unable to determine if you have any eligible services. '
+                'Please ensure there is an eligible service linked to '
+                'your Telstra ID to redeem the free offer. Please visit '
+                '{0} for further instructions'.format(config.HUB_URL))
+    except Exception as e:
+        raise e
     prog_dialog.update(80, 'Obtaining Live Pass')
 
     media_order_data = config.MEDIA_ORDER_JSON.format(ph_no,
