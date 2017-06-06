@@ -50,15 +50,15 @@ class Session(requests.Session):
         """Send the request after generating the complete URL."""
         utils.log("Performing HTTP {0} for {1}".format(method, url))
         try:
-            rfs = kwargs.pop('raise_for_status', True)
             req = super(Session, self).request(method, url, *args, **kwargs)
-            if rfs:
-                req.raise_for_status()
+            req.raise_for_status()
         except SSLError as e:
             raise AFLVideoException('SSL Error: {0}. This is usually due to '
                                     'an old version of Kodi. Please upgrade '
                                     'to at least Kodi v17 or later.'
                                     ''.format(e))
+        except requests.exceptions.HTTPError as e:
+            raise e
         except Exception as e:
             raise AFLVideoException('Error: {0}'.format(e))
 

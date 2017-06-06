@@ -102,9 +102,8 @@ def get_token(username, password):
     session.headers = media_order_hdrs
 
     # First check if there are any eligible services attached to the account
-    offers = session.get(config.OFFERS_URL, raise_for_status=False)
     try:
-        offers.raise_for_status()
+        offers = session.get(config.OFFERS_URL)
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
             message = json.loads(e.response.text).get('userMessage')
