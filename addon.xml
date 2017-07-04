@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><addon id="plugin.video.afl-video" name="AFL Video" provider-name="Andy Botting" version="1.8.1">
+<?xml version="1.0" ?><addon id="plugin.video.afl-video" name="AFL Video" provider-name="Andy Botting" version="1.8.2">
    <requires>
       <import addon="xbmc.python" version="2.1.0"/>
       <import addon="script.module.beautifulsoup4"/>

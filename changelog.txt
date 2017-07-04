@@ -1,4 +1,7 @@
-[B]Version 1.8.1[/B]
+[B]Version 1.8.2[/B]
+- Small error handling improvements (#2535)
+
+[B]Version v1.8.1[/B]
 - Use new requests functions and code cleanups
 - Fix AttributeError: StorageServer instance has no attribute 'delete' #2267
 - Update travisci config
