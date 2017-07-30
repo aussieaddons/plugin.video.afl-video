@@ -16,42 +16,27 @@
 #    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sys
 import config
-import utils
-import xbmcaddon
+import sys
 import xbmcgui
 import xbmcplugin
+
+from aussieaddonscommon import utils
 
 
 def make_list():
     try:
-        # Disabled until team channels has been moved to new API
-        # items = []
-        # __addon__ = xbmcaddon.Addon()
-        # favourite_team =  __addon__.getSetting('TEAM')
-        # if favourite_team > 0:
-        #     for team in config.TEAMS:
-        #         if favourite_team == team['id']:
-        #             items.append({'name': team['name'],
-        #                           'channel': team['channel']})
-        #
-        # enumerate through the list of categories and add the item
-        # to the media list
-
         for category in config.CATEGORIES:
             url = "%s?category=%s" % (sys.argv[0], category)
             listitem = xbmcgui.ListItem(category)
 
             # add the item to the media list
-            ok = xbmcplugin.addDirectoryItem(
-                        handle=int(sys.argv[1]),
-                        url=url,
-                        listitem=listitem,
-                        isFolder=True,
-                        totalItems=len(config.CATEGORIES)
-                    )
+            ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),
+                                             url=url,
+                                             listitem=listitem,
+                                             isFolder=True,
+                                             totalItems=len(config.CATEGORIES))
 
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
-    except Exception as e:
-        utils.handle_error('Unable build video category list', exc=e)
+    except Exception:
+        utils.handle_error('Unable build video category list')

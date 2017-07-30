@@ -20,28 +20,27 @@
 import base64
 import comm
 import config
-import custom_session
 import json
 import requests
 import urllib
 import xbmcaddon
 
 import telstra_auth
-import utils
 
-from exception import AFLVideoException
+from aussieaddonscommon.exceptions import AussieAddonsException
+from aussieaddonscommon import session
+from aussieaddonscommon import utils
 
 try:
     import StorageServer
 except ImportError:
     import storageserverdummy as StorageServer
 
-cache = StorageServer.StorageServer(config.ADDON_ID, 1)
 
+cache = StorageServer.StorageServer(utils.get_addon_id(), 1)
 addon = xbmcaddon.Addon()
 free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
-
-session = custom_session.Session()
+sess = session.Session()
 
 
 def clear_token():
@@ -55,9 +54,9 @@ def clear_token():
 def fetch_session_id(url, data):
     """send http POST and return the json response data"""
     data = urllib.urlencode(data)
-    session.headers = config.HEADERS
-    comm.update_token(session)
-    res = session.post(url, data)
+    sess.headers = config.HEADERS
+    comm.update_token(sess)
+    res = sess.post(url, data)
     try:
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
@@ -86,15 +85,15 @@ def get_user_token():
             login_json = fetch_session_id(config.LOGIN_URL, login_data)
             data = json.loads(login_json)
             if data.get('responseCode') != 0:
-                raise AFLVideoException('Invalid login/password for paid '
-                                        'afl.com.au subscription.')
+                raise AussieAddonsException('Invalid login/password for paid '
+                                            'afl.com.au subscription.')
             session_id = data['data'].get('artifactValue')
 
             try:
-                session.headers.update({'Authorization': None})
+                sess.headers.update({'Authorization': None})
                 encoded_session_id = urllib.quote(session_id)
                 session_url = config.SESSION_URL.format(encoded_session_id)
-                res = session.get(session_url)
+                res = sess.get(session_url)
                 res.raise_for_status()
                 data = json.loads(res.text)
                 token = data.get('uuid')
@@ -106,30 +105,30 @@ def get_user_token():
         utils.log('Using token: {0}******'.format(token[:-6]))
         return token
     else:
-        raise AFLVideoException('AFL Live Pass subscription is required.')
+        raise AussieAddonsException('AFL Live Pass subscription is required.')
 
 
 def get_embed_token(user_token, video_id):
     """send our user token to get our embed token, including api key"""
     try:
-        comm.update_token(session)
+        comm.update_token(sess)
         embed_token_url = config.EMBED_TOKEN_URL.format(user_token, video_id)
         utils.log("Fetching embed token: {0}".format(embed_token_url))
         try:
-            res = session.get(embed_token_url)
+            res = sess.get(embed_token_url)
         except requests.exceptions.SSLError:
             cache.delete('AFLTOKEN')
-            raise AFLVideoException('Your version of Kodi is too old to '
-                                    'support live streaming. Please upgrade '
-                                    'to the latest version.')
+            raise AussieAddonsException(
+                'Your version of Kodi is too old to support live streaming. '
+                'Please upgrade to the latest version.')
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
         if not free_subscription:
             cache.delete('AFLTOKEN')
-            raise AFLVideoException('Paid subscription not found for supplied '
-                                    'username and password. Please check the '
-                                    'subscription type in settings is '
-                                    'correct.')
+            raise AussieAddonsException(
+                'Paid subscription not found for supplied username and '
+                'password. Please check the subscription type in settings '
+                'is correct.')
         else:
             utils.log(res.text)
             cache.delete('AFLTOKEN')
@@ -140,20 +139,21 @@ def get_embed_token(user_token, video_id):
 
 def get_secure_token(secure_url, video_id):
     """send our embed token back with a few other url encoded parameters"""
-    res = session.get(secure_url)
+    res = sess.get(secure_url)
     try:
         parsed_json = json.loads(res.text)
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(res.text))
         if '<html' in res.text:  # smart DNS redirects
-            raise AFLVideoException('Failed to get authorization token. '
-                                    'Please ensure any smart DNS service '
-                                    'is disabled.')
+            raise AussieAddonsException(
+                'Failed to get authorization token. Please ensure any smart '
+                'DNS service is disabled.')
         else:
             raise Exception('Failed to get authorization token.')
     if parsed_json.get('authorized') is False:
-        raise AFLVideoException('Failed to get authorization token: {0}'
-                                ''.format(parsed_json.get('message')))
+        raise AussieAddonsException(
+            'Failed to get authorization token: {0}'
+            ''.format(parsed_json.get('message')))
 
     auth_data = parsed_json.get('authorization_data')
 
@@ -161,20 +161,21 @@ def get_secure_token(secure_url, video_id):
     video = auth_data.get(video_id)
 
     if video.get('authorized') is False:
-        raise AFLVideoException('Failed to obtain secure token: {0}.\n'
-                                'Check your subscription is valid.'
-                                ''.format(video.get('message')))
+        raise AussieAddonsException(
+            'Failed to obtain secure token: {0}.\n'
+            'Check your subscription is valid.'.format(video.get('message')))
     try:
         streams = video.get('streams')
         ios_token = streams[0]['url']['data']
         return base64.b64decode(ios_token)
     except Exception as e:
-        raise AFLVideoException('Failed to get stream URL: {0}'.format(e))
+        raise AussieAddonsException(
+            'Failed to get stream URL: {0}'.format(e))
 
 
 def get_m3u8_streams(secure_token_url):
     """fetch our m3u8 file which contains streams of various qualities"""
-    res = session.get(secure_token_url)
+    res = sess.get(secure_token_url)
     data = res.text.splitlines()
     return data
 

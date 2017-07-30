@@ -16,14 +16,13 @@
 #     along with this add-on. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import sys
-import config
-import utils
-import classes
 import comm
+import sys
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
+
+from aussieaddonscommon import utils
 
 
 def make_list(round_id, match_id):
@@ -46,11 +45,8 @@ def make_list(round_id, match_id):
                                             isFolder=False)
             xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
         else:
-            d = xbmcgui.Dialog()
-            msg = utils.dialog_message("No videos found. "
-                                       "Replays are only available 24-48 "
-                                       "hours after match has been played. "
-                                       "Please try again later.")
-            d.ok(*msg)
-    except Exception as e:
-        utils.handle_error('Unable to play replay', exc=e)
+            utils.dialog_message('No videos found. Replays are only available '
+                                 '24 hours after match has been played.'
+                                 'Please try again later.')
+    except Exception:
+        utils.handle_error('Unable to play replay')

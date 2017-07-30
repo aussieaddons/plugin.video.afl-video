@@ -20,24 +20,25 @@ import os
 import sys
 import xbmcaddon
 
+from aussieaddonscommon import utils
+
 # Add our resources/lib to the python path
 try:
     current_dir = os.path.dirname(os.path.abspath(__file__))
-except:
+except Exception:
     current_dir = os.getcwd()
-
 sys.path.append(os.path.join(current_dir, "resources", "lib"))
 
-import utils  # noqa: E402
 import index  # noqa: E402
-import rounds  # noqa: E402
 import matches  # noqa: E402
-import videos  # noqa: E402
-import play_replay  # noqa: E402
-import play  # noqa: E402
 import ooyalahelper  # noqa: E402
+import play  # noqa: E402
+import play_replay  # noqa: E402
+import rounds  # noqa: E402
 import teams  # noqa: E402
+import videos  # noqa: E402
 
+# Print our platform/version debugging information
 utils.log_xbmc_platform_version()
 
 if __name__ == "__main__":
@@ -47,7 +48,6 @@ if __name__ == "__main__":
     if (len(params) == 0):
         index.make_list()
     else:
-        utils.log("Loading add-on with params: %s" % params)
         if 'category' in params:
             if params['category'] == 'Settings':
                 xbmcaddon.Addon().openSettings()

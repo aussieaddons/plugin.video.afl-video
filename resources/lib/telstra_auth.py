@@ -1,22 +1,25 @@
 import comm
 import config
-import custom_session
 import json
 import re
 import requests
 import urllib
 import urlparse
-import utils
 import xbmcgui
+
+from aussieaddonscommon.exceptions import AussieAddonsException
+from aussieaddonscommon import session as custom_session
+from aussieaddonscommon import utils
 
 from bs4 import BeautifulSoup
 
 
-class TelstraAuthException(Exception):
-    """Telstra Auth custom exception
+class TelstraAuthException(AussieAddonsException):
+    """Telstra Auth exception
 
-    A Not Fatal Exception is used for certain conditions where we do not
-    want to give users an option to send an error report
+    This exception can be thrown with the reportable arg set which can
+    determine whether or not it is allowed to be sent as an automatic
+    error report
     """
     pass
 

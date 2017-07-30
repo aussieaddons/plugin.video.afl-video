@@ -18,17 +18,6 @@
 # Ignore flake8 E501 line too long
 # flake8: noqa
 
-import version
-
-NAME = 'AFL Video'
-ADDON_ID = 'plugin.video.afl-video'
-VERSION = version.VERSION
-
-GITHUB_API_URL = 'https://api.github.com/repos/andybotting/xbmc-addon-afl-video'
-ISSUE_API_URL = GITHUB_API_URL + '/issues'
-ISSUE_API_AUTH = 'eGJtY2JvdDo1OTQxNTJjMTBhZGFiNGRlN2M0YWZkZDYwZGQ5NDFkNWY4YmIzOGFj'
-GIST_API_URL = 'https://api.github.com/gists'
-
 # These values match the bitrate given in the video data
 VIDEO_QUALITY = {'0': 172,
                  '1': 1024,

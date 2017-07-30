@@ -18,61 +18,67 @@
 
 import classes
 import config
-import custom_session
 import datetime
 import json
 import time
-import utils
 import xbmcaddon
 
-from exception import AFLVideoException
+from aussieaddonscommon import exceptions
+from aussieaddonscommon import session
+from aussieaddonscommon import utils
 
 from bs4 import BeautifulStoneSoup
 
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
 
-__addon__ = xbmcaddon.Addon()
+ADDON = xbmcaddon.Addon()
+
+
+def get_team(team_id):
+    """Return the team from a given team ID"""
+    for t in config.TEAMS:
+        if t['team_id'] == team_id:
+            return t
 
 
 def fetch_url(url, data=None, headers=None, request_token=False):
-    """
-    Simple function that fetches a URL using requests.
-    An exception is raised if an error (e.g. 404) occurs.
-    """
-    utils.log("Fetching URL: %s" % url)
-    with custom_session.Session() as session:
-
+    """Simple function that fetches a URL using requests."""
+    with session.Session() as sess:
         if headers:
-            session.headers.update(headers)
+            sess.headers.update(headers)
 
         # Token headers
         if request_token:
-            update_token(session)
+            update_token(sess)
 
         if data:
-            request = session.post(url, data)
+            request = sess.post(url, data)
         else:
-            request = session.get(url)
-
+            request = sess.get(url)
+        try:
+            request.raise_for_status()
+        except Exception as e:
+            # Just re-raise for now
+            raise e
         data = request.text
     return data
 
 
-def update_token(session):
+def update_token(sess):
+    """Update token
+
+    This functions performs a HTTP POST to the token URL and it will update
+    the requests session with a token required for API calls
     """
-        This functions performs a HTTP POST to the token URL
-        and it will update the requests session with a token
-        required for API calls
-    """
-    res = session.post(config.TOKEN_URL)
+    res = sess.post(config.TOKEN_URL)
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:
-        raise AFLVideoException('Failed to retrieve API token: {0}\n'
-                                'Service may be currently unavailable.'
-                                ''.format(e))
-    session.headers.update({'x-media-mis-token': token})
+        raise exceptions.AussieAddonsException(
+            'Failed to retrieve API token: {0}\n'
+            'Service may be currently unavailable.'.format(e))
+    sess.headers.update({'x-media-mis-token': token})
 
 
 def get_attr(attrs, key):
@@ -82,9 +88,10 @@ def get_attr(attrs, key):
 
 
 def parse_json_video(video_data):
-    """
-        Parse the JSON data and construct a video object from it for a list
-        of videos
+    """Parse JSON stream data
+
+    Parse the JSON data and construct a video object from it for a list
+    of videos
     """
     attrs = video_data.get('customAttributes')
     if not attrs:
@@ -109,7 +116,7 @@ def parse_json_video(video_data):
 
     if not video_id:
         # Look for configured state stream
-        state = __addon__.getSetting('STATE')
+        state = ADDON.getSetting('STATE')
         video_id = get_attr(attrs, 'state-' + state)
 
     if not video_id:
@@ -122,9 +129,10 @@ def parse_json_video(video_data):
 
 
 def parse_json_live(video_data):
-    """
-        Parse the JSON data for live match and construct a video object from it
-        for a list of videos
+    """Parse JSON live stream data
+
+    Parse the JSON data for live match and construct a video object from it
+    for a list of videos
     """
     video_stream = video_data.get('videoStream')
     if not video_stream:
@@ -147,7 +155,7 @@ def parse_json_live(video_data):
 
     if not video_id:
         # Look for configured state stream
-        state = __addon__.getSetting('STATE')
+        state = ADDON.getSetting('STATE')
         video_id = get_attr(attrs, 'state-' + state)
 
     if not video_id:
@@ -157,7 +165,8 @@ def parse_json_live(video_data):
     if not video_id:
         utils.log('Unable to find video ID from stream data: {0}'.format(
                   video_data))
-        raise AFLVideoException('Unable to find video ID from stream data.')
+        raise exceptions.AussieAddonsException('Unable to find video '
+                                               'ID from stream data.')
 
     video.ooyalaid = video_id
     video.live = True
@@ -185,7 +194,7 @@ def get_video(video_id):
     video = parse_json_video(video_data)
 
     # Find our quality setting and fetch the URL
-    qual = __addon__.getSetting('QUALITY')
+    qual = ADDON.getSetting('QUALITY')
 
     # Set the last video entry (usually highest qual) as a default fallback
     # in case we don't make a match below
@@ -263,9 +272,7 @@ def get_live_videos():
 
 
 def get_round(round_id, live=False):
-    """
-        Fetch the round and return the results
-    """
+    """Fetch the round and return the results"""
     round_matches = []
     round_url = config.ROUND_URL
 
@@ -288,8 +295,8 @@ def get_round(round_id, live=False):
 
         if d['homeSquadId']:
             match = {}
-            home_team = utils.get_team(d['homeSquadId'])['name']
-            away_team = utils.get_team(d['awaySquadId'])['name']
+            home_team = get_team(d['homeSquadId'])['name']
+            away_team = get_team(d['awaySquadId'])['name']
             match['name'] = "%s v %s" % (home_team, away_team)
             match['id'] = d['FixtureId']
             match['round_id'] = dict(rnd.items())['id']
@@ -308,7 +315,7 @@ def get_round(round_id, live=False):
                     continue
                 airTime = ts.strftime(" - %A @ %I:%M %p A")
                 match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
-                                    match['name'], airTime, timezone)
+                                match['name'], airTime, timezone)
 
             # Add date/time
             round_matches.append(match)
@@ -317,7 +324,6 @@ def get_round(round_id, live=False):
 
 
 def get_match_video(round_id, match_id, quality):
-
     match_video = []
     round_url = "%s/%s" % (config.ROUND_URL, round_id)
 
