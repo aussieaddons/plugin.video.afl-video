@@ -98,7 +98,7 @@ class Video(object):
     def get_url(self):
         return self.url
 
-    def get_xbmc_list_item(self):
+    def get_kodi_list_item(self):
         """Get XBMC list item
 
         Returns a dict of program information, in the format which
@@ -117,7 +117,7 @@ class Video(object):
             info_dict['season'] = self.get_season()
         return info_dict
 
-    def get_xbmc_stream_info(self):
+    def get_kodi_stream_info(self):
         """Return a stream info dict"""
         info_dict = {}
         if self.get_duration():

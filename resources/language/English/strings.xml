@@ -5,6 +5,7 @@
     <!-- Categories -->
     <string id="20001">General</string>
     <string id="20002">AFL Live Pass</string>
+    <string id="20003">Debugging</string>
 
     <!-- General -->
     <string id="10002">Favourite Team</string>
@@ -18,7 +19,8 @@
     <string id="10009">On Demand Video Quality</string>
     <string id="10007">AFL Live Pass Subscription</string>
     <string id="10008">Subscription Type</string>
-    <string id="10010">Debugging</string>
+
+    <!-- Debugging -->
     <string id="10011">Remove Stored Login Token</string>
-    <string id="10012">State</string>
+    <string id="10012">Send error report</string>
 </strings>

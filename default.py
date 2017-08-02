@@ -23,11 +23,8 @@ import xbmcaddon
 from aussieaddonscommon import utils
 
 # Add our resources/lib to the python path
-try:
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-except Exception:
-    current_dir = os.getcwd()
-sys.path.append(os.path.join(current_dir, "resources", "lib"))
+addon_dir = xbmcaddon.Addon().getAddonInfo('path')
+sys.path.insert(0, os.path.join(addon_dir, 'resources', 'lib'))
 
 import index  # noqa: E402
 import matches  # noqa: E402
@@ -39,36 +36,37 @@ import teams  # noqa: E402
 import videos  # noqa: E402
 
 # Print our platform/version debugging information
-utils.log_xbmc_platform_version()
+utils.log_kodi_platform_version()
 
 if __name__ == "__main__":
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
 
-    if (len(params) == 0):
+    if len(params) == 0:
         index.make_list()
-    else:
-        if 'category' in params:
-            if params['category'] == 'Settings':
-                xbmcaddon.Addon().openSettings()
-            elif params['category'] == 'Team Video':
-                teams.make_list()
-            elif params['category'].startswith('Match Replays'):
-                # Pull season out from end of category name
-                season = params['category'].split()[-1]
-                rounds.make_rounds(season)
-            else:
-                videos.make_list(params_str)
-        elif 'team' in params:
+    elif 'category' in params:
+        if params['category'] == 'Settings':
+            xbmcaddon.Addon().openSettings()
+        elif params['category'] == 'Team Video':
+            teams.make_list()
+        elif params['category'].startswith('Match Replays'):
+            # Pull season out from end of category name
+            season = params['category'].split()[-1]
+            rounds.make_rounds(season)
+        else:
             videos.make_list(params_str)
-        elif 'match_id' in params:
-            # List of videos (quarters) for a match
-            play_replay.make_list(params['round_id'], params['match_id'])
-        elif 'round_id' in params:
-            # Match list for a round
-            matches.make_list(params['round_id'])
-        elif 'title' in params:
-            play.play(params_str)
-        elif 'action' in params:
-            if params['action'] == 'cleartoken':
-                ooyalahelper.clear_token()
+    elif 'team' in params:
+        videos.make_list(params_str)
+    elif 'match_id' in params:
+        # List of videos (quarters) for a match
+        play_replay.make_list(params['round_id'], params['match_id'])
+    elif 'round_id' in params:
+        # Match list for a round
+        matches.make_list(params['round_id'])
+    elif 'title' in params:
+        play.play(params_str)
+    elif 'action' in params:
+        if params['action'] == 'cleartoken':
+            ooyalahelper.clear_token()
+        if params['action'] == 'sendreport':
+            utils.user_report()

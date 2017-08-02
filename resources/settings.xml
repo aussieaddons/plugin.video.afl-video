@@ -12,7 +12,9 @@
     <setting id="SUBSCRIPTION_TYPE" type="enum" label="10008" values="Paid (afl.com.au)|Free offer (Telstra ID)" default="1" enable="eq(-1,true)" />
     <setting id="LIVE_USERNAME" type="text" label="10003" default="" enable="eq(-2,true)" />
     <setting id="LIVE_PASSWORD" type="text" label="10004" option="hidden" default="" enable="eq(-3,true)" />
-    <setting label="10010" type="lsep"/>
     <setting label="10011" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=cleartoken)" enable="eq(-5,true)"/>
+  </category>
+  <category label="20003">
+    <setting label="10012" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=sendreport)"/>
   </category>
 </settings>
