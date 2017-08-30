@@ -1,4 +1,10 @@
-[B]Version 1.8.2[/B]
+[B]Version 1.8.3[/B]
+- Clean up settings, method name fixes
+- Update travis CI key for repo move
+- Add higher res icons
+- Use aussie addons common module, flake8 fixes
+
+[B]Version v1.8.2[/B]
 - Small error handling improvements (#2535)
 
 [B]Version v1.8.1[/B]
