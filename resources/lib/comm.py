@@ -260,14 +260,14 @@ def get_live_videos():
 
         if video:
             video_list.append(video)
-
-    upcoming_videos = get_round('latest', True)
-    for match in upcoming_videos:
-        v = classes.Video()
-        v.title = match['name']
-        v.isdummy = True
-        v.url = 'null'
-        video_list.append(v)
+    # disabled for now
+    #upcoming_videos = get_round('latest', True)
+    #for match in upcoming_videos:
+    #    v = classes.Video()
+    #    v.title = match['name']
+    #    v.isdummy = True
+    #    v.url = 'null'
+    #    video_list.append(v)
     return video_list
 
 
