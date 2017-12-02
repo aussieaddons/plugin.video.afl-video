@@ -34,11 +34,14 @@ MAX_REPLAY_QUAL = 6
 
 # Round URL, which lists the games of the round if they've had their Videos uploaded
 # This URL can also take a 'Round ID' added to the end (e.g CD_R201301401)
-ROUND_URL = 'http://www.afl.com.au/api/gas/afl/roundVideo'
+ROUND_URL = 'https://api.afl.com.au/cfs/afl/videos/round/{0}?pageSize=20&pageNum=1&categories=Match Replays&includeOnlineVideos=false'
 
 # This URL returns a token if POST'ed to. The token is required in the header to any
 # reqeusts against the API
 TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
+
+# API URL for all seasons and rounds data
+SEASONS_URL = 'https://api.afl.com.au/cfs/afl/seasons'
 
 # API URL for current live videos
 LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
@@ -137,11 +140,7 @@ CATEGORIES = [
     'Live Matches',
     'Team Video',
     'Recent Match Replays',
-    'Match Replays 2017',
-    'Match Replays 2016',
-    'Match Replays 2015',
-    'Match Replays 2014',
-    'Match Replays 2013',
+    'All Match Replays',
     'Auto-generated Highlights',
     'Editorial Highlights',
     'Media Conferences',
@@ -156,11 +155,7 @@ CATEGORY_LOOKUP = {
     'Live Matches': 'Live Matches',
     'Team Video': 'Team Video',
     'Recent Match Replays': 'Match Replays&pageSize=50',
-    'Match Replays 2017': 'Match Replays 2017',
-    'Match Replays 2016': 'Match Replays 2016',
-    'Match Replays 2015': 'Match Replays 2015',
-    'Match Replays 2014': 'Match Replays 2014',
-    'Match Replays 2013': 'Match Replays 2013',
+    'All Match Replays': 'All Match Replays',
     'Auto-generated Highlights': 'Auto-generated Highlights&pageSize=50',
     'Editorial Highlights': 'Editorial Highlights&pageSize=50',
     'Media Conferences': 'Media Conferences&pageSize=50',

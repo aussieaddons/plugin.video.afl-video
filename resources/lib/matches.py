@@ -24,19 +24,18 @@ import xbmcplugin
 from aussieaddonscommon import utils
 
 
-def make_list(round_id):
-    utils.log("Fetching match list for round %s..." % round_id)
+def make_list(params):
+    utils.log("Fetching match list for round %s..." % params['round_id'])
     try:
-        matches = comm.get_round(round_id)
+        matches = comm.get_round(params)
         utils.log("Found %s matches" % len(matches))
 
         ok = True
         for m in matches:
-
-            listitem = xbmcgui.ListItem(label=m['name'])
-            url = "%s?round_id=%s&match_id=%s" % (sys.argv[0],
-                                                  m['round_id'],
-                                                  m['id'])
+            listitem = xbmcgui.ListItem(label=m.title)
+            url = "%s?title=%s&ooyalaid=%s&subscription_required=True" % (sys.argv[0],
+                                                  m.title,
+                                                  m.id)
 
             # Add the item to the list
             ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),

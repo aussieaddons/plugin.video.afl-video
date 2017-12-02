@@ -271,57 +271,40 @@ def get_live_videos():
     return video_list
 
 
-def get_round(round_id, live=False):
+def get_seasons(season=None):
+    """Grab the seasons/round list from the API"""
+    data = json.loads(fetch_url(config.SEASONS_URL, request_token=True))
+    seasons = data.get('seasons')
+    if not season:
+        utils.log('not season')
+        return seasons
+    for s in seasons:
+        utils.log('Checking Seasons')
+        if s.get('id') == season:
+            utils.log(s.get('id'))
+            return s
+    
+
+def get_round(params, live=False):
     """Fetch the round and return the results"""
     round_matches = []
-    round_url = config.ROUND_URL
-
-    # Pass a 'latest' string in round_id to get 'this week'
-    if round_id != 'latest':
-        round_url = "%s/%s" % (round_url, round_id)
-
-    xml = fetch_url(round_url)
-    try:
-        rnd = ET.fromstring(xml)
-    except ET.ParseError:
-        utils.log('Could not parse XML. Data is: {0}'.format(xml))
-        raise Exception('Could not parse XML. Service may be '
-                        'currently unavailable.')
-
-    matches = rnd.find('matches').getchildren()
-
-    for m in matches:
-        d = dict(m.items())
-
-        if d['homeSquadId']:
-            match = {}
-            home_team = get_team(d['homeSquadId'])['name']
-            away_team = get_team(d['awaySquadId'])['name']
-            match['name'] = "%s v %s" % (home_team, away_team)
-            match['id'] = d['FixtureId']
-            match['round_id'] = dict(rnd.items())['id']
-
-            # special formatting for the 'upcoming games' list in the live menu
-            if live:
-                now = datetime.datetime.now()
-                timestamp = d['dateTime']
-                timezone = d['timezone']
-                ts = datetime.datetime.fromtimestamp(
-                    time.mktime(time.strptime(timestamp,
-                                              "%Y-%m-%dT%H:%M:%S")))
-                delta = now - ts
-                # remove games that have already been played
-                if delta > datetime.timedelta(hours=3):
-                    continue
-                airTime = ts.strftime(" - %A @ %I:%M %p A")
-                match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
-                                match['name'], airTime, timezone)
-
-            # Add date/time
-            round_matches.append(match)
-
+    data = json.loads(fetch_url(config.ROUND_URL.format(params.get('round_id')), request_token=True))
+    videos = data['categories'][0].get('videos')
+    for video in videos:
+        v = classes.Video()
+        attrs = video.get('customAttributes')
+        if not attrs:
+            continue
+        v.id = get_attr(attrs, 'ooyala embed code')
+        v.title = video.get('title')
+        v.thumbnail = video.get('thumbnailPath')
+        if video.get('entitlement'):
+            v.subscription_required = True
+        round_matches.append(v)
     return round_matches
 
+        
+        
 
 def get_match_video(round_id, match_id, quality):
     match_video = []
