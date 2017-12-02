@@ -39,11 +39,12 @@ def make_rounds(params):
                 sys.argv[0], name, round_id, season_id)
 
             # Add the item to the list
-            ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),
-                                             url=url,
-                                             listitem=listitem,
-                                             isFolder=True,
-                                             totalItems=len(rounds))
+            ok = xbmcplugin.addDirectoryItem(
+                handle=int(sys.argv[1]),
+                url=url,
+                listitem=listitem,
+                isFolder=True,
+                totalItems=len(season.get('rounds')))
 
         # send notification we're finished, successfully or unsuccessfully
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)

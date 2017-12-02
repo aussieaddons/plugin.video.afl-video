@@ -290,5 +290,3 @@ def get_seasons(season=None):
             utils.log(s.get('id'))
             return s
     
-
-
