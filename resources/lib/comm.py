@@ -186,7 +186,7 @@ def get_video(video_id):
 
     json_data = json.loads(data)
 
-    if len(json_data['entries']) == 0:
+    if not json_data.get('entries'):
         raise IOError('Video URL not found')
 
     # Only one entry with this function
@@ -221,6 +221,12 @@ def get_team_videos(team_id):
 
 def get_category_videos(category):
     url = config.VIDEO_LIST_URL + '?categories=' + category
+    return get_videos(url)
+
+
+def get_round_videos(round_id):
+    """Fetch the round and return the results"""
+    url = config.ROUND_URL.format(round_id)
     return get_videos(url)
 
 
@@ -260,7 +266,7 @@ def get_live_videos():
 
         if video:
             video_list.append(video)
-    # disabled for now
+
     #upcoming_videos = get_round('latest', True)
     #for match in upcoming_videos:
     #    v = classes.Video()
@@ -284,48 +290,3 @@ def get_seasons(season=None):
             utils.log(s.get('id'))
             return s
     
-
-def get_round(params, live=False):
-    """Fetch the round and return the results"""
-    round_matches = []
-    data = json.loads(fetch_url(config.ROUND_URL.format(params.get('round_id')), request_token=True))
-    videos = data['categories'][0].get('videos')
-    for video in videos:
-        v = classes.Video()
-        attrs = video.get('customAttributes')
-        if not attrs:
-            continue
-        v.id = get_attr(attrs, 'ooyala embed code')
-        v.title = video.get('title')
-        v.thumbnail = video.get('thumbnailPath')
-        if video.get('entitlement'):
-            v.subscription_required = True
-        round_matches.append(v)
-    return round_matches
-
-        
-        
-
-def get_match_video(round_id, match_id, quality):
-    match_video = []
-    round_url = "%s/%s" % (config.ROUND_URL, round_id)
-
-    try:
-        xml = fetch_url(round_url)
-        rnd = ET.fromstring(xml)
-
-        matches = rnd.find('matches')
-        match = matches.find('match[@FixtureId="%s"]' % match_id)
-
-        qualities = match.find('qualities')
-        quality = qualities.find('quality[@name="%s"]' %
-                                 config.REPLAY_QUALITY[quality])
-        periods = quality.find('periods')
-
-        for qtr in periods.getchildren():
-            qtr_dict = dict(qtr.items())
-            match_video.append(qtr_dict)
-    except Exception:
-        return None
-
-    return match_video

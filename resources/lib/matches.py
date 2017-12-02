@@ -32,6 +32,7 @@ def make_list(params):
 
         ok = True
         for m in matches:
+            utils.log(m.__dict__)
             listitem = xbmcgui.ListItem(label=m.title)
             url = "%s?title=%s&ooyalaid=%s&subscription_required=True" % (sys.argv[0],
                                                   m.title,

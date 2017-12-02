@@ -41,6 +41,7 @@ utils.log_kodi_platform_version()
 if __name__ == "__main__":
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
+    utils.log('Loading with params: {0}'.format(params))
 
     if len(params) == 0:
         index.make_list()
@@ -58,8 +59,7 @@ if __name__ == "__main__":
     elif 'team' in params:
         videos.make_list(params_str)
     elif 'round_id' in params:
-        # Match list for a round
-        matches.make_list(params)
+        videos.make_list(params_str)
     elif 'title' in params:
         play.play(params_str)
     elif 'action' in params:

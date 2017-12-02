@@ -26,6 +26,7 @@ from aussieaddonscommon import utils
 
 
 def make_rounds(params):
+    utils.log('Making rounds list...')
     try:
         season = comm.get_seasons(season=params.get('season'))
         rounds = reversed(season.get('rounds'))
@@ -42,7 +43,7 @@ def make_rounds(params):
                                              url=url,
                                              listitem=listitem,
                                              isFolder=True,
-                                             totalItems=len(season.get('rounds')))
+                                             totalItems=len(rounds))
 
         # send notification we're finished, successfully or unsuccessfully
         xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
