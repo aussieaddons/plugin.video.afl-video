@@ -41,6 +41,7 @@ utils.log_kodi_platform_version()
 if __name__ == "__main__":
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
+    utils.log('Loading with params: {0}'.format(params))
 
     if len(params) == 0:
         index.make_list()
@@ -49,20 +50,16 @@ if __name__ == "__main__":
             xbmcaddon.Addon().openSettings()
         elif params['category'] == 'Team Video':
             teams.make_list()
-        elif params['category'].startswith('Match Replays'):
-            # Pull season out from end of category name
-            season = params['category'].split()[-1]
-            rounds.make_rounds(season)
+        elif params['category'] == 'All Match Replays':
+            index.make_seasons_list()
         else:
             videos.make_list(params_str)
+    elif 'season' in params:
+        rounds.make_rounds(params)
     elif 'team' in params:
         videos.make_list(params_str)
-    elif 'match_id' in params:
-        # List of videos (quarters) for a match
-        play_replay.make_list(params['round_id'], params['match_id'])
     elif 'round_id' in params:
-        # Match list for a round
-        matches.make_list(params['round_id'])
+        videos.make_list(params_str)
     elif 'title' in params:
         play.play(params_str)
     elif 'action' in params:

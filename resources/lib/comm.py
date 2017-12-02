@@ -186,7 +186,7 @@ def get_video(video_id):
 
     json_data = json.loads(data)
 
-    if len(json_data['entries']) == 0:
+    if not json_data.get('entries'):
         raise IOError('Video URL not found')
 
     # Only one entry with this function
@@ -221,6 +221,12 @@ def get_team_videos(team_id):
 
 def get_category_videos(category):
     url = config.VIDEO_LIST_URL + '?categories=' + category
+    return get_videos(url)
+
+
+def get_round_videos(round_id):
+    """Fetch the round and return the results"""
+    url = config.ROUND_URL.format(round_id)
     return get_videos(url)
 
 
@@ -261,88 +267,28 @@ def get_live_videos():
         if video:
             video_list.append(video)
 
-    upcoming_videos = get_round('latest', True)
-    for match in upcoming_videos:
-        v = classes.Video()
-        v.title = match['name']
-        v.isdummy = True
-        v.url = 'null'
-        video_list.append(v)
+    #upcoming_videos = get_round('latest', True)
+    #for match in upcoming_videos:
+    #    v = classes.Video()
+    #    v.title = match['name']
+    #    v.isdummy = True
+    #    v.url = 'null'
+    #    video_list.append(v)
     return video_list
 
 
-def get_round(round_id, live=False):
-    """Fetch the round and return the results"""
-    round_matches = []
-    round_url = config.ROUND_URL
-
-    # Pass a 'latest' string in round_id to get 'this week'
-    if round_id != 'latest':
-        round_url = "%s/%s" % (round_url, round_id)
-
-    xml = fetch_url(round_url)
-    try:
-        rnd = ET.fromstring(xml)
-    except ET.ParseError:
-        utils.log('Could not parse XML. Data is: {0}'.format(xml))
-        raise Exception('Could not parse XML. Service may be '
-                        'currently unavailable.')
-
-    matches = rnd.find('matches').getchildren()
-
-    for m in matches:
-        d = dict(m.items())
-
-        if d['homeSquadId']:
-            match = {}
-            home_team = get_team(d['homeSquadId'])['name']
-            away_team = get_team(d['awaySquadId'])['name']
-            match['name'] = "%s v %s" % (home_team, away_team)
-            match['id'] = d['FixtureId']
-            match['round_id'] = dict(rnd.items())['id']
-
-            # special formatting for the 'upcoming games' list in the live menu
-            if live:
-                now = datetime.datetime.now()
-                timestamp = d['dateTime']
-                timezone = d['timezone']
-                ts = datetime.datetime.fromtimestamp(
-                    time.mktime(time.strptime(timestamp,
-                                              "%Y-%m-%dT%H:%M:%S")))
-                delta = now - ts
-                # remove games that have already been played
-                if delta > datetime.timedelta(hours=3):
-                    continue
-                airTime = ts.strftime(" - %A @ %I:%M %p A")
-                match['name'] = '[COLOR red]{0}{1}{2}[/COLOR]'.format(
-                                match['name'], airTime, timezone)
-
-            # Add date/time
-            round_matches.append(match)
-
-    return round_matches
+def get_seasons(season=None):
+    """Grab the seasons/round list from the API"""
+    data = json.loads(fetch_url(config.SEASONS_URL, request_token=True))
+    seasons = data.get('seasons')
+    if not season:
+        utils.log('not season')
+        return seasons
+    for s in seasons:
+        utils.log('Checking Seasons')
+        if s.get('id') == season:
+            utils.log(s.get('id'))
+            return s
+    
 
 
-def get_match_video(round_id, match_id, quality):
-    match_video = []
-    round_url = "%s/%s" % (config.ROUND_URL, round_id)
-
-    try:
-        xml = fetch_url(round_url)
-        rnd = ET.fromstring(xml)
-
-        matches = rnd.find('matches')
-        match = matches.find('match[@FixtureId="%s"]' % match_id)
-
-        qualities = match.find('qualities')
-        quality = qualities.find('quality[@name="%s"]' %
-                                 config.REPLAY_QUALITY[quality])
-        periods = quality.find('periods')
-
-        for qtr in periods.getchildren():
-            qtr_dict = dict(qtr.items())
-            match_video.append(qtr_dict)
-    except Exception:
-        return None
-
-    return match_video

@@ -26,12 +26,14 @@ from aussieaddonscommon import utils
 
 
 def make_list(url):
-
+    utils.log('Making video list...')
     try:
         params = utils.get_url(url)
 
         if 'team' in params:
             videos = comm.get_team_videos(params.get('team'))
+        elif 'round_id' in params:
+            videos = comm.get_round_videos(params.get('round_id'))
         elif params.get('category') == 'Live Matches':
             videos = comm.get_live_videos()
         else:

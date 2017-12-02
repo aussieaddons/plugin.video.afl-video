@@ -29,12 +29,8 @@ from aussieaddonscommon import utils
 def play(url):
     try:
         params = utils.get_url(url)
-        if 'id' in params:
-            video_id = params['id']
-            v = comm.get_video(video_id)
-        elif 'url' in params or 'ooyalaid' in params:
-            v = classes.Video()
-            v.parse_xbmc_url(url)
+        v = classes.Video()
+        v.parse_xbmc_url(url)
 
         if 'ooyalaid' in params:
             login_token = None
