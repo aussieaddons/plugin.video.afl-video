@@ -27,10 +27,8 @@ addon_dir = xbmcaddon.Addon().getAddonInfo('path')
 sys.path.insert(0, os.path.join(addon_dir, 'resources', 'lib'))
 
 import index  # noqa: E402
-import matches  # noqa: E402
 import ooyalahelper  # noqa: E402
 import play  # noqa: E402
-import play_replay  # noqa: E402
 import rounds  # noqa: E402
 import teams  # noqa: E402
 import videos  # noqa: E402
@@ -53,13 +51,13 @@ if __name__ == "__main__":
         elif params['category'] == 'All Match Replays':
             index.make_seasons_list()
         else:
-            videos.make_list(params_str)
+            videos.make_list(params)
     elif 'season' in params:
         rounds.make_rounds(params)
     elif 'team' in params:
-        videos.make_list(params_str)
+        videos.make_list(params)
     elif 'round_id' in params:
-        videos.make_list(params_str)
+        videos.make_list(params)
     elif 'title' in params:
         play.play(params_str)
     elif 'action' in params:
