@@ -202,7 +202,9 @@ def parse_m3u8_streams(data, live, secure_token_url):
         data.remove('#EXT-X-VERSION:3')
     count = 1
     m3u_list = []
-    prepend_live = secure_token_url[:secure_token_url.find('index-root')]
+    base_url = secure_token_url[:secure_token_url.rfind('/') + 1]
+    base_domain = secure_token_url[:secure_token_url.find('/', 8) + 1]
+
     while count < len(data):
         line = data[count]
         line = line.strip('#EXT-X-STREAM-INF:')
@@ -215,14 +217,20 @@ def parse_m3u8_streams(data, live, secure_token_url):
         line = line.strip()
         line = line.split(',')
         linelist = [i.split('=') for i in line]
-
-        if not live:
-            linelist.append(['URL', data[count + 1]])
+        
+        count += 1
+        
+        uri = data[count]
+        
+        if uri.startswith('/'):
+            linelist.append(['URL', base_domain + uri])
+        elif uri.find('://') == -1:
+            linelist.append(['URL', base_url + uri])
         else:
-            linelist.append(['URL', prepend_live + data[count + 1]])
+            linelist.append(['URL', uri])
 
         m3u_list.append(dict((i[0], i[1]) for i in linelist))
-        count += 2
+        count += 1
     sorted_m3u_list = sorted(m3u_list, key=lambda k: int(k['BANDWIDTH']))
     stream = sorted_m3u_list[qual]['URL']
     return stream
