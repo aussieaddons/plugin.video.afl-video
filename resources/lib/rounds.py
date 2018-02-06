@@ -17,7 +17,6 @@
 #
 
 import comm
-import config
 import sys
 import xbmcgui
 import xbmcplugin

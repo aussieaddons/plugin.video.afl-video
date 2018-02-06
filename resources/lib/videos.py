@@ -34,6 +34,8 @@ def make_list(params):
             videos = comm.get_round_videos(params.get('round_id'))
         elif params.get('category') == 'Live Matches':
             videos = comm.get_live_videos()
+        elif params.get('category') == 'AFLW':
+            videos = comm.get_aflw_videos()
         else:
             category = config.CATEGORY_LOOKUP[params.get('category')]
             videos = comm.get_category_videos(category)

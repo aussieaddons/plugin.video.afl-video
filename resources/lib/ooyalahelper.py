@@ -60,7 +60,7 @@ def fetch_session_id(url, data):
     try:
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        utils.log(res.text)
+        utils.log(e.response.text)
         raise Exception(e)
     return res.text
 
@@ -99,7 +99,7 @@ def get_user_token():
                 token = data.get('uuid')
 
             except requests.exceptions.HTTPError as e:
-                utils.log(res.text)
+                utils.log(e.response.text)
                 raise e
         cache.set('AFLTOKEN', token)
         utils.log('Using token: {0}******'.format(token[:-6]))
@@ -130,8 +130,8 @@ def get_embed_token(user_token, video_id):
                 'password. Please check the subscription type in settings '
                 'is correct.')
         else:
-            utils.log(res.text)
             cache.delete('AFLTOKEN')
+            utils.log(e.response.text)
             raise e
     data = json.loads(res.text)
     return urllib.quote(data.get('token'))
@@ -217,11 +217,11 @@ def parse_m3u8_streams(data, live, secure_token_url):
         line = line.strip()
         line = line.split(',')
         linelist = [i.split('=') for i in line]
-        
+
         count += 1
-        
+
         uri = data[count]
-        
+
         if uri.startswith('/'):
             linelist.append(['URL', base_domain + uri])
         elif uri.find('://') == -1:
