@@ -43,6 +43,9 @@ TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
 # API URL for all seasons and rounds data
 SEASONS_URL = 'https://api.afl.com.au/cfs/afl/seasons'
 
+# API URL for fixture data
+FIXTURE_URL = 'https://api.afl.com.au/cfs/afl/fixturesAndResults/season/{0}/round/{1}'
+
 # API URL for current live videos
 LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
 
@@ -69,6 +72,17 @@ HEADERS = {'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build
            'Content-Type': 'application/x-www-form-urlencoded'}
 
 VIDEO_FEED_URL = "http://feed.theplatform.com/f/gqvPBC/AFLProd_Online_H264?byGuid={0}&form=json"
+
+
+# AFLW
+
+AFLW_INDEX_URL = 'https://app-league-aflw.yinzcam.com/V1/Home/Index?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
+
+AFLW_BOX_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Box/{0}?carrier=&height=1776&error=100000000&ycurl_version=1&os=Android&a=0&platform=Android&mnc=0&ff=mobile&b=0&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
+
+AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&ff=mobile&mnc=0&app_version=1.0.5&version=5.7&width=1080&os_version=7.1.2&mcc=0&application=AFLW_LEAGUE&compId=CD_S2018264'
+
+AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
 # New auth config for 2017
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
@@ -141,6 +155,7 @@ CATEGORIES = [
     'Team Video',
     'Recent Match Replays',
     'All Match Replays',
+    'AFLW',
     'Auto-generated Highlights',
     'Editorial Highlights',
     'Media Conferences',

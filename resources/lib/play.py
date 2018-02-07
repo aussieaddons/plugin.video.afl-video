@@ -17,7 +17,6 @@
 #
 
 import classes
-import comm
 import ooyalahelper
 import sys
 import xbmcgui

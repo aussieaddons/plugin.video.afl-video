@@ -27,8 +27,6 @@ from aussieaddonscommon import exceptions
 from aussieaddonscommon import session
 from aussieaddonscommon import utils
 
-from bs4 import BeautifulStoneSoup
-
 # Use local etree to get v1.3.0
 import etree.ElementTree as ET
 
@@ -61,6 +59,8 @@ def fetch_url(url, data=None, headers=None, request_token=False):
         except Exception as e:
             # Just re-raise for now
             raise e
+        if request.text[0] == u'\ufeff':  # bytes \xef\xbb\xbf in utf-8 encding
+            request.encoding = 'utf-8-sig'
         data = request.text
     return data
 
@@ -226,13 +226,8 @@ def get_live_videos():
         if video:
             video_list.append(video)
 
-    #upcoming_videos = get_round('latest', True)
-    #for match in upcoming_videos:
-    #    v = classes.Video()
-    #    v.title = match['name']
-    #    v.isdummy = True
-    #    v.url = 'null'
-    #    video_list.append(v)
+    video_list += get_upcoming()
+    video_list += get_aflw_upcoming()
     return video_list
 
 
@@ -245,3 +240,137 @@ def get_seasons(season=None):
     for s in seasons:
         if s.get('id') == season:
             return s
+
+
+def get_upcoming():
+    """Make a dummy file list for users to see upcoming matches/times"""
+    season_data = json.loads(fetch_url(config.SEASONS_URL, request_token=True))
+    current_season = season_data.get('currentSeasonId')
+    current_round = None
+    for s in season_data.get('seasons'):
+        if s.get('id') == current_season:
+            current_round = s.get('currentRoundId')
+            break
+
+    if not current_round:
+        return None
+
+    fixture_url = config.FIXTURE_URL.format(current_season, current_round)
+    fixture_data = json.loads(fetch_url(fixture_url, request_token=True))
+
+    listing = []
+    for match in fixture_data.get('fixtures'):
+        if match.get('status') == 'SCHEDULED':
+            v = classes.Video()
+            home = match['homeTeam'].get('teamName')
+            away = match['awayTeam'].get('teamName')
+            match_time = get_airtime(match.get('utcStartTime'))
+            title = '{home} vs {away} - {time}'
+            v.title = title.format(home=home, away=away, time=match_time)
+            v.isdummy = True
+            v.url = 'null'
+            listing.append(v)
+    return listing
+
+
+def get_airtime(timestamp, aflw=False):
+    """Convert timestamp to nicely formatted local time"""
+    try:
+        delta = ((time.mktime(time.localtime()) -
+                 time.mktime(time.gmtime())) / 3600)
+        if time.localtime().tm_isdst:
+            delta += 1
+        ts_format = "%Y-%m-%dT%H:%M:%S.000+0000"
+        if aflw:
+            ts_format = ts_format.replace('.000+0000', 'Z')
+        ts = datetime.datetime.fromtimestamp(
+            time.mktime(time.strptime(timestamp, ts_format)))
+        ts += datetime.timedelta(hours=delta)
+        return ts.strftime("%A %d %b @ %I:%M %p").replace(' 0', ' ')
+    except OverflowError:
+        return timestamp
+
+# AFLW functions
+
+
+def get_aflw_upcoming():
+    """
+    similar to get_score but this time we are searching for upcoming live
+    match info
+    """
+    data = fetch_url(config.AFLW_SCORE_URL)
+    tree = ET.fromstring(data)
+    listing = []
+
+    for elem in tree.findall("Day"):
+        for subelem in elem.findall("Game"):
+            if subelem.find('GameState').text == 'COMPLETE':
+                continue
+            v = classes.Video()
+            home = subelem.find('HomeTeam').attrib['FullName']
+            away = subelem.find('AwayTeam').attrib['FullName']
+            timestamp = subelem.find('Timestamp').text
+            # convert zulu to local time
+            airtime = get_airtime(timestamp, aflw=True)
+            title = ('[COLOR red]AFLW:[/COLOR] '
+                     '{0} vs {1} - {2}')
+            v.title = title.format(home, away, airtime)
+            v.dummy = True
+            listing.append(v)
+    return listing
+
+
+def get_aflw_score(match_id):
+    """
+    fetch score xml and return the scores for corresponding match IDs
+    """
+    data = fetch_url(config.AFLW_SCORE_URL)
+    tree = ET.fromstring(data)
+
+    for elem in tree.findall("Day"):
+        for subelem in elem.findall("Game"):
+            if subelem.attrib['Id'] == str(match_id):
+                home_score = str(subelem.find('HomeTeam').attrib['Score'])
+                away_score = str(subelem.find('AwayTeam').attrib['Score'])
+                return '[COLOR yellow]{0} - {1}[/COLOR]'.format(
+                    home_score, away_score)
+
+
+def get_aflw_videos():
+    data = fetch_url(config.AFLW_LONG_URL)
+    tree = ET.fromstring(data)
+    listing = []
+
+    for elem in tree.findall('MediaSection'):
+        for video in elem.findall('Item'):
+            if video.attrib['Type'] == 'V':
+                v = classes.Video()
+                v.title = video.find('Title').text
+                v.thumbnail = video.find('FullImageUrl').text
+                v.ooyalaid = video.find('Video').attrib['Id']
+                listing.append(v)
+    return listing
+
+
+def find_aflw_live_matches():
+    """
+    get index of current round's games so we can find the 'box' URL
+    and make a list of game ids,
+    returns a list of ElementTree objects to parse for live matches
+    """
+    data = fetch_url(config.AFLW_INDEX_URL)
+    tree = ET.fromstring(data)
+    box_list = []
+    listing = []
+
+    for elem in tree.find('HeadlineGames'):
+        box_list.append(elem.attrib['Id'])
+
+    for game_id in box_list:
+        data = fetch_url(config.AFLW_BOX_URL.format(game_id))
+        tree = ET.fromstring(data)
+        watch_button = tree.find('WatchButton')
+        if watch_button:
+            if watch_button.find('Title').text != 'WATCH REPLAY':
+                listing.append(tree)
+    return listing

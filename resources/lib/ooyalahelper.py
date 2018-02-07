@@ -21,6 +21,7 @@ import base64
 import comm
 import config
 import json
+import re
 import requests
 import urllib
 import xbmcaddon
@@ -60,7 +61,7 @@ def fetch_session_id(url, data):
     try:
         res.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        utils.log(res.text)
+        utils.log(e.response.text)
         raise Exception(e)
     return res.text
 
@@ -99,7 +100,7 @@ def get_user_token():
                 token = data.get('uuid')
 
             except requests.exceptions.HTTPError as e:
-                utils.log(res.text)
+                utils.log(e.response.text)
                 raise e
         cache.set('AFLTOKEN', token)
         utils.log('Using token: {0}******'.format(token[:-6]))
@@ -130,8 +131,8 @@ def get_embed_token(user_token, video_id):
                 'password. Please check the subscription type in settings '
                 'is correct.')
         else:
-            utils.log(res.text)
             cache.delete('AFLTOKEN')
+            utils.log(e.response.text)
             raise e
     data = json.loads(res.text)
     return urllib.quote(data.get('token'))
@@ -198,41 +199,36 @@ def parse_m3u8_streams(data, live, secure_token_url):
         if qual == config.MAX_REPLAY_QUAL:
             qual = -1
 
-    if '#EXT-X-VERSION:3' in data:
-        data.remove('#EXT-X-VERSION:3')
-    count = 1
     m3u_list = []
     base_url = secure_token_url[:secure_token_url.rfind('/') + 1]
     base_domain = secure_token_url[:secure_token_url.find('/', 8) + 1]
+    m3u8_lines = iter(data)
+    for line in m3u8_lines:
+            stream_inf = '#EXT-X-STREAM-INF:'
+            if line.startswith(stream_inf):
+                line = line[len(stream_inf):]
+            else:
+                continue
 
-    while count < len(data):
-        line = data[count]
-        line = line.strip('#EXT-X-STREAM-INF:')
-        line = line.strip('PROGRAM-ID=1,')
-        line = line[:line.find('CODECS')]
+            csv_list = re.split(',(?=(?:(?:[^"]*"){2})*[^"]*$)', line)
+            linelist = [i.split('=') for i in csv_list]
 
-        if line.endswith(','):
-            line = line[:-1]
+            uri = next(m3u8_lines)
 
-        line = line.strip()
-        line = line.split(',')
-        linelist = [i.split('=') for i in line]
-        
-        count += 1
-        
-        uri = data[count]
-        
-        if uri.startswith('/'):
-            linelist.append(['URL', base_domain + uri])
-        elif uri.find('://') == -1:
-            linelist.append(['URL', base_url + uri])
-        else:
-            linelist.append(['URL', uri])
-
-        m3u_list.append(dict((i[0], i[1]) for i in linelist))
-        count += 1
+            if uri.startswith('/'):
+                linelist.append(['URL', base_domain + uri])
+            elif uri.find('://') == -1:
+                linelist.append(['URL', base_url + uri])
+            else:
+                linelist.append(['URL', uri])
+            m3u_list.append(dict((i[0], i[1]) for i in linelist))
     sorted_m3u_list = sorted(m3u_list, key=lambda k: int(k['BANDWIDTH']))
-    stream = sorted_m3u_list[qual]['URL']
+    try:
+        stream = sorted_m3u_list[qual]['URL']
+    except IndexError as e:
+        utils.log('Quality setting: {0}'.format(qual))
+        utils.log('Sorted m3u8 list: {0}'.format(sorted_m3u_list))
+        raise e
     return stream
 
 
