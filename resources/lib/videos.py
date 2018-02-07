@@ -23,6 +23,7 @@ import xbmcgui
 import xbmcplugin
 
 from aussieaddonscommon import utils
+from aussieaddonscommon.exceptions import AussieAddonsException
 
 
 def make_list(params):
@@ -37,7 +38,16 @@ def make_list(params):
         elif params.get('category') == 'AFLW':
             videos = comm.get_aflw_videos()
         else:
-            category = config.CATEGORY_LOOKUP[params.get('category')]
+            try:
+                category = config.CATEGORY_LOOKUP[params.get('category')]
+            except KeyError as e:
+                xbmcgui.Dialog().ok(
+                    'Outdated Favourites Link',
+                    'The Kodi Favourite item being accessed was created with '
+                    'an earlier version of the AFL Video add-on and is no '
+                    'longer compatible. Please remove this link and update '
+                    'with a new one.')
+                raise AussieAddonsException(e)
             videos = comm.get_category_videos(category)
 
         ok = True
