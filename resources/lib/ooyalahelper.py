@@ -202,14 +202,14 @@ def parse_m3u8_streams(data, live, secure_token_url):
     m3u_list = []
     base_url = secure_token_url[:secure_token_url.rfind('/') + 1]
     base_domain = secure_token_url[:secure_token_url.find('/', 8) + 1]
-    m3u8_lines = iter(data)    
+    m3u8_lines = iter(data)
     for line in m3u8_lines:
             stream_inf = '#EXT-X-STREAM-INF:'
             if line.startswith(stream_inf):
                 line = line[len(stream_inf):]
             else:
                 continue
-            
+
             csv_list = re.split(',(?=(?:(?:[^"]*"){2})*[^"]*$)', line)
             linelist = [i.split('=') for i in csv_list]
 
