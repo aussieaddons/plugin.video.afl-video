@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <string id="10000">ווידאו AFL</string>
+
+    <!-- Categories -->
+    <string id="20001">כללי</string>
+    <string id="20002">סיסמה לשידור חי AFL</string>
+    <string id="20003">איתור באגים</string>
+
+    <!-- General -->
+    <string id="10002">נבחרת מועדפת</string>
+    <string id="10001">איכות ווידאו</string>
+
+    <!-- AFL Live Pass subscription -->
+    <string id="10003">שם משתמש</string>
+    <string id="10004">סיסמה</string>
+    <string id="10005">מספר טלפון</string>
+    <string id="10006">איכות שידור חי</string>
+    <string id="10009">איכות ווידאו VOD</string>
+    <string id="10007">ססמת מנוי לשידור חי AFL</string>
+    <string id="10008">סוג מנוי</string>
+
+    <!-- Debugging -->
+    <string id="10011">הסר מידע התחברות שמור</string>
+    <string id="10012">שלח יומן שגיאות</string>
+</strings>
