@@ -9,12 +9,14 @@
     <setting id="REPLAYQUALITY" type="enum" label="10009" values="270k/s - 320x180 (Lowest)|400k/s - 320x180|600k/s - 480x270|900k/s - 640x360|1.4MB/s - 720x406|2.1MB/s - 720x406|2.8MB/s - 1280x720 (Highest)" default="6" />
     <setting id="STATE" type="labelenum" label="10012" values="ACT|NSW|NT|QLD|SA|TAS|VIC|WA" default="VIC" />
     <setting id="LIVE_SUBSCRIPTION" type="bool" label="10007" default="false" />
-    <setting id="SUBSCRIPTION_TYPE" type="enum" label="10008" values="Paid (afl.com.au)|Free offer (Telstra ID)" default="1" enable="eq(-1,true)" />
-    <setting id="LIVE_USERNAME" type="text" label="10003" default="" enable="eq(-2,true)" />
-    <setting id="LIVE_PASSWORD" type="text" label="10004" option="hidden" default="" enable="eq(-3,true)" />
-    <setting label="10011" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=cleartoken)" enable="eq(-4,true)"/>
+    <setting id="SUBSCRIPTION_TYPE" type="enum" label="10008" values="Paid (afl.com.au)|Free offer (Telstra ID)|Paid (in-app purchase)" default="1" enable="eq(-1,true)" />
+    <setting id="LIVE_USERNAME" type="text" label="10003" default="" enable="eq(-2,true)+lt(-1,2)" />
+    <setting id="LIVE_PASSWORD" type="text" label="10004" option="hidden" default="" enable="eq(-3,true)+lt(-2,2)" />
+    <setting id="IAP_TOKEN" type="text" label="10005" default="" enable="eq(-4,true)+gt(-3,1)" />
+    <setting label="10013" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=iap_help)"/>
   </category>
   <category label="20003">
     <setting label="10012" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=sendreport)"/>
+    <setting label="10011" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=cleartoken)"/>
   </category>
 </settings>
