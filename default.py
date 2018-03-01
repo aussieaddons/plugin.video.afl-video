@@ -63,5 +63,7 @@ if __name__ == "__main__":
     elif 'action' in params:
         if params['action'] == 'cleartoken':
             ooyalahelper.clear_token()
-        if params['action'] == 'sendreport':
+        elif params['action'] == 'sendreport':
             utils.user_report()
+        elif params['action'] == 'iap_help':
+            ooyalahelper.iap_help()

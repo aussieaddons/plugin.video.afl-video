@@ -25,6 +25,7 @@ import re
 import requests
 import urllib
 import xbmcaddon
+import xbmcgui
 
 import telstra_auth
 
@@ -40,7 +41,7 @@ except ImportError:
 
 cache = StorageServer.StorageServer(utils.get_addon_id(), 1)
 addon = xbmcaddon.Addon()
-free_subscription = int(addon.getSetting('SUBSCRIPTION_TYPE'))
+subscription_type = int(addon.getSetting('SUBSCRIPTION_TYPE'))
 sess = session.Session()
 
 
@@ -68,6 +69,23 @@ def fetch_session_id(url, data):
 
 def get_user_token():
     """Send user login info and retrieve token for session"""
+    # in-app purchase/manual
+    if subscription_type == 2:
+        iap_token = addon.getSetting('IAP_TOKEN').lower()
+        try:
+            int(iap_token, 16)
+        except ValueError:
+            raise AussieAddonsException(
+                'mis-uuid token must be 32 characters in length, and only '
+                'contain numbers 0-9 and letters a-f')
+        if len(iap_token) != 32:
+            raise AussieAddonsException(
+                'mis-uuid token must be 32 characters in length, and only '
+                'contain numbers 0-9 and letters a-f')
+        token = 'mis-uuid-{0}'.format(iap_token)
+        utils.log('Using manual token: {0}******'.format(token[:-6]))
+        return token
+
     stored_token = cache.get('AFLTOKEN')
     if stored_token:
         utils.log('Using token: {0}******'.format(stored_token[:-6]))
@@ -77,17 +95,18 @@ def get_user_token():
         username = addon.getSetting('LIVE_USERNAME')
         password = addon.getSetting('LIVE_PASSWORD')
 
-        if free_subscription:
+        if subscription_type == 1:  # free subscription
             token = telstra_auth.get_token(username, password)
-        else:
+        else:  # paid afl.com.au
             login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
                           'authToken': addon.getSetting('LIVE_PASSWORD'),
                           'userIdentifierType': 'EMAIL'}
             login_json = fetch_session_id(config.LOGIN_URL, login_data)
             data = json.loads(login_json)
             if data.get('responseCode') != 0:
-                raise AussieAddonsException('Invalid login/password for paid '
-                                            'afl.com.au subscription.')
+                raise AussieAddonsException('Invalid Telstra ID login/'
+                                            'password for paid afl.com.au '
+                                            'subscription.')
             session_id = data['data'].get('artifactValue')
 
             try:
@@ -95,7 +114,6 @@ def get_user_token():
                 encoded_session_id = urllib.quote(session_id)
                 session_url = config.SESSION_URL.format(encoded_session_id)
                 res = sess.get(session_url)
-                res.raise_for_status()
                 data = json.loads(res.text)
                 token = data.get('uuid')
 
@@ -106,7 +124,9 @@ def get_user_token():
         utils.log('Using token: {0}******'.format(token[:-6]))
         return token
     else:
-        raise AussieAddonsException('AFL Live Pass subscription is required.')
+        raise AussieAddonsException('AFL Live Pass subscription is required '
+                                    'for this content. Please open the '
+                                    'add-on settings to enable and configure.')
 
 
 def get_embed_token(user_token, video_id):
@@ -122,18 +142,29 @@ def get_embed_token(user_token, video_id):
             raise AussieAddonsException(
                 'Your version of Kodi is too old to support live streaming. '
                 'Please upgrade to the latest version.')
-        res.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        if not free_subscription:
+        if subscription_type == 0:  # paid afl.com.au
             cache.delete('AFLTOKEN')
             raise AussieAddonsException(
                 'Paid subscription not found for supplied username and '
                 'password. Please check the subscription type in settings '
                 'is correct.')
-        else:
+        elif subscription_type == 1:  # free sub
             cache.delete('AFLTOKEN')
             utils.log(e.response.text)
-            raise e
+            if e.response.status_code == 400:
+                raise AussieAddonsException(
+                    'Stored login token has expired, please try to play this '
+                    'item again. If this error persists please submit an '
+                    'issue on our github (github.com/aussieaddons/plugin.'
+                    'video.afl-video')
+            else:
+                raise e
+        else:  # in-app purchase/manual
+            raise AussieAddonsException(
+                'mis-uuid token is invalid, please check the token in '
+                'the settings is correct and try again')
+            
     data = json.loads(res.text)
     return urllib.quote(data.get('token'))
 
@@ -254,3 +285,15 @@ def get_m3u8_playlist(video_id, live, login_token=None):
     m3u8_data = get_m3u8_streams(secure_token_url)
     m3u8_playlist_url = parse_m3u8_streams(m3u8_data, live, secure_token_url)
     return m3u8_playlist_url
+
+
+def iap_help():
+    xbmcgui.Dialog().ok(
+        'Instructions for finding mis-uuid',
+        'Open the AFL app on your device and obtain your LIVE PASS '
+        'subscription. Once logged in the purple T at the top right of the '
+        'home screen should turn green. Press on the green T which will open '
+        'the settings, and go into "AFL Live Pass Subscription". Scroll to '
+        'the bottom of the screen to find the mis-uuid token. Enter the 32 '
+        'digit hexadecimal number that comes after "mis-uuid-" into the '
+        'subscription token setting.')
