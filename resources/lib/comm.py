@@ -260,10 +260,15 @@ def get_upcoming():
 
     listing = []
     for match in fixture_data.get('fixtures'):
-        if match.get('status') == 'SCHEDULED':
+        if match.get('status') in ['SCHEDULED',
+                                   'UNCONFIRMED_TEAMS',
+                                   'CONFIRMED_TEAMS']:
             v = classes.Video()
-            home = match['homeTeam'].get('teamName')
-            away = match['awayTeam'].get('teamName')
+            try:
+                home = match['homeTeam'].get('teamName')
+                away = match['awayTeam'].get('teamName')
+            except KeyError:
+                continue
             match_time = get_airtime(match.get('utcStartTime'))
             title = '{home} vs {away} - {time}'
             v.title = title.format(home=home, away=away, time=match_time)
