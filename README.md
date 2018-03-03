@@ -23,7 +23,7 @@ You will need set your subscription type and enter the credentials for your AFL 
 Please visit this [Telstra page][hub] to create a new Telstra ID or link an existing one with your mobile service.
 If you have purchased an in-app subscription from Google Play or Apple's App Store you will need to enter in a login token which can be displayed in the app, located at the bottom of the 'AFL Live Pass Subscription' page in the settings once you have logged in.
 
-More detailed instructions for this process are listed in this [document][livepass]
+More detailed instructions and help for the Live Pass are in this [document][livepass]
 
 The live streaming bitrates reflect an average bitrate only, you should ideally have twice the bandwidth available to ensure buffer free viewing.
 
