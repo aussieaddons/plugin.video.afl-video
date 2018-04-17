@@ -85,6 +85,8 @@ AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&h
 AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
 # New auth config for 2017
+USER_AGENT = 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC One_M8 Build/MRA58K.H15)'
+USER_AGENT_LONG = 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36'
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
 
 SIGNON_HEADERS = {'Host': 'signon.telstra.com',
@@ -146,6 +148,30 @@ SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml
                       'Host': 'hub.telstra.com.au',
                       'Accept-Encoding': 'gzip, deflate',
                       'X-Requested-With': 'com.telstra.android.afl'}
+SSO_URL = 'https://api.telstra.com/v1/sso/auth'
+
+SSO_PARAMS = {'redirect_uri': 'https://hub.telstra.com.au/offers/content/cached/callback.html',
+              'response_type': 'id_token token',
+              'scope': 'openid email profile phone telstra.user.sso.profile'}
+              
+SSO_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+               'Accept-Encoding': 'gzip, '
+                                  'deflate',
+               'Accept-Language': 'en-AU,en-US;q=0.9',
+               'Cache-Control': 'max-age=0',
+               'Connection': 'keep-alive',
+               'Referer': 'https://signon.telstra.com.au/login?goto=https%3A%2F%2Fapi.telstra.com%2Fv1%2Fsso%2Fidpcallback%3Fcbs%3DeyJhbGciOiJIUzI1NiJ9.eyJjYWxsYmFja19zdGF0ZSI6IjEyMjcyMDQ3LWU3N2ItNGRiZC1hNGZiLTBlYTcwMDMyYmRlMSIsImF1ZCI6InJhYSIsImV4cCI6MTUyMDczNTMyMTk0OCwiaWF0IjoxNTIwNjQ4OTIxOTQ4fQ.-I05HQE9eIpRS0LLSYB_pJ4iVKZZzyziVYarvjCe_2o%26app_name%3DOne%20Place%20portal',
+               'Upgrade-Insecure-Requests': '1',
+               'User-Agent': USER_AGENT_LONG,
+               'X-Requested-With': 'com.telstra.nrl'}
+
+SPC_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+               'Accept-Encoding': 'gzip, '
+                                  'deflate',
+               'Accept-Language': 'en-AU,en-US;q=0.9',
+               'User-Agent': USER_AGENT_LONG,
+               'X-Requested-With': 'com.telstra.nrl'}
+
 
 
 # Categories existing on the new content system

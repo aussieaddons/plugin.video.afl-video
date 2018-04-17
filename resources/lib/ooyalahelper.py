@@ -49,6 +49,7 @@ def clear_token():
     """Remove stored token from cache storage"""
     try:
         cache.delete('AFLTOKEN')
+        utils.dialog_message('Login token removed')
     except AttributeError:
         pass
 
@@ -164,7 +165,7 @@ def get_embed_token(user_token, video_id):
             raise AussieAddonsException(
                 'mis-uuid token is invalid, please check the token in '
                 'the settings is correct and try again')
-            
+
     data = json.loads(res.text)
     return urllib.quote(data.get('token'))
 
