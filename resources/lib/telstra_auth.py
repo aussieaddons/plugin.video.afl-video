@@ -1,17 +1,16 @@
+import binascii
 import comm
 import config
 import json
+import os
 import re
 import requests
-import urllib
 import urlparse
 import xbmcgui
 
 from aussieaddonscommon.exceptions import AussieAddonsException
 from aussieaddonscommon import session as custom_session
 from aussieaddonscommon import utils
-
-from bs4 import BeautifulSoup
 
 
 class TelstraAuthException(AussieAddonsException):
@@ -45,66 +44,77 @@ def get_token(username, password):
     if not token:
         raise TelstraAuthException('Unable to get token from AFL API')
 
-    spurl = config.SPORTSPASS_URL.format(token)
-    session.headers = config.SPORTSPASS_HEADERS
-    sp = session.get(spurl)
-    msisdn_url = sp.url
-    prog_dialog.update(20, 'Signing on to telstra.com')
+    prog_dialog.update(20, 'Getting SSO Client ID')
+    # GET to our spc url and receive SSO client ID
+    spc_url = config.SPORTSPASS_URL.format(token)
+    session.headers = config.SPC_HEADERS
+    spc_resp = session.get(spc_url)
+    sso_token_match = re.search('ssoClientId = "(\w+)"', spc_resp.text)
+    try:
+        sso_token = sso_token_match.group(1)
+    except AttributeError as e:
+        utils.log('SPC login response: {0}'.format(spc_resp.text))
+        raise e
 
-    # Sign in to telstra.com to recieve cookies, get the SAML auth, and
-    # modify the escape characters so we can send it back later
-    utils.log('Signing in to: {0}'.format(config.SIGNON_URL))
-    session.headers = config.SIGNON_HEADERS
+    # Sign in to telstra.com with our SSO client id to get the url
+    # for retrieving the bearer token for media orders
+    prog_dialog.update(40, 'Signing on to telstra.com')
+    sso_params = config.SSO_PARAMS
+    sso_params.update({'client_id': sso_token,
+                       'state': binascii.b2a_hex(os.urandom(16)),
+                       'nonce': binascii.b2a_hex(os.urandom(16))})
+
+    sso_auth_resp = session.get(config.SSO_URL, params=sso_params)
+    sso_url = dict(urlparse.parse_qsl(
+                   urlparse.urlsplit(sso_auth_resp.url)[3])).get('goto')
+
+    # login to telstra.com.au and get our BPSESSION cookie
+    session.headers.update(config.SIGNON_HEADERS)
     signon_data = config.SIGNON_DATA
-    signon_data.update({'username': username, 'password': password})
-    signon = session.post(config.SIGNON_URL, data=signon_data)
+    signon_data = {'username': username, 'password': password, 'goto': sso_url}
+    signon = session.post(config.SIGNON_URL,
+                          data=signon_data,
+                          allow_redirects=False)
+    bp_session = session.cookies.get_dict().get('BPSESSION')
 
-    signon_pieces = urlparse.urlsplit(signon.url)
+    # check signon is valid (correct username/password)
+
+    signon_pieces = urlparse.urlsplit(signon.headers.get('Location'))
     signon_query = dict(urlparse.parse_qsl(signon_pieces.query))
 
     utils.log('Sign-on result: %s' % signon_query)
 
     if 'errorcode' in signon_query:
-        if signon_query['errorcode'] in ['0', '1', '2', '3']:
-            raise TelstraAuthException('Error signing in.\n'
+        if signon_query['errorcode'] == '0':
+            raise TelstraAuthException('Please enter your username '
+                                       'in the settings')
+        if signon_query['errorcode'] == '1':
+            raise TelstraAuthException('Please enter your password '
+                                       'in the settings')
+        if signon_query['errorcode'] == '2':
+            raise TelstraAuthException('Please enter your username and '
+                                       'password in the settings')
+        if signon_query['errorcode'] == '3':
+            raise TelstraAuthException('Invalid Telstra ID username/password. '
                                        'Please check your username and '
-                                       'password in the settings are correct.')
+                                       'password in the settings')
 
-    soup = BeautifulSoup(signon.text, 'html.parser')
-    saml_response = soup.find(attrs={'name': 'SAMLResponse'}).get('value')
-    saml_base64 = urllib.quote(saml_response)
-    prog_dialog.update(40, 'Obtaining API token')
-
-    # Send the SAML login data and retrieve the auth token from the response
-    session.headers = config.SAML_LOGIN_HEADERS
-    session.cookies.set('saml_request_path', msisdn_url)
-    saml_data = 'SAMLResponse=' + saml_base64
-    utils.log('Fetching stream auth token: {0}'.format(config.SAML_LOGIN_URL))
-    saml_login = session.post(config.SAML_LOGIN_URL, data=saml_data)
-
-    confirm_url = saml_login.url
-    auth_token_match = re.search('apiToken = "(\w+)"', saml_login.text)
-    if auth_token_match:
-        auth_token = auth_token_match.group(1)
-        utils.log('Found auth token: {0}'.format(auth_token))
-    else:
-        raise TelstraAuthException('Could not obtain authorisation token')
-    prog_dialog.update(60, 'Determining eligible services')
-
-    # 'Order' the subscription package to activate our token/login
-    msisdn_pieces = urlparse.urlsplit(msisdn_url)
-    msisdn_query = urlparse.parse_qsl(msisdn_pieces.query)
-    offer_id = dict(msisdn_query).get('offerId')
-
-    if not offer_id:
-        raise TelstraAuthException('Could not find streaming offer ID')
-
-    media_order_hdrs = config.MEDIA_ORDER_HEADERS
-    media_order_hdrs.update({'Authorization': 'Bearer {0}'.format(auth_token),
-                             'Referer': confirm_url})
-    session.headers = media_order_hdrs
+    # Use BPSESSION cookie to ask for bearer token
+    sso_headers = config.SSO_HEADERS
+    sso_headers.update({'Cookie': 'BPSESSION={0}'.format(bp_session)})
+    session.headers = sso_headers
+    sso_token_resp = session.get(sso_url)
+    bearer_token = dict(urlparse.parse_qsl(
+                    urlparse.urlsplit(sso_token_resp.url)[4]))['access_token']
 
     # First check if there are any eligible services attached to the account
+    prog_dialog.update(60, 'Determining eligible services')
+    offer_id = dict(urlparse.parse_qsl(
+                    urlparse.urlsplit(spc_url)[3]))['offerId']
+    media_order_headers = config.MEDIA_ORDER_HEADERS
+    media_order_headers.update(
+        {'Authorization': 'Bearer {0}'.format(bearer_token)})
+    session.headers = media_order_headers
     try:
         offers = session.get(config.OFFERS_URL)
     except requests.exceptions.HTTPError as e:
@@ -115,7 +125,7 @@ def get_token(username, password):
                         'service to the supplied Telstra ID')
             raise TelstraAuthException(message)
         else:
-            raise TelstraAuthException(e)
+            raise TelstraAuthException(e.response.status_code)
     try:
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
@@ -133,13 +143,22 @@ def get_token(username, password):
                 '{0} for further instructions'.format(config.HUB_URL))
     except Exception as e:
         raise e
-    prog_dialog.update(80, 'Obtaining Live Pass')
 
-    media_order_data = config.MEDIA_ORDER_JSON.format(ph_no,
-                                                      offer_id,
-                                                      token)
-    session.post(config.MEDIA_ORDER_URL, media_order_data)
+    # 'Order' the subscription package to activate the service
+    prog_dialog.update(80, 'Activating live pass on service')
+    order_data = config.MEDIA_ORDER_JSON.format(ph_no, offer_id, token)
+    order = session.post(config.MEDIA_ORDER_URL, data=order_data)
+
+    # check to make sure order has been placed correctly
+    if order.status_code == 201:
+        try:
+            order_json = json.loads(order.text)
+            status = order_json['data'].get('status') == 'COMPLETE'
+            if status:
+                utils.log('Order status complete')
+        except:
+            utils.log('Unable to check status of order, continuing anyway')
+    session.close()
     prog_dialog.update(100, 'Finished!')
     prog_dialog.close()
-    session.close()
     return token
