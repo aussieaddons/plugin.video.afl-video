@@ -189,6 +189,7 @@ CATEGORIES = [
     'Shows',
     'Mark and Goal',
     'News',
+    'All',
     'Settings'
 ]
 
@@ -204,6 +205,7 @@ CATEGORY_LOOKUP = {
     'Shows': 'Access All Areas,The 10,Where It All Began,Pick A Winner,Friday Front Bar,In the moment,Versus,Round Rewind,Special Features',
     'Mark and Goal': 'Mark of the Year,Goal of the Year&pageSize=20',
     'News': 'News&pageSize=50',
+    'All': 'all&pageSize=50',
     'Settings': 'Settings'
 }
 
