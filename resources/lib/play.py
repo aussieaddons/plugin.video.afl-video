@@ -30,7 +30,12 @@ def play(url):
         params = utils.get_url(url)
         v = classes.Video()
         v.parse_xbmc_url(url)
-
+        if params.get('isdummy'):
+            xbmcgui.Dialog().ok(
+                    'Dummy item',
+                    'This item is not playable, it is used only to display '
+                    'the upcoming schedule. Playable matches will have '
+                    '"LIVE NOW" in green next to the title.')
         if 'ooyalaid' in params:
             login_token = None
             if params.get('subscription_required') == 'True':
