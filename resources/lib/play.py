@@ -34,8 +34,9 @@ def play(url):
             xbmcgui.Dialog().ok(
                     'Dummy item',
                     'This item is not playable, it is used only to display '
-                    'the upcoming schedule. Playable matches will have '
-                    '"LIVE NOW" in green next to the title.')
+                    'the upcoming schedule. Please check back once the match '
+                    'has started. Playable matches will have "LIVE NOW" in '
+                    'green next to the title.')
         if 'ooyalaid' in params:
             login_token = None
             if params.get('subscription_required') == 'True':
