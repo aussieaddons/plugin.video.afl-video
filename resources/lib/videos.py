@@ -52,12 +52,12 @@ def make_list(params):
 
         ok = True
         for v in videos:
-
             listitem = xbmcgui.ListItem(label=v.get_title(),
                                         thumbnailImage=v.get_thumbnail())
             listitem.setInfo('video', v.get_kodi_list_item())
             listitem.addStreamInfo('video', v.get_kodi_stream_info())
-            listitem.setProperty('IsPlayable', 'true')
+            if not v.isdummy:
+                listitem.setProperty('IsPlayable', 'true')
 
             # Build the URL for the program, including the list_info
             url = "%s?%s" % (sys.argv[0], v.make_xbmc_url())
