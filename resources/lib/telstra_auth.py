@@ -29,7 +29,7 @@ def get_token(username, password):
     Obtain a valid token from Telstra, will be used to make requests for
     Ooyala embed tokens
     """
-    session = custom_session.Session(force_tlsv1=True)
+    session = custom_session.Session(force_tlsv1=False)
 
     prog_dialog = xbmcgui.DialogProgress()
     prog_dialog.create('Logging in with Telstra ID')
@@ -70,7 +70,6 @@ def get_token(username, password):
 
     # login to telstra.com.au and get our BPSESSION cookie
     session.headers.update(config.SIGNON_HEADERS)
-    signon_data = config.SIGNON_DATA
     signon_data = {'username': username, 'password': password, 'goto': sso_url}
     signon = session.post(config.SIGNON_URL,
                           data=signon_data,
@@ -100,10 +99,10 @@ def get_token(username, password):
                                        'password in the settings')
 
     # Use BPSESSION cookie to ask for bearer token
-    sso_headers = config.SSO_HEADERS
-    sso_headers.update({'Cookie': 'BPSESSION={0}'.format(bp_session)})
-    session.headers = sso_headers
-    sso_token_resp = session.get(sso_url)
+    session.headers = config.SSO_HEADERS
+    session.headers.update({'Cookie': 'BPSESSION={0}'.format(bp_session)})
+    sso_token_resp = session.get(signon.headers.get('Location'))
+
     bearer_token = dict(urlparse.parse_qsl(
                     urlparse.urlsplit(sso_token_resp.url)[4]))['access_token']
 
@@ -115,6 +114,7 @@ def get_token(username, password):
     media_order_headers.update(
         {'Authorization': 'Bearer {0}'.format(bearer_token)})
     session.headers = media_order_headers
+
     try:
         offers = session.get(config.OFFERS_URL)
     except requests.exceptions.HTTPError as e:
@@ -125,7 +125,7 @@ def get_token(username, password):
                         'service to the supplied Telstra ID')
             raise TelstraAuthException(message)
         else:
-            raise TelstraAuthException(e.response.status_code)
+            raise TelstraAuthException(e)
     try:
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
