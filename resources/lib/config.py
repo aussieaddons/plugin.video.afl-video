@@ -32,6 +32,10 @@ REPLAY_QUALITY = {'0': 'low',
 MAX_LIVE_QUAL = 4
 MAX_REPLAY_QUAL = 6
 
+
+USER_AGENT = 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC One_M8 Build/MRA58K.H15)'
+USER_AGENT_LONG = 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36'
+
 # Round URL, which lists the games of the round if they've had their Videos uploaded
 # This URL can also take a 'Round ID' added to the end (e.g CD_R201301401)
 ROUND_URL = 'https://api.afl.com.au/cfs/afl/videos/round/{0}?pageSize=50&pageNum=1&categories=Match%20Replays&includeOnlineVideos=false'
@@ -67,12 +71,11 @@ AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/
 PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'
 
 # http headers required for accessing Bigpond authentication URL
-HEADERS = {'User-Agent' : 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC_0PJA10 Build/MRA58K)',
+HEADERS = {'User-Agent' : USER_AGENT,
            'Authorization': 'Basic QUZMb3dfZGV2aWNlOmFOVSNGNHJCU0dqbmtANEZXM0Zt',
            'Content-Type': 'application/x-www-form-urlencoded'}
 
 VIDEO_FEED_URL = "http://feed.theplatform.com/f/gqvPBC/AFLProd_Online_H264?byGuid={0}&form=json"
-
 
 # AFLW
 
@@ -85,70 +88,41 @@ AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&h
 AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
 # New auth config for 2017
-USER_AGENT = 'Dalvik/2.1.0 (Linux; U; Android 6.0; HTC One_M8 Build/MRA58K.H15)'
-USER_AGENT_LONG = 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36'
+
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
 
-SIGNON_HEADERS = {'Host': 'signon.telstra.com',
-                  'Connection': 'keep-alive',
+SIGNON_HEADERS = {'Connection': 'keep-alive',
                   'Cache-Control': 'max-age=0',
-                  'Origin': 'https://signon.telstra.com',
+                  'Origin': 'https://signon.telstra.com.au',
                   'Upgrade-Insecure-Requests': '1',
-                  'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
+                  'User-Agent': USER_AGENT_LONG,
                   'Content-Type': 'application/x-www-form-urlencoded',
                   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                  'Referer': 'https://signon.telstra.com/login?goto=https%3A%2F%2Fsignon.telstra.com%2Ffederation%2Fsaml2%3FSPID%3Dtelstramedia&gotoNoTok=',
                   'Accept-Encoding': 'gzip,deflate',
                   'Accept-Language': 'en-AU,en-US;q=0.8'}
 
-SIGNON_URL = 'https://signon.telstra.com/login'
+SIGNON_URL = 'https://signon.telstra.com.au/login'
 
-SIGNON_DATA = {'goto': 'https://signon.telstra.com/federation/saml2?SPID=telstramedia',
-               'gotoOnFail': '',
-               'username': None,
-               'password': None}
-
-SAML_LOGIN_URL = 'https://hub.telstra.com.au/login/saml_login'
-
-SAML_LOGIN_HEADERS = {'Host': 'hub.telstra.com.au',
-                      'Connection': 'keep-alive',
-                      'Cache-Control': 'max-age=0',
-                      'Origin': 'https://signon.telstra.com',
-                      'Upgrade-Insecure-Requests': '1',
-                      'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
-                      'Content-Type': 'application/x-www-form-urlencoded',
-                      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                      'Referer': 'https://signon.telstra.com/federation/saml2?SPID=telstramedia',
-                      'Accept-Encoding': 'gzip, deflate',
-                      'Accept-Language': 'en-AU,en-US;q=0.8',
-                      'X-Requested-With': 'com.telstra.nrl'}
-
-OFFERS_URL = 'https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
+OFFERS_URL = 'https://tapi.telstra.com/v1/media-products/catalogues/media/offers'
 
 HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
 
 MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
                        'Accept': 'application/json, text/plain, */*',
-                       'Host': 'api.telstra.com',
                        'Connection': 'keep-alive',
                        'Origin': 'https://hub.telstra.com.au',
-                       'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
+                       'User-Agent': USER_AGENT_LONG,
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'en-AU,en-US;q=0.8',
-                       'X-Requested-With': 'com.telstra.nrl'}
+                       'X-Requested-With': 'com.telstra.android.afl'}
 
-MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
+MEDIA_ORDER_URL = 'https://tapi.telstra.com/v1/media-commerce/orders'
 
 MEDIA_ORDER_JSON = '{{"serviceId":"{0}","serviceType":"MSISDN","offer":{{"id":"{1}"}},"pai":"{2}"}}'
 
 SPORTSPASS_URL = 'http://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
 
-SPORTSPASS_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                      'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; HTC One_M8 Build/MRA58K.H15; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/56.0.2924.87 Mobile Safari/537.36',
-                      'Host': 'hub.telstra.com.au',
-                      'Accept-Encoding': 'gzip, deflate',
-                      'X-Requested-With': 'com.telstra.android.afl'}
-SSO_URL = 'https://api.telstra.com/v1/sso/auth'
+SSO_URL = 'https://tapi.telstra.com/v1/sso/auth'
 
 SSO_PARAMS = {'redirect_uri': 'https://hub.telstra.com.au/offers/content/cached/callback.html',
               'response_type': 'id_token token',
@@ -160,18 +134,14 @@ SSO_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,
                'Accept-Language': 'en-AU,en-US;q=0.9',
                'Cache-Control': 'max-age=0',
                'Connection': 'keep-alive',
-               'Referer': 'https://signon.telstra.com.au/login?goto=https%3A%2F%2Fapi.telstra.com%2Fv1%2Fsso%2Fidpcallback%3Fcbs%3DeyJhbGciOiJIUzI1NiJ9.eyJjYWxsYmFja19zdGF0ZSI6IjEyMjcyMDQ3LWU3N2ItNGRiZC1hNGZiLTBlYTcwMDMyYmRlMSIsImF1ZCI6InJhYSIsImV4cCI6MTUyMDczNTMyMTk0OCwiaWF0IjoxNTIwNjQ4OTIxOTQ4fQ.-I05HQE9eIpRS0LLSYB_pJ4iVKZZzyziVYarvjCe_2o%26app_name%3DOne%20Place%20portal',
-               'Upgrade-Insecure-Requests': '1',
-               'User-Agent': USER_AGENT_LONG,
-               'X-Requested-With': 'com.telstra.nrl'}
+               'X-Requested-With': 'com.telstra.android.afl'}
 
 SPC_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                'Accept-Encoding': 'gzip, '
                                   'deflate',
                'Accept-Language': 'en-AU,en-US;q=0.9',
                'User-Agent': USER_AGENT_LONG,
-               'X-Requested-With': 'com.telstra.nrl'}
-
+               'X-Requested-With': 'com.telstra.android.afl'}
 
 
 # Categories existing on the new content system

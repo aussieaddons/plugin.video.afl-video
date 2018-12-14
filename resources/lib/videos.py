@@ -28,6 +28,7 @@ from aussieaddonscommon.exceptions import AussieAddonsException
 
 def make_list(params):
     utils.log('Making video list...')
+    cache = True
     try:
         if 'team' in params:
             videos = comm.get_team_videos(params.get('team'))
@@ -35,6 +36,7 @@ def make_list(params):
             videos = comm.get_round_videos(params.get('round_id'))
         elif params.get('category') == 'Live Matches':
             videos = comm.get_live_videos()
+            cache = False
         elif params.get('category') == 'AFLW':
             videos = comm.get_aflw_videos()
         else:
@@ -68,7 +70,9 @@ def make_list(params):
                                              listitem=listitem,
                                              isFolder=False)
 
-        xbmcplugin.endOfDirectory(handle=int(sys.argv[1]), succeeded=ok)
+        xbmcplugin.endOfDirectory(handle=int(sys.argv[1]),
+                                  succeeded=ok,
+                                  cacheToDisc=cache)
         xbmcplugin.setContent(handle=int(sys.argv[1]), content='episodes')
     except Exception:
         utils.handle_error('Unable to fetch video list')
