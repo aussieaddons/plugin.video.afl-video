@@ -190,7 +190,6 @@ def get_mobile_token():
     data = config.MOBILE_TOKEN_PARAMS
     data.update({'x-user-id': mobile_userid})
     mobile_token_resp = session.post(config.OAUTH_URL, data=data)
-    utils.log(mobile_token_resp.text)
     bearer_token = json.loads(mobile_token_resp.text).get('access_token')
 
     # First check if there are any eligible services attached to the account
@@ -198,13 +197,9 @@ def get_mobile_token():
     session.headers = config.OAUTH_HEADERS
     session.headers.update(
         {'Authorization': 'Bearer {0}'.format(bearer_token)})
-    utils.log(session.headers)
     try:
         offers = session.get(config.OLD_OFFERS_URL)
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 401:
-            utils.log(e.response.text)
-            raise Exception()
         if e.response.status_code == 404:
             message = json.loads(e.response.text).get('userMessage')
             message += (' Please visit {0} '.format(config.HUB_URL) +
