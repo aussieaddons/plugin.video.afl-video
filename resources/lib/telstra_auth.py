@@ -162,3 +162,96 @@ def get_token(username, password):
     prog_dialog.update(100, 'Finished!')
     prog_dialog.close()
     return token
+
+
+def get_mobile_token():
+    session = custom_session.Session(force_tlsv1=False)
+    prog_dialog = xbmcgui.DialogProgress()
+    prog_dialog.create('Logging in with mobile service')
+    prog_dialog.update(1, 'Obtaining oauth token')
+    comm.update_token(session)
+    auth_resp = session.post(config.AFL_LOGIN_URL)
+    jsondata = json.loads(auth_resp.text)
+    userid = jsondata.get('uuid')
+    if not userid:
+        raise TelstraAuthException('Unable to get token from AFL API')
+
+    prog_dialog.update(20, 'Obtaining mobile token')
+    mobile_userid_cookies = session.get(
+        config.MOBILE_ID_URL).cookies.get_dict()
+    mobile_userid = mobile_userid_cookies.get('GUID_S')
+    if not mobile_userid or mobile_userid_cookies.get('nouid'):
+        raise TelstraAuthException('Not connected to Telstra Mobile network. '
+                                   'Please disable WiFi and enable mobile '
+                                   'data if on a Telstra mobile device, or '
+                                   "connect this device's WiFi to a device "
+                                   'that is on the Telstra Mobile network '
+                                   'and try again.')
+    data = config.MOBILE_TOKEN_PARAMS
+    data.update({'x-user-id': mobile_userid})
+    mobile_token_resp = session.post(config.OAUTH_URL, data=data)
+    utils.log(mobile_token_resp.text)
+    bearer_token = json.loads(mobile_token_resp.text).get('access_token')
+
+    # First check if there are any eligible services attached to the account
+    prog_dialog.update(40, 'Determining eligible services')
+    session.headers = config.OAUTH_HEADERS
+    session.headers.update(
+        {'Authorization': 'Bearer {0}'.format(bearer_token)})
+    utils.log(session.headers)
+    try:
+        offers = session.get(config.OLD_OFFERS_URL)
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 401:
+            utils.log(e.response.text)
+            raise Exception()
+        if e.response.status_code == 404:
+            message = json.loads(e.response.text).get('userMessage')
+            message += (' Please visit {0} '.format(config.HUB_URL) +
+                        'for further instructions to link your mobile '
+                        'service to the supplied Telstra ID')
+            raise TelstraAuthException(message)
+        else:
+            raise TelstraAuthException(e)
+    try:
+        offer_data = json.loads(offers.text)
+        offers_list = offer_data['data']['offers']
+        ph_no = None
+        for offer in offers_list:
+            if offer.get('name') != 'AFL Live Pass':
+                continue
+            data = offer.get('productOfferingAttributes')
+            ph_no = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
+        if not ph_no:
+            raise TelstraAuthException(
+                'Unable to determine if you have any eligible services. '
+                'Please ensure there is an eligible service linked to '
+                'your Telstra ID to redeem the free offer. Please visit '
+                '{0} for further instructions'.format(config.HUB_URL))
+    except Exception as e:
+        raise e
+
+    # 'Order' the subscription package to activate the service
+    prog_dialog.update(60, 'Activating live pass on service')
+    order_data = config.MOBILE_ORDER_JSON
+    order_data.update({'serviceId': ph_no, 'pai': userid})
+    try:
+        order = session.post(config.OLD_MEDIA_ORDER_URL, json=order_data)
+    except requests.exceptions.HTTPError as e:
+        raise e
+
+    # check to make sure order has been placed correctly
+    prog_dialog.update(80, 'Confirming activation')
+    if order.status_code == 201:
+        try:
+            order_json = json.loads(order.text)
+            status = order_json['data'].get('status') == 'COMPLETE'
+            if status:
+                utils.log('Order status complete')
+        except:
+            utils.log('Unable to check status of order, continuing anyway')
+
+    session.close()
+    prog_dialog.update(100, 'Finished!')
+    prog_dialog.close()
+    return userid
