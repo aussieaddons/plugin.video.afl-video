@@ -230,10 +230,7 @@ def get_mobile_token():
     prog_dialog.update(60, 'Activating live pass on service')
     order_data = config.MOBILE_ORDER_JSON
     order_data.update({'serviceId': ph_no, 'pai': userid})
-    try:
-        order = session.post(config.OLD_MEDIA_ORDER_URL, json=order_data)
-    except requests.exceptions.HTTPError as e:
-        raise e
+    order = session.post(config.OLD_MEDIA_ORDER_URL, json=order_data)
 
     # check to make sure order has been placed correctly
     prog_dialog.update(80, 'Confirming activation')
