@@ -42,7 +42,7 @@ ROUND_URL = 'https://api.afl.com.au/cfs/afl/videos/round/{0}?pageSize=50&pageNum
 
 # This URL returns a token if POST'ed to. The token is required in the header to any
 # reqeusts against the API
-TOKEN_URL = 'http://api.afl.com.au/cfs/afl/WMCTok'
+TOKEN_URL = 'https://api.afl.com.au/cfs/afl/WMCTok'
 
 # API URL for all seasons and rounds data
 SEASONS_URL = 'https://api.afl.com.au/cfs/afl/seasons'
