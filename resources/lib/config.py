@@ -103,6 +103,8 @@ SIGNON_HEADERS = {'Connection': 'keep-alive',
 
 SIGNON_URL = 'https://signon.telstra.com.au/login'
 
+OLD_OFFERS_URL = 'https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
+
 OFFERS_URL = 'https://tapi.telstra.com/v1/media-products/catalogues/media/offers'
 
 HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
@@ -115,6 +117,8 @@ MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'en-AU,en-US;q=0.8',
                        'X-Requested-With': 'com.telstra.android.afl'}
+
+OLD_MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
 
 MEDIA_ORDER_URL = 'https://tapi.telstra.com/v1/media-commerce/orders'
 
@@ -143,6 +147,27 @@ SPC_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,
                'User-Agent': USER_AGENT_LONG,
                'X-Requested-With': 'com.telstra.android.afl'}
 
+#Mobile Auth
+OFFER_ID = 'a482eaad-9213-419c-ace2-65b7cae73317'
+
+OAUTH_HEADERS = {'User-Agent': 'AFL(Android) / 40656',
+                 'Accept-Encoding': 'gzip'}
+
+OAUTH_URL = 'https://api.telstra.com/v1/media-commerce/oauth/token'
+
+MOBILE_ID_URL = 'http://medrx.telstra.com.au/online.php'
+
+MOBILE_CLIENT_ID = 'BDm2sYxE5twDWsM5CXAWHUPrm1ultZ9L'
+
+MOBILE_CLIENT_SECRET = 'uIGtb1DTQ0LBxe1N'
+
+MOBILE_TOKEN_PARAMS = {'client_id': MOBILE_CLIENT_ID,
+                      'client_secret': MOBILE_CLIENT_SECRET,
+                      'grant_type': 'client_credentials',
+                      'scope': 'MEDIA-PRODUCTS-API MEDIA-COMMERCE-API',
+                      'x-user-idp': 'NGP'}
+
+MOBILE_ORDER_JSON = {"offer": {"id":OFFER_ID}, "serviceType":"MSISDN"}
 
 # Categories existing on the new content system
 

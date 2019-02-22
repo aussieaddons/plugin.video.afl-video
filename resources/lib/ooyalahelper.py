@@ -98,16 +98,19 @@ def get_user_token():
 
         if subscription_type == 1:  # free subscription
             token = telstra_auth.get_token(username, password)
+        elif subscription_type == 3:  # mobile activated subscription
+            token = telstra_auth.get_mobile_token()
         else:  # paid afl.com.au
             login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
                           'authToken': addon.getSetting('LIVE_PASSWORD'),
                           'userIdentifierType': 'EMAIL'}
             login_json = fetch_session_id(config.LOGIN_URL, login_data)
             data = json.loads(login_json)
+            utils.log(data)
             if data.get('responseCode') != 0:
                 raise AussieAddonsException('Invalid Telstra ID login/'
                                             'password for paid afl.com.au '
-                                            'subscription.')
+                                            '/ linked subscription.')
             session_id = data['data'].get('artifactValue')
 
             try:
@@ -144,13 +147,14 @@ def get_embed_token(user_token, video_id):
                 'Your version of Kodi is too old to support live streaming. '
                 'Please upgrade to the latest version.')
     except requests.exceptions.HTTPError as e:
-        if subscription_type == 0:  # paid afl.com.au
+        if subscription_type == 0:  # paid afl.com.au/linked
             cache.delete('AFLTOKEN')
             raise AussieAddonsException(
-                'Paid subscription not found for supplied username and '
-                'password. Please check the subscription type in settings '
-                'is correct.')
-        elif subscription_type == 1:  # free sub
+                'Paid or linked subscription not found for supplied username '
+                'and password. Please check the subscription type in settings '
+                'is correct or your subscription has been linked to your '
+                'Telstra ID in the Android/iOS app')
+        elif subscription_type in [1, 3]:  # free/mobile sub
             cache.delete('AFLTOKEN')
             utils.log(e.response.text)
             if e.response.status_code == 400:
@@ -289,7 +293,7 @@ def get_m3u8_playlist(video_id, live, login_token=None):
 
 
 def iap_help():
-    xbmcgui.Dialog().ok(
+    xbmcgui.Dialog().textviewer(
         'Instructions for finding mis-uuid',
         'Open the AFL app on your device and obtain your LIVE PASS '
         'subscription. Once logged in the purple T at the top right of the '
