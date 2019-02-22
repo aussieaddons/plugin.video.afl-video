@@ -11,7 +11,7 @@ script:
   - git config --global user.email 'aussieaddons@aussieaddons.com'
   - git config --global user.name 'Aussie Add-ons Bot'
   - >
-    git clone https://github.com/xbmc-catchuptv-au/repo-devel.git $TRAVIS_BUILD_DIR/.deploy-devel &&
+    git clone https://github.com/aussieaddons/repo-devel.git $TRAVIS_BUILD_DIR/.deploy-devel &&
     cd $TRAVIS_BUILD_DIR/.deploy-devel &&
     ./manage_repo.py $TRAVIS_BUILD_DIR || travis_terminate 1
   - git config credential.helper "store --file=.git/credentials"
@@ -22,7 +22,7 @@ script:
     git push || travis_terminate 1
   - if [ -z "$TRAVIS_TAG" ]; then travis_terminate 0; fi
   - >
-    git clone https://github.com/xbmc-catchuptv-au/repo.git $TRAVIS_BUILD_DIR/.deploy-prod &&
+    git clone https://github.com/aussieaddons/repo.git $TRAVIS_BUILD_DIR/.deploy-prod &&
     cd $TRAVIS_BUILD_DIR/.deploy-prod &&
     ./manage_repo.py $TRAVIS_BUILD_DIR || travis_terminate 1
   - git config credential.helper "store --file=.git/credentials"
