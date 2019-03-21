@@ -203,8 +203,9 @@ def get_secure_token(secure_url, video_id):
             'Check your subscription is valid.'.format(video.get('message')))
     try:
         streams = video.get('streams')
-        ios_token = streams[0]['url']['data']
-        return base64.b64decode(ios_token)
+        stream_url = base64.b64decode(streams[0]['url']['data'])
+        widevine_url = streams[0].get('widevine_server_path')
+        return {'stream_url': stream_url, 'widevine_url': widevine_url}
     except Exception as e:
         raise AussieAddonsException(
             'Failed to get stream URL: {0}'.format(e))
@@ -282,14 +283,8 @@ def get_m3u8_playlist(video_id, live, login_token=None):
         embed_token = get_embed_token(login_token, video_id)
         auth_url = auth_url + '&embedToken=' + embed_token
 
-    secure_token_url = get_secure_token(auth_url, video_id)
-
-    if 'chunklist.m3u8' in secure_token_url:
-        return secure_token_url
-
-    m3u8_data = get_m3u8_streams(secure_token_url)
-    m3u8_playlist_url = parse_m3u8_streams(m3u8_data, live, secure_token_url)
-    return m3u8_playlist_url
+    stream_data = get_secure_token(auth_url, video_id)
+    return stream_data
 
 
 def iap_help():
