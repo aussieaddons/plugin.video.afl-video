@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-  <category label="20001">
-    <setting id="QUALITY" type="enum" label="10001" values="Low (172k/s)|Medium (1Mb/s)|High (2Mb/s)" default="2" />
-    <setting id="TEAM" type="enum" label="10002" values="None|Adelaide|Brisbane|Carlton|Collingwood|Essendon|Fremantle|Gold Coast|Geelong|Greater Western Sydney|Hawthorn|Melbourne|North Melbourne|Port Adelaide|Richmond|St. Kilda|Sydney|West Coast|Western Bulldogs" default="0" />
-  </category>
   <category label="20002">
-    <setting id="LIVE_QUALITY" type="enum" label="10006" values="Lowest (300k/s)|Low (450k/s)|Medium (660k/s)|High (1Mb/s)|Highest (1.6Mb/s)" default="4" />
-    <setting id="REPLAYQUALITY" type="enum" label="10009" values="270k/s - 320x180 (Lowest)|400k/s - 320x180|600k/s - 480x270|900k/s - 640x360|1.4MB/s - 720x406|2.1MB/s - 720x406|2.8MB/s - 1280x720 (Highest)" default="6" />
+    <setting label="10014" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=open_ia_settings)" option="close"/>
     <setting id="STATE" type="labelenum" label="10012" values="ACT|NSW|NT|QLD|SA|TAS|VIC|WA" default="VIC" />
     <setting id="LIVE_SUBSCRIPTION" type="bool" label="10007" default="false" />
     <setting id="SUBSCRIPTION_TYPE" type="enum" label="10008" values="Paid (afl.com.au) or linked live pass|Free offer (Telstra ID)|Paid (in-app purchase)|Mobile data" default="1" enable="eq(-1,true)" />

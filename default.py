@@ -67,3 +67,15 @@ if __name__ == "__main__":
             utils.user_report()
         elif params['action'] == 'iap_help':
             ooyalahelper.iap_help()
+        elif params['action'] == 'open_ia_settings':
+            try:
+                import drmhelper
+                if drmhelper.check_inputstream(drm=False):
+                    ia = drmhelper.get_addon()
+                    ia.openSettings()
+                else:
+                    utils.dialog_message(
+                        "Can't open inputstream.adaptive settings")
+            except Exception as e:
+                utils.dialog_message(
+                    "Can't open inputstream.adaptive settings")

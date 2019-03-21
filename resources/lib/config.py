@@ -65,7 +65,7 @@ SESSION_URL = 'http://api.sub.afl.com.au/cfs-premium/users/session?sessionId={0}
 EMBED_TOKEN_URL = 'https://api.afl.com.au/cfs/users/{0}/token?embedCode={1}'
 
 # URL to send our embed token and retrieve playlist
-AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/{0}/{1}?device=html5&domain=http://www.ooyala.com&supportedFormats=m3u8'
+AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/{0}/{1}?device=html5&domain=http://www.ooyala.com&supportedFormats=m3u8,dash'
 
 # Ooyala provider indentifier code used in contructing request uris
 PCODE = 'Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi'

@@ -17,6 +17,7 @@
 #
 
 import classes
+import drmhelper
 import ooyalahelper
 import sys
 import xbmcgui
@@ -42,16 +43,38 @@ def play(url):
             if params.get('subscription_required') == 'True':
                 login_token = ooyalahelper.get_user_token()
 
-            stream_url = ooyalahelper.get_m3u8_playlist(params['ooyalaid'],
-                                                        v.live, login_token)
+            stream_data = ooyalahelper.get_m3u8_playlist(params['ooyalaid'],
+                                                         v.live, login_token)
         else:
-            stream_url = v.get_url()
+            stream_data = {'stream_url': v.get_url()}
 
         listitem = xbmcgui.ListItem(label=v.get_title(),
                                     iconImage=v.get_thumbnail(),
                                     thumbnailImage=v.get_thumbnail(),
-                                    path=stream_url)
+                                    path=stream_data.get('stream_url'))
+        try:
+            inputstream = drmhelper.check_inputstream(dialogs_v17=False)
+        except TypeError:
+            inputstream = drmhelper.check_inputstream()
+        if v.live and not inputstream:
+            utils.dialog_message(
+                'Kodi 18+ is now required to view live streams.')
+            return
 
+        if inputstream and not v.live:
+            listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
+            listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
+            listitem.setProperty('inputstream.adaptive.license_key',
+                                 stream_data.get('stream_url'))
+        elif v.live:
+            listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
+            listitem.setProperty('inputstream.adaptive.manifest_type', 'mpd')
+            listitem.setProperty('inputstream.adaptive.license_type',
+                                 'com.widevine.alpha')
+            listitem.setProperty('inputstream.adaptive.license_key',
+                                 stream_data.get('widevine_url') +
+                                 '|Content-Type=application%2F'
+                                 'x-www-form-urlencoded|A{SSM}|')
         listitem.addStreamInfo('video', v.get_kodi_stream_info())
         listitem.setInfo('video', v.get_kodi_list_item())
 
