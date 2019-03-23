@@ -73,7 +73,9 @@ def play(url):
                 'Kodi 18+ is now required to view live streams.')
             return
 
-        if inputstream and not v.live:
+        widevine_url = stream_data.get('widevine_url')
+
+        if (inputstream and not v.live) or not widevine_url:
             listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
             listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
             listitem.setProperty('inputstream.adaptive.license_key',
@@ -82,9 +84,9 @@ def play(url):
             listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
             listitem.setProperty('inputstream.adaptive.manifest_type', 'mpd')
             listitem.setProperty('inputstream.adaptive.license_type',
-                                 'com.widevine.alpha')
+                             'com.widevine.alpha')
             listitem.setProperty('inputstream.adaptive.license_key',
-                                 stream_data.get('widevine_url') +
+                                 widevine_url +
                                  '|Content-Type=application%2F'
                                  'x-www-form-urlencoded|A{SSM}|')
         listitem.addStreamInfo('video', v.get_kodi_stream_info())
