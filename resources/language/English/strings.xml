@@ -21,6 +21,7 @@
     <string id="10008">Subscription Type</string>
     <string id="10013">Help finding mis-uuid token</string>
     <string id="10014">Inputstream.adapive settings (video quality)</string>
+    <string id="10015">State</string>
 
     <!-- Debugging -->
     <string id="10011">Remove Stored Login Token</string>

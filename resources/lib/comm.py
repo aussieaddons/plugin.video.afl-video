@@ -62,7 +62,7 @@ def fetch_url(url, data=None, headers=None, request_token=False):
         if request.text[0] == u'\ufeff':  # bytes \xef\xbb\xbf in utf-8 encding
             request.encoding = 'utf-8-sig'
         data = request.text
-    return data
+    return data.encode('utf-8')
 
 
 def update_token(sess):

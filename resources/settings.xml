@@ -2,7 +2,7 @@
 <settings>
   <category label="20002">
     <setting label="10014" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=open_ia_settings)" option="close"/>
-    <setting id="STATE" type="labelenum" label="10012" values="ACT|NSW|NT|QLD|SA|TAS|VIC|WA" default="VIC" />
+    <setting id="STATE" type="labelenum" label="10015" values="ACT|NSW|NT|QLD|SA|TAS|VIC|WA" default="VIC" />
     <setting id="LIVE_SUBSCRIPTION" type="bool" label="10007" default="false" />
     <setting id="SUBSCRIPTION_TYPE" type="enum" label="10008" values="Paid (afl.com.au) or linked live pass|Free offer (Telstra ID)|Paid (in-app purchase)|Mobile data" default="1" enable="eq(-1,true)" />
     <setting id="LIVE_USERNAME" type="text" label="10003" default="" enable="eq(-2,true)+lt(-1,2)" />
