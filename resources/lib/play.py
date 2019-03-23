@@ -75,7 +75,7 @@ def play(url):
 
         widevine_url = stream_data.get('widevine_url')
 
-        if (inputstream and not v.live) or not widevine_url:
+        if inputstream and (not v.live or not widevine_url):
             listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
             listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
             listitem.setProperty('inputstream.adaptive.license_key',
