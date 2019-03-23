@@ -20,6 +20,7 @@ import classes
 import drmhelper
 import ooyalahelper
 import sys
+import xbmc
 import xbmcgui
 import xbmcplugin
 
@@ -52,10 +53,21 @@ def play(url):
                                     iconImage=v.get_thumbnail(),
                                     thumbnailImage=v.get_thumbnail(),
                                     path=stream_data.get('stream_url'))
-        try:
-            inputstream = drmhelper.check_inputstream(dialogs_v17=False)
-        except TypeError:
+
+        if v.live:
             inputstream = drmhelper.check_inputstream()
+        else:
+            try:
+                fullver = xbmc.getInfoLabel(
+                    "System.BuildVersion").split(' ')[0]
+                ver = fullver[:fullver.find('-')]
+                if float(ver) < 17.0:
+                    inputstream = False
+                else:
+                    inputstream = drmhelper.check_inputstream(drm=False)
+            except:
+                inputstream = False
+
         if v.live and not inputstream:
             utils.dialog_message(
                 'Kodi 18+ is now required to view live streams.')
