@@ -20,6 +20,7 @@ import classes
 import config
 import datetime
 import json
+import requests
 import time
 import xbmcaddon
 
@@ -71,7 +72,16 @@ def update_token(sess):
     This functions performs a HTTP POST to the token URL and it will update
     the requests session with a token required for API calls
     """
-    res = sess.post(config.TOKEN_URL)
+    retries = 3
+    while retries > 0:
+        try:
+            res = sess.post(config.TOKEN_URL)
+            break
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code in [404, 503]:
+                if retries == 1:
+                    raise e
+        retries -= 1
     try:
         token = json.loads(res.text).get('token')
     except Exception as e:
