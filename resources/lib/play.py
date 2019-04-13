@@ -20,7 +20,6 @@ import classes
 import drmhelper
 import ooyalahelper
 import sys
-import xbmc
 import xbmcgui
 import xbmcplugin
 
@@ -54,23 +53,12 @@ def play(url):
                                     thumbnailImage=v.get_thumbnail(),
                                     path=stream_data.get('stream_url'))
 
-        if v.live:
-            inputstream = drmhelper.check_inputstream()
-        else:
-            try:
-                fullver = xbmc.getInfoLabel(
-                    "System.BuildVersion").split(' ')[0]
-                ver = fullver[:fullver.find('-')]
-                if float(ver) < 17.0:
-                    inputstream = False
-                else:
-                    inputstream = drmhelper.check_inputstream(drm=False)
-            except:
-                inputstream = False
-
-        if v.live and not inputstream:
+        inputstream = drmhelper.check_inputstream(drm=v.live)
+        if not inputstream:
             utils.dialog_message(
-                'Kodi 18+ is now required to view live streams.')
+                'Failed to play stream. Please visit our website at '
+                'http://aussieaddons.com/addons/afl/ for more '
+                'information.')
             return
 
         widevine_url = stream_data.get('widevine_url')
@@ -84,7 +72,7 @@ def play(url):
             listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
             listitem.setProperty('inputstream.adaptive.manifest_type', 'mpd')
             listitem.setProperty('inputstream.adaptive.license_type',
-                             'com.widevine.alpha')
+                                 'com.widevine.alpha')
             listitem.setProperty('inputstream.adaptive.license_key',
                                  widevine_url +
                                  '|Content-Type=application%2F'
