@@ -140,28 +140,17 @@ def get_token(username, password):
     try:
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
-        ph_no = None
+        ph_no_list = []
         
         for offer in offers_list:
             if offer.get('name') != 'AFL Live Pass':
                 continue
-            from copy import deepcopy
-            offer_copy = deepcopy(offer)
-            if offer_copy.get('productOfferingAttributes')[2].get('name') == 'ServiceId':
-                    offer_copy.get('productOfferingAttributes')[2]['value'] = '{0}XXXXX'.format(offer_copy.get('productOfferingAttributes')[2]['value'][:6])
-                    utils.log('Product offer is: {0}'.format(offer_copy))
-            
-        for offer in offers_list:
-            if offer.get('name') != 'AFL Live Pass':
-                continue
-            if offer.get('contractTerm') != 0:
-                continue
             data = offer.get('productOfferingAttributes')
             serv_id = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
             if serv_id in service_ids:
-                ph_no = serv_id
+                ph_no_list.append(serv_id)
                 break
-        if not ph_no:
+        if len(ph_no_list) == 0:
             raise TelstraAuthException(
                 'Unable to determine if you have any eligible services. '
                 'Please ensure there is an eligible service linked to '
@@ -172,18 +161,29 @@ def get_token(username, password):
 
     # 'Order' the subscription package to activate the service
     prog_dialog.update(80, 'Activating live pass on service')
-    order_data = config.MEDIA_ORDER_JSON.format(ph_no, offer_id, token)
-    order = session.post(config.MEDIA_ORDER_URL, data=order_data)
 
-    # check to make sure order has been placed correctly
-    if order.status_code == 201:
+    last_order_response = None
+    for ph_no in ph_no_list:
         try:
-            order_json = json.loads(order.text)
-            status = order_json['data'].get('status') == 'COMPLETE'
-            if status:
-                utils.log('Order status complete')
-        except:
-            utils.log('Unable to check status of order, continuing anyway')
+            order_data = config.MEDIA_ORDER_JSON.format(ph_no, offer_id, token)
+            order = session.post(config.MEDIA_ORDER_URL, data=order_data)
+            last_order_response = order
+            # check to make sure order has been placed correctly
+            if order.status_code == 201:
+                try:
+                    order_json = json.loads(order.text)
+                    status = order_json['data'].get('status') == 'COMPLETE'
+                    if status:
+                        utils.log('Order status complete')
+                        break
+                except:
+                    utils.log('Unable to check status of order, continuing anyway')
+        except requests.exceptions.HTTPError as e:
+            last_order_response = e.response
+
+    if str(last_order_response.status_code)[0] != '2':
+        last_order_response.raise_for_status()
+
     session.close()
     prog_dialog.update(100, 'Finished!')
     prog_dialog.close()
