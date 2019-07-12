@@ -122,6 +122,7 @@ def get_token(username, password):
         utils.log(service.get('startDate'))
         utils.log(service.get('endDate'))
         utils.log(service.get('status'))
+        utils.log('{0}XXXXX'.format(service.get('serviceId')[:6]))
     
     service_ids = [x['serviceId'] for x in ents if x['status'] == 'Active']
         
@@ -146,7 +147,7 @@ def get_token(username, password):
             from copy import deepcopy
             offer_copy = deepcopy(offer)
             if offer_copy.get('productOfferingAttributes')[2].get('name') == 'ServiceId':
-                offer_copy.get('productOfferingAttributes')[2]['value'] = '{0}XXX'.format(offer_copy.get('productOfferingAttributes')[2]['value'][:6])
+                offer_copy.get('productOfferingAttributes')[2]['value'] = '{0}XXXXX'.format(offer_copy.get('productOfferingAttributes')[2]['value'][:6])
                 utils.log('Product offer is: {0}'.format(offer_copy))
             
             utils.log('Offer reuptake: {0}'.format(offer.get('reuptakeAllowed')))
