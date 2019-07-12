@@ -115,10 +115,10 @@ def get_token(username, password):
         {'Authorization': 'Bearer {0}'.format(bearer_token)})
     session.headers = media_order_headers
 
-    entitlements = json.loads(
+    ents = json.loads(
         session.get(config.ENTITLEMENTS_URL).text).get('entitlements')
     
-    service_ids = [x['serviceId'] for x in entitlements]
+    service_ids = [x['serviceId'] for x in ents if x['status'] == 'Active']
         
     try:
         offers = session.get(config.OFFERS_URL)
