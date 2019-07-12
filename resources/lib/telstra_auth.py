@@ -141,16 +141,21 @@ def get_token(username, password):
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
         ph_no = None
+        
         for offer in offers_list:
             if offer.get('name') != 'AFL Live Pass':
                 continue
             from copy import deepcopy
             offer_copy = deepcopy(offer)
             if offer_copy.get('productOfferingAttributes')[2].get('name') == 'ServiceId':
-                offer_copy.get('productOfferingAttributes')[2]['value'] = '{0}XXXXX'.format(offer_copy.get('productOfferingAttributes')[2]['value'][:6])
-                utils.log('Product offer is: {0}'.format(offer_copy))
+                    offer_copy.get('productOfferingAttributes')[2]['value'] = '{0}XXXXX'.format(offer_copy.get('productOfferingAttributes')[2]['value'][:6])
+                    utils.log('Product offer is: {0}'.format(offer_copy))
             
-            utils.log('Offer reuptake: {0}'.format(offer.get('reuptakeAllowed')))
+        for offer in offers_list:
+            if offer.get('name') != 'AFL Live Pass':
+                continue
+            if offer.get('contractTerm') != 0:
+                continue
             data = offer.get('productOfferingAttributes')
             serv_id = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
             if serv_id in service_ids:
