@@ -115,6 +115,11 @@ def get_token(username, password):
         {'Authorization': 'Bearer {0}'.format(bearer_token)})
     session.headers = media_order_headers
 
+    entitlements = json.loads(
+        session.get(config.ENTITLEMENTS_URL).text).get('entitlements')
+    
+    service_ids = [x['serviceId'] for x in entitlements]
+        
     try:
         offers = session.get(config.OFFERS_URL)
     except requests.exceptions.HTTPError as e:
@@ -134,7 +139,10 @@ def get_token(username, password):
             if offer.get('name') != 'AFL Live Pass':
                 continue
             data = offer.get('productOfferingAttributes')
-            ph_no = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
+            serv_id = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
+            if serv_id in service_ids:
+                ph_no = serv_id
+                break
         if not ph_no:
             raise TelstraAuthException(
                 'Unable to determine if you have any eligible services. '

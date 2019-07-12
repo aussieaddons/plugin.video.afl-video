@@ -120,6 +120,8 @@ MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
 
 OLD_MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
 
+ENTITLEMENTS_URL = 'https://tapi.telstra.com/v1/media-entitlements/entitlements?idp=TDI&tenantId=afl'
+
 MEDIA_ORDER_URL = 'https://tapi.telstra.com/v1/media-commerce/orders'
 
 MEDIA_ORDER_JSON = '{{"serviceId":"{0}","serviceType":"MSISDN","offer":{{"id":"{1}"}},"pai":"{2}"}}'
