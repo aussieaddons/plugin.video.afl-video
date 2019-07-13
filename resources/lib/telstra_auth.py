@@ -141,7 +141,7 @@ def get_token(username, password):
         offer_data = json.loads(offers.text)
         offers_list = offer_data['data']['offers']
         ph_no_list = []
-        
+
         for offer in offers_list:
             if offer.get('name') != 'AFL Live Pass':
                 continue
@@ -174,6 +174,8 @@ def get_token(username, password):
                     order_json = json.loads(order.text)
                     status = order_json['data'].get('status') == 'COMPLETE'
                     if status:
+                        order_json['data']['serviceId'] = 'XXXXXXXXXXX'
+                        utils.log(order_json)
                         utils.log('Order status complete')
                         break
                 except:
