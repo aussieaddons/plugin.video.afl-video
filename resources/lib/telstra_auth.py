@@ -153,6 +153,8 @@ def get_token(username, password):
     prog_dialog.update(80, 'Activating live pass on service')
 
     last_order_response = None
+    utils.log('no. of services: {0}'.format(len(ph_no_list)))
+    completed = False
     for ph_no in ph_no_list:
         try:
             order_data = config.MEDIA_ORDER_JSON.format(ph_no, offer_id, token)
@@ -164,7 +166,7 @@ def get_token(username, password):
                     order_json = json.loads(order.text)
                     status = order_json['data'].get('status') == 'COMPLETE'
                     if status:
-                        order_json['data']['serviceId'] = 'XXXXXXXXXXX'
+                        order_json['data']['serviceId'] = '{0}XXXXX'.format(order_json['data']['serviceId'][:6])
                         utils.log(order_json)
                         offer_correlation_id = order_json['data']['orderItems'][0]['productOffer'].get('id')
                         order_correlation_id = order_json['data']['orderItems'][0].get('correlationId')
@@ -173,14 +175,19 @@ def get_token(username, password):
                             continue
                         else:
                             utils.log('Order status complete')
+                            completed = True
                             break
                 except:
                     utils.log('Unable to check status of order, continuing anyway')
         except requests.exceptions.HTTPError as e:
+            utils.log('Error {0} on order post'.format(e.response.status_code))
             last_order_response = e.response
 
     if str(last_order_response.status_code)[0] != '2':
         last_order_response.raise_for_status()
+
+    if not completed:
+        raise TelstraAuthException('Live pass registration failed')
 
     session.close()
     prog_dialog.update(100, 'Finished!')
