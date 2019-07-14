@@ -115,16 +115,6 @@ def get_token(username, password):
         {'Authorization': 'Bearer {0}'.format(bearer_token)})
     session.headers = media_order_headers
 
-    ents = json.loads(
-        session.get(config.ENTITLEMENTS_URL).text).get('entitlements')
-    
-    for service in ents:
-        utils.log(service.get('startDate'))
-        utils.log(service.get('endDate'))
-        utils.log(service.get('status'))
-        utils.log('{0}XXXXX'.format(service.get('serviceId')[:6]))
-    
-    service_ids = [x['serviceId'] for x in ents if x['status'] == 'Active']
         
     try:
         offers = session.get(config.OFFERS_URL)
@@ -147,9 +137,8 @@ def get_token(username, password):
                 continue
             data = offer.get('productOfferingAttributes')
             serv_id = [x['value'] for x in data if x['name'] == 'ServiceId'][0]
-            if serv_id in service_ids:
-                ph_no_list.append(serv_id)
-                break
+            ph_no_list.append(serv_id)
+
         if len(ph_no_list) == 0:
             raise TelstraAuthException(
                 'Unable to determine if you have any eligible services. '
@@ -158,6 +147,7 @@ def get_token(username, password):
                 '{0} for further instructions'.format(config.HUB_URL))
     except Exception as e:
         raise e
+
 
     # 'Order' the subscription package to activate the service
     prog_dialog.update(80, 'Activating live pass on service')
@@ -176,8 +166,14 @@ def get_token(username, password):
                     if status:
                         order_json['data']['serviceId'] = 'XXXXXXXXXXX'
                         utils.log(order_json)
-                        utils.log('Order status complete')
-                        break
+                        offer_correlation_id = order_json['data']['orderItems'][0]['productOffer'].get('id')
+                        order_correlation_id = order_json['data']['orderItems'][0].get('correlationId')
+                        if offer_correlation_id != order_correlation_id:
+                            utils.log('Correlation id does not match, trying next service')
+                            continue
+                        else:
+                            utils.log('Order status complete')
+                            break
                 except:
                     utils.log('Unable to check status of order, continuing anyway')
         except requests.exceptions.HTTPError as e:
