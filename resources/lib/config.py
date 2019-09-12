@@ -87,7 +87,7 @@ AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&h
 
 AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
-# New auth config for 2017
+# New auth config for 2019
 
 AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
 
@@ -105,7 +105,7 @@ SIGNON_URL = 'https://signon.telstra.com.au/login'
 
 OLD_OFFERS_URL = 'https://api.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
 
-OFFERS_URL = 'https://tapi.telstra.com/v1/media-products/catalogues/media/offers'
+OFFERS_URL = 'https://tapi.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
 
 HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
 
@@ -120,19 +120,47 @@ MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
 
 OLD_MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
 
+ENTITLEMENTS_URL = 'https://tapi.telstra.com/v1/media-entitlements/entitlements?idp=TDI&tenantId=afl'
+
+SUBSCRIPTIONS_URL = 'http://api.sub.afl.com.au/cfs-premium/users/{0}/subscriptions'
+
 MEDIA_ORDER_URL = 'https://tapi.telstra.com/v1/media-commerce/orders'
 
 MEDIA_ORDER_JSON = '{{"serviceId":"{0}","serviceType":"MSISDN","offer":{{"id":"{1}"}},"pai":"{2}"}}'
 
 SPORTSPASS_URL = 'http://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
 
-SSO_URL = 'https://tapi.telstra.com/v1/sso/auth'
+MYID_AUTHORIZATION_URL = 'https://myid.telstra.com/identity/as/authorization.oauth2'
 
-SSO_PARAMS = {'redirect_uri': 'https://hub.telstra.com.au/offers/content/cached/callback.html',
-              'response_type': 'id_token token',
-              'scope': 'openid email profile phone telstra.user.sso.profile'}
+MYID_TOKEN_URL = 'https://myid.telstra.com/identity/as/token.oauth2'
+
+MYID_TOKEN_PARAMS = {
+    'redirect_uri': 'https://hub.telstra.com.au/offers/content/cached/callback.html',
+    'grant_type': 'authorization_code'
+}
+
+MYID_RESUME_AUTHORIZATION_URL = 'https://myid.telstra.com/identity/as/{0}/resume/as/authorization.ping'
+
+MYID_AUTH_RESUME_DATA = {
+    'pf.rememberUsername': 'on',
+    'pf.ok': 'clicked',
+    'pf.cancel': '',
+    'pf.adapterId': 'upAdapter'
+}
+
+SSO_SESSION_HANDLER_URLS = [
+    'https://signon.telstra.com/SSOSessionHandler',
+    'https://signon.bigpond.com/SSOSessionHandler',
+    'https://signon.telstra.com.au/SSOSessionHandler'
+]
+
+MYID_AUTH_PARAMS = {'redirect_uri': 'https://hub.telstra.com.au/offers/content/cached/callback.html',
+              'response_type': 'code',
+              'scope': 'openid app.oneplace',
+              'code_challenge_method': 'S256',
+              'response_mode': 'query'}
               
-SSO_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+MYID_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                'Accept-Encoding': 'gzip, '
                                   'deflate',
                'Accept-Language': 'en-AU,en-US;q=0.9',
@@ -150,16 +178,16 @@ SPC_HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,
 #Mobile Auth
 OFFER_ID = 'a482eaad-9213-419c-ace2-65b7cae73317'
 
-OAUTH_HEADERS = {'User-Agent': 'AFL(Android) / 40656',
+MOBILE_OAUTH_HEADERS = {'User-Agent': 'AFL(Android) / 40656',
                  'Accept-Encoding': 'gzip'}
 
-OAUTH_URL = 'https://api.telstra.com/v1/media-commerce/oauth/token'
+MOBILE_OAUTH_URL = 'https://tapi.telstra.com/v1/media-commerce/oauth/token'
 
 MOBILE_ID_URL = 'http://medrx.telstra.com.au/online.php'
 
-MOBILE_CLIENT_ID = 'BDm2sYxE5twDWsM5CXAWHUPrm1ultZ9L'
+MOBILE_CLIENT_ID = 'FlQEXSy4RNd0YXqQ8Ms4sVZAT8xmsW6j'
 
-MOBILE_CLIENT_SECRET = 'uIGtb1DTQ0LBxe1N'
+MOBILE_CLIENT_SECRET = 'NjpuDUkgKsVZFkDF'
 
 MOBILE_TOKEN_PARAMS = {'client_id': MOBILE_CLIENT_ID,
                       'client_secret': MOBILE_CLIENT_SECRET,

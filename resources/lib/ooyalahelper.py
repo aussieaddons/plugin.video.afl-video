@@ -97,9 +97,11 @@ def get_user_token():
         password = addon.getSetting('LIVE_PASSWORD')
 
         if subscription_type == 1:  # free subscription
-            token = telstra_auth.get_token(username, password)
+            auth = telstra_auth.TelstraAuth(username, password)
+            token = auth.get_free_token()
         elif subscription_type == 3:  # mobile activated subscription
-            token = telstra_auth.get_mobile_token()
+            auth = telstra_auth.TelstraAuth()
+            token = auth.get_mobile_token()
         else:  # paid afl.com.au
             login_data = {'userIdentifier': addon.getSetting('LIVE_USERNAME'),
                           'authToken': addon.getSetting('LIVE_PASSWORD'),
