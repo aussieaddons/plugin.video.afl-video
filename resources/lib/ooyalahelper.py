@@ -1,28 +1,30 @@
 import base64
-import comm
-import config
 import json
-import re
+
+from future.moves.urllib.parse import quote, urlencode
+
 import requests
-import urllib
-import xbmcaddon
-import xbmcgui
 
-import telstra_auth
-
-from aussieaddonscommon.exceptions import AussieAddonsException
 from aussieaddonscommon import session
 from aussieaddonscommon import utils
+from aussieaddonscommon.exceptions import AussieAddonsException
+
+from resources.lib import comm
+from resources.lib import config
+from resources.lib import telstra_auth
+
+import xbmcaddon
+
+import xbmcgui
 
 try:
     import StorageServer
 except ImportError:
-    import storageserverdummy as StorageServer
-
+    import resources.lib.storageserverdummy as StorageServer
 
 cache = StorageServer.StorageServer(utils.get_addon_id(), 1)
 addon = xbmcaddon.Addon()
-subscription_type = int(addon.getSetting('SUBSCRIPTION_TYPE'))
+
 sess = session.Session()
 
 
@@ -37,7 +39,7 @@ def clear_token():
 
 def fetch_session_id(url, data):
     """send http POST and return the json response data"""
-    data = urllib.urlencode(data)
+    data = urlencode(data)
     sess.headers = config.HEADERS
     comm.update_token(sess)
     res = sess.post(url, data)
@@ -49,9 +51,14 @@ def fetch_session_id(url, data):
     return res.text
 
 
+def get_sub_type():
+    return int(addon.getSetting('SUBSCRIPTION_TYPE'))
+
+
 def get_user_token():
     """Send user login info and retrieve token for session"""
     # in-app purchase/manual
+    subscription_type = get_sub_type()
     if subscription_type == 2:
         iap_token = addon.getSetting('IAP_TOKEN').lower()
         try:
@@ -89,7 +96,6 @@ def get_user_token():
                           'userIdentifierType': 'EMAIL'}
             login_json = fetch_session_id(config.LOGIN_URL, login_data)
             data = json.loads(login_json)
-            utils.log(data)
             if data.get('responseCode') != 0:
                 raise AussieAddonsException('Invalid Telstra ID login/'
                                             'password for paid afl.com.au '
@@ -98,7 +104,7 @@ def get_user_token():
 
             try:
                 sess.headers.update({'Authorization': None})
-                encoded_session_id = urllib.quote(session_id)
+                encoded_session_id = quote(session_id)
                 session_url = config.SESSION_URL.format(encoded_session_id)
                 res = sess.get(session_url)
                 data = json.loads(res.text)
@@ -130,6 +136,7 @@ def get_embed_token(user_token, video_id):
                 'Your version of Kodi is too old to support live streaming. '
                 'Please upgrade to the latest version.')
     except requests.exceptions.HTTPError as e:
+        subscription_type = get_sub_type()
         if subscription_type == 0:  # paid afl.com.au/linked
             cache.delete('AFLTOKEN')
             raise AussieAddonsException(
@@ -154,7 +161,7 @@ def get_embed_token(user_token, video_id):
                 'the settings is correct and try again')
 
     data = json.loads(res.text)
-    return urllib.quote(data.get('token'))
+    return quote(data.get('token'))
 
 
 def get_secure_token(secure_url, video_id):
@@ -186,9 +193,12 @@ def get_secure_token(secure_url, video_id):
             'Check your subscription is valid.'.format(video.get('message')))
     try:
         streams = video.get('streams')
-        stream_url = base64.b64decode(streams[0]['url']['data'])
-        widevine_url = streams[0].get('widevine_server_path')
-        return {'stream_url': stream_url, 'widevine_url': widevine_url}
+        stream_url = str(
+            base64.b64decode(streams[0]['url']['data']).decode('utf-8'))
+        widevine_url = streams[0].get(
+            'widevine_server_path', b'').decode('utf-8')
+        return {'stream_url': str(stream_url),
+                'widevine_url': str(widevine_url)}
     except Exception as e:
         raise AussieAddonsException(
             'Failed to get stream URL: {0}'.format(e))
@@ -199,57 +209,6 @@ def get_m3u8_streams(secure_token_url):
     res = sess.get(secure_token_url)
     data = res.text.splitlines()
     return data
-
-
-def parse_m3u8_streams(data, live, secure_token_url):
-    """Parse m3u8 stream
-
-    Parse the retrieved m3u8 stream list into a list of dictionaries
-    then return the url for the highest quality stream. Different
-    handling is required of live m3u8 files as they seem to only contain
-    the destination filename and not the domain/path.
-    """
-
-    if live:
-        qual = int(xbmcaddon.Addon().getSetting('LIVE_QUALITY'))
-        if qual == config.MAX_LIVE_QUAL:
-            qual = -1
-    else:
-        qual = int(xbmcaddon.Addon().getSetting('REPLAYQUALITY'))
-        if qual == config.MAX_REPLAY_QUAL:
-            qual = -1
-
-    m3u_list = []
-    base_url = secure_token_url[:secure_token_url.rfind('/') + 1]
-    base_domain = secure_token_url[:secure_token_url.find('/', 8) + 1]
-    m3u8_lines = iter(data)
-    for line in m3u8_lines:
-            stream_inf = '#EXT-X-STREAM-INF:'
-            if line.startswith(stream_inf):
-                line = line[len(stream_inf):]
-            else:
-                continue
-
-            csv_list = re.split(',(?=(?:(?:[^"]*"){2})*[^"]*$)', line)
-            linelist = [i.split('=') for i in csv_list]
-
-            uri = next(m3u8_lines)
-
-            if uri.startswith('/'):
-                linelist.append(['URL', base_domain + uri])
-            elif uri.find('://') == -1:
-                linelist.append(['URL', base_url + uri])
-            else:
-                linelist.append(['URL', uri])
-            m3u_list.append(dict((i[0], i[1]) for i in linelist))
-    sorted_m3u_list = sorted(m3u_list, key=lambda k: int(k['BANDWIDTH']))
-    try:
-        stream = sorted_m3u_list[qual]['URL']
-    except IndexError as e:
-        utils.log('Quality setting: {0}'.format(qual))
-        utils.log('Sorted m3u8 list: {0}'.format(sorted_m3u_list))
-        raise e
-    return stream
 
 
 def get_m3u8_playlist(video_id, live, login_token=None):

@@ -1,19 +1,23 @@
-
-import classes
-import drmhelper
-import ooyalahelper
 import sys
-import xbmcgui
-import xbmcplugin
 
 from aussieaddonscommon import utils
+
+import drmhelper
+
+from resources.lib import classes
+from resources.lib import comm
+from resources.lib import ooyalahelper
+
+import xbmcgui
+
+import xbmcplugin
 
 
 def play(url):
     try:
         params = utils.get_url(url)
         v = classes.Video()
-        v.parse_xbmc_url(url)
+        v.parse_kodi_url(url)
         if params.get('isdummy'):
             xbmcgui.Dialog().ok(
                     'Dummy item',

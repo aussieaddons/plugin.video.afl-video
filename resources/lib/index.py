@@ -1,16 +1,19 @@
-import comm
-import config
 import sys
-import xbmcgui
-import xbmcplugin
 
 from aussieaddonscommon import utils
+
+from resources.lib import comm
+from resources.lib import config
+
+import xbmcgui
+
+import xbmcplugin
 
 
 def make_list():
     try:
         for category in config.CATEGORIES:
-            url = "%s?category=%s" % (sys.argv[0], category)
+            url = '{0}?category={1}'.format(sys.argv[0], category)
             listitem = xbmcgui.ListItem(category)
 
             # add the item to the media list

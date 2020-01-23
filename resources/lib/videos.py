@@ -1,11 +1,14 @@
-import comm
-import config
 import sys
-import xbmcgui
-import xbmcplugin
 
 from aussieaddonscommon import utils
 from aussieaddonscommon.exceptions import AussieAddonsException
+
+from resources.lib import comm
+from resources.lib import config
+
+import xbmcgui
+
+import xbmcplugin
 
 
 def make_list(params):
@@ -44,7 +47,7 @@ def make_list(params):
                 listitem.setProperty('IsPlayable', 'true')
 
             # Build the URL for the program, including the list_info
-            url = "%s?%s" % (sys.argv[0], v.make_xbmc_url())
+            url = "%s?%s" % (sys.argv[0], v.make_kodi_url())
 
             # Add the program item to the list
             ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),

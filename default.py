@@ -1,24 +1,21 @@
-import os
 import sys
-import xbmcaddon
 
 from aussieaddonscommon import utils
 
-# Add our resources/lib to the python path
-addon_dir = xbmcaddon.Addon().getAddonInfo('path')
-sys.path.insert(0, os.path.join(addon_dir, 'resources', 'lib'))
+from resources.lib import index
+from resources.lib import ooyalahelper
+from resources.lib import play
+from resources.lib import rounds
+from resources.lib import teams
+from resources.lib import videos
 
-import index  # noqa: E402
-import ooyalahelper  # noqa: E402
-import play  # noqa: E402
-import rounds  # noqa: E402
-import teams  # noqa: E402
-import videos  # noqa: E402
+import xbmcaddon
 
 # Print our platform/version debugging information
 utils.log_kodi_platform_version()
 
-if __name__ == "__main__":
+
+def main():
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
     utils.log('Loading with params: {0}'.format(params))
@@ -58,6 +55,10 @@ if __name__ == "__main__":
                 else:
                     utils.dialog_message(
                         "Can't open inputstream.adaptive settings")
-            except Exception as e:
+            except Exception:
                 utils.dialog_message(
                     "Can't open inputstream.adaptive settings")
+
+
+if __name__ == "__main__":
+    main()

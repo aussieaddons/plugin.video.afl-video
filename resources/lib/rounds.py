@@ -1,9 +1,12 @@
-import comm
 import sys
-import xbmcgui
-import xbmcplugin
 
 from aussieaddonscommon import utils
+
+from resources.lib import comm
+
+import xbmcgui
+
+import xbmcplugin
 
 
 def make_rounds(params):

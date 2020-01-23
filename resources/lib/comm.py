@@ -1,15 +1,16 @@
-import classes
-import config
 import datetime
 import json
 import time
-import xbmcaddon
 import xml.etree.ElementTree as ET
 
 from aussieaddonscommon import exceptions
 from aussieaddonscommon import session
 from aussieaddonscommon import utils
 
+from resources.lib import classes
+from resources.lib import config
+
+import xbmcaddon
 
 ADDON = xbmcaddon.Addon()
 
@@ -40,6 +41,7 @@ def fetch_url(url, data=None, headers=None, request_token=False):
         except Exception as e:
             # Just re-raise for now
             raise e
+        request.encoding = 'utf-8-sig'
         if request.text[0] == u'\ufeff':  # bytes \xef\xbb\xbf in utf-8 encding
             request.encoding = 'utf-8-sig'
         data = request.text
@@ -369,7 +371,7 @@ def find_aflw_live_matches():
         data = fetch_url(config.AFLW_BOX_URL.format(game_id))
         tree = ET.fromstring(data)
         watch_button = tree.find('WatchButton')
-        if watch_button:
+        if watch_button is not None:
             if watch_button.find('Title').text != 'WATCH REPLAY':
                 listing.append(tree)
     return listing
