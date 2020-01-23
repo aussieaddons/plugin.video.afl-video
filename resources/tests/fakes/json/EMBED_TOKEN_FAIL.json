@@ -1,0 +1,9 @@
+{
+    "code": "CFSUSERS005",
+    "date": "2020-01-12T06:00:00.123+0000",
+    "host": "ip-10-3-5-70",
+    "mdc": "@7532@",
+    "techMessage": "UUID 'mis-uuid-aabbccddeeff00112233445566778899' is not entitled to generate a token.",
+    "userMessage": "Oops, you need a subscription to view premium content! Please check out our great subscription options.",
+    "version": "4.2.58"
+}

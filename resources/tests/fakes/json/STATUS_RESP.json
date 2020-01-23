@@ -1,0 +1,15 @@
+{
+    "Expiration": "2020-01-31T12:59:59.000Z",
+    "NRLLive": {
+        "IsPost2018Purchase": "true"
+    },
+    "Product": "69b1f3e1-5196-4a57-9a46-472d20b78bc8",
+    "Reason": "An active subscription was found on your account.",
+    "Service": "TELSTRA_ONE_PLACE",
+    "Strings": {
+        "Name": "$0.00 Season Pass",
+        "Type": "NRL Live Pass"
+    },
+    "UnsubscribeUrl": "http://hub.telstra.com.au/sp2017-nrl-app?type=cancellation",
+    "Valid": "true"
+}

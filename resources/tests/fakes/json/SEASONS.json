@@ -1,0 +1,1705 @@
+{
+  "currentSeasonId" : "CD_S2020014",
+  "seasons" : [ {
+    "name" : "AFL Premiership 2012",
+    "shortName" : "Premiership",
+    "year" : 2012,
+    "id" : "CD_S2012014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201201401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201201402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201201403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201201404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201201405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201201406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201201407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201201408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201201409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201201410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201201411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201201412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201201413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201201414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201201415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201201416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201201417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201201418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201201419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201201420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201201421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201201422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201201423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201201424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201201425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201201426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201201427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2012014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201201427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2013 AFL NAB Cup",
+    "shortName" : "NAB Cup",
+    "year" : 2013,
+    "id" : "CD_S2013101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201310101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2013101",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201310102",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2013101",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201310103",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2013101",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201310104",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2013101",
+      "roundNumber" : 4
+    } ],
+    "currentRoundId" : "CD_R201310104",
+    "matchCentreUrl" : "http://m.afl.com.au/match-centre/nab-cup.mobileapp"
+  }, {
+    "name" : "AFL Premiership 2013",
+    "shortName" : "Premiership",
+    "year" : 2013,
+    "id" : "CD_S2013014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201301401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201301402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201301403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201301404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201301405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201301406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201301407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201301408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201301409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201301410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201301411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201301412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201301413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201301414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201301415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201301416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201301417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201301418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201301419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201301420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201301421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201301422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201301423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201301424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201301425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201301426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201301427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2013014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201301427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2014 AFL NAB Challenge",
+    "shortName" : "NAB Challenge",
+    "year" : 2014,
+    "id" : "CD_S2014101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201410101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2014101",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201410102",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2014101",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201410103",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2014101",
+      "roundNumber" : 3
+    } ],
+    "currentRoundId" : "CD_R201410101",
+    "matchCentreUrl" : "http://m.afl.com.au/match-centre/nab-challenge/2014.mobileapp"
+  }, {
+    "name" : "AFL Premiership 2014",
+    "shortName" : "Premiership",
+    "year" : 2014,
+    "id" : "CD_S2014014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201401401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201401402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201401403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201401404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201401405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201401406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201401407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201401408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201401409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201401410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201401411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201401412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201401413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201401414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201401415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201401416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201401417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201401418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201401419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201401420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201401421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201401422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201401423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201401424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201401425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201401426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201401427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2014014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201401427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2015 AFL NAB Challenge",
+    "shortName" : "NAB Challenge",
+    "year" : 2015,
+    "id" : "CD_S2015101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201510101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2015101",
+      "roundNumber" : 1
+    } ],
+    "currentRoundId" : "CD_R201510101",
+    "matchCentreUrl" : "http://m.afl.com.au/match-centre/nab-challenge/2015.mobileapp"
+  }, {
+    "name" : "AFL Premiership 2015",
+    "shortName" : "Premiership",
+    "year" : 2015,
+    "id" : "CD_S2015014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201501401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201501402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201501403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201501404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201501405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201501406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201501407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201501408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201501409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201501410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201501411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201501412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201501413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201501414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201501415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201501416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201501417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201501418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201501419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201501420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201501421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201501422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201501423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201501424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201501425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201501426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201501427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2015014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201501427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2016 AFL NAB Challenge",
+    "shortName" : "NAB Challenge",
+    "year" : 2016,
+    "id" : "CD_S2016101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201610101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2016101",
+      "roundNumber" : 1
+    } ],
+    "currentRoundId" : "CD_R201610101",
+    "matchCentreUrl" : "http://m.afl.com.au/match-centre/nab-challenge.mobileapp"
+  }, {
+    "name" : "AFL Premiership 2016",
+    "shortName" : "Premiership",
+    "year" : 2016,
+    "id" : "CD_S2016014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201601401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201601402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201601403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201601404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201601405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201601406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201601407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201601408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201601409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201601410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201601411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201601412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201601413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201601414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201601415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201601416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201601417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201601418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201601419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201601420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201601421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201601422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201601423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201601424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201601425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201601426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201601427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2016014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201601427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2017 AFL JLT Series",
+    "shortName" : "JLT Series",
+    "year" : 2017,
+    "id" : "CD_S2017101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201710101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2017101",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201710102",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2017101",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201710103",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2017101",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201710104",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2017101",
+      "roundNumber" : 4
+    } ],
+    "currentRoundId" : "CD_R201710104",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "AFL Premiership 2017",
+    "shortName" : "Premiership",
+    "year" : 2017,
+    "id" : "CD_S2017014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201701401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201701402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201701403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201701404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201701405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201701406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201701407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201701408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201701409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201701410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201701411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201701412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201701413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201701414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201701415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201701416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201701417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201701418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201701419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201701420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201701421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201701422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201701423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201701424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201701425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201701426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201701427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2017014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201701427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2018 AFL JLT Series",
+    "shortName" : "JLT Series",
+    "year" : 2018,
+    "id" : "CD_S2018101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201810101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2018101",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201810102",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2018101",
+      "roundNumber" : 2
+    } ],
+    "currentRoundId" : "CD_R201810102",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "AFL Premiership 2018",
+    "shortName" : "Premiership",
+    "year" : 2018,
+    "id" : "CD_S2018014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201801401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201801402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201801403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201801404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201801405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201801406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201801407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201801408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201801409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201801410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201801411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201801412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201801413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201801414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201801415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201801416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201801417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201801418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201801419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201801420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201801421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201801422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201801423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201801424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201801425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201801426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201801427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2018014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201801427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2019 AFL JLT Series",
+    "shortName" : "JLT Series",
+    "year" : 2019,
+    "id" : "CD_S2019101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201910101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2019101",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201910102",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2019101",
+      "roundNumber" : 2
+    } ],
+    "currentRoundId" : "CD_R201910102",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "AFL Premiership 2019",
+    "shortName" : "Premiership",
+    "year" : 2019,
+    "id" : "CD_S2019014",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R201901401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R201901402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R201901403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R201901404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R201901405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R201901406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R201901407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R201901408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R201901409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R201901410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R201901411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R201901412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R201901413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R201901414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R201901415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R201901416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R201901417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R201901418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R201901419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R201901420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R201901421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R201901422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R201901423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 23
+    }, {
+      "name" : "Finals Week 1",
+      "roundId" : "CD_R201901424",
+      "abbreviation" : "FW1",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 24
+    }, {
+      "name" : "Semi Finals",
+      "roundId" : "CD_R201901425",
+      "abbreviation" : "SF",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 25
+    }, {
+      "name" : "Preliminary Finals",
+      "roundId" : "CD_R201901426",
+      "abbreviation" : "PF",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 26
+    }, {
+      "name" : "Grand Final",
+      "roundId" : "CD_R201901427",
+      "abbreviation" : "GF",
+      "seasonId" : "CD_S2019014",
+      "roundNumber" : 27
+    } ],
+    "currentRoundId" : "CD_R201901427",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "2020 Marsh Community Series",
+    "shortName" : "Marsh Series",
+    "year" : 2020,
+    "id" : "CD_S2020101",
+    "roundPhase" : "OFF_SEASON",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R202010101",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2020101",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R202010102",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2020101",
+      "roundNumber" : 2
+    } ],
+    "currentRoundId" : "CD_R202010101",
+    "matchCentreUrl" : null
+  }, {
+    "name" : "AFL Premiership 2020",
+    "shortName" : "Premiership",
+    "year" : 2020,
+    "id" : "CD_S2020014",
+    "roundPhase" : "SCHEDULED",
+    "rounds" : [ {
+      "name" : "Round 1",
+      "roundId" : "CD_R202001401",
+      "abbreviation" : "Rd 1",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 1
+    }, {
+      "name" : "Round 2",
+      "roundId" : "CD_R202001402",
+      "abbreviation" : "Rd 2",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 2
+    }, {
+      "name" : "Round 3",
+      "roundId" : "CD_R202001403",
+      "abbreviation" : "Rd 3",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 3
+    }, {
+      "name" : "Round 4",
+      "roundId" : "CD_R202001404",
+      "abbreviation" : "Rd 4",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 4
+    }, {
+      "name" : "Round 5",
+      "roundId" : "CD_R202001405",
+      "abbreviation" : "Rd 5",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 5
+    }, {
+      "name" : "Round 6",
+      "roundId" : "CD_R202001406",
+      "abbreviation" : "Rd 6",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 6
+    }, {
+      "name" : "Round 7",
+      "roundId" : "CD_R202001407",
+      "abbreviation" : "Rd 7",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 7
+    }, {
+      "name" : "Round 8",
+      "roundId" : "CD_R202001408",
+      "abbreviation" : "Rd 8",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 8
+    }, {
+      "name" : "Round 9",
+      "roundId" : "CD_R202001409",
+      "abbreviation" : "Rd 9",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 9
+    }, {
+      "name" : "Round 10",
+      "roundId" : "CD_R202001410",
+      "abbreviation" : "Rd 10",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 10
+    }, {
+      "name" : "Round 11",
+      "roundId" : "CD_R202001411",
+      "abbreviation" : "Rd 11",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 11
+    }, {
+      "name" : "Round 12",
+      "roundId" : "CD_R202001412",
+      "abbreviation" : "Rd 12",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 12
+    }, {
+      "name" : "Round 13",
+      "roundId" : "CD_R202001413",
+      "abbreviation" : "Rd 13",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 13
+    }, {
+      "name" : "Round 14",
+      "roundId" : "CD_R202001414",
+      "abbreviation" : "Rd 14",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 14
+    }, {
+      "name" : "Round 15",
+      "roundId" : "CD_R202001415",
+      "abbreviation" : "Rd 15",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 15
+    }, {
+      "name" : "Round 16",
+      "roundId" : "CD_R202001416",
+      "abbreviation" : "Rd 16",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 16
+    }, {
+      "name" : "Round 17",
+      "roundId" : "CD_R202001417",
+      "abbreviation" : "Rd 17",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 17
+    }, {
+      "name" : "Round 18",
+      "roundId" : "CD_R202001418",
+      "abbreviation" : "Rd 18",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 18
+    }, {
+      "name" : "Round 19",
+      "roundId" : "CD_R202001419",
+      "abbreviation" : "Rd 19",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 19
+    }, {
+      "name" : "Round 20",
+      "roundId" : "CD_R202001420",
+      "abbreviation" : "Rd 20",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 20
+    }, {
+      "name" : "Round 21",
+      "roundId" : "CD_R202001421",
+      "abbreviation" : "Rd 21",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 21
+    }, {
+      "name" : "Round 22",
+      "roundId" : "CD_R202001422",
+      "abbreviation" : "Rd 22",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 22
+    }, {
+      "name" : "Round 23",
+      "roundId" : "CD_R202001423",
+      "abbreviation" : "Rd 23",
+      "seasonId" : "CD_S2020014",
+      "roundNumber" : 23
+    } ],
+    "currentRoundId" : "CD_R202001401",
+    "matchCentreUrl" : null
+  } ]
+}

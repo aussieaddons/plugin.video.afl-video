@@ -1,0 +1,8 @@
+{
+  "token" : "https://player.ooyala.com/sas/embed_token/Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi/1yNGE5dDoyTdUKykqSeTysvmgup-rvS1?api_key=Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi.Gq2TW&expires=1578714136&signature=B4wXnPEA5TQXdIwn9UPHtiwkqXtOZO6jn9tEkTXrD%2BM&account_id=mis-uuid-dd65414d9e6d724a7d8f57ac891f4f24",
+  "embedCode" : "1yNGE5dDoyTdUKykqSeTysvmgup-rvS1",
+  "uuid" : "mis-uuid-dd65414d9e6d724a7d8f57ac891f4f24",
+  "marketSegment" : null,
+  "fairPlayUrl" : "https://player.ooyala.com/sas/fps/Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi/certificate?expires=1578714136&api_key=Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi.Gq2TW&signature=cAS8bKRPKTZ3ZWIwxsEIWUoGxC7%2BwwA3GiQrnVBT9bA",
+  "urlSigningToken" : "eyJhbGciOiJIUzI1NiJ9.eyJlbWJlZF9jb2RlIjoiMXlOR0U1ZERveVRkVUt5a3FTZVR5c3ZtZ3VwLXJ2UzEiLCJzdWIiOiJtaXMtdXVpZC1kZDY1NDE0ZDllNmQ3MjRhN2Q4ZjU3YWM4OTFmNGYyNCIsIm5iZiI6MTU3ODcxMDUwNiwidXJsX3NpZ25pbmciOiJ5ZXMiLCJpc3MiOiJtaXNQcmVtaXVtIiwidXJsX3Jlc29sdXRpb24iOiJ5ZXMiLCJleHAiOjE1Nzg3MTQxMzYsImlhdCI6MTU3ODcxNDEwNiwianRpIjoiMjEwY2Q0MTAtNzUxOS00NTU2LTgwZDQtNjY1OTIyMjNlNjg2In0.H6cq5fxA8zXZ1k2hdOc1q5WnCDGAnNcuIl6QelNCaqs"
+}

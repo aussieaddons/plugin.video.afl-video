@@ -1,0 +1,78 @@
+{
+    "correlationId": "",
+    "data": {
+        "offers": [
+            {
+                "bonusEndDateTime": "2020-01-31T23:59:59.000+1100",
+                "bonusPeriod": 0,
+                "carrierBillableOffer": false,
+                "channelTags": [
+                    "All_v1Apps_All_3248",
+                    "TTV_OneApp_HomeScreen_7677",
+                    "All_MyOffersPortal_Offerpage_4368",
+                    "All_MyTelstra_Summary_6859"
+                ],
+                "contractTerm": 0,
+                "externalId": "NA",
+                "id": "a482eaad-9213-419c-ace2-65b7cae73317",
+                "name": "AFL Live Pass",
+                "oneOffCharge": 0,
+                "productOfferingAttributes": [
+                    {
+                        "id": "bc8b893a-132d-4fe3-9415-c2073d884d98",
+                        "name": "OfferType",
+                        "value": "base"
+                    },
+                    {
+                        "id": "9bc51efb-215b-4f1e-a1fa-f7730ea8e088",
+                        "name": "carrierBillable",
+                        "value": "true"
+                    },
+                    {
+                        "id": "7081a50a-e114-453b-9e80-af1aa731a902",
+                        "name": "ServiceType",
+                        "value": "MSISDN"
+                    },
+                    {
+                        "id": "b7f2162d-c63e-40c0-8d69-6414d395b8c0",
+                        "name": "ServiceId",
+                        "value": "61400000000"
+                    }
+
+                ],
+                "productOffers": [
+                    {
+                        "contractTerm": 1,
+                        "externalId": "SPORTS_PASS_$0_AFL",
+                        "id": "a0d57c43-928e-4d35-bb3b-57b91fd4b79f",
+                        "name": "AFL Live Pass Streaming",
+                        "oneOffCharge": 0,
+                        "product": {
+                            "category": "Sport",
+                            "description": "AFL Streaming",
+                            "externalId": "AFL",
+                            "id": "1612b3d3-b4a2-4c70-ac73-444228e5d279",
+                            "partner": {
+                                "description": "Australian Football League",
+                                "id": "afl",
+                                "name": "AFL",
+                                "website": "https://www.afl.com.au/"
+                            },
+                            "productName": "afl_streaming",
+                            "productUrl": "https://www.afl.com.au/"
+                        },
+                        "recurringCharge": 0,
+                        "requiredPaiPattern": "^(mis-uuid-[a-f|0-9]{32}|[gG]d{11})$",
+                        "url": "http://www.afl.com.au/mobile?browser=external"
+                    }
+                ],
+                "publishEndDate": "2020-01-31T23:59:59.999+1100",
+                "publishStartDate": "2017-01-31T00:00:00.000+1100",
+                "recurringCharge": 0,
+                "reuptakeAllowed": true,
+                "serviceTransferAllowed": false,
+                "totalPrice": 0
+            }
+        ]
+    }
+}

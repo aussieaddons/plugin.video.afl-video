@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Boxscore>
+  <Id>12345</Id>
+  <LiveVideo>
+     <Item Type="V" Featured="false">
+      <Id>LIVE_2735</Id>
+      <Title>Wests Magpies v Bears LIVE</Title>
+      <Timestamp>2019-07-07T03:00:00Z</Timestamp>
+      <Video Type="O" Id="M3bjJyZDE6sP74YyKfBlYm_0pSY1yws3" HevcId="JsbWk4ZjE616b91YV7wtrJ7eS7DUlUMp" PCode="p3ZWsyOiMLEluThqwB_eQUFngsCZ" />
+      <FullImageUrl />
+    </Item>
+  </LiveVideo>
+</Boxscore>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Boxscore>
+  <Id>CD_M20202640101</Id>
+  <Timestamp>2020-02-07T08:40:00Z</Timestamp>
+  <AwayTeam TriCode="CARL" Id="CD_T8096" Name="Blues" FullName="Carlton" Record="0-0-0" Score="" ScoreDetail="" ScoreDetailFull="">
+    <Last/>
+  </AwayTeam>
+  <HomeTeam TriCode="RICH" Id="CD_T8788" Name="Richmond" FullName="Richmond" Record="0-0-0" Score="" ScoreDetail="" ScoreDetailFull="">
+    <Last/>
+  </HomeTeam>
+  <State>P</State>
+  <GameState>LIVE</GameState>
+  <Venue>Ikon Park</Venue>
+  <VenueShort>IKP</VenueShort>
+  <Week>Round 1</Week>
+  <Result/>
+  <ResultFull/>
+  <HideStats>false</HideStats>
+  <DisableAutoRefresh>true</DisableAutoRefresh>
+  <DisableMatchcentre>false</DisableMatchcentre>
+  <WatchButton>
+    <Title>foo</Title>
+  </WatchButton>
+  <HeadlineButtons>
+    <Button>
+      <Title>VENUE INFO</Title>
+      <URL>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fikon-park%3fwebview%3dtrue&amp;hideHistoryButtons=true</URL>
+      <Type>Default</Type>
+    </Button>
+  </HeadlineButtons>
+  <Resources>
+    <Resource Major="GT_BOX">
+      <Button Title="MATCH" Type="GT_BOX" Selected="true"/>
+      <Button Title="NEWS" Type="MEDIA" Selected="false" URL="yc://feature/MEDIA?majorResource=GAME_MEDIA&amp;path=/Media/MatchMedia/CD_M20202640101&amp;omnitureTag=match%20centre%3Apre%20match%3Anews"/>
+      <Button Title="TEAMS" Type="INJ" Selected="false" URL="yc://feature/INJ?gameID=CD_M20202640101"/>
+    </Resource>
+    <Resource Major="GAME_MEDIA">
+      <Button Title="MATCH" Type="GT_BOX" Selected="false" URL="yc://feature/GT_BOX?id=CD_M20202640101"/>
+      <Button Title="NEWS" Type="MEDIA" Selected="true"/>
+      <Button Title="TEAMS" Type="INJ" Selected="false" URL="yc://feature/INJ?gameID=CD_M20202640101"/>
+    </Resource>
+    <Resource Major="INJ">
+      <Button Title="MATCH" Type="GT_BOX" Selected="false" URL="yc://feature/GT_BOX?id=CD_M20202640101"/>
+      <Button Title="NEWS" Type="MEDIA" Selected="false" URL="yc://feature/MEDIA?majorResource=GAME_MEDIA&amp;path=/Media/MatchMedia/CD_M20202640101&amp;omnitureTag=match%20centre%3Apre%20match%3Anews"/>
+      <Button Title="TEAMS" Type="INJ" Selected="true"/>
+    </Resource>
+  </Resources>
+  <TabletResources>
+    <Resource Major="GT_BOX">
+      <Button Title="NEWS" Type="MEDIA" Selected="false" URL="yc://feature/MEDIA?majorResource=GAME_MEDIA&amp;path=/Media/MatchMedia/CD_M20202640101&amp;omnitureTag=match%20centre%3Apre%20match%3Anews"/>
+      <Button Title="TEAMS" Type="INJ" Selected="false" URL="yc://feature/INJ?gameID=CD_M20202640101"/>
+    </Resource>
+  </TabletResources>
+  <Score State="UPCOMING" HasOT="false">
+    <ScorePeriod Column="Q1" AwayGoals="" AwayBehinds="" HomeGoals="" HomeBehinds=""/>
+    <ScorePeriod Column="Q2" AwayGoals="" AwayBehinds="" HomeGoals="" HomeBehinds=""/>
+    <ScorePeriod Column="Q3" AwayGoals="" AwayBehinds="" HomeGoals="" HomeBehinds=""/>
+    <ScorePeriod Column="Q4" AwayGoals="" AwayBehinds="" HomeGoals="" HomeBehinds=""/>
+  </Score>
+  <Stats Heading="SEASON AVERAGES">
+    <Stat Type="Bar" Name="KICKS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="HANDBALLS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="DISPOSALS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="PercentCircle" Name="DISPOSAL EFF" Home="0%" HomeValue="0" HomeMax="100" Away="0%" AwayValue="0" AwayMax="100" Max="100" Reverse="false"/>
+    <Stat Type="PercentCircle" Name="EFF INSIDE 50" Home="0%" HomeDescription="0 Shots from 0 Inside 50s" HomeValue="0" HomeMax="100" Away="0%" AwayDescription="0 Shots from 0 Inside 50s" AwayValue="0" AwayMax="100" Max="100" Reverse="false"/>
+    <Stat Type="Bar" Name="INSIDE 50s" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="REBOUND 50s" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+  </Stats>
+  <Stats Heading="">
+    <Stat Type="Bar" Name="CONT POSS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="UNCONT POSS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="MARKS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="CONT MARKS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="MARKS IN 50" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="TACKLES" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="TACKLES IN FWD 50" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+  </Stats>
+  <Stats Heading="">
+    <Stat Type="VSCircle" Name="INTERCEPT POSS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="VSCircle" Name="TURNOVERS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="true"/>
+    <Stat Type="VSCircle" Name="CLEARANCES" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+  </Stats>
+  <Stats Heading="">
+    <Stat Type="Bar" Name="CENTRE CL" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="STOPPAGE CL" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="HIT-OUTS" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="BOUNCES" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="Bar" Name="FREES FOR" Home="0" HomeValue="0" HomeMax="0" Away="0" AwayValue="0" AwayMax="0" Max="0" Reverse="false"/>
+    <Stat Type="PercentCircle" Name="INTERCHANGES" Home="0/0" HomeValue="0" HomeMax="0" Away="0/0" AwayValue="0" AwayMax="0" Max="0" Reverse="true"/>
+  </Stats>
+  <YinzNode InVenue="false" VenueStatus="O" Ads="YC" InHomeMarket="O" Generated="1/11/2020 12:03:26 PM"/>
+</Boxscore>

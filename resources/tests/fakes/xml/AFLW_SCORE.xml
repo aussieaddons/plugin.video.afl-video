@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scores>
+  <Filters>
+    <Filter QueryParameter="compId" Type="Arrow" Current="CD_S2020264">
+      <FilterItems>
+        <Items Id="CD_S2017264" Name="2017 NAB AFLW Competition"/>
+        <Items Id="CD_S2018264" Name="2018 NAB AFLW Competition"/>
+        <Items Id="CD_S2019264" Name="2019 NAB AFLW Competition"/>
+        <Items Id="CD_S2020264" Name="2020 NAB AFLW Competition"/>
+      </FilterItems>
+    </Filter>
+    <Filter QueryParameter="round" Type="Scroller" Current="CD_R202026401">
+      <FilterItems>
+        <Items Id="CD_R202026401" Name="Round 1"/>
+        <Items Id="CD_R202026402" Name="Round 2"/>
+        <Items Id="CD_R202026403" Name="Round 3"/>
+        <Items Id="CD_R202026404" Name="Round 4"/>
+        <Items Id="CD_R202026405" Name="Round 5"/>
+        <Items Id="CD_R202026406" Name="Round 6"/>
+        <Items Id="CD_R202026407" Name="Round 7"/>
+        <Items Id="CD_R202026408" Name="Round 8"/>
+      </FilterItems>
+    </Filter>
+  </Filters>
+  <Week>Round 1</Week>
+  <Weeks>
+    <Current>CD_R202026401</Current>
+    <Next>CD_R202026402</Next>
+    <Week Id="CD_R202026401" Name="Round 1"/>
+    <Week Id="CD_R202026402" Name="Round 2"/>
+    <Week Id="CD_R202026403" Name="Round 3"/>
+    <Week Id="CD_R202026404" Name="Round 4"/>
+    <Week Id="CD_R202026405" Name="Round 5"/>
+    <Week Id="CD_R202026406" Name="Round 6"/>
+    <Week Id="CD_R202026407" Name="Round 7"/>
+    <Week Id="CD_R202026408" Name="Round 8"/>
+  </Weeks>
+  <Day Name="">
+    <Game Id="CD_M20202640101">
+      <State>P</State>
+      <Timestamp>2020-02-07T08:40:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>Ikon Park</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T8788" TriCode="RICH" Name="Richmond" FullName="Richmond" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T8096" TriCode="CARL" Name="Blues" FullName="Carlton" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fikon-park%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20202640102">
+      <State>P</State>
+      <Timestamp>2020-02-08T02:10:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>Blacktown International Sportspark</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7889" TriCode="GWS" Name="Giants" FullName="GWS Giants" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T8786" TriCode="GCFC" Name="Suns" FullName="Gold Coast Suns" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fblacktown-international-sportspark%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20202640103">
+      <State>P</State>
+      <Timestamp>2020-02-08T04:10:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>Casey Fields</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7386" TriCode="MELB" Name="Demons" FullName="Melbourne" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T8466" TriCode="NMFC" Name="Kangaroos" FullName="Kangaroos" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fcasey-fields%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20202640104">
+      <State>P</State>
+      <Timestamp>2020-02-08T06:10:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>Hickey Park</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7887" TriCode="BL" Name="Lions" FullName="Brisbane Lions" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T8098" TriCode="ADEL" Name="Crows" FullName="Adelaide Crows" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fhickey-park%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20202640105">
+      <State>P</State>
+      <Timestamp>2020-02-09T02:10:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>Victoria Park</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T8097" TriCode="COLL" Name="Magpies" FullName="Collingwood" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T8787" TriCode="WCE" Name="West Coast Eagles" FullName="West Coast Eagles" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fvictoria-park%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20202640106">
+      <State>P</State>
+      <Timestamp>2020-02-09T04:10:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>RSEA Park</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T8796" TriCode="STK" Name="St Kilda" FullName="St Kilda" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T7387" TriCode="WB" Name="Bulldogs" FullName="Western Bulldogs" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2frsea-park%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20202640107">
+      <State>P</State>
+      <Timestamp>2020-02-09T06:10:00Z</Timestamp>
+      <Result/>
+      <ResultFull/>
+      <Venue>Fremantle Oval</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period/>
+      <Label>Round 1</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7886" TriCode="FRE" Name="Freo" FullName="Fremantle" LadderPosition="" Conference="B" Score="" ScoreDetail=""/>
+      <AwayTeam Id="CD_T8467" TriCode="GEEL" Name="Cats" FullName="Geelong Cats" LadderPosition="" Conference="A" Score="" ScoreDetail=""/>
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2ffremantle-oval%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+  </Day>
+  <Bye Name="BYES"/>
+  <YinzNode InVenue="false" VenueStatus="O" Ads="YC" InHomeMarket="O" Generated="1/11/2020 11:36:57 AM"/>
+</Scores>

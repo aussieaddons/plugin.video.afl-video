@@ -1,0 +1,102 @@
+{
+    "correlationId": "ab8dcfe2-3159-426d-922c-934501085bce",
+    "data": {
+        "cac": "2091234567",
+        "customerType": "CONSUMER",
+        "endDateTime": "2020-01-31T23:59:59.000+1100",
+        "id": "948d2cb1-ba9b-4ce1-8964-8044ff2803cc",
+        "offer": {
+            "bonusEndDateTime": "2020-01-31T23:59:59.000+1100",
+            "bonusPeriod": 0,
+            "carrierBillableOffer": false,
+            "channelTags": [
+                "All_v1Apps_All_3248",
+                "TTV_OneApp_HomeScreen_7677",
+                "All_MyOffersPortal_Offerpage_4368"
+            ],
+            "contractTerm": 0,
+            "externalId": "NA",
+            "id": "a482eaad-9213-419c-ace2-65b7cae73317",
+            "name": "AFL Live Pass",
+            "oneOffCharge": 0,
+            "productOfferingAttributes": [
+                {
+                    "id": "bc8b893a-132d-4fe3-9415-c2073d884d98",
+                    "name": "OfferType",
+                    "value": "base"
+                }
+            ],
+            "productOffers": [
+                {
+                    "contractTerm": 1,
+                    "externalId": "SPORTS_PASS_$0_AFL",
+                    "id": "a0d57c43-928e-4d35-bb3b-57b91fd4b79f",
+                    "name": "AFL Live Pass Streaming",
+                    "oneOffCharge": 0,
+                    "product": {
+                        "category": "Sport",
+                        "description": "AFL Streaming",
+                        "externalId": "AFL",
+                        "id": "2c0a83d2-f9c8-4d61-8a0e-1fa2d1964db5",
+                        "partner": {
+                            "description": "Australian Football League",
+                            "id": "afl",
+                            "name": "AFL",
+                            "website": "https://www.afl.com.au/"
+                        },
+                        "productName": "afl_streaming",
+                        "productUrl": "https://www.afl.com.au/"
+                    },
+                    "recurringCharge": 0,
+                    "requiredPaiPattern": "^(mis-uuid-[a-f|0-9]{32}|[gG]d{11})$",
+                    "url": "http://www.afl.com.au/mobile?browser=external"
+                }
+            ],
+            "publishEndDate": "2020-01-31T23:59:59.999+1100",
+            "publishStartDate": "2017-01-31T00:00:00.000+1100",
+            "recurringCharge": 0,
+            "reuptakeAllowed": true,
+            "serviceTransferAllowed": false,
+            "totalPrice": 0
+        },
+        "orderItems": [
+            {
+                "correlationId": "ab8dcfe2-3159-426d-922c-934501085bce",
+                "endDateTime": "2020-01-31T23:59:59.000+1100",
+                "id": "f382d398-c879-4d30-bd39-3934ab760bc8",
+                "pai": "mis-uuid-aabbccddeeff00112233445566778899",
+                "productOffer": {
+                    "contractTerm": 1,
+                    "externalId": "SPORTS_PASS_$0_AFL",
+                    "id": "a0d57c43-928e-4d35-bb3b-57b91fd4b79f",
+                    "name": "AFL Live Pass Streaming",
+                    "oneOffCharge": 0,
+                    "product": {
+                        "category": "Sport",
+                        "description": "AFL Streaming",
+                        "externalId": "AFL",
+                        "id": "2c0a83d2-f9c8-4d61-8a0e-1fa2d1964db5",
+                        "partner": {
+                            "description": "Australian Football League",
+                            "id": "afl",
+                            "name": "AFL",
+                            "website": "https://www.afl.com.au/"
+                        },
+                        "productName": "afl_streaming",
+                        "productUrl": "https://www.afl.com.au/"
+                    },
+                    "recurringCharge": 0,
+                    "requiredPaiPattern": "^(mis-uuid-[a-f|0-9]{32}|[gG]d{11})$",
+                    "url": "http://www.afl.com.au/mobile?browser=external"
+                },
+                "startDateTime": "2019-09-28T10:00:00.000+1000",
+                "status": "COMPLETE"
+            }
+        ],
+        "serviceId": "61400000000",
+        "serviceType": "MSISDN",
+        "startDateTime": "2019-07-28T10:00:00.000+1000",
+        "status": "COMPLETE"
+    },
+    "time": "2019-07-28T10:00:00.000+1000"
+}

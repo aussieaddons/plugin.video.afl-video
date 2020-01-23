@@ -1,0 +1,10 @@
+{
+    "data": {
+        "FQUN": "username@telstra.com",
+        "amlbcookieValue": "21",
+        "artifactName": "BPSESSION",
+        "artifactValue": "artifactstring#"
+    },
+    "responseCode": 0,
+    "responseMessage": "Success"
+}
