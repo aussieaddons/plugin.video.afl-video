@@ -29,7 +29,11 @@ def play(url):
             stream_data = ooyalahelper.get_m3u8_playlist(params['ooyalaid'],
                                                          v.live, login_token)
         else:
-            stream_data = {'stream_url': v.get_url()}
+            if v.type == 'B':
+                stream_url = comm.get_bc_url(v)
+            else:
+                stream_url = v.get_url()
+            stream_data = {'stream_url': str(stream_url)}
 
         listitem = xbmcgui.ListItem(label=v.get_title(),
                                     iconImage=v.get_thumbnail(),

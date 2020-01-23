@@ -60,6 +60,8 @@ HEADERS = {'User-Agent' : USER_AGENT,
 
 VIDEO_FEED_URL = "http://feed.theplatform.com/f/gqvPBC/AFLProd_Online_H264?byGuid={0}&form=json"
 
+BC_EDGE_URL = 'https://edge.api.brightcove.com/playback/v1/accounts/{account_id}/videos/{video_id}'
+
 # AFLW
 
 AFLW_INDEX_URL = 'https://app-league-aflw.yinzcam.com/V1/Home/Index?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'

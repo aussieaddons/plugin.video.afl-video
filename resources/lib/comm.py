@@ -62,6 +62,16 @@ def update_token(sess):
     sess.headers.update({'x-media-mis-token': token})
 
 
+def get_bc_url(video):
+    data = fetch_url(config.BC_EDGE_URL.format(account_id=video.account_id,
+                                               video_id=video.video_id),
+                     headers={'BCOV-POLICY': video.policy_key})
+    json_data = json.loads(data)
+    for source in json_data.get('sources'):
+        if source.get('type') == 'application/vnd.apple.mpegurl':
+            return source.get('src')
+
+
 def get_attr(attrs, key):
     for attr in attrs:
         if attr.get('attrName') == key:
@@ -333,7 +343,10 @@ def get_aflw_videos():
                 v = classes.Video()
                 v.title = video.find('Title').text
                 v.thumbnail = video.find('FullImageUrl').text
-                v.ooyalaid = video.find('Video').attrib['Id']
+                v.type = video.find('Video').attrib['Type']
+                v.video_id = video.find('Video').attrib['Id']
+                v.policy_key = video.find('Video').attrib['PolicyKey']
+                v.account_id = video.find('Video').attrib['AccountId']
                 listing.append(v)
     return listing
 
