@@ -22,13 +22,12 @@ import datetime
 import json
 import time
 import xbmcaddon
+import xml.etree.ElementTree as ET
 
 from aussieaddonscommon import exceptions
 from aussieaddonscommon import session
 from aussieaddonscommon import utils
 
-# Use local etree to get v1.3.0
-import etree.ElementTree as ET
 
 ADDON = xbmcaddon.Addon()
 
