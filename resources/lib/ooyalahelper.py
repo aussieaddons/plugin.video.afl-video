@@ -1,22 +1,3 @@
-# Ooyalahelper module copyright 2016 Glenn Guy
-#
-# Ooyalahelper module is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ooyalahelper module is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ooyalahelper module. If not, see <http://www.gnu.org/licenses/>.
-
-
-# This module contains functions for interacting with the Ooyala API
-
-
 import base64
 import comm
 import config
