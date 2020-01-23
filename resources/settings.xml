@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-  <category label="20002">
-    <setting label="10014" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=open_ia_settings)" option="close"/>
-    <setting id="STATE" type="labelenum" label="10015" values="ACT|NSW|NT|QLD|SA|TAS|VIC|WA" default="VIC" />
-    <setting id="LIVE_SUBSCRIPTION" type="bool" label="10007" default="false" />
-    <setting id="SUBSCRIPTION_TYPE" type="enum" label="10008" values="Paid (afl.com.au) or linked live pass|Free offer (Telstra ID)|Paid (in-app purchase)|Mobile data" default="1" enable="eq(-1,true)" />
-    <setting id="LIVE_USERNAME" type="text" label="10003" default="" enable="eq(-2,true)+lt(-1,2)" />
-    <setting id="LIVE_PASSWORD" type="text" label="10004" option="hidden" default="" enable="eq(-3,true)+lt(-2,2)" />
-    <setting id="IAP_TOKEN" type="text" label="10005" default="" enable="eq(-4,true)+gt(-3,1)+lt(-3,3)" />
-    <setting label="10013" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=iap_help)"/>
+  <category label="30000">
+    <setting label="30008" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=open_ia_settings)" option="close"/>
+    <setting id="STATE" type="labelenum" label="30009" values="ACT|NSW|NT|QLD|SA|TAS|VIC|WA" default="VIC" />
+    <setting id="LIVE_SUBSCRIPTION" type="bool" label="30005" default="false" />
+    <setting id="SUBSCRIPTION_TYPE" type="enum" label="30006" values="Paid (afl.com.au) or linked live pass|Free offer (Telstra ID)|Paid (in-app purchase)|Mobile data" default="1" enable="eq(-1,true)" />
+    <setting id="LIVE_USERNAME" type="text" label="30002" default="" enable="eq(-2,true)+lt(-1,2)" />
+    <setting id="LIVE_PASSWORD" type="text" label="30003" option="hidden" default="" enable="eq(-3,true)+lt(-2,2)" />
+    <setting id="IAP_TOKEN" type="text" label="30004" default="" enable="eq(-4,true)+gt(-3,1)+lt(-3,3)" />
+    <setting label="30007" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=iap_help)"/>
   </category>
-  <category label="20003">
-    <setting label="10012" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=sendreport)"/>
-    <setting label="10011" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=cleartoken)"/>
+  <category label="30001">
+    <setting label="30011" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=sendreport)"/>
+    <setting label="30010" type="action" action="RunPlugin(plugin://plugin.video.afl-video/?action=cleartoken)"/>
   </category>
 </settings>
