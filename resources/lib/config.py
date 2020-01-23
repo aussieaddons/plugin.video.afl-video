@@ -66,7 +66,7 @@ AFLW_INDEX_URL = 'https://app-league-aflw.yinzcam.com/V1/Home/Index?carrier=&hei
 
 AFLW_BOX_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Box/{0}?carrier=&height=1776&error=100000000&ycurl_version=1&os=Android&a=0&platform=Android&mnc=0&ff=mobile&b=0&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
-AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&ff=mobile&mnc=0&app_version=1.0.5&version=5.7&width=1080&os_version=7.1.2&mcc=0&application=AFLW_LEAGUE&compId=CD_S2018264'
+AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&ff=mobile&mnc=0&app_version=1.0.5&version=5.7&width=1080&os_version=7.1.2&mcc=0&application=AFLW_LEAGUE'
 
 AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
