@@ -1,0 +1,395 @@
+{
+  "seasonId" : "CD_S2019014",
+  "roundId" : "CD_R201901423",
+  "teamId" : null,
+  "venueId" : null,
+  "fixtures" : [ {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142301",
+    "providerMatchId" : "106742301",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T110",
+    "homeTeam" : {
+      "teamAbbr" : "PORT",
+      "teamName" : "Port Adelaide",
+      "teamNickname" : "Power"
+    },
+    "awayTeamId" : "CD_T60",
+    "awayTeam" : {
+      "teamAbbr" : "FRE",
+      "teamName" : "Fremantle",
+      "teamNickname" : "Freo"
+    },
+    "venue" : {
+      "name" : "Adelaide Oval",
+      "timeZone" : "Australia/Adelaide",
+      "venueId" : "CD_V6",
+      "abbreviation" : "AO",
+      "location" : "Adelaide",
+      "state" : "SA"
+    },
+    "utcStartTime" : "2019-08-25T06:40:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 110,
+      "goals" : 15,
+      "behinds" : 20,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 67,
+      "goals" : 10,
+      "behinds" : 7,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142302",
+    "providerMatchId" : "106742302",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T100",
+    "homeTeam" : {
+      "teamAbbr" : "NMFC",
+      "teamName" : "North Melbourne",
+      "teamNickname" : "Kangaroos"
+    },
+    "awayTeamId" : "CD_T90",
+    "awayTeam" : {
+      "teamAbbr" : "MELB",
+      "teamName" : "Melbourne",
+      "teamNickname" : "Demons"
+    },
+    "venue" : {
+      "name" : "Blundstone Arena",
+      "timeZone" : "Australia/Hobart",
+      "venueId" : "CD_V2",
+      "abbreviation" : "BA",
+      "location" : "Hobart",
+      "state" : "TAS"
+    },
+    "utcStartTime" : "2019-08-24T04:10:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 88,
+      "goals" : 13,
+      "behinds" : 10,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 83,
+      "goals" : 12,
+      "behinds" : 11,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142303",
+    "providerMatchId" : "106742303",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T120",
+    "homeTeam" : {
+      "teamAbbr" : "RICH",
+      "teamName" : "Richmond",
+      "teamNickname" : "Tigers"
+    },
+    "awayTeamId" : "CD_T20",
+    "awayTeam" : {
+      "teamAbbr" : "BL",
+      "teamName" : "Brisbane Lions",
+      "teamNickname" : "Lions"
+    },
+    "venue" : {
+      "name" : "MCG",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V40",
+      "abbreviation" : "MCG",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2019-08-25T05:20:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 82,
+      "goals" : 12,
+      "behinds" : 10,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 55,
+      "goals" : 8,
+      "behinds" : 7,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142304",
+    "providerMatchId" : "106742304",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T1000",
+    "homeTeam" : {
+      "teamAbbr" : "GCFC",
+      "teamName" : "Gold Coast Suns",
+      "teamNickname" : "Suns"
+    },
+    "awayTeamId" : "CD_T1010",
+    "awayTeam" : {
+      "teamAbbr" : "GWS",
+      "teamName" : "GWS Giants",
+      "teamNickname" : "Giants"
+    },
+    "venue" : {
+      "name" : "Metricon Stadium",
+      "timeZone" : "Australia/Brisbane",
+      "venueId" : "CD_V81",
+      "abbreviation" : "MS",
+      "location" : "Gold Coast",
+      "state" : "QLD"
+    },
+    "utcStartTime" : "2019-08-24T09:25:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 55,
+      "goals" : 7,
+      "behinds" : 13,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 127,
+      "goals" : 20,
+      "behinds" : 7,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142305",
+    "providerMatchId" : "106742305",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T150",
+    "homeTeam" : {
+      "teamAbbr" : "WCE",
+      "teamName" : "West Coast Eagles",
+      "teamNickname" : "Eagles"
+    },
+    "awayTeamId" : "CD_T80",
+    "awayTeam" : {
+      "teamAbbr" : "HAW",
+      "teamName" : "Hawthorn",
+      "teamNickname" : "Hawks"
+    },
+    "venue" : {
+      "name" : "Optus Stadium",
+      "timeZone" : "Australia/Perth",
+      "venueId" : "CD_V2925",
+      "abbreviation" : "OS",
+      "location" : "Perth",
+      "state" : "WA"
+    },
+    "utcStartTime" : "2019-08-24T10:10:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 67,
+      "goals" : 9,
+      "behinds" : 13,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 105,
+      "goals" : 16,
+      "behinds" : 9,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142306",
+    "providerMatchId" : "106742306",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T70",
+    "homeTeam" : {
+      "teamAbbr" : "GEEL",
+      "teamName" : "Geelong Cats",
+      "teamNickname" : "Cats"
+    },
+    "awayTeamId" : "CD_T30",
+    "awayTeam" : {
+      "teamAbbr" : "CARL",
+      "teamName" : "Carlton",
+      "teamNickname" : "Blues"
+    },
+    "venue" : {
+      "name" : "GMHBA Stadium",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V30",
+      "abbreviation" : "GMHBA",
+      "location" : "Geelong",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2019-08-24T06:35:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 129,
+      "goals" : 19,
+      "behinds" : 15,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 61,
+      "goals" : 8,
+      "behinds" : 13,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142307",
+    "providerMatchId" : "106742307",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T140",
+    "homeTeam" : {
+      "teamAbbr" : "WB",
+      "teamName" : "Western Bulldogs",
+      "teamNickname" : "Bulldogs"
+    },
+    "awayTeamId" : "CD_T10",
+    "awayTeam" : {
+      "teamAbbr" : "ADEL",
+      "teamName" : "Adelaide Crows",
+      "teamNickname" : "Crows"
+    },
+    "venue" : {
+      "name" : "Mars Stadium",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V313",
+      "abbreviation" : "MARS",
+      "location" : "Ballarat",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2019-08-25T03:10:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 121,
+      "goals" : 18,
+      "behinds" : 13,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 87,
+      "goals" : 13,
+      "behinds" : 9,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142308",
+    "providerMatchId" : "106742308",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T40",
+    "homeTeam" : {
+      "teamAbbr" : "COLL",
+      "teamName" : "Collingwood",
+      "teamNickname" : "Magpies"
+    },
+    "awayTeamId" : "CD_T50",
+    "awayTeam" : {
+      "teamAbbr" : "ESS",
+      "teamName" : "Essendon",
+      "teamNickname" : "Bombers"
+    },
+    "venue" : {
+      "name" : "MCG",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V40",
+      "abbreviation" : "MCG",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2019-08-23T09:50:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 76,
+      "goals" : 10,
+      "behinds" : 16,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 65,
+      "goals" : 10,
+      "behinds" : 5,
+      "superGoals" : null
+    }
+  }, {
+    "lastUpdated" : "2019-11-07T03:01:45.325+0000",
+    "roundNumber" : 23,
+    "matchId" : "CD_M20190142309",
+    "providerMatchId" : "106742309",
+    "status" : "CONCLUDED",
+    "homeTeamId" : "CD_T160",
+    "homeTeam" : {
+      "teamAbbr" : "SYD",
+      "teamName" : "Sydney Swans",
+      "teamNickname" : "Swans"
+    },
+    "awayTeamId" : "CD_T130",
+    "awayTeam" : {
+      "teamAbbr" : "STK",
+      "teamName" : "St Kilda",
+      "teamNickname" : "Saints"
+    },
+    "venue" : {
+      "name" : "SCG",
+      "timeZone" : "Australia/Sydney",
+      "venueId" : "CD_V60",
+      "abbreviation" : "SCG",
+      "location" : "Sydney",
+      "state" : "NSW"
+    },
+    "utcStartTime" : "2019-08-24T03:45:00.000+0000",
+    "competitionId" : "CD_S2019014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : {
+      "totalScore" : 109,
+      "goals" : 17,
+      "behinds" : 7,
+      "superGoals" : null
+    },
+    "awayTeamScore" : {
+      "totalScore" : 64,
+      "goals" : 8,
+      "behinds" : 16,
+      "superGoals" : null
+    }
+  } ],
+  "byes" : [ ]
+}

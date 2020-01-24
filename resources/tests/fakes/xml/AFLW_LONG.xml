@@ -1,0 +1,1562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Media>
+  <HasLargeImages>true</HasLargeImages>
+  <Buttons>
+    <Button Type="L" Text="ALL" IconName="media_icon_all"/>
+    <Button Type="N" Text="NEWS" IconName="media_icon_articles"/>
+    <Button Type="V" Text="VIDEO" IconName="media_icon_video"/>
+  </Buttons>
+  <MediaSection Heading="11 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40294</Id>
+      <Title>Players' survey: Which team will win the premiership?</Title>
+      <Description>We conducted an exclusive survey among 14 players – one from every club – to find out who they regard as the best of the best</Description>
+      <Timestamp>2020-01-10T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Players' survey: Which team will win the premiership?</Twitter>
+        <Facebook>Players' survey: Which team will win the premiership?</Facebook>
+        <Text>Players' survey: Which team will win the premiership?</Text>
+        <SocialUrl>https://womens.afl/news/40294</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40294</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/08/6ab29200-ddae-48ab-bf15-b8018eeb66ac/Adelaide-celebrate-2019-premiership.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/08/6ab29200-ddae-48ab-bf15-b8018eeb66ac/Adelaide-celebrate-2019-premiership.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="10 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40663</Id>
+      <Title>Docker out for season after surgery for injuries sustained in police pursuit</Title>
+      <Description>Ann McMahon has been ruled out for the 2020 AFLW season after undergoing surgery on a broken leg</Description>
+      <Timestamp>2020-01-10T09:19:30Z</Timestamp>
+      <Social>
+        <Twitter>Docker out for season after surgery for injuries sustained in police pursuit</Twitter>
+        <Facebook>Docker out for season after surgery for injuries sustained in police pursuit</Facebook>
+        <Text>Docker out for season after surgery for injuries sustained in police pursuit</Text>
+        <SocialUrl>https://womens.afl/news/40663</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40663</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/28/5e063f54-4402-43df-9853-b065c469dc9d/AnnMcMahonDec28.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/28/5e063f54-4402-43df-9853-b065c469dc9d/AnnMcMahonDec28.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40638</Id>
+      <Title>Blues lose list manager on eve of season</Title>
+      <Description>Carlton is on the hunt for a new list manager after Wayne Siekman quit to take up a role in South Australia</Description>
+      <Timestamp>2020-01-10T04:57:51Z</Timestamp>
+      <Social>
+        <Twitter>Blues lose list manager on eve of season</Twitter>
+        <Facebook>Blues lose list manager on eve of season</Facebook>
+        <Text>Blues lose list manager on eve of season</Text>
+        <SocialUrl>https://womens.afl/news/40638</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40638</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/10/7c612e89-65f0-4f76-929a-3efb0cc6e6d5/Wayne-Seikman.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/10/7c612e89-65f0-4f76-929a-3efb0cc6e6d5/Wayne-Seikman.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40286</Id>
+      <Title>Sarah Black's top 30: Strong-marking Blues star at No.27</Title>
+      <Description>Check back every day as Sarah Black reveals her top 30 AFLW players</Description>
+      <Timestamp>2020-01-10T01:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Sarah Black's top 30: Strong-marking Blues star at No.27</Twitter>
+        <Facebook>Sarah Black's top 30: Strong-marking Blues star at No.27</Facebook>
+        <Text>Sarah Black's top 30: Strong-marking Blues star at No.27</Text>
+        <SocialUrl>https://womens.afl/news/40286</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40286</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/11/aefda365-0def-40fb-bb97-a664e93ae27b/harriskickhero2048.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/11/aefda365-0def-40fb-bb97-a664e93ae27b/harriskickhero2048.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40292</Id>
+      <Title>Dynamic Lion fit again and hungry for success</Title>
+      <Description>Sophie Conway is back fitter and hungrier to succeed than ever after overcoming a ruptured ACL that wiped out her 2019 season</Description>
+      <Timestamp>2020-01-09T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Dynamic Lion fit again and hungry for success</Twitter>
+        <Facebook>Dynamic Lion fit again and hungry for success</Facebook>
+        <Text>Dynamic Lion fit again and hungry for success</Text>
+        <SocialUrl>https://womens.afl/news/40292</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40292</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/10/03f8c2b1-0b2f-4d7a-9d37-2c4303fbd6b2/Sophie-Conway-in-action-during-the-2019-AFLW-Grand-Final.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/10/03f8c2b1-0b2f-4d7a-9d37-2c4303fbd6b2/Sophie-Conway-in-action-during-the-2019-AFLW-Grand-Final.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="9 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40414</Id>
+      <Title>Pies-Dees clash moved to create double-header at Marvel Stadium</Title>
+      <Description>Collingwood's clash against Melbourne has been moved to Marvel Stadium to create a double-header with the Victoria v All Stars Bushfire Relief match</Description>
+      <Timestamp>2020-01-09T02:09:25Z</Timestamp>
+      <Social>
+        <Twitter>Pies-Dees clash moved to create double-header at Marvel Stadium</Twitter>
+        <Facebook>Pies-Dees clash moved to create double-header at Marvel Stadium</Facebook>
+        <Text>Pies-Dees clash moved to create double-header at Marvel Stadium</Text>
+        <SocialUrl>https://womens.afl/news/40414</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40414</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/09/71bcdbd6-aa0a-4828-a912-7198aa877082/W02CoMe19MW1843_Best.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/09/71bcdbd6-aa0a-4828-a912-7198aa877082/W02CoMe19MW1843_Best.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40280</Id>
+      <Title>Players' survey: Which new team will be the best in 2020?</Title>
+      <Description>We conducted an exclusive survey among 14 players – one from every club – to find out who they think will be the best in 2020</Description>
+      <Timestamp>2020-01-08T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Players' survey: Which new team will be the best in 2020?</Twitter>
+        <Facebook>Players' survey: Which new team will be the best in 2020?</Facebook>
+        <Text>Players' survey: Which new team will be the best in 2020?</Text>
+        <SocialUrl>https://womens.afl/news/40280</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40280</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/06/75580f36-27b4-4536-8ed5-ecbf8b218e20/TR251119DB0432.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/06/75580f36-27b4-4536-8ed5-ecbf8b218e20/TR251119DB0432.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="8 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40277</Id>
+      <Title>10 questions with … Roo Ash Riddell</Title>
+      <Description>North Melbourne star reveals the coach's pet, worst teammate on social media, her pump-up songs and more</Description>
+      <Timestamp>2020-01-07T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>10 questions with … Roo Ash Riddell</Twitter>
+        <Facebook>10 questions with … Roo Ash Riddell</Facebook>
+        <Text>10 questions with … Roo Ash Riddell</Text>
+        <SocialUrl>https://womens.afl/news/40277</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40277</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/925cfc2b-d31d-4641-b2ba-86baed660c2e/W01NMCa19AT1551.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/925cfc2b-d31d-4641-b2ba-86baed660c2e/W01NMCa19AT1551.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="7 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40260</Id>
+      <Title>Eagles temper expectations for inaugural season</Title>
+      <Description>Wins and losses won't define West Coast in its inaugural AFLW season</Description>
+      <Timestamp>2020-01-06T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Eagles temper expectations for inaugural season</Twitter>
+        <Facebook>Eagles temper expectations for inaugural season</Facebook>
+        <Text>Eagles temper expectations for inaugural season</Text>
+        <SocialUrl>https://womens.afl/news/40260</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40260</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/23c261bb-b27a-46e8-a01c-a48279a265c4/TR251119WR1065.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/23c261bb-b27a-46e8-a01c-a48279a265c4/TR251119WR1065.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40263</Id>
+      <Title>Players' survey: Who is the best defender in AFLW?</Title>
+      <Description>We conducted an exclusive survey among 14 players – one from every club – to find out who they regard as the best of the best</Description>
+      <Timestamp>2020-01-06T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Players' survey: Who is the best defender in AFLW?</Twitter>
+        <Facebook>Players' survey: Who is the best defender in AFLW?</Facebook>
+        <Text>Players' survey: Who is the best defender in AFLW?</Text>
+        <SocialUrl>https://womens.afl/news/40263</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40263</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/67073a27-5e3d-4b7b-8da3-33c2c10ac56c/AA121219JE0025.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/67073a27-5e3d-4b7b-8da3-33c2c10ac56c/AA121219JE0025.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="6 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_18852</Id>
+      <Title>Follow the leader: Your club's 2020 captain and leadership group</Title>
+      <Description>Your one-stop shop to find out who will lead your club this season</Description>
+      <Timestamp>2020-01-06T08:10:00Z</Timestamp>
+      <Social>
+        <Twitter>Follow the leader: Your club's 2020 captain and leadership group</Twitter>
+        <Facebook>Follow the leader: Your club's 2020 captain and leadership group</Facebook>
+        <Text>Follow the leader: Your club's 2020 captain and leadership group</Text>
+        <SocialUrl>https://womens.afl/news/18852</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/18852</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/06/25ab5e79-44d0-41d7-b98f-5990d1b8f42a/WGFAdCa19MW2319.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/06/25ab5e79-44d0-41d7-b98f-5990d1b8f42a/WGFAdCa19MW2319.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40247</Id>
+      <Title>No Harf measures: Carlton coach realistic about 2020 challenges</Title>
+      <Description>Despite making the AFLW Grand Final last year, Carlton coach Daniel Harford knows his team still needs to make major improvements</Description>
+      <Timestamp>2020-01-06T04:10:00Z</Timestamp>
+      <Social>
+        <Twitter>No Harf measures: Carlton coach realistic about 2020 challenges</Twitter>
+        <Facebook>No Harf measures: Carlton coach realistic about 2020 challenges</Facebook>
+        <Text>No Harf measures: Carlton coach realistic about 2020 challenges</Text>
+        <SocialUrl>https://womens.afl/news/40247</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40247</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/06/9f25c7e8-9922-4d13-b42f-6bc9e3dd602e/W05CaCo19MD0088.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/06/9f25c7e8-9922-4d13-b42f-6bc9e3dd602e/W05CaCo19MD0088.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40253</Id>
+      <Title>Crows' strong culture will help fill leadership void</Title>
+      <Description>Crows have plenty of leaders to cover absence of Chelsea Randall and potentially Erin Phillips</Description>
+      <Timestamp>2020-01-05T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Crows' strong culture will help fill leadership void</Twitter>
+        <Facebook>Crows' strong culture will help fill leadership void</Facebook>
+        <Text>Crows' strong culture will help fill leadership void</Text>
+        <SocialUrl>https://womens.afl/news/40253</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40253</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/c84194dd-7bc9-419d-a4b6-45b37b6657d9/TR121219JE0050.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/c84194dd-7bc9-419d-a4b6-45b37b6657d9/TR121219JE0050.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40255</Id>
+      <Title>Dockers 'a lot hungrier' after prelim pain in 2019</Title>
+      <Description>Versatility has been a key theme of Fremantle's AFLW pre-season as the motivated Dockers vow to make amends for last year</Description>
+      <Timestamp>2020-01-05T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Dockers 'a lot hungrier' after prelim pain in 2019</Twitter>
+        <Facebook>Dockers 'a lot hungrier' after prelim pain in 2019</Facebook>
+        <Text>Dockers 'a lot hungrier' after prelim pain in 2019</Text>
+        <SocialUrl>https://womens.afl/news/40255</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40255</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/faf6f634-a43a-4b6a-9cf4-594b211d3d89/03FrSt19DC0670.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/faf6f634-a43a-4b6a-9cf4-594b211d3d89/03FrSt19DC0670.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="5 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40265</Id>
+      <Title>Tigers move two home games due to capacity issues</Title>
+      <Description>The AFL and Richmond have agreed to move two home games away from the Swinburne Centre</Description>
+      <Timestamp>2020-01-05T08:44:02Z</Timestamp>
+      <Social>
+        <Twitter>Tigers move two home games due to capacity issues</Twitter>
+        <Facebook>Tigers move two home games due to capacity issues</Facebook>
+        <Text>Tigers move two home games due to capacity issues</Text>
+        <SocialUrl>https://womens.afl/news/40265</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40265</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/78f29dd1-810a-47c0-8732-532d7579638f/TR171219PG491054033.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/78f29dd1-810a-47c0-8732-532d7579638f/TR171219PG491054033.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40258</Id>
+      <Title>Dees' devastating double ACL blow: Duo to miss season</Title>
+      <Description>Melbourne has lost defenders Katherine Smith and Shae Sloane to ACL injuries</Description>
+      <Timestamp>2020-01-05T03:43:33Z</Timestamp>
+      <Social>
+        <Twitter>Dees' devastating double ACL blow: Duo to miss season</Twitter>
+        <Facebook>Dees' devastating double ACL blow: Duo to miss season</Facebook>
+        <Text>Dees' devastating double ACL blow: Duo to miss season</Text>
+        <SocialUrl>https://womens.afl/news/40258</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40258</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/05/286f548b-1972-49d4-8104-5c40f3f24d9b/W01MeFr19MW1096.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/05/286f548b-1972-49d4-8104-5c40f3f24d9b/W01MeFr19MW1096.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40252</Id>
+      <Title>Players' survey: Who is the best forward in AFLW?</Title>
+      <Description>We conducted an exclusive survey among 14 players – one from every club – to find out who they regard as the best of the best</Description>
+      <Timestamp>2020-01-04T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Players' survey: Who is the best forward in AFLW?</Twitter>
+        <Facebook>Players' survey: Who is the best forward in AFLW?</Facebook>
+        <Text>Players' survey: Who is the best forward in AFLW?</Text>
+        <SocialUrl>https://womens.afl/news/40252</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40252</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/01/3542bc13-c649-4772-a47c-8b3a4eb7583b/Jasmine-Garner-was-voted-the-best-forward-in-the-League.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/01/3542bc13-c649-4772-a47c-8b3a4eb7583b/Jasmine-Garner-was-voted-the-best-forward-in-the-League.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40224</Id>
+      <Title>Cats search for 'cohesion' in bid to score more points</Title>
+      <Description>Geelong, the lowest scoring team in the 2019 NAB AFLW season, is taking a renewed focus on connection into the new year.</Description>
+      <Timestamp>2020-01-04T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Cats search for 'cohesion' in bid to score more points</Twitter>
+        <Facebook>Cats search for 'cohesion' in bid to score more points</Facebook>
+        <Text>Cats search for 'cohesion' in bid to score more points</Text>
+        <SocialUrl>https://womens.afl/news/40224</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40224</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/29/e8448d65-de04-4c10-8ea6-ffff5ddd9854/W06GeFr19SB950706853.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/29/e8448d65-de04-4c10-8ea6-ffff5ddd9854/W06GeFr19SB950706853.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="4 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40215</Id>
+      <Title>Sun embarking on third start-up club in four years</Title>
+      <Description>If anyone knows about success at expansion clubs, it's Gold Coast midfielder Jamie Stanton</Description>
+      <Timestamp>2020-01-03T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Sun embarking on third start-up club in four years</Twitter>
+        <Facebook>Sun embarking on third start-up club in four years</Facebook>
+        <Text>Sun embarking on third start-up club in four years</Text>
+        <SocialUrl>https://womens.afl/news/40215</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40215</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/29/58f641eb-f7c8-41b0-bacb-54f33ce15ab8/PC110719CH13.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/29/58f641eb-f7c8-41b0-bacb-54f33ce15ab8/PC110719CH13.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40218</Id>
+      <Title>10 questions with ... Giant Yvonne Bonner</Title>
+      <Description>Giants star reveals coach's pet, favourite app, ideal Amazing Race partner and more</Description>
+      <Timestamp>2020-01-03T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>10 questions with ... Giant Yvonne Bonner</Twitter>
+        <Facebook>10 questions with ... Giant Yvonne Bonner</Facebook>
+        <Text>10 questions with ... Giant Yvonne Bonner</Text>
+        <SocialUrl>https://womens.afl/news/40218</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40218</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/29/ea67595f-288d-4f24-b48f-fbd8f6d07792/AA270219RP041.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/29/ea67595f-288d-4f24-b48f-fbd8f6d07792/AA270219RP041.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="3 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40250</Id>
+      <Title>Players' survey: Who is the best midfielder in AFLW?</Title>
+      <Description>We conducted an exclusive survey among 14 players – one from every club – to find out who they regard as the best of the best</Description>
+      <Timestamp>2020-01-02T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Players' survey: Who is the best midfielder in AFLW?</Twitter>
+        <Facebook>Players' survey: Who is the best midfielder in AFLW?</Facebook>
+        <Text>Players' survey: Who is the best midfielder in AFLW?</Text>
+        <SocialUrl>https://womens.afl/news/40250</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40250</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2020/01/01/a2f87d6d-f572-4dfb-a190-e7eac301000d/Erin-Phillips-was-voted-the-best-midfielder-in-the-League.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2020/01/01/a2f87d6d-f572-4dfb-a190-e7eac301000d/Erin-Phillips-was-voted-the-best-midfielder-in-the-League.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40221</Id>
+      <Title>New Tiger itching to go after off-season surgery</Title>
+      <Description>She may be at her third club in four years, but Christina Bernardi's pre-season is different for another reason.</Description>
+      <Timestamp>2020-01-02T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>New Tiger itching to go after off-season surgery</Twitter>
+        <Facebook>New Tiger itching to go after off-season surgery</Facebook>
+        <Text>New Tiger itching to go after off-season surgery</Text>
+        <SocialUrl>https://womens.afl/news/40221</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40221</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/29/d1818bb1-c403-456a-afc8-b9db5d6195b4/ChristinaBernardi.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/29/d1818bb1-c403-456a-afc8-b9db5d6195b4/ChristinaBernardi.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="2 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40204</Id>
+      <Title>New Eagle takes valuable lesson from nasty shoulder injury</Title>
+      <Description>Freak accident gives new West Coast midfielder a greater perspective on the game she loves</Description>
+      <Timestamp>2020-01-01T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>New Eagle takes valuable lesson from nasty shoulder injury</Twitter>
+        <Facebook>New Eagle takes valuable lesson from nasty shoulder injury</Facebook>
+        <Text>New Eagle takes valuable lesson from nasty shoulder injury</Text>
+        <SocialUrl>https://womens.afl/news/40204</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40204</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/28/f813826f-12a9-4e4e-aa88-11545209e546/EmmaSwansonDec28.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/28/f813826f-12a9-4e4e-aa88-11545209e546/EmmaSwansonDec28.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40212</Id>
+      <Title>Friends and foes: Two Queensland teams enjoying healthy rivalry</Title>
+      <Description>Craig Starcevich holds no grudge to Gold Coast despite the Suns decimating the Lions' list</Description>
+      <Timestamp>2020-01-01T20:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Friends and foes: Two Queensland teams enjoying healthy rivalry</Twitter>
+        <Facebook>Friends and foes: Two Queensland teams enjoying healthy rivalry</Facebook>
+        <Text>Friends and foes: Two Queensland teams enjoying healthy rivalry</Text>
+        <SocialUrl>https://womens.afl/news/40212</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40212</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/29/969df03f-05ed-4c14-a1d4-4926f368ca05/PC110719CH32.JPG</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/29/969df03f-05ed-4c14-a1d4-4926f368ca05/PC110719CH32.JPG</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="1 JANUARY 2020">
+    <Item Type="N" Featured="false">
+      <Id>PULSELIVE_40243</Id>
+      <Title>Your team's New Year's resolutions for 2020</Title>
+      <Description>With the new year upon us, we take a look at what every club will be hoping for to ensure next season is a successful one</Description>
+      <Timestamp>2019-12-31T21:45:00Z</Timestamp>
+      <Social>
+        <Twitter>Your team's New Year's resolutions for 2020</Twitter>
+        <Facebook>Your team's New Year's resolutions for 2020</Facebook>
+        <Text>Your team's New Year's resolutions for 2020</Text>
+        <SocialUrl>https://womens.afl/news/40243</SocialUrl>
+      </Social>
+      <Video Type="" Id=""/>
+      <MediaUrl>https://womens.afl/news/40243</MediaUrl>
+      <ImageUrl>https://womens.afl/aflw/photo/2019/12/30/6055b32c-5f7e-4eef-b933-7fc111ae0a6c/AFLW-teams-ready-for-2020.jpg</ImageUrl>
+      <FullImageUrl>https://womens.afl/aflw/photo/2019/12/30/6055b32c-5f7e-4eef-b933-7fc111ae0a6c/AFLW-teams-ready-for-2020.jpg</FullImageUrl>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="19 DECEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>6116895321001</Id>
+      <Title>Kerryn Harrington: Navy blue, through and through</Title>
+      <Description>Co-captain Kerryn Harrington living out a childhood dream running out for the navy blue</Description>
+      <Timestamp>2019-12-19T00:33:34Z</Timestamp>
+      <Social>
+        <Twitter>Kerryn Harrington: Navy blue, through and through</Twitter>
+        <Facebook>Kerryn Harrington: Navy blue, through and through</Facebook>
+        <Text>Kerryn Harrington: Navy blue, through and through</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="6116895321001" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191219113925a_1024x576.png</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191219113925a_1024x576.png</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Kerryn Harrington: Navy blue, through and through</AssetName>
+        <Data Key="assetID" Value="6116895321001"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="GENW"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Co-captain Kerryn Harrington living out a childhood dream running out for the navy blue"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="GENW"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="11 DECEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>6114707144001</Id>
+      <Title>Tayla Thorn: Rediscovering the passion</Title>
+      <Description>Gold Coast recruit Tayla Thorn talks about rediscovering her passion for the game and a new start at the Suns</Description>
+      <Timestamp>2019-12-10T23:28:27Z</Timestamp>
+      <Social>
+        <Twitter>Tayla Thorn: Rediscovering the passion</Twitter>
+        <Facebook>Tayla Thorn: Rediscovering the passion</Facebook>
+        <Text>Tayla Thorn: Rediscovering the passion</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="6114707144001" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191211102846a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191211102846a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Tayla Thorn: Rediscovering the passion</AssetName>
+        <Data Key="assetID" Value="6114707144001"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Gold Coast recruit Tayla Thorn talks about rediscovering her passion for the game and a new start at the Suns"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="5 DECEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>6113149460001</Id>
+      <Title>It Starts Here: Running - Episode one</Title>
+      <Description>Over the next 14 weeks, we're going to be bringing you an insight into the different stages of AFLW pre-season, so that you join the players in getting fit for 2020. In Episode one St Kilda are taking us through the 2km time trial</Description>
+      <Timestamp>2019-12-05T01:22:01Z</Timestamp>
+      <Social>
+        <Twitter>It Starts Here: Running - Episode one</Twitter>
+        <Facebook>It Starts Here: Running - Episode one</Facebook>
+        <Text>It Starts Here: Running - Episode one</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="6113149460001" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191205122542a_1024x576.png</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191205122542a_1024x576.png</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>It Starts Here: Running - Episode one</AssetName>
+        <Data Key="assetID" Value="6113149460001"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Over the next 14 weeks, we're going to be bringing you an insight into the different stages of AFLW pre-season, so that you join the players in getting fit for 2020. In Episode one St Kilda are taking us through the 2km time trial"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="26 NOVEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:VtOGx0aTE6WULUyaxL99M5Zob7g5VZhQ</Id>
+      <Title>'You don't have to listen to what everybody tells you': Farrugia's Giant impact</Title>
+      <Description>Inaugural Greater Western Sydney captain Amanda Farrugia has retired after making a lasting impact on women's footy</Description>
+      <Timestamp>2019-11-26T02:50:15Z</Timestamp>
+      <Social>
+        <Twitter>'You don't have to listen to what everybody tells you': Farrugia's Giant impact</Twitter>
+        <Facebook>'You don't have to listen to what everybody tells you': Farrugia's Giant impact</Facebook>
+        <Text>'You don't have to listen to what everybody tells you': Farrugia's Giant impact</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:VtOGx0aTE6WULUyaxL99M5Zob7g5VZhQ" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191126135233a_1024x576.png</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191126135233a_1024x576.png</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>'You don't have to listen to what everybody tells you': Farrugia's Giant impact</AssetName>
+        <Data Key="assetID" Value="ref:VtOGx0aTE6WULUyaxL99M5Zob7g5VZhQ"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Inaugural Greater Western Sydney captain Amanda Farrugia has retired after making a lasting impact on women's footy"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="18 NOVEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>6109047773001</Id>
+      <Title>Welcome to AFLW: Gold Coast Suns</Title>
+      <Description>We can't wait to have another team from the Sunshine State join us in 2020!</Description>
+      <Timestamp>2019-11-17T19:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Welcome to AFLW: Gold Coast Suns</Twitter>
+        <Facebook>Welcome to AFLW: Gold Coast Suns</Facebook>
+        <Text>Welcome to AFLW: Gold Coast Suns</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="6109047773001" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191126094949a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191126094949a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Welcome to AFLW: Gold Coast Suns</AssetName>
+        <Data Key="assetID" Value="6109047773001"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="We can't wait to have another team from the Sunshine State join us in 2020!"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="12 NOVEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>6109048105001</Id>
+      <Title>Welcome to AFLW: St Kilda Football Club</Title>
+      <Description>Who better to help us get to know the Saints than our NAB AFL Auskickers!</Description>
+      <Timestamp>2019-11-11T22:39:55Z</Timestamp>
+      <Social>
+        <Twitter>Welcome to AFLW: St Kilda Football Club</Twitter>
+        <Facebook>Welcome to AFLW: St Kilda Football Club</Facebook>
+        <Text>Welcome to AFLW: St Kilda Football Club</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="6109048105001" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191112094205a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191112094205a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Welcome to AFLW: St Kilda Football Club</AssetName>
+        <Data Key="assetID" Value="6109048105001"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Who better to help us get to know the Saints than our NAB AFL Auskickers!"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="4 NOVEMBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:JqdXFwaTE6zReGl6ne0R7_hdydsbfSWw</Id>
+      <Title>Welcome to AFLW: Richmond</Title>
+      <Description>The coach, the chief and the teams journey to 2020</Description>
+      <Timestamp>2019-11-04T07:00:00Z</Timestamp>
+      <Social>
+        <Twitter>Welcome to AFLW: Richmond</Twitter>
+        <Facebook>Welcome to AFLW: Richmond</Facebook>
+        <Text>Welcome to AFLW: Richmond</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:JqdXFwaTE6zReGl6ne0R7_hdydsbfSWw" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191101165616a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191101165616a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Welcome to AFLW: Richmond</AssetName>
+        <Data Key="assetID" Value="ref:JqdXFwaTE6zReGl6ne0R7_hdydsbfSWw"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="The coach, the chief and the teams journey to 2020"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="30 OCTOBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:1wOGNwaTE6ZpCIvUYMAyD0tAhIBm2t4o</Id>
+      <Title>AFLW 2020: ALL YOU NEED TO KNOW</Title>
+      <Description>Everything you need to know as the 2020 AFLW fixture is revealed</Description>
+      <Timestamp>2019-10-29T22:17:21Z</Timestamp>
+      <Social>
+        <Twitter>AFLW 2020: ALL YOU NEED TO KNOW</Twitter>
+        <Facebook>AFLW 2020: ALL YOU NEED TO KNOW</Facebook>
+        <Text>AFLW 2020: ALL YOU NEED TO KNOW</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:1wOGNwaTE6ZpCIvUYMAyD0tAhIBm2t4o" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191030091734a_1024x576.png</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191030091734a_1024x576.png</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW 2020: ALL YOU NEED TO KNOW</AssetName>
+        <Data Key="assetID" Value="ref:1wOGNwaTE6ZpCIvUYMAyD0tAhIBm2t4o"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Everything you need to know as the 2020 AFLW fixture is revealed"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="22 OCTOBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:Z5eXZuaTE6JVb2jAUpByvrfHokDoCMU6</Id>
+      <Title>AFLW Tigers recruit... their recruiter? Tesoriero's unusual draft path</Title>
+      <Description>Richmond's recruiting department selects one from its own staff list with Lauren Tesoriero taken at pick No.96</Description>
+      <Timestamp>2019-10-22T04:10:54Z</Timestamp>
+      <Social>
+        <Twitter>AFLW Tigers recruit... their recruiter? Tesoriero's unusual draft path</Twitter>
+        <Facebook>AFLW Tigers recruit... their recruiter? Tesoriero's unusual draft path</Facebook>
+        <Text>AFLW Tigers recruit... their recruiter? Tesoriero's unusual draft path</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:Z5eXZuaTE6JVb2jAUpByvrfHokDoCMU6" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191022151126a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191022151126a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW Tigers recruit... their recruiter? Tesoriero's unusual draft path</AssetName>
+        <Data Key="assetID" Value="ref:Z5eXZuaTE6JVb2jAUpByvrfHokDoCMU6"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Richmond's recruiting department selects one from its own staff list with Lauren Tesoriero taken at pick No.96"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:9jbXZuaTE6lsWI1Ty9bySXWts_o3H0B-</Id>
+      <Title>Brown and Grant names live on with father-daughter selections</Title>
+      <Description>Millie Brown and Isabella Grant follow in their fathers' footsteps to become Geelong and Western Bulldogs players respectively</Description>
+      <Timestamp>2019-10-22T02:30:30Z</Timestamp>
+      <Social>
+        <Twitter>Brown and Grant names live on with father-daughter selections</Twitter>
+        <Facebook>Brown and Grant names live on with father-daughter selections</Facebook>
+        <Text>Brown and Grant names live on with father-daughter selections</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:9jbXZuaTE6lsWI1Ty9bySXWts_o3H0B-" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191022133052a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191022133052a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Brown and Grant names live on with father-daughter selections</AssetName>
+        <Data Key="assetID" Value="ref:9jbXZuaTE6lsWI1Ty9bySXWts_o3H0B-"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Millie Brown and Isabella Grant follow in their fathers' footsteps to become Geelong and Western Bulldogs players respectively"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:lxY3ZuaTE6iJrBq5MePsegWOhj3YAFA1</Id>
+      <Title>The No.1 pick of the 2019 NAB AFLW Draft is...</Title>
+      <Description>Western Bulldogs choose forward Gabby Newton as the first selection in the AFLW draft</Description>
+      <Timestamp>2019-10-22T00:43:44Z</Timestamp>
+      <Social>
+        <Twitter>The No.1 pick of the 2019 NAB AFLW Draft is...</Twitter>
+        <Facebook>The No.1 pick of the 2019 NAB AFLW Draft is...</Facebook>
+        <Text>The No.1 pick of the 2019 NAB AFLW Draft is...</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:lxY3ZuaTE6iJrBq5MePsegWOhj3YAFA1" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191022114547a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191022114547a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>The No.1 pick of the 2019 NAB AFLW Draft is...</AssetName>
+        <Data Key="assetID" Value="ref:lxY3ZuaTE6iJrBq5MePsegWOhj3YAFA1"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Western Bulldogs choose forward Gabby Newton as the first selection in the AFLW draft"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="11 OCTOBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:BlbDVtaTE6evkbxbSNhfiOmcTaIMf67B</Id>
+      <Title>2019 International Day of the Girl: Unscripted and Unstoppable</Title>
+      <Description>When GWS Giant Erin McKinnon was 13, there was no girls football at the Mosman Swans. Now there's a team in every age group, thanks to a movement she started.</Description>
+      <Timestamp>2019-10-10T22:49:55Z</Timestamp>
+      <Social>
+        <Twitter>2019 International Day of the Girl: Unscripted and Unstoppable</Twitter>
+        <Facebook>2019 International Day of the Girl: Unscripted and Unstoppable</Facebook>
+        <Text>2019 International Day of the Girl: Unscripted and Unstoppable</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:BlbDVtaTE6evkbxbSNhfiOmcTaIMf67B" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191011095132a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191011095132a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>2019 International Day of the Girl: Unscripted and Unstoppable</AssetName>
+        <Data Key="assetID" Value="ref:BlbDVtaTE6evkbxbSNhfiOmcTaIMf67B"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="When GWS Giant Erin McKinnon was 13, there was no girls football at the Mosman Swans. Now there's a team in every age group, thanks to a movement she started."/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="3 OCTOBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:NtYmdsaTE63JMoY9IKSB2mjqB_PiOK47</Id>
+      <Title>2019 NAB AFL Women's Draft Combine - the evolution</Title>
+      <Description>Digging a little deeper on the 2019 NAB AFL Women's Draft Combine</Description>
+      <Timestamp>2019-10-02T23:00:00Z</Timestamp>
+      <Social>
+        <Twitter>2019 NAB AFL Women's Draft Combine - the evolution</Twitter>
+        <Facebook>2019 NAB AFL Women's Draft Combine - the evolution</Facebook>
+        <Text>2019 NAB AFL Women's Draft Combine - the evolution</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:NtYmdsaTE63JMoY9IKSB2mjqB_PiOK47" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191007093400a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191007093400a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>2019 NAB AFL Women's Draft Combine - the evolution</AssetName>
+        <Data Key="assetID" Value="ref:NtYmdsaTE63JMoY9IKSB2mjqB_PiOK47"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Digging a little deeper on the 2019 NAB AFL Women's Draft Combine"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="2 OCTOBER 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:FwMnZraTE6MH2mNJW1fjbYo0RzQHBCu6</Id>
+      <Title>2019 NAB AFL Women's Draft Combine</Title>
+      <Description>Putting the future of our league through their paces, but what does it all involve? Melbourne Football Club's Libby Birch is here to explain</Description>
+      <Timestamp>2019-10-02T09:00:00Z</Timestamp>
+      <Social>
+        <Twitter>2019 NAB AFL Women's Draft Combine</Twitter>
+        <Facebook>2019 NAB AFL Women's Draft Combine</Facebook>
+        <Text>2019 NAB AFL Women's Draft Combine</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:FwMnZraTE6MH2mNJW1fjbYo0RzQHBCu6" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191003110743a_1024x576.png</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20191003110743a_1024x576.png</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>2019 NAB AFL Women's Draft Combine</AssetName>
+        <Data Key="assetID" Value="ref:FwMnZraTE6MH2mNJW1fjbYo0RzQHBCu6"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Putting the future of our league through their paces, but what does it all involve? Melbourne Football Club's Libby Birch is here to explain"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="11 JULY 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:l5dWE0aTE6HiMbesrGErs_30st85TH0Q</Id>
+      <Title>The Spirit of the Coburg Lions</Title>
+      <Description>Disability and hardship won't stop these amazing young lions, proving there's more to the game than winning</Description>
+      <Timestamp>2019-07-11T00:00:00Z</Timestamp>
+      <Social>
+        <Twitter>The Spirit of the Coburg Lions</Twitter>
+        <Facebook>The Spirit of the Coburg Lions</Facebook>
+        <Text>The Spirit of the Coburg Lions</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:l5dWE0aTE6HiMbesrGErs_30st85TH0Q" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190705150717a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190705150717a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>The Spirit of the Coburg Lions</AssetName>
+        <Data Key="assetID" Value="ref:l5dWE0aTE6HiMbesrGErs_30st85TH0Q"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Disability and hardship won't stop these amazing young lions, proving there's more to the game than winning"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="2 APRIL 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:l2cXJqaDE6GsK2-eTkn8xqgTYWwWjpWi</Id>
+      <Title>Phillips claims her second AFLW best and fairest medal</Title>
+      <Description>Who takes home this year's highest AFLW individual honour?</Description>
+      <Timestamp>2019-04-02T10:31:29Z</Timestamp>
+      <Social>
+        <Twitter>Phillips claims her second AFLW best and fairest medal</Twitter>
+        <Facebook>Phillips claims her second AFLW best and fairest medal</Facebook>
+        <Text>Phillips claims her second AFLW best and fairest medal</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:l2cXJqaDE6GsK2-eTkn8xqgTYWwWjpWi" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190402214302a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190402214302a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Phillips claims her second AFLW best and fairest medal</AssetName>
+        <Data Key="assetID" Value="ref:l2cXJqaDE6GsK2-eTkn8xqgTYWwWjpWi"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Who takes home this year's highest AFLW individual honour?"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:h1bHJqaDE6KTX3s42VLIYf-mdyVQdCyZ</Id>
+      <Title>Announcement of the 2019 NAB AFLW Rising Star</Title>
+      <Description>Which young player will take out this year's award?</Description>
+      <Timestamp>2019-04-02T10:12:53Z</Timestamp>
+      <Social>
+        <Twitter>Announcement of the 2019 NAB AFLW Rising Star</Twitter>
+        <Facebook>Announcement of the 2019 NAB AFLW Rising Star</Facebook>
+        <Text>Announcement of the 2019 NAB AFLW Rising Star</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:h1bHJqaDE6KTX3s42VLIYf-mdyVQdCyZ" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190402211503a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190402211503a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Announcement of the 2019 NAB AFLW Rising Star</AssetName>
+        <Data Key="assetID" Value="ref:h1bHJqaDE6KTX3s42VLIYf-mdyVQdCyZ"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Must Watch"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Which young player will take out this year's award?"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Must Watch"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="1 APRIL 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:Bsc2hqaDE6stFEb7Sq6HdGGS9uUAbLcK</Id>
+      <Title>The 10 best moments of the AFLW season</Title>
+      <Description>We count down the best moments from an incredible 2019 AFLW season</Description>
+      <Timestamp>2019-04-01T03:50:40Z</Timestamp>
+      <Social>
+        <Twitter>The 10 best moments of the AFLW season</Twitter>
+        <Facebook>The 10 best moments of the AFLW season</Facebook>
+        <Text>The 10 best moments of the AFLW season</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:Bsc2hqaDE6stFEb7Sq6HdGGS9uUAbLcK" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190401145021a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190401145021a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>The 10 best moments of the AFLW season</AssetName>
+        <Data Key="assetID" Value="ref:Bsc2hqaDE6stFEb7Sq6HdGGS9uUAbLcK"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="The 10"/>
+        <Data Key="vmsProgramType" Value="Programs"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="We count down the best moments from an incredible 2019 AFLW season"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="The 10"/>
+        <Data Key="media_program_type" Value="Programs"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <MediaSection Heading="31 MARCH 2019">
+    <Item Type="V" Featured="false">
+      <Id>ref:h5ZjZiaTE66t-0Bn-Kd406a64Q3e8dda</Id>
+      <Title>AFLW Match Highlights: Adelaide v Carlton</Title>
+      <Description>The Crows and Blues clash in the 2019 AFLW Grand Final</Description>
+      <Timestamp>2019-03-31T04:37:15Z</Timestamp>
+      <Social>
+        <Twitter>AFLW Match Highlights: Adelaide v Carlton</Twitter>
+        <Facebook>AFLW Match Highlights: Adelaide v Carlton</Facebook>
+        <Text>AFLW Match Highlights: Adelaide v Carlton</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:h5ZjZiaTE66t-0Bn-Kd406a64Q3e8dda" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331154031a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331154031a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW Match Highlights: Adelaide v Carlton</AssetName>
+        <Data Key="assetID" Value="ref:h5ZjZiaTE66t-0Bn-Kd406a64Q3e8dda"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Auto-generated Highlights"/>
+        <Data Key="vmsProgramType" Value="Highlights"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="The Crows and Blues clash in the 2019 AFLW Grand Final"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Auto-generated Highlights"/>
+        <Data Key="media_program_type" Value="Highlights"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:9sZ2RqaDE6QajKSAYwGIpuKf-lVIBME6</Id>
+      <Title>AFLW: GF Crows v Blues Q4</Title>
+      <Description>Watch the full replay of the fourth quarter</Description>
+      <Timestamp>2019-03-31T04:00:04Z</Timestamp>
+      <Social>
+        <Twitter>AFLW: GF Crows v Blues Q4</Twitter>
+        <Facebook>AFLW: GF Crows v Blues Q4</Facebook>
+        <Text>AFLW: GF Crows v Blues Q4</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:9sZ2RqaDE6QajKSAYwGIpuKf-lVIBME6" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331154149a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331154149a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW: GF Crows v Blues Q4</AssetName>
+        <Data Key="assetID" Value="ref:9sZ2RqaDE6QajKSAYwGIpuKf-lVIBME6"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Match Replays"/>
+        <Data Key="vmsProgramType" Value="Match Replays"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Watch the full replay of the fourth quarter"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Match Replays"/>
+        <Data Key="media_program_type" Value="Match Replays"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:4wZGRqaDE6yKFaVd_Oqh8mlMGemkb5ia</Id>
+      <Title>AFLW: GF Crows v Blues Q3</Title>
+      <Description>Watch the full replay of the third quarter</Description>
+      <Timestamp>2019-03-31T04:00:03Z</Timestamp>
+      <Social>
+        <Twitter>AFLW: GF Crows v Blues Q3</Twitter>
+        <Facebook>AFLW: GF Crows v Blues Q3</Facebook>
+        <Text>AFLW: GF Crows v Blues Q3</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:4wZGRqaDE6yKFaVd_Oqh8mlMGemkb5ia" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331144121a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331144121a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW: GF Crows v Blues Q3</AssetName>
+        <Data Key="assetID" Value="ref:4wZGRqaDE6yKFaVd_Oqh8mlMGemkb5ia"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Match Replays"/>
+        <Data Key="vmsProgramType" Value="Match Replays"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Watch the full replay of the third quarter"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Match Replays"/>
+        <Data Key="media_program_type" Value="Match Replays"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:N5OWRqaDE66tsO9f431SNLhA5GCn83o6</Id>
+      <Title>AFLW: GF Crows v Blues Q2</Title>
+      <Description>Watch the full replay of the second quarter</Description>
+      <Timestamp>2019-03-31T04:00:02Z</Timestamp>
+      <Social>
+        <Twitter>AFLW: GF Crows v Blues Q2</Twitter>
+        <Facebook>AFLW: GF Crows v Blues Q2</Facebook>
+        <Text>AFLW: GF Crows v Blues Q2</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:N5OWRqaDE66tsO9f431SNLhA5GCn83o6" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331140857a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331140857a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW: GF Crows v Blues Q2</AssetName>
+        <Data Key="assetID" Value="ref:N5OWRqaDE66tsO9f431SNLhA5GCn83o6"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Match Replays"/>
+        <Data Key="vmsProgramType" Value="Match Replays"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Watch the full replay of the second quarter"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Match Replays"/>
+        <Data Key="media_program_type" Value="Match Replays"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:VjNWRqaDE60ZiUpcEpDMuEKlZIJev9Tp</Id>
+      <Title>AFLW: GF Crows v Blues Q1</Title>
+      <Description>Watch the full replay of the first quarter</Description>
+      <Timestamp>2019-03-31T04:00:01Z</Timestamp>
+      <Social>
+        <Twitter>AFLW: GF Crows v Blues Q1</Twitter>
+        <Facebook>AFLW: GF Crows v Blues Q1</Facebook>
+        <Text>AFLW: GF Crows v Blues Q1</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:VjNWRqaDE60ZiUpcEpDMuEKlZIJev9Tp" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331133416a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331133416a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>AFLW: GF Crows v Blues Q1</AssetName>
+        <Data Key="assetID" Value="ref:VjNWRqaDE60ZiUpcEpDMuEKlZIJev9Tp"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramCategory" Value="Match Replays"/>
+        <Data Key="vmsProgramType" Value="Match Replays"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="Watch the full replay of the first quarter"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category" Value="Match Replays"/>
+        <Data Key="media_program_type" Value="Match Replays"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:04YmRqaDE64Vy4iCSmLMglJMeq0f927j</Id>
+      <Title>Heartbreak as Erin Phillips suffers a knee injury</Title>
+      <Description>The AFLW and Crows superstar is stretchered off in the GF</Description>
+      <Timestamp>2019-03-31T03:28:51Z</Timestamp>
+      <Social>
+        <Twitter>Heartbreak as Erin Phillips suffers a knee injury</Twitter>
+        <Facebook>Heartbreak as Erin Phillips suffers a knee injury</Facebook>
+        <Text>Heartbreak as Erin Phillips suffers a knee injury</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:04YmRqaDE64Vy4iCSmLMglJMeq0f927j" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331143113a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331143113a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Heartbreak as Erin Phillips suffers a knee injury</AssetName>
+        <Data Key="assetID" Value="ref:04YmRqaDE64Vy4iCSmLMglJMeq0f927j"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramType" Value="Highlights"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="The AFLW and Crows superstar is stretchered off in the GF"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category"/>
+        <Data Key="media_program_type" Value="Highlights"/>
+      </Metadata>
+    </Item>
+    <Item Type="V" Featured="false">
+      <Id>ref:ZpNWRqaDE6fNTAZ8C2Bv2YMYjzsLwPn0</Id>
+      <Title>Sensational Scheer takes a hanger to get the Crows fans excited</Title>
+      <Description>What a grab by Chloe Scheer as Danielle Ponter finishes off the moment</Description>
+      <Timestamp>2019-03-31T02:43:05Z</Timestamp>
+      <Social>
+        <Twitter>Sensational Scheer takes a hanger to get the Crows fans excited</Twitter>
+        <Facebook>Sensational Scheer takes a hanger to get the Crows fans excited</Facebook>
+        <Text>Sensational Scheer takes a hanger to get the Crows fans excited</Text>
+        <SocialUrl/>
+      </Social>
+      <Video Type="B" Id="ref:ZpNWRqaDE6fNTAZ8C2Bv2YMYjzsLwPn0" PolicyKey="BCpkADawqM1QskXmdQ0lYWP28_kgxaEVamSaKhqRV6_36at-aBpdF1WwayJrDWJj-DWyx-m-WYrMdvAK9BDQXzwMYKD3oZsbTVNPK8pHRa3RJ_gwfRfYzS0ULl0u3OlZqAGpnhTJF3NZOdkf" AccountId="6057984922001"/>
+      <MediaUrl/>
+      <ImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331134354a_1024x576.jpg</ImageUrl>
+      <FullImageUrl>http://bpvideos.telstra.insnw.net/web/images/20190331134354a_1024x576.jpg</FullImageUrl>
+      <FullImageWidth>326</FullImageWidth>
+      <FullImageHeight>184</FullImageHeight>
+      <Exclusive>false</Exclusive>
+      <LiveEvent>false</LiveEvent>
+      <LiveNow>false</LiveNow>
+      <DisableSecondScreen>false</DisableSecondScreen>
+      <Metadata Type="CONVIVA">
+        <AssetName>Sensational Scheer takes a hanger to get the Crows fans excited</AssetName>
+        <Data Key="assetID" Value="ref:ZpNWRqaDE6fNTAZ8C2Bv2YMYjzsLwPn0"/>
+        <Data Key="competition" Value="AFLW"/>
+        <Data Key="matchID" Value="N/A"/>
+        <Data Key="season" Value="N/A"/>
+        <Data Key="liveContentType" Value="N/A"/>
+        <Data Key="vmsProgramType" Value="Highlights"/>
+      </Metadata>
+      <Metadata Type="GOOGLE_ANALYTICS">
+        <Data Key="key_words"/>
+        <Data Key="media_asset_description" Value="What a grab by Chloe Scheer as Danielle Ponter finishes off the moment"/>
+        <Data Key="image_path"/>
+        <Data Key="image_caption"/>
+        <Data Key="media_program_category"/>
+        <Data Key="media_program_type" Value="Highlights"/>
+      </Metadata>
+    </Item>
+  </MediaSection>
+  <YinzNode InVenue="false" VenueStatus="O" Ads="YC" InHomeMarket="O" Generated="1/11/2020 11:42:45 AM"/>
+</Media>

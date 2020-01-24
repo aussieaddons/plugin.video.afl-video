@@ -1,0 +1,8 @@
+{
+    "access_token": "abcdefg",
+    "expires_in": 3600,
+    "id_token": "hijklmn",
+    "refresh_token": "opqrstu",
+    "scope": "openid email profile offline_access",
+    "token_type": "Bearer"
+}

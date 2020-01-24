@@ -1,0 +1,54 @@
+{
+    "account_id": "6057984922001",
+    "ad_keys": null,
+    "created_at": "2019-12-10T23:33:08.693Z",
+    "cue_points": [],
+    "custom_fields": {
+        "asset_ref": "1009410",
+        "channel": "/Category/Sport/AFL",
+        "competition": "AFLWomens",
+        "content_provider": "AFLFLM",
+        "country_rights": "AU",
+        "duration": "174000",
+        "filehash": "c8a395b5549758188f96b95191a32262",
+        "no_ads": "ads",
+        "program_category": "MustWatch",
+        "program_type": "Programs",
+        "season_champion_id": "CD_S2019264",
+        "season_name": "2019NABAFLWCompetition",
+        "team": "AFL",
+        "transcoder": "Envivio"
+    },
+    "description": "Gold Coast recruit Tayla Thorn talks about rediscovering her passion for the game and a new start at the Suns",
+    "duration": 174120,
+    "economics": "AD_SUPPORTED",
+    "id": "6114707144001",
+    "link": null,
+    "long_description": "Gold Coast recruit Tayla Thorn talks about rediscovering her passion for the game and a new start at the Suns",
+    "name": "Tayla Thorn: Rediscovering the passion",
+    "offline_enabled": false,
+    "poster": "https://foo.bar/image.jpg",
+    "poster_sources": [
+        {
+            "src": "https://foo.bar/image.jpg"
+        }
+    ],
+    "published_at": "2019-12-10T23:33:08.711Z",
+    "reference_id": "hxcDF3aTE6jq2g21TRebQGmjee2wBv2v",
+    "sources": [
+        {
+            "asset_id": "6114709518001",
+            "src": "https://foo.bar/index.m3u8",
+            "type": "application/vnd.apple.mpegurl"
+        }
+    ],
+    "tags": [],
+    "text_tracks": [],
+    "thumbnail": "https://foo.bar/image.jpg",
+    "thumbnail_sources": [
+        {
+            "src": "https://foo.bar/image.jpg"
+        }
+    ],
+    "updated_at": "2020-01-08T00:33:59.472Z"
+}

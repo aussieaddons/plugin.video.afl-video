@@ -1,19 +1,23 @@
 import base64
 import binascii
-import comm
-import config
 import hashlib
 import json
 import os
 import random
 import re
-import requests
-import urlparse
-import xbmcgui
 
-from aussieaddonscommon.exceptions import AussieAddonsException
+from future.moves.urllib.parse import parse_qsl, urlparse
+
+import requests
+
 from aussieaddonscommon import session as custom_session
 from aussieaddonscommon import utils
+from aussieaddonscommon.exceptions import AussieAddonsException
+
+from resources.lib import comm
+from resources.lib import config
+
+import xbmcgui
 
 
 class TelstraAuthException(AussieAddonsException):
@@ -37,12 +41,12 @@ class TelstraAuth(object):
     def get_code_verifier(self):
         letters = 'abcdef0123456789'
         verifier = ''.join(random.choice(letters) for i in range(64))
-        return verifier
+        return verifier.encode('utf-8')
 
     def get_code_challenge(self, verifier):
         code_challenge_digest = hashlib.sha256(verifier).digest()
-        code_challenge = base64.b64encode(code_challenge_digest, '-_').rstrip(
-            '=')
+        code_challenge = base64.b64encode(code_challenge_digest, b'-_').rstrip(
+            b'=')
         return code_challenge
 
     def create_dialog(self, msg):
@@ -59,11 +63,10 @@ class TelstraAuth(object):
 
     def set_sso_client_id(self):
         # GET to our spc url and receive SSO client ID
-
         self.session.headers = config.SPC_HEADERS
         self.spc_url = config.SPORTSPASS_URL.format(self.token)
         spc_resp = self.session.get(self.spc_url)
-        sso_token_match = re.search('ssoClientId = "(\w+)"', spc_resp.text)
+        sso_token_match = re.search('ssoClientId = "(\\w+)"', spc_resp.text)
         try:
             self.sso_client_id = sso_token_match.group(1)
         except AttributeError as e:
@@ -80,7 +83,7 @@ class TelstraAuth(object):
         myid_auth = self.session.get(config.MYID_AUTHORIZATION_URL,
                                      params=myid_oauth_params)
 
-        identify_path_match = re.search('action="/identity/as/(\w+)/',
+        identify_path_match = re.search('action="/identity/as/(\\w+)/',
                                         myid_auth.text)
         try:
             self.identify_path_token = identify_path_match.group(1)
@@ -103,7 +106,7 @@ class TelstraAuth(object):
         try:
             auth_page_title = auth_page_title_match.group(1)
             if auth_page_title == 'Sign in to Telstra with your Telstra ID':
-                raise AussieAddonsException(
+                raise TelstraAuthException(
                     'Invalid Telstra ID username or password')
         except AttributeError as e:
             raise e
@@ -120,8 +123,8 @@ class TelstraAuth(object):
             config.MYID_RESUME_AUTHORIZATION_URL.format(
                 self.identify_path_token),
             params={'ctfr-proceed': 'true'})
-        query = urlparse.urlparse(myid_signon_proceed.url).query
-        self.callback_code = dict(urlparse.parse_qsl(query)).get('code')
+        query = urlparse(myid_signon_proceed.url).query
+        self.callback_code = dict(parse_qsl(query)).get('code')
 
     def set_bearer_token(self):
         #  finally get access token
@@ -167,7 +170,7 @@ class TelstraAuth(object):
                     continue
                 data = offer.get('productOfferingAttributes')
                 serv_id = \
-                [x['value'] for x in data if x['name'] == 'ServiceId'][0]
+                    [x['value'] for x in data if x['name'] == 'ServiceId'][0]
                 self.ph_no_list.append(serv_id)
 
             if len(self.ph_no_list) == 0:
@@ -197,7 +200,7 @@ class TelstraAuth(object):
                         self.pai = order_json['data']['orderItems'][0].get(
                             'pai')
                         return True
-                except:
+                except Exception:
                     utils.log(
                         'Unable to check status of order, continuing')
         except requests.exceptions.HTTPError as e:

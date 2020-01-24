@@ -1,24 +1,10 @@
-#
-#    AFL Video Kodi Add-on
-#    Copyright (C) 2016 Andy Botting
-#
-#    AFL Video is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    AFL Video is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
-#
-
 import datetime
 import time
-import urllib
+import unicodedata
+from builtins import str
+from collections import OrderedDict
+
+from future.moves.urllib.parse import parse_qsl, quote_plus, unquote_plus
 
 from aussieaddonscommon import utils
 
@@ -26,7 +12,7 @@ from aussieaddonscommon import utils
 class Video(object):
 
     def __init__(self):
-        self.id = None
+        self.video_id = None
         self.title = ''
         self.genre = 'Sport'
         self.rating = 'PG'
@@ -39,6 +25,9 @@ class Video(object):
         self.ooyalaid = None
         self.isdummy = None
         self.live = None
+        self.type = None
+        self.account_id = None
+        self.policy_key = None
         self.subscription_required = False
 
     def __repr__(self):
@@ -124,74 +113,33 @@ class Video(object):
             info_dict['duration'] = self.get_duration()
         return info_dict
 
-    def make_xbmc_url(self):
-        """Make XBMC URL
+    def make_kodi_url(self):
+        d_original = OrderedDict(
+            sorted(self.__dict__.items(), key=lambda x: x[0]))
+        d = d_original.copy()
+        for key, value in d_original.items():
+            if not value:
+                d.pop(key)
+                continue
+            if isinstance(value, str):
+                d[key] = unicodedata.normalize(
+                    'NFKD', value).encode('ascii', 'ignore').decode('utf-8')
+        url = ''
+        for key in d.keys():
+            if isinstance(d[key], (str, bytes)):
+                val = quote_plus(d[key])
+            else:
+                val = d[key]
+            url += '&{0}={1}'.format(key, val)
+        return url
 
-        Returns a string which represents the program object, but in
-        a format suitable for passing as a URL.
-        """
-        d = {}
-        if self.id:
-            d['id'] = self.id
-        if self.title:
-            d['title'] = self.title
-        if self.description:
-            d['description'] = self.description
-        if self.genre:
-            d['genre'] = self.genre
-        if self.duration:
-            d['duration'] = self.duration
-        if self.season:
-            d['season'] = self.season
+    def parse_kodi_url(self, url):
+        params = dict(parse_qsl(url))
+        for item in params.keys():
+            setattr(self, item, unquote_plus(params[item]))
         if self.date:
-            d['date'] = self.date.strftime("%Y-%m-%d %H:%M:%S")
-        if self.thumbnail:
-            d['thumbnail'] = self.thumbnail
-        if self.url:
-            d['url'] = self.url
-        if self.ooyalaid:
-            d['ooyalaid'] = self.ooyalaid
-        if self.isdummy:
-            d['isdummy'] = self.isdummy
-        if self.live:
-            d['live'] = self.live
-        if self.subscription_required:
-            d['subscription_required'] = self.subscription_required
-        return utils.make_url(d)
-
-    def parse_xbmc_url(self, string):
-        """Get XBMC URL
-
-        Takes a string input which is a URL representation of the
-        program object
-        """
-        d = utils.get_url(string)
-        if 'id' in d:
-            self.id = d.get('id')
-        if 'title' in d:
-            self.title = d.get('title')
-        if 'description' in d:
-            self.description = d.get('description')
-        if 'genre' in d:
-            self.genre = d.get('genre')
-        if 'season' in d:
-            self.season = d.get('season')
-        if 'duration' in d:
-            self.duration = d.get('duration')
-        if 'url' in d:
-            self.url = urllib.unquote_plus(d.get('url'))
-        if 'thumbnail' in d:
-            self.thumbnail = urllib.unquote_plus(d.get('thumbnail'))
-        if 'date' in d:
-            ts = time.strptime(d.get('date'), '%Y-%m-%d %H:%M:%S')
-            timestamp = time.mktime(ts)
-            self.date = datetime.date.fromtimestamp(timestamp)
-        if 'ooyalaid' in d:
-            self.ooyalaid = d.get('ooyalaid')
-        if 'isdummy' in d:
-            self.isdummy = d.get('isdummy')
-        if 'live' in d:
-            self.live = d.get('live')
-        if 'subscription_required' in d:
-            if d.get('subscription_required') == 'True':
-                self.subscription_required = True
+            try:
+                self.date = datetime.datetime.strptime(self.date, "%Y-%m-%d")
+            except TypeError:
+                self.date = datetime.datetime(
+                    *(time.strptime(self.date, "%Y-%m-%d")[0:6]))

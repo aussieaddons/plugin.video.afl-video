@@ -1,0 +1,33 @@
+{
+    "user_info": {
+        "domain": "www.nrl.com",
+        "request_timestamp": "1506446434",
+        "country": "US",
+        "device": "html5",
+        "timezone": -7.0,
+        "ip_address": "60.254.143.223",
+        "continent": "NORTH AMERICA"
+    },
+    "debug_data": {
+        "user_info": {
+            "request_timestamp": "1506446434"
+        },
+        "provider_enabled_ssl": false,
+        "server_latency": "4.55821",
+        "provider_not_use_cookies": false,
+        "request_id": "056f8e85ecf16432a258f1defaef816b"
+    },
+    "authorization_data": {
+        "1yNGE5dDoyTdUKykqSeTysvmgup-rvS1": {
+            "restrict_devices": false,
+            "retry": null,
+            "authorized": false,
+            "synd_rule_failures": null,
+            "request_timestamp": "1506446434",
+            "code": "3",
+            "message": "unauthorized location",
+            "require_heartbeat": false
+        }
+    },
+    "signature": "wTddCV+8s/ZyBZZ24GuJNNSXOVIfL/pP2PU/ir5uuo="
+}

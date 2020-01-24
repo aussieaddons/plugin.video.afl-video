@@ -1,0 +1,305 @@
+{
+  "seasonId" : "CD_S2020014",
+  "roundId" : "CD_R202001401",
+  "teamId" : null,
+  "venueId" : null,
+  "fixtures" : [ {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140101",
+    "providerMatchId" : "110860101",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T120",
+    "homeTeam" : {
+      "teamAbbr" : "RICH",
+      "teamName" : "Richmond",
+      "teamNickname" : "Tigers"
+    },
+    "awayTeamId" : "CD_T30",
+    "awayTeam" : {
+      "teamAbbr" : "CARL",
+      "teamName" : "Carlton",
+      "teamNickname" : "Blues"
+    },
+    "venue" : {
+      "name" : "MCG",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V40",
+      "abbreviation" : "MCG",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2020-03-19T08:25:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140102",
+    "providerMatchId" : "110860102",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T140",
+    "homeTeam" : {
+      "teamAbbr" : "WB",
+      "teamName" : "Western Bulldogs",
+      "teamNickname" : "Bulldogs"
+    },
+    "awayTeamId" : "CD_T40",
+    "awayTeam" : {
+      "teamAbbr" : "COLL",
+      "teamName" : "Collingwood",
+      "teamNickname" : "Magpies"
+    },
+    "venue" : {
+      "name" : "Marvel Stadium",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V190",
+      "abbreviation" : "MRVL",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2020-03-20T08:50:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140103",
+    "providerMatchId" : "110860103",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T50",
+    "homeTeam" : {
+      "teamAbbr" : "ESS",
+      "teamName" : "Essendon",
+      "teamNickname" : "Bombers"
+    },
+    "awayTeamId" : "CD_T60",
+    "awayTeam" : {
+      "teamAbbr" : "FRE",
+      "teamName" : "Fremantle",
+      "teamNickname" : "Freo"
+    },
+    "venue" : {
+      "name" : "Marvel Stadium",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V190",
+      "abbreviation" : "MRVL",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2020-03-21T02:45:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140104",
+    "providerMatchId" : "110860104",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T10",
+    "homeTeam" : {
+      "teamAbbr" : "ADEL",
+      "teamName" : "Adelaide Crows",
+      "teamNickname" : "Crows"
+    },
+    "awayTeamId" : "CD_T160",
+    "awayTeam" : {
+      "teamAbbr" : "SYD",
+      "teamName" : "Sydney Swans",
+      "teamNickname" : "Swans"
+    },
+    "venue" : {
+      "name" : "Adelaide Oval",
+      "timeZone" : "Australia/Adelaide",
+      "venueId" : "CD_V6",
+      "abbreviation" : "AO",
+      "location" : "Adelaide",
+      "state" : "SA"
+    },
+    "utcStartTime" : "2020-03-21T05:35:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140105",
+    "providerMatchId" : "110860105",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T1010",
+    "homeTeam" : {
+      "teamAbbr" : "GWS",
+      "teamName" : "GWS Giants",
+      "teamNickname" : "Giants"
+    },
+    "awayTeamId" : "CD_T70",
+    "awayTeam" : {
+      "teamAbbr" : "GEEL",
+      "teamName" : "Geelong Cats",
+      "teamNickname" : "Cats"
+    },
+    "venue" : {
+      "name" : "GIANTS Stadium",
+      "timeZone" : "Australia/Sydney",
+      "venueId" : "CD_V43",
+      "abbreviation" : "GS",
+      "location" : "Sydney",
+      "state" : "NSW"
+    },
+    "utcStartTime" : "2020-03-21T08:25:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140106",
+    "providerMatchId" : "110860106",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T1000",
+    "homeTeam" : {
+      "teamAbbr" : "GCFC",
+      "teamName" : "Gold Coast Suns",
+      "teamNickname" : "Suns"
+    },
+    "awayTeamId" : "CD_T110",
+    "awayTeam" : {
+      "teamAbbr" : "PORT",
+      "teamName" : "Port Adelaide",
+      "teamNickname" : "Power"
+    },
+    "venue" : {
+      "name" : "Metricon Stadium",
+      "timeZone" : "Australia/Brisbane",
+      "venueId" : "CD_V81",
+      "abbreviation" : "MS",
+      "location" : "Gold Coast",
+      "state" : "QLD"
+    },
+    "utcStartTime" : "2020-03-21T08:25:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140107",
+    "providerMatchId" : "110860107",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T100",
+    "homeTeam" : {
+      "teamAbbr" : "NMFC",
+      "teamName" : "North Melbourne",
+      "teamNickname" : "Kangaroos"
+    },
+    "awayTeamId" : "CD_T130",
+    "awayTeam" : {
+      "teamAbbr" : "STK",
+      "teamName" : "St Kilda",
+      "teamNickname" : "Saints"
+    },
+    "venue" : {
+      "name" : "Marvel Stadium",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V190",
+      "abbreviation" : "MRVL",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2020-03-22T02:10:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140108",
+    "providerMatchId" : "110860108",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T80",
+    "homeTeam" : {
+      "teamAbbr" : "HAW",
+      "teamName" : "Hawthorn",
+      "teamNickname" : "Hawks"
+    },
+    "awayTeamId" : "CD_T20",
+    "awayTeam" : {
+      "teamAbbr" : "BL",
+      "teamName" : "Brisbane Lions",
+      "teamNickname" : "Lions"
+    },
+    "venue" : {
+      "name" : "MCG",
+      "timeZone" : "Australia/Melbourne",
+      "venueId" : "CD_V40",
+      "abbreviation" : "MCG",
+      "location" : "Melbourne",
+      "state" : "VIC"
+    },
+    "utcStartTime" : "2020-03-22T04:20:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  }, {
+    "lastUpdated" : "2019-12-01T23:40:08.651+0000",
+    "roundNumber" : 1,
+    "matchId" : "CD_M20200140109",
+    "providerMatchId" : "110860109",
+    "status" : "SCHEDULED",
+    "homeTeamId" : "CD_T150",
+    "homeTeam" : {
+      "teamAbbr" : "WCE",
+      "teamName" : "West Coast Eagles",
+      "teamNickname" : "Eagles"
+    },
+    "awayTeamId" : "CD_T90",
+    "awayTeam" : {
+      "teamAbbr" : "MELB",
+      "teamName" : "Melbourne",
+      "teamNickname" : "Demons"
+    },
+    "venue" : {
+      "name" : "Optus Stadium",
+      "timeZone" : "Australia/Perth",
+      "venueId" : "CD_V2925",
+      "abbreviation" : "OS",
+      "location" : "Perth",
+      "state" : "WA"
+    },
+    "utcStartTime" : "2020-03-22T07:20:00.000+0000",
+    "competitionId" : "CD_S2020014",
+    "name" : null,
+    "twitterHashTag" : null,
+    "venueLocalStartTime" : null,
+    "homeTeamScore" : null,
+    "awayTeamScore" : null
+  } ],
+  "byes" : [ ]
+}

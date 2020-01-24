@@ -1,20 +1,3 @@
-#
-#    AFL Video Kodi Add-on
-#    Copyright (C) 2016 Andy Botting
-#
-#    AFL Video is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    AFL Video is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
-
 # Ignore flake8 E501 line too long
 # flake8: noqa
 
@@ -77,13 +60,15 @@ HEADERS = {'User-Agent' : USER_AGENT,
 
 VIDEO_FEED_URL = "http://feed.theplatform.com/f/gqvPBC/AFLProd_Online_H264?byGuid={0}&form=json"
 
+BC_EDGE_URL = 'https://edge.api.brightcove.com/playback/v1/accounts/{account_id}/videos/{video_id}'
+
 # AFLW
 
 AFLW_INDEX_URL = 'https://app-league-aflw.yinzcam.com/V1/Home/Index?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
 AFLW_BOX_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Box/{0}?carrier=&height=1776&error=100000000&ycurl_version=1&os=Android&a=0&platform=Android&mnc=0&ff=mobile&b=0&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 
-AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&ff=mobile&mnc=0&app_version=1.0.5&version=5.7&width=1080&os_version=7.1.2&mcc=0&application=AFLW_LEAGUE&compId=CD_S2018264'
+AFLW_SCORE_URL = 'https://app-league-aflw.yinzcam.com/V1/Game/Scores/?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&ff=mobile&mnc=0&app_version=1.0.5&version=5.7&width=1080&os_version=7.1.2&mcc=0&application=AFLW_LEAGUE'
 
 AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&height=1776&ycurl_version=1&os=Android&platform=Android&mnc=0&ff=mobile&app_version=1.0.5&version=5.7&width=1080&mcc=0&os_version=7.1.2&application=AFLW_LEAGUE'
 

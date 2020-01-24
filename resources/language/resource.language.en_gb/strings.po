@@ -1,0 +1,65 @@
+# Kodi Media Center language file
+# Addon Name: AFL Video
+# Addon id: plugin.video.afl-video
+# Addon Provider: Aussie Add-ons
+msgid ""
+msgstr ""
+"Project-Id-Version: Kodi Addons\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30000"
+msgid "AFL Live Pass"
+msgstr ""
+
+msgctxt "#30001"
+msgid "Debugging"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Username"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Password"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Subscription token (mis-uuid)"
+msgstr ""
+
+msgctxt "#30005"
+msgid "AFL Live Pass Subscription"
+msgstr ""
+
+msgctxt "#30006"
+msgid "Subscription Type"
+msgstr ""
+
+msgctxt "#30007"
+msgid "Help finding mis-uuid token"
+msgstr ""
+
+msgctxt "#30008"
+msgid "Inputstream.adapive settings (video quality)"
+msgstr ""
+
+msgctxt "#30009"
+msgid "State"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Remove Stored Login Token"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Send error report"
+msgstr ""

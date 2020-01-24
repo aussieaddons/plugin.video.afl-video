@@ -1,34 +1,16 @@
-#
-#     AFL Video Kodi Add-on
-#     Copyright (C) 2016 Andy Botting
-#
-#     AFL Video is free software: you can redistribute it and/or modify
-#     it under the terms of the GNU General Public License as published by
-#     the Free Software Foundation, either version 3 of the License, or
-#     (at your option) any later version.
-#
-#     AFL Video is distributed in the hope that it will be useful,
-#     but WITHOUT ANY WARRANTY; without even the implied warranty of
-#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#     GNU General Public License for more details.
-#
-#     You should have received a copy of the GNU General Public License
-#     along with this add-on. If not, see <http://www.gnu.org/licenses/>.
-#
-
-import classes
-import config
 import datetime
 import json
 import time
-import xbmcaddon
+import xml.etree.ElementTree as ET
 
 from aussieaddonscommon import exceptions
 from aussieaddonscommon import session
 from aussieaddonscommon import utils
 
-# Use local etree to get v1.3.0
-import etree.ElementTree as ET
+from resources.lib import classes
+from resources.lib import config
+
+import xbmcaddon
 
 ADDON = xbmcaddon.Addon()
 
@@ -59,6 +41,7 @@ def fetch_url(url, data=None, headers=None, request_token=False):
         except Exception as e:
             # Just re-raise for now
             raise e
+        request.encoding = 'utf-8-sig'
         if request.text[0] == u'\ufeff':  # bytes \xef\xbb\xbf in utf-8 encding
             request.encoding = 'utf-8-sig'
         data = request.text
@@ -79,6 +62,16 @@ def update_token(sess):
             'Failed to retrieve API token: {0}\n'
             'Service may be currently unavailable.'.format(e))
     sess.headers.update({'x-media-mis-token': token})
+
+
+def get_bc_url(video):
+    data = fetch_url(config.BC_EDGE_URL.format(account_id=video.account_id,
+                                               video_id=video.video_id),
+                     headers={'BCOV-POLICY': video.policy_key})
+    json_data = json.loads(data)
+    for source in json_data.get('sources'):
+        if source.get('type') == 'application/vnd.apple.mpegurl':
+            return source.get('src')
 
 
 def get_attr(attrs, key):
@@ -352,7 +345,10 @@ def get_aflw_videos():
                 v = classes.Video()
                 v.title = video.find('Title').text
                 v.thumbnail = video.find('FullImageUrl').text
-                v.ooyalaid = video.find('Video').attrib['Id']
+                v.type = video.find('Video').attrib['Type']
+                v.video_id = video.find('Video').attrib['Id']
+                v.policy_key = video.find('Video').attrib['PolicyKey']
+                v.account_id = video.find('Video').attrib['AccountId']
                 listing.append(v)
     return listing
 
@@ -375,7 +371,7 @@ def find_aflw_live_matches():
         data = fetch_url(config.AFLW_BOX_URL.format(game_id))
         tree = ET.fromstring(data)
         watch_button = tree.find('WatchButton')
-        if watch_button:
+        if watch_button is not None:
             if watch_button.find('Title').text != 'WATCH REPLAY':
                 listing.append(tree)
     return listing

@@ -1,0 +1,8 @@
+{
+  "token" : "http://foobar.com/video",
+  "embedCode" : "foo",
+  "uuid" : "mis-uuid-aabbccddeeff00112233445566778899",
+  "marketSegment" : null,
+  "fairPlayUrl" : "http://foobar.com/video",
+  "urlSigningToken" : "eyJhbGciOiJIUzI1NiJ9.eyJlbWJlZF9jb2RlIjoiMXlOR0U1ZERveVRkVUt5a3FTZVR5c3ZtZ3VwLXJ2UzIiLCJzdWIiOiJtaXMtdXVpZC1hYWJiY2NkZGVlZmYwMDExMjIzMzQ0NTU2Njc3ODg5OSIsIm5iZiI6MTU3ODc4NTAwMCwidXJsX3NpZ25pbmciOiJ5ZXMiLCJpc3MiOiJtaXNQcmVtaXVtIiwidXJsX3Jlc29sdXRpb24iOiJ5ZXMiLCJleHAiOjE1Nzg3ODkwMDAsImlhdCI6MTU3ODc4OTAwMCwianRpIjoiYWJjZGVmMDEtYWJjZC1lZjAxLTQ0NjYtMDEyMzQ1Njc4OTAxIn0=.FFaa_3fJNBCHtwLDATlmabcd500123FyY3ddffVREb8"
+}

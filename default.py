@@ -1,42 +1,21 @@
-#
-#    AFL Video Kodi Add-on
-#    Copyright (C) 2016 Andy Botting
-#
-#    AFL Video is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    AFL Video is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this add-on. If not, see <http://www.gnu.org/licenses/>.
-#
-
-import os
 import sys
-import xbmcaddon
 
 from aussieaddonscommon import utils
 
-# Add our resources/lib to the python path
-addon_dir = xbmcaddon.Addon().getAddonInfo('path')
-sys.path.insert(0, os.path.join(addon_dir, 'resources', 'lib'))
+from resources.lib import index
+from resources.lib import ooyalahelper
+from resources.lib import play
+from resources.lib import rounds
+from resources.lib import teams
+from resources.lib import videos
 
-import index  # noqa: E402
-import ooyalahelper  # noqa: E402
-import play  # noqa: E402
-import rounds  # noqa: E402
-import teams  # noqa: E402
-import videos  # noqa: E402
+import xbmcaddon
 
 # Print our platform/version debugging information
 utils.log_kodi_platform_version()
 
-if __name__ == "__main__":
+
+def main():
     params_str = sys.argv[2]
     params = utils.get_url(params_str)
     utils.log('Loading with params: {0}'.format(params))
@@ -76,6 +55,10 @@ if __name__ == "__main__":
                 else:
                     utils.dialog_message(
                         "Can't open inputstream.adaptive settings")
-            except Exception as e:
+            except Exception:
                 utils.dialog_message(
                     "Can't open inputstream.adaptive settings")
+
+
+if __name__ == "__main__":
+    main()

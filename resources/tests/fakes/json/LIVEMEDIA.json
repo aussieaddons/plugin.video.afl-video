@@ -1,0 +1,58 @@
+[ {
+  "title" : "AFL.TV",
+  "matchId" : null,
+  "homeTeam" : null,
+  "awayTeam" : null,
+  "videoStream" : {
+    "customAttributes" : [ {
+      "attrName" : "ooyala embed code",
+      "attrValue" : "1yNGE5dDoyTdUKykqSeTysvmgup-rvS1",
+      "mediaId" : null,
+      "attributeId" : null,
+      "attrKey" : null,
+      "guid" : null
+    }, {
+      "attrName" : "hevcEmbedCode",
+      "attrValue" : "0wY2VlZTE6moUTYQx3dxNMbKDhUJl-Qw",
+      "mediaId" : null,
+      "attributeId" : null,
+      "attrKey" : null,
+      "guid" : null
+    }, {
+      "attrName" : "embedCode-tv-avc",
+      "attrValue" : "83ZDR4ZjE6KuXiwCAnmVChu_l1ZNtzk6",
+      "mediaId" : null,
+      "attributeId" : null,
+      "attrKey" : null,
+      "guid" : null
+    }, {
+      "attrName" : "embedCode-tv-hevc",
+      "attrValue" : "M2cGx4ZjE6a27Jd_2vx_AON7oyXfKwI9",
+      "mediaId" : null,
+      "attributeId" : null,
+      "attrKey" : null,
+      "guid" : null
+    }, {
+      "attrName" : "AFL Live Video",
+      "attrValue" : "AFL Live Video",
+      "mediaId" : null,
+      "attributeId" : null,
+      "attrKey" : null,
+      "guid" : null
+    }, {
+      "attrName" : "DRM",
+      "attrValue" : "false",
+      "mediaId" : null,
+      "attributeId" : null,
+      "attrKey" : null,
+      "guid" : null
+    } ],
+    "title" : "AFL.TV",
+    "streamId" : "footyTV",
+    "entitlement" : "BPS_MOB_AFL_VOD",
+    "thumbnailURL" : "https://s.afl.com.au/staticfile/AFL Tenant/AFL/Files/Images/AFL-TV.JPG",
+    "sizeRestricted" : false
+  },
+  "auxiliaryVideoStreams" : null,
+  "audioStreams" : null
+} ]

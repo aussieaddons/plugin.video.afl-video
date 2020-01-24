@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Home>
+  <Alerts/>
+  <State>P</State>
+  <CardTabs IconType="T">
+    <List Title="FEATURED">CARDS</List>
+    <List Title="FIXTURE">G</List>
+    <List Title="SOCIAL">T</List>
+  </CardTabs>
+  <HeadlineGames>
+    <Game Id="CD_M20202640101"/>
+    <Game Id="CD_M20202640102"/>
+    <Game Id="CD_M20202640103"/>
+    <Game Id="CD_M20202640104"/>
+    <Game Id="CD_M20202640105"/>
+    <Game Id="CD_M20202640106"/>
+    <Game Id="CD_M20202640107"/>
+  </HeadlineGames>
+  <HeadlineItems>
+    <Item Type="Blank" Default="true" DisableBlur="true"/>
+    <Item Type="BoxScore" Id="CD_M20202640101" Title="RICH v CARL" Subtitle="$d{2020-02-07T08:40:00Z|EEE, d MMM}"/>
+    <Item Type="BoxScore" Id="CD_M20202640102" Title="GWS v GCFC" Subtitle="$d{2020-02-08T02:10:00Z|EEE, d MMM}"/>
+    <Item Type="BoxScore" Id="CD_M20202640103" Title="MELB v NMFC" Subtitle="$d{2020-02-08T04:10:00Z|EEE, d MMM}"/>
+    <Item Type="BoxScore" Id="CD_M20202640104" Title="BL v ADEL" Subtitle="$d{2020-02-08T06:10:00Z|EEE, d MMM}"/>
+    <Item Type="BoxScore" Id="CD_M20202640105" Title="COLL v WCE" Subtitle="$d{2020-02-09T02:10:00Z|EEE, d MMM}"/>
+    <Item Type="BoxScore" Id="CD_M20202640106" Title="STK v WB" Subtitle="$d{2020-02-09T04:10:00Z|EEE, d MMM}"/>
+    <Item Type="BoxScore" Id="CD_M20202640107" Title="FREO v GEEL" Subtitle="$d{2020-02-09T06:10:00Z|EEE, d MMM}"/>
+  </HeadlineItems>
+  <Widget>
+    <View Type="MEDIA" Id="PULSELIVE_40294"/>
+    <View Type="MEDIA" Id="PULSELIVE_40663"/>
+  </Widget>
+  <YinzNode InVenue="false" VenueStatus="O" Ads="YC" InHomeMarket="O" Generated="1/11/2020 11:58:42 AM" ServerConfig="https://api.afl.com.au/"/>
+</Home>
