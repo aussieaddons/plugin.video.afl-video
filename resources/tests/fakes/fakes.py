@@ -200,23 +200,6 @@ M3U8_URL_BC = {
 
 VIDEO_ID = '1yNGE5dDoyTdUKykqSeTysvmgup-rvS1'
 
-EXPECTED_VIDEO_TITLES = [
-    '2019: Touch Premiership: Knights v Broncos',
-    'Long lost dogs back in the same pack',
-    'Knights v Warriors - Round 16',
-    'Tetevano charged for tackle on Brooks',
-    'Papalii: I let the State down in Origin II',
-    'Seibold denies dumping Boyd rumours as baby Broncos emerge',
-    'Extended Highlights: Wests Tigers v Roosters',
-    'Full Match Replay: Wests Tigers v Roosters - Round 16, 2019',
-    'Roosters: Round 16',
-    'Wests Tigers: Round 16'
-]
-
-EXPECTED_LIVE_TITLES = [
-    'Wests Magpies v Bears LIVE'
-]
-
 # telstra_auth
 
 FAKE_XSRF_COOKIE = 'XSRF-TOKEN=foobar; path=/; secure'
@@ -233,38 +216,6 @@ FAKE_RANDOM = [
     b'\xb7\x91e|\x7fd\x1e\xdal\x8b\x99\xe2Z\xf2\xe9Y',
     b'\x11\x7ff(\x01\n\xf7\x13lHq\xcb\xfa\x81\x03\xf3'
 ]
-
-AUTH_REDIRECT_URL = 'https://www.nrl.com/account/login?ReturnUrl=%2Faccount' \
-                    '%2Fauthorize%3Fresponse_type%3Dcode%26scope%3Dopenid' \
-                    '%2520email%2520profile%2520offline_access%26client_id' \
-                    '%3Dnrlapp-ios%26redirect_uri%3Dhttps%3A%2F%2Fredirect' \
-                    '.nrl-live.app.openid.yinzcam.com'
-
-AUTH_REDIRECT_CODE_URL = 'https://redirect.nrl-live.app.openid.yinzcam.com' \
-                         '?code=abcdefg'
-
-SSO_ID = 'wd8F30d550YH9ntjH44azdXYNDpSWUvf'
-
-SSO_AUTH_REDIRECT_URL = 'https://signon.telstra.com/login?goto=https%3A%2F' \
-                        '%2Ftapi.telstra.com%2Fv1%2Fsso%2Fidpcallback%3Fcbs' \
-                        '%3Dfoobar123abc%26app_name%3DOne%20Place%20Portal'
-
-SIGNON_FAIL_REDIRECT_URL = 'https://signon.telstra.com.au/login?status=error' \
-                           '&errorcode=3&eun=mrfoobar&goto=https%3A%2F' \
-                           '%2Ftapi.telstra.com%2Fv1%2Fsso%2Fidpcallback' \
-                           '%3Fcbs%3Dfoobar123abc%26app_name%3DOne+Place' \
-                           '+Portal'
-
-SIGNON_REDIRECT_URL = 'https://signon.telstra.com/login?raaURLAction' \
-                      '=cdcTransfer&raaGotoChain=signon.telstra.com%2Flogin' \
-                      '%7Csignon.bigpond.com%2Flogin&cookieAction=write' \
-                      '%7Cwrite&cookieName=BPSESSION%7CBPSESSION' \
-                      '&cdcValBPSESSION=AQICapYHjH4f&goto=https%3A%2F%2Ftapi' \
-                      '.telstra.com%2Fv1%2Fsso%2Fidpcallback%3Fcbs' \
-                      '%3Dfoobar123abc%26app_name%3DOne+Place+Portal'
-
-SSO_URL = 'https://tapi.telstra.com/v1/sso/idpcallback?cbs=foobar123abc' \
-          '&app_name=One Place Portal'
 
 MYID_RESUME_AUTH_REDIRECT_URL = \
     'https://hub.telstra.com.au/offers/content/cached/callback.html?code' \
