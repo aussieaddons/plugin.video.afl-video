@@ -39,8 +39,9 @@ def make_list(params):
 
         ok = True
         for v in videos:
-            listitem = xbmcgui.ListItem(label=v.get_title(),
-                                        thumbnailImage=v.get_thumbnail())
+            listitem = xbmcgui.ListItem(label=v.get_title())
+            thumb = v.get_thumbnail()
+            listitem.setArt({'icon': thumb, 'thumb': thumb})
             listitem.setInfo('video', v.get_kodi_list_item())
             listitem.addStreamInfo('video', v.get_kodi_stream_info())
             if not v.isdummy:

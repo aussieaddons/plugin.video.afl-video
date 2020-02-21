@@ -19,11 +19,10 @@ def make_list():
             except Exception:
                 current_dir = os.getcwd()
 
-            thumbnail = os.path.join(current_dir, "..", "..", "resources",
+            thumb = os.path.join(current_dir, "..", "..", "resources",
                                      "img", t['thumb'])
-            listitem = xbmcgui.ListItem(label=t['name'],
-                                        iconImage=thumbnail,
-                                        thumbnailImage=thumbnail)
+            listitem = xbmcgui.ListItem(label=t['name'])
+            listitem.setArt({'icon': thumb, 'thumb': thumb})
             url = "%s?team=%s" % (sys.argv[0], t['team_id'])
 
             # Add the item to the list

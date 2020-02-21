@@ -37,10 +37,10 @@ def play(url):
             stream_url = comm.get_bc_url(v)
             stream_data = {'stream_url': str(stream_url)}
 
+        thumb = v.get_thumbnail()
         listitem = xbmcgui.ListItem(label=v.get_title(),
-                                    iconImage=v.get_thumbnail(),
-                                    thumbnailImage=v.get_thumbnail(),
                                     path=stream_data.get('stream_url'))
+        listitem.setArt({'icon': thumb, 'thumb': thumb})
 
         inputstream = drmhelper.check_inputstream(drm=False)
         if not inputstream:
