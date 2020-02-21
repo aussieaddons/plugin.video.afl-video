@@ -1,58 +1,174 @@
-[ {
-  "title" : "AFL.TV",
-  "matchId" : null,
-  "homeTeam" : null,
-  "awayTeam" : null,
-  "videoStream" : {
-    "customAttributes" : [ {
-      "attrName" : "ooyala embed code",
-      "attrValue" : "1yNGE5dDoyTdUKykqSeTysvmgup-rvS1",
-      "mediaId" : null,
-      "attributeId" : null,
-      "attrKey" : null,
-      "guid" : null
-    }, {
-      "attrName" : "hevcEmbedCode",
-      "attrValue" : "0wY2VlZTE6moUTYQx3dxNMbKDhUJl-Qw",
-      "mediaId" : null,
-      "attributeId" : null,
-      "attrKey" : null,
-      "guid" : null
-    }, {
-      "attrName" : "embedCode-tv-avc",
-      "attrValue" : "83ZDR4ZjE6KuXiwCAnmVChu_l1ZNtzk6",
-      "mediaId" : null,
-      "attributeId" : null,
-      "attrKey" : null,
-      "guid" : null
-    }, {
-      "attrName" : "embedCode-tv-hevc",
-      "attrValue" : "M2cGx4ZjE6a27Jd_2vx_AON7oyXfKwI9",
-      "mediaId" : null,
-      "attributeId" : null,
-      "attrKey" : null,
-      "guid" : null
-    }, {
-      "attrName" : "AFL Live Video",
-      "attrValue" : "AFL Live Video",
-      "mediaId" : null,
-      "attributeId" : null,
-      "attrKey" : null,
-      "guid" : null
-    }, {
-      "attrName" : "DRM",
-      "attrValue" : "false",
-      "mediaId" : null,
-      "attributeId" : null,
-      "attrKey" : null,
-      "guid" : null
-    } ],
-    "title" : "AFL.TV",
-    "streamId" : "footyTV",
-    "entitlement" : "BPS_MOB_AFL_VOD",
-    "thumbnailURL" : "https://s.afl.com.au/staticfile/AFL Tenant/AFL/Files/Images/AFL-TV.JPG",
-    "sizeRestricted" : false
-  },
-  "auxiliaryVideoStreams" : null,
-  "audioStreams" : null
-} ]
+{
+    "content": [
+        {
+            "audioStreams": [],
+            "matchId": null,
+            "startTime": "2013-01-01T00:00:00Z",
+            "title": "AFL.TV",
+            "videoStreams": [
+                {
+                    "customAttributes": [
+                        {
+                            "attrName": "LiveApp",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "sizeRestricted",
+                            "attrValue": "false"
+                        },
+                        {
+                            "attrName": "AFL Live Video",
+                            "attrValue": "AFL Live Video"
+                        },
+                        {
+                            "attrName": "brightcove_videoid_ttv",
+                            "attrValue": "6122405941001"
+                        },
+                        {
+                            "attrName": "entitlement",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "imageURL",
+                            "attrValue": "https://resources.afl.com.au/afl/photo/2020/02/19/6762aa4c-cf87-43a9-976f-52fc510c6f55/placeholder-video-afltv.jpg"
+                        },
+                        {
+                            "attrName": "DVR",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "brightcove_videoid",
+                            "attrValue": "6114753537001"
+                        },
+                        {
+                            "attrName": "TTV",
+                            "attrValue": "true"
+                        }
+                    ],
+                    "endTime": "2022-01-31T00:00:00Z",
+                    "startTime": "2020-01-01T00:00:00Z",
+                    "streamId": "footyTV",
+                    "thumbnailURL": null
+                }
+            ]
+        },
+        {
+            "audioStreams": [
+                {
+                    "customAttributes": [
+                        {
+                            "attrName": "streamURL",
+                            "attrValue": "https://aflliveradioshls349.ngcdn.telstra.com/afllive/aflradio_1/playlist.m3u8"
+                        },
+                        {
+                            "attrName": "brightcove_videoid",
+                            "attrValue": "6119926457001"
+                        }
+                    ],
+                    "endTime": "2020-02-21T11:00:00Z",
+                    "startTime": "2020-02-21T08:00:00Z",
+                    "streamId": "SEN",
+                    "thumbnailURL": "https://resources.afl.com.au/afl/photo/2020/02/19/07b610df-799b-48b3-bf75-d0a8e32e7799/SEN1116.jpg"
+                },
+                {
+                    "customAttributes": [
+                        {
+                            "attrName": "streamURL",
+                            "attrValue": "https://aflliveradioshls349.ngcdn.telstra.com/afllive/aflradio_1/playlist.m3u8"
+                        },
+                        {
+                            "attrName": "brightcove_videoid",
+                            "attrValue": "6119926457001"
+                        }
+                    ],
+                    "endTime": "2020-02-21T11:00:00Z",
+                    "startTime": "2020-02-21T08:00:00Z",
+                    "streamId": "AFL Nation",
+                    "thumbnailURL": "https://resources.afl.com.au/afl/photo/2020/02/19/11e4c053-92fc-4293-a509-f1b4083c4c79/AFLNATION_x2.jpg"
+                },
+                {
+                    "customAttributes": [
+                        {
+                            "attrName": "brightcove_videoid",
+                            "attrValue": "6119925720001"
+                        },
+                        {
+                            "attrName": "streamURL",
+                            "attrValue": "https://aflliveradioshls349.ngcdn.telstra.com/afllive/aflradio_12/playlist.m3u8"
+                        }
+                    ],
+                    "endTime": "2020-02-21T11:00:00Z",
+                    "startTime": "2020-02-21T08:00:00Z",
+                    "streamId": "Triple M",
+                    "thumbnailURL": "https://resources.afl.com.au/afl/photo/2020/02/19/41a1bc02-f656-47bd-82c7-2da48b99faa9/triplem-rocks-footy-logo.png"
+                }
+            ],
+            "matchId": "CD_M20201010102",
+            "startTime": "2020-02-21T08:10:00Z",
+            "title": "Western Bulldogs v North Melbourne",
+            "videoStreams": [
+                {
+                    "customAttributes": [
+                        {
+                            "attrName": "imageURL",
+                            "attrValue": null
+                        }
+                    ],
+                    "endTime": "2020-02-21T11:10:00Z",
+                    "startTime": "2020-02-21T07:40:00Z",
+                    "streamId": "Fox Footy",
+                    "thumbnailURL": "https://resources.afl.com.au/afl/photo/2020/02/11/e427952e-20fd-4b2b-8461-3955b1a00e3b/FOXFOOTY_x2-2-.jpg"
+                },
+                {
+                    "customAttributes": [
+                        {
+                            "attrName": "entitlement",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "brightcove_videoid",
+                            "attrValue": "6116940884001"
+                        },
+                        {
+                            "attrName": "DVR",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "LiveApp",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "AFL Live Video",
+                            "attrValue": "AFL Live Video"
+                        },
+                        {
+                            "attrName": "sizeRestricted",
+                            "attrValue": "true"
+                        },
+                        {
+                            "attrName": "imageURL",
+                            "attrValue": "https://resources.afl.com.au/afl/photo/2020/02/19/85588232-d7a0-430c-92a7-9b58c78463e7/WB-v-NM.jpg"
+                        }
+                    ],
+                    "endTime": "2020-02-21T11:10:00Z",
+                    "startTime": "2020-02-21T07:40:00Z",
+                    "streamId": "AFL Live Pass",
+                    "thumbnailURL": "https://resources.afl.com.au/afl/photo/2020/02/11/20758dde-9b43-41c1-a087-695442a7f1a1/AFLLIVEPASS_x2-2-.jpg"
+                },
+                {
+                    "customAttributes": [],
+                    "endTime": "2020-02-21T11:00:00Z",
+                    "startTime": "2020-02-21T08:00:00Z",
+                    "streamId": "WatchAFL",
+                    "thumbnailURL": "https://resources.afl.com.au/afl/photo/2020/02/11/9871b833-1219-4ff6-97cf-e4fe5507b3ac/WATCHAFL_x2.jpg"
+                }
+            ]
+        }
+    ],
+    "pageInfo": {
+        "numEntries": 2,
+        "numPages": 1,
+        "page": 0,
+        "pageSize": 10
+    }
+}

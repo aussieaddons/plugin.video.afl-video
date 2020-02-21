@@ -1,0 +1,1381 @@
+{
+  "context" : "afl2019",
+  "androidMenu" : [ {
+    "value" : {
+      "menuUrl" : "afllive://?type=video",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/video_list@3x.png",
+      "title" : "Video",
+      "pageTitle" : "Video"
+    },
+    "id" : "video"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=matchCentre",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_matches@3x.png",
+      "title" : "Matches",
+      "pageTitle" : "Matches"
+    },
+    "id" : "matchCentre"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=stats",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_stats@3x.png",
+      "title" : "Stats",
+      "pageTitle" : "Stats"
+    },
+    "id" : "stats"
+  }, {
+    "value" : {
+      "menuUrl" : "https://womens.afl",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_womens@3x.png",
+      "title" : "AFL Women's",
+      "pageTitle" : "AFL Women's"
+    },
+    "id" : "womensFootyAd"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.afl.com.au/trade",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_trade@3x.png",
+      "title" : "Trade Hub",
+      "pageTitle" : "Trade Hub"
+    },
+    "id" : "trade"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.afl.com.au/draft",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_draft@3x.png",
+      "title" : "Draft Hub",
+      "pageTitle" : "Draft Hub"
+    },
+    "id" : "draft"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=matchCentre",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_calendar@3x.png",
+      "title" : "2020 AFL Premiership",
+      "pageTitle" : "2020 AFL Premiership"
+    },
+    "id" : "premiershipfixture"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=ladder",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_ladder@3x.png",
+      "title" : "Ladder",
+      "pageTitle" : "Ladder"
+    },
+    "id" : "ladder"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=matchups",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_matchups@3x.png",
+      "title" : "Compare",
+      "pageTitle" : "Compare"
+    },
+    "id" : "matchups"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=teamstats",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_teams@3x.png",
+      "title" : "Teams",
+      "pageTitle" : "Teams"
+    },
+    "id" : "teamStats"
+  }, {
+    "value" : null,
+    "id" : "separator1"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=youraccount",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_account@3x.png",
+      "title" : "My Account",
+      "pageTitle" : "My Account"
+    },
+    "id" : "youraccount"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.telstra.com.au/thanks/sport/afl",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_telstra@3x.png",
+      "title" : "Telstra Plus Tickets",
+      "pageTitle" : "Telstra Plus Tickets"
+    },
+    "id" : "thanks"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=notifications",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_notifications@3x.png",
+      "title" : "Notifications",
+      "pageTitle" : "Notifications"
+    },
+    "id" : "notifications"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=more",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_settings@3x.png",
+      "title" : "Settings",
+      "pageTitle" : "Settings"
+    },
+    "id" : "more"
+  }, {
+    "value" : {
+      "menuUrl" : "https://Crowdsupport.telstra.com.au/t5/AFL-Live/bd-p/AFL_Live",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_help@3x.png",
+      "title" : "24/7 Support",
+      "pageTitle" : "24/7 Support"
+    },
+    "id" : "support"
+  }, {
+    "value" : null,
+    "id" : "separator2"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.theaflstore.com.au/",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_shop@3x.png",
+      "title" : "Shop AFL",
+      "pageTitle" : "Shop AFL"
+    },
+    "id" : "shopAfl"
+  }, {
+    "value" : {
+      "menuUrl" : "http://m.afl.com.au/news/from-afl-hq.mobileapp",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_aflhq@3x.png",
+      "title" : "AFLHQ",
+      "pageTitle" : "AFLHQ"
+    },
+    "id" : "aflhq"
+  } ],
+  "articleStaticConfig" : [ {
+    "value" : {
+      "type" : "javascript",
+      "location" : "top",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/main.91d58dd6.js"
+    },
+    "id" : "topJsStatsPro"
+  }, {
+    "value" : {
+      "type" : "css",
+      "location" : "top",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/main.0b19f9e0.css"
+    },
+    "id" : "topCssStatsPro"
+  }, {
+    "value" : {
+      "type" : "css",
+      "location" : "top",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/article.css"
+    },
+    "id" : "topCssArticle"
+  }, {
+    "value" : {
+      "type" : "css",
+      "location" : "top",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/global.app.css"
+    },
+    "id" : "topCssGlobal"
+  }, {
+    "value" : {
+      "type" : "javascript",
+      "location" : "bottom",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/afl-env.js"
+    },
+    "id" : "bottomJsAflEnv"
+  }, {
+    "value" : {
+      "type" : "javascript",
+      "location" : "bottom",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/common.js"
+    },
+    "id" : "bottomJsCommon"
+  }, {
+    "value" : {
+      "type" : "javascript",
+      "location" : "bottom",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/common-foot-mobile-app.js"
+    },
+    "id" : "bottomJsCommonFootMobileApp"
+  }, {
+    "value" : {
+      "type" : "javascript",
+      "location" : "bottom",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/mobileApp.js"
+    },
+    "id" : "bottomJsMobileApp"
+  }, {
+    "value" : {
+      "type" : "javascript",
+      "location" : "bottom",
+      "url" : "https://www.afl.com.au/staticfile/AFL%20Tenant/AFL/Files/AppArticleFiles/ooyala-app-config.js"
+    },
+    "id" : "bottomJsOoyalaAppConfig"
+  } ],
+  "brandingBar" : [ {
+    "value" : {
+      "url" : "http://pubads.g.doubleclick.net/gampad/clk?id=5003846389&iu=/7414/app.ios.afl/stats",
+      "image" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/ISA",
+      "tracking" : "",
+      "backgroundColour" : "",
+      "opacity" : 0.95
+    },
+    "id" : "homeStatsPlayers"
+  }, {
+    "value" : {
+      "url" : "http://pubads.g.doubleclick.net/gampad/clk?id=4998592769&iu=/7414/app.ios.afl/ladder",
+      "image" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/wbfull",
+      "tracking" : "",
+      "backgroundColour" : "",
+      "opacity" : 0.95
+    },
+    "id" : "ladder"
+  }, {
+    "value" : {
+      "url" : "http://pubads.g.doubleclick.net/gampad/clk?id=5003844900&iu=/7414/app.ios.afl/matchcentre",
+      "image" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/mcdonaldsmc",
+      "tracking" : "",
+      "backgroundColour" : "",
+      "opacity" : 0.95
+    },
+    "id" : "matchCentre"
+  }, {
+    "value" : {
+      "url" : "http://pubads.g.doubleclick.net/gampad/clk?id=5003846389&iu=/7414/app.ios.afl/stats",
+      "image" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/ISA",
+      "tracking" : "",
+      "backgroundColour" : "",
+      "opacity" : 0.95
+    },
+    "id" : "matchUps"
+  }, {
+    "value" : {
+      "url" : "http://pubads.g.doubleclick.net/gampad/clk?id=5003844393&iu=/7414/app.ios.afl/fixtures",
+      "image" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/mcdonaldsmc",
+      "tracking" : "",
+      "backgroundColour" : "",
+      "opacity" : 0.95
+    },
+    "id" : "fixtures"
+  } ],
+  "general" : [ {
+    "value" : "CD_R201901427",
+    "id" : "statsProRoundId"
+  }, {
+    "value" : "90",
+    "id" : "premiumPreviewDuration"
+  }, {
+    "value" : "CD_S2019014",
+    "id" : "pinnacleSeason"
+  }, {
+    "value" : "Zha2IxOrpV-sPLqnCop1Lz0fZ5Gi",
+    "id" : "ooyalaPcode"
+  }, {
+    "value" : "30",
+    "id" : "appRatingMessageRepeatAfterDays"
+  }, {
+    "value" : "true",
+    "id" : "isPauseButtonVisible"
+  }, {
+    "value" : "false",
+    "id" : "isAuthenticationRequiredForRadio"
+  }, {
+    "value" : "false",
+    "id" : "isAuthenticationRequiredForPushNotification"
+  }, {
+    "value" : "true",
+    "id" : "isRegistrationSectionOnLoginPageVisible"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/54620_AFLVideoGenericThumbnailSmall.jpg",
+    "id" : "liveVideoDefaultThumbnail"
+  }, {
+    "value" : "e653500594a781dbc42026afe046762692966809",
+    "id" : "convivaCustomerKey"
+  }, {
+    "value" : "https://cws.conviva.com",
+    "id" : "convivaGatewayURL"
+  }, {
+    "value" : "true",
+    "id" : "playerProfileUseClubBackground"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/AFLLiveAppDefaultPlayerBackground.png",
+    "id" : "playerProfileDefaultBackground"
+  }, {
+    "value" : "https://womens.afl",
+    "id" : "womensMoreWidgetURL"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/aflw-promo-flat.jpg",
+    "id" : "womensCompAppImageURL"
+  }, {
+    "value" : "https://www.afl.com.au/trade",
+    "id" : "promoWidgetClickURL"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/TradeHubwidget_tile.jpg",
+    "id" : "promoWidgetImageURL"
+  }, {
+    "value" : "https://www.foxtelnow.com.au",
+    "id" : "foxtelPromoClickURL"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/FoxtelNow1024x84pixels@x2_R1.png",
+    "id" : "foxtelPromoImageURL"
+  }, {
+    "value" : "http://www.afl.com.au/news/trade/trade-talk.mobileapp",
+    "id" : "promoWidget2ClickURL"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/Trade_Talk.jpg",
+    "id" : "promoWidget2ImageURL"
+  }, {
+    "value" : "http://www.afl.com.au/news/trade/trade-tracker.mobileapp",
+    "id" : "promoWidget3ClickURL"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/Tradetrackerwidget_tile.jpg",
+    "id" : "promoWidget3ImageURL"
+  }, {
+    "value" : "6",
+    "id" : "videoLandingFeaturedLimit"
+  }, {
+    "value" : "Sorry, there is a problem playing this video. Please visit our Telstra 24x7 help site for assistance.",
+    "id" : "ooyalaErrorMessage"
+  }, {
+    "value" : "Access 24/7 Support",
+    "id" : "ooyalaErrorButtonLabel"
+  }, {
+    "value" : "https://crowdsupport.telstra.com.au/t5/AFL-Live/bd-p/AFL_Live",
+    "id" : "ooyalaErrorButtonURL"
+  }, {
+    "value" : "Distance,Speed,Sprinting,Work Rate",
+    "id" : "playerTrackerStatsDisplayOrder"
+  }, {
+    "value" : "Distance Overall,Distance High Speed,Speed Avg Attack,Speed Avg Defence",
+    "id" : "teamTrackerStatsDisplayOrder"
+  }, {
+    "value" : "5",
+    "id" : "preRollTimeout"
+  }, {
+    "value" : "true",
+    "id" : "sportingBetBrandingEnabled"
+  }, {
+    "value" : "BCpknonpremium",
+    "id" : "brightCovePK_nonpremium"
+  }, {
+    "value" : "BCpkpremium",
+    "id" : "brightCovePK_premium"
+  }, {
+    "value" : "foo",
+    "id" : "brightCoveAccountId"
+  } ],
+  "homeWidgets" : [ {
+    "value" : {
+      "customAttributes" : [ ],
+      "type" : "AdhocLiveStream"
+    },
+    "id" : "liveStreamingEventWidgetSmall"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "maxItems",
+        "attrValue" : "6"
+      } ],
+      "type" : "AdhocAudio"
+    },
+    "id" : "liveAudioWidget"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "tabletColumn",
+        "attrValue" : "1"
+      }, {
+        "attrName" : "title",
+        "attrValue" : "Widget Title"
+      }, {
+        "attrName" : "trackingCode",
+        "attrValue" : "code"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "children" : [ {
+          "customAttributes" : [ {
+            "attrName" : "",
+            "attrValue" : ""
+          }, {
+            "attrName" : "image",
+            "attrValue" : "null"
+          }, {
+            "attrName" : "iosAdsetId",
+            "attrValue" : "/7414/app.ios.afl/home/banner"
+          }, {
+            "attrName" : "androidAdsetId",
+            "attrValue" : "/7414/app.android.afl/home/banner"
+          }, {
+            "attrName" : "adtype",
+            "attrValue" : "banner"
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          }, {
+            "attrName" : "backgroundColour",
+            "attrValue" : "red"
+          } ],
+          "type" : "Advertisement"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "headlineOnImage",
+            "attrValue" : "enabled"
+          } ],
+          "type" : "HeroNews"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "title",
+            "attrValue" : "Marsh Wk1"
+          }, {
+            "attrName" : "tabletColumn",
+            "attrValue" : "1"
+          }, {
+            "attrName" : "url",
+            "attrValue" : "https://www.afl.com.au/matches/team-lineups?GameWeeks=1?webview=true"
+          }, {
+            "attrName" : "image",
+            "attrValue" : "https://resources.afl.com.au/afl/photo/2020/02/19/0234fcad-09a3-40b1-adfa-71abca421903/promo-tile-lineups.jpg"
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          }, {
+            "attrName" : "backgroundColour",
+            "attrValue" : "red"
+          } ],
+          "type" : "Promo"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "maxItems",
+            "attrValue" : "4"
+          }, {
+            "attrName" : "tabletColumn",
+            "attrValue" : "1"
+          }, {
+            "attrName" : "title",
+            "attrValue" : "Widget Title"
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          } ],
+          "children" : [ {
+            "customAttributes" : [ {
+              "attrName" : "tabletColumn",
+              "attrValue" : "1"
+            }, {
+              "attrName" : "url",
+              "attrValue" : "https://womens.afl"
+            }, {
+              "attrName" : "image",
+              "attrValue" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/promo-tile-aflw.jpg"
+            } ],
+            "type" : "Promo"
+          }, {
+            "customAttributes" : [ {
+              "attrName" : "tabletColumn",
+              "attrValue" : "1"
+            }, {
+              "attrName" : "url",
+              "attrValue" : "https://www.afl.com.au/fantasy?webview=true"
+            }, {
+              "attrName" : "image",
+              "attrValue" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/promo-tile-fantasy.jpg"
+            } ],
+            "type" : "Promo"
+          }, {
+            "customAttributes" : [ {
+              "attrName" : "tabletColumn",
+              "attrValue" : "1"
+            }, {
+              "attrName" : "url",
+              "attrValue" : "http://on.afl/state_of_origin_tickets?webview=true"
+            }, {
+              "attrName" : "image",
+              "attrValue" : "https://resources.afl.com.au/afl/photo/2020/01/20/6bdb9a28-4c36-4d97-bec1-aba07121305b/stateorigintickets_540x360.png"
+            }, {
+              "attrName" : "trackingCode",
+              "attrValue" : "code"
+            } ],
+            "type" : "Promo"
+          }, {
+            "customAttributes" : [ {
+              "attrName" : "tabletColumn",
+              "attrValue" : "1"
+            }, {
+              "attrName" : "hideMore",
+              "attrValue" : "false"
+            }, {
+              "attrName" : "url",
+              "attrValue" : "https://www.afl.com.au/bushfire-relief?webview=true"
+            }, {
+              "attrName" : "image",
+              "attrValue" : "https://resources.afl.com.au/afl/photo/2020/01/16/8505a8d5-4bec-45be-b865-cb1a4ddc0a28/Bushfire-Relief-Website_540x360.png"
+            }, {
+              "attrName" : "trackingCode",
+              "attrValue" : "code"
+            } ],
+            "type" : "Promo"
+          }, {
+            "customAttributes" : [ {
+              "attrName" : "tabletColumn",
+              "attrValue" : "1"
+            }, {
+              "attrName" : "url",
+              "attrValue" : "afllive://?type=stats"
+            }, {
+              "attrName" : "image",
+              "attrValue" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/promo-tile-statspro.jpg"
+            }, {
+              "attrName" : "trackingCode",
+              "attrValue" : "code"
+            }, {
+              "attrName" : "backgroundColour",
+              "attrValue" : "red"
+            } ],
+            "type" : "Promo"
+          } ],
+          "type" : "HorizontalCarousel"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "title",
+            "attrValue" : "Featured News"
+          }, {
+            "attrName" : "maxItems",
+            "attrValue" : "6"
+          }, {
+            "attrName" : "hideMore",
+            "attrValue" : "false"
+          } ],
+          "type" : "FeaturedNews"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "",
+            "attrValue" : ""
+          }, {
+            "attrName" : "image",
+            "attrValue" : "null"
+          }, {
+            "attrName" : "iosAdsetId",
+            "attrValue" : "/7414/app.ios.afl/home/mrec"
+          }, {
+            "attrName" : "androidAdsetId",
+            "attrValue" : "/7414/app.android.afl/home/mrec"
+          }, {
+            "attrName" : "adtype",
+            "attrValue" : "MREC"
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          }, {
+            "attrName" : "backgroundColour",
+            "attrValue" : "red"
+          } ],
+          "type" : "Advertisement"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "maxItems",
+            "attrValue" : "5"
+          }, {
+            "attrName" : "tabletColumn",
+            "attrValue" : "1"
+          }, {
+            "attrName" : "hideMore",
+            "attrValue" : "false"
+          }, {
+            "attrName" : "title",
+            "attrValue" : "Latest videos "
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          } ],
+          "type" : "FeaturedVideo"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "tabletColumn",
+            "attrValue" : "1"
+          }, {
+            "attrName" : "appImageURL",
+            "attrValue" : "https://s.afl.com.au/staticfile/AFL Tenant/AFLMobile/Static Files/aflw-promo-flat.jpg"
+          }, {
+            "attrName" : "iOSAppLink",
+            "attrValue" : "itms://itunes.apple.com/au/app/id1337745184?mt=8"
+          }, {
+            "attrName" : "androidAppLink",
+            "attrValue" : "com.afl.aflw.android"
+          }, {
+            "attrName" : "iosSchema",
+            "attrValue" : "yc-aflw-league://feature/HOME"
+          }, {
+            "attrName" : "androidSchema",
+            "attrValue" : "yc-league-aflw://feature/HOME"
+          } ],
+          "type" : "AppDownloadLink"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "maxItems",
+            "attrValue" : "3"
+          }, {
+            "attrName" : "tabletColumn",
+            "attrValue" : "1"
+          }, {
+            "attrName" : "hideMore",
+            "attrValue" : "false"
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          } ],
+          "type" : "MyTeam"
+        } ],
+        "type" : "container"
+      }, {
+        "customAttributes" : [ ],
+        "children" : [ {
+          "customAttributes" : [ {
+            "attrName" : "title",
+            "attrValue" : "News"
+          } ],
+          "type" : "FeaturedNews"
+        } ],
+        "type" : "container"
+      }, {
+        "customAttributes" : [ ],
+        "children" : [ {
+          "customAttributes" : [ {
+            "attrName" : "tabletColumn",
+            "attrValue" : "1"
+          }, {
+            "attrName" : "title",
+            "attrValue" : "Ladder"
+          }, {
+            "attrName" : "trackingCode",
+            "attrValue" : "code"
+          } ],
+          "type" : "Ladder"
+        } ],
+        "type" : "container"
+      } ],
+      "type" : "Waistband"
+    },
+    "id" : "waistbandWidget"
+  } ],
+  "identityUrls" : [ {
+    "value" : "https://id.telstra.com.au/register/aflgame",
+    "id" : "registration"
+  }, {
+    "value" : "https://signon.bigpond.com/federation/saml2?SPID=AFLMedia&furl=https%3A%2F%2Fid.afl.com.au%2Fsubscription",
+    "id" : "mySubscription"
+  }, {
+    "value" : "https://services.bigpond.com/rest/v1/AuthenticationService/authenticate",
+    "id" : "login"
+  } ],
+  "interstitial" : [ {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/cbus_interstitial.png",
+    "id" : "home"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/McDONALDS_INTERSTITIAL.png",
+    "id" : "matchCentre"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/cbus_interstitial.png",
+    "id" : "video"
+  }, {
+    "value" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/cbus_interstitial.png",
+    "id" : "news"
+  } ],
+  "iosMenu" : [ {
+    "value" : {
+      "menuUrl" : "afllive://?type=video",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/video_list@3x.png",
+      "title" : "Video",
+      "pageTitle" : "Video"
+    },
+    "id" : "video"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=matchCentre",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_matches@3x.png",
+      "title" : "Matches",
+      "pageTitle" : "Matches"
+    },
+    "id" : "matchCentre"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=stats",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_stats@3x.png",
+      "title" : "Stats",
+      "pageTitle" : "Stats"
+    },
+    "id" : "stats"
+  }, {
+    "value" : {
+      "menuUrl" : "https://womens.afl",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_womens@3x.png",
+      "title" : "AFL Women's",
+      "pageTitle" : "AFL Women's"
+    },
+    "id" : "womensFooty"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.afl.com.au/trade",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_trade@3x.png",
+      "title" : "Trade Hub",
+      "pageTitle" : "Trade Hub"
+    },
+    "id" : "trade"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.afl.com.au/draft",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_draft@3x.png",
+      "title" : "Draft Hub",
+      "pageTitle" : "Draft Hub"
+    },
+    "id" : "draft"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=matchCentre",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_calendar@3x.png",
+      "title" : "2020 AFL Premiership",
+      "pageTitle" : "2020 AFL Premiership"
+    },
+    "id" : "premiershipfixture"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=ladder",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_ladder@3x.png",
+      "title" : "Ladder",
+      "pageTitle" : "Ladder"
+    },
+    "id" : "ladder"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=players",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_players@3x.png",
+      "title" : "Players",
+      "pageTitle" : "Players"
+    },
+    "id" : "players"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=matchups",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_matchups@3x.png",
+      "title" : "Compare",
+      "pageTitle" : "Compare"
+    },
+    "id" : "matchups"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=teamstats",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_teams@3x.png",
+      "title" : "Teams",
+      "pageTitle" : "Teams"
+    },
+    "id" : "teamStats"
+  }, {
+    "value" : null,
+    "id" : "separator1"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=youraccount",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_account@3x.png",
+      "title" : "My Account",
+      "pageTitle" : "My Account"
+    },
+    "id" : "youraccount"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.telstra.com.au/thanks/sport/afl",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_telstra@3x.png",
+      "title" : "Telstra Plus Tickets",
+      "pageTitle" : "Telstra Plus Tickets"
+    },
+    "id" : "thanks"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=notifications",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_notifications@3x.png",
+      "title" : "Notifications",
+      "pageTitle" : "Notifications"
+    },
+    "id" : "notifications"
+  }, {
+    "value" : {
+      "menuUrl" : "afllive://?type=more",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_settings@3x.png",
+      "title" : "Settings",
+      "pageTitle" : "Settings"
+    },
+    "id" : "more"
+  }, {
+    "value" : {
+      "menuUrl" : "https://crowdsupport.telstra.com.au/t5/AFL-Live/bd-p/AFL_Live",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_help@3x.png",
+      "title" : "24/7 Support",
+      "pageTitle" : "24/7 Support"
+    },
+    "id" : "support"
+  }, {
+    "value" : null,
+    "id" : "separator2"
+  }, {
+    "value" : {
+      "menuUrl" : "https://www.theaflstore.com.au/",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_shop@3x.png",
+      "title" : "Shop AFL",
+      "pageTitle" : "Shop AFL"
+    },
+    "id" : "shopAfl"
+  }, {
+    "value" : {
+      "menuUrl" : "http://m.afl.com.au/news/from-afl-hq.mobileapp",
+      "menuIcon" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/ui_icon_aflhq@3x.png",
+      "title" : "AFLHQ",
+      "pageTitle" : "AFLHQ"
+    },
+    "id" : "aflhq"
+  } ],
+  "livePassFlow" : [ {
+    "value" : "*Includes FREE two-week trials for new customers only. Cancel anytime.",
+    "id" : "disclaimerLine1"
+  } ],
+  "meteringMessage" : [ {
+    "value" : "false",
+    "id" : "enabled"
+  }, {
+    "value" : "7",
+    "id" : "repeatAfterDays"
+  } ],
+  "playerKeyStats" : [ {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "tackles", "spoils", "interceptMarks", "dreamTeamPoints" ]
+    },
+    "id" : "KEY_DEFENDER"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "marks", "tackles", "metresGained", "dreamTeamPoints" ]
+    },
+    "id" : "MEDIUM_DEFENDER"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "marks", "tackles", "totalClearances", "dreamTeamPoints" ]
+    },
+    "id" : "MIDFIELDER"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "marks", "tackles", "totalClearances", "dreamTeamPoints" ]
+    },
+    "id" : "MIDFIELDER_FORWARD"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "marks", "tackles", "goals", "dreamTeamPoints" ]
+    },
+    "id" : "MEDIUM_FORWARD"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "goals", "goalAccuracy", "marks", "tackles", "dreamTeamPoints" ]
+    },
+    "id" : "KEY_FORWARD"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "totalClearances", "hitouts", "hitoutsToAdvantage", "dreamTeamPoints" ]
+    },
+    "id" : "RUCK"
+  }, {
+    "value" : {
+      "statOrder" : [ "disposals", "kicks", "handballs", "marks", "tackles", "goals", "dreamTeamPoints" ]
+    },
+    "id" : "DEFAULT"
+  } ],
+  "playerPositions" : [ {
+    "value" : "Key Forward",
+    "id" : "KEY_FORWARD"
+  }, {
+    "value" : "Midfielder",
+    "id" : "MIDFIELDER"
+  }, {
+    "value" : "Key Defender",
+    "id" : "KEY_DEFENDER"
+  }, {
+    "value" : "Ruck",
+    "id" : "RUCK"
+  }, {
+    "value" : "Midfielder Forward",
+    "id" : "MIDFIELDER_FORWARD"
+  }, {
+    "value" : "Medium Forward",
+    "id" : "MEDIUM_FORWARD"
+  }, {
+    "value" : "Medium Defender",
+    "id" : "MEDIUM_DEFENDER"
+  } ],
+  "playertracker" : [ {
+    "value" : "Track players around the ground with the Telstra Player Tracker. The tracker will run slightly behind the live broadcast and is intended for viewing instant replays of the action",
+    "id" : "infoMessage"
+  }, {
+    "value" : "New! Track players around the ground with the Telstra Player Tracker. The tracker will run slightly behind the live broadcast and is intended for viewing instant replays of the action",
+    "id" : "overlayMessage"
+  }, {
+    "value" : "true",
+    "id" : "overlayMessageEnabled"
+  }, {
+    "value" : "Some or all of the tracking data for this match may not be accurate.",
+    "id" : "degradedMessage"
+  }, {
+    "value" : "Tracking data will be shown as soon as it becomes available.",
+    "id" : "notAvailableMessage"
+  }, {
+    "value" : "GPS tracking is not available for this match",
+    "id" : "notPermittedMessage"
+  }, {
+    "value" : "CD_T00",
+    "id" : "notPermittedTeams"
+  }, {
+    "value" : "10",
+    "id" : "degradedThreshold"
+  }, {
+    "value" : "25",
+    "id" : "notAvailableThreshold"
+  }, {
+    "value" : "or not a Telstra Customer",
+    "id" : "teaserNonTelstraLabel"
+  }, {
+    "value" : "FIND OUT MORE",
+    "id" : "teaserButtonText"
+  }, {
+    "value" : "https://telstra.com",
+    "id" : "teaserClickUrl"
+  } ],
+  "preRoll" : [ {
+    "value" : {
+      "imageUrl" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/cbus_interstitial.png",
+      "iosAdsetId" : "5b596416dcb946f39af6ee862eafa6d5",
+      "iosAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.ios.afl/home&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "androidAdsetId" : "a3e7f903790641a4972258f672055e6f",
+      "androidAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.android.afl/home&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "backgroundColour" : "black"
+    },
+    "id" : "home"
+  }, {
+    "value" : {
+      "imageUrl" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/McDONALDS_INTERSTITIAL.png",
+      "iosAdsetId" : "ff12cc6200b94fc3a4797c5a3efe0ed6",
+      "iosAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.ios.afl/matchcentre&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "androidAdsetId" : "860f1d9b67264cf58330f8c548485488",
+      "androidAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.android.afl/matchcentre&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "backgroundColour" : "#000000"
+    },
+    "id" : "matchCentre"
+  }, {
+    "value" : {
+      "imageUrl" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/cbus_interstitial.png",
+      "iosAdsetId" : "488eda10273047ac966545a563c26c01",
+      "iosAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.ios.afl/video&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "androidAdsetId" : "491b0a23342f446181a3296494e9e047",
+      "androidAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.android.afl/video&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "backgroundColour" : "black"
+    },
+    "id" : "video"
+  }, {
+    "value" : {
+      "imageUrl" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/cbus_interstitial.png",
+      "iosAdsetId" : "5d3b519c976e465ca85939936978c51e",
+      "iosAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.ios.afl/news&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "androidAdsetId" : "dd6bc6e72c6e4c36ba4c18028ee9e9f6",
+      "androidAdTagURL" : "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7414/app.android.afl/news&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&ad_rule=1&cmsid=1503&vid=[oo_embedcode]",
+      "backgroundColour" : "black"
+    },
+    "id" : "news"
+  } ],
+  "socialMedia" : [ {
+    "value" : "http://m.afl.com.au/aflsocial.mobileapp",
+    "id" : "url"
+  } ],
+  "sportsPassFlow" : [ {
+    "value" : "true",
+    "id" : "enabled"
+  }, {
+    "value" : "true",
+    "id" : "mvp2Enabled"
+  }, {
+    "value" : "true",
+    "id" : "isTDILinkingEnabled"
+  }, {
+    "value" : "999",
+    "id" : "repeatAfterNumberOfLaunch"
+  }, {
+    "value" : "http://hub.telstra.com.au/sp2017-afl-app?tpUID={tpUID}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317",
+    "id" : "onePlacePortalUrl"
+  }, {
+    "value" : "http://hub.telstra.com.au/sp2017-afl-app?tpUID={tpUID}&type=manageMyAccount&offerId=a482eaad-9213-419c-ace2-65b7cae73317",
+    "id" : "onePlacePortalManageUrl"
+  }, {
+    "value" : "Telstra Mobile Customers get a free 2020 Live Pass to enjoy all matches live and data-free!",
+    "id" : "offerPageTitle"
+  }, {
+    "value" : "Not a Telstra Mobile Customer? Get a Live Pass from $4.99/week. Data charges apply.",
+    "id" : "offerPageSubtitle"
+  }, {
+    "value" : "By clicking through you are agreeing to Telstra's <a href=\"https://www.afl.com.au/mobile/terms\">Terms &amp; Conditions</a> and <a href=\"https://www.telstra.com.au/privacy/privacy-statement\">privacy agreement</a>",
+    "id" : "offerPageTCDescription"
+  }, {
+    "value" : "FREE FOR TELSTRA MOBILE CUSTOMERS",
+    "id" : "offerPageTelstraMobileCustomerButtonText"
+  }, {
+    "value" : "BUY OR RESTORE A LIVE PASS",
+    "id" : "offerPagePurchaseLivePassButtonText"
+  }, {
+    "value" : "NO THANKS",
+    "id" : "offerPageSkipButtonText"
+  }, {
+    "value" : "Congratulations! You've successfully activated your Live Pass",
+    "id" : "offerConfirmationPageTitle"
+  }, {
+    "value" : "Enjoy watching all matches live and data-free",
+    "id" : "offerConfirmationPageSubtitle"
+  }, {
+    "value" : "NOTE: Thank you for taking up the 2020 AFL Live Pass (Season Pass). As you currently have an active in-app subscription with your respective app store, to avoid further subscription charges, please cancel your in-app purchase by opening Settings on your device and selecting iTunes & App Store. Tap your Apple ID to sign in. From here you can update your subscriptions.",
+    "id" : "offerConfirmationPageAppleInAppSubscriptionNote"
+  }, {
+    "value" : "NOTE: Thank you for taking up the 2020 AFL Live Pass (Season Pass). As you currently have an active in-app subscription with your respective app store, to avoid further subscription charges, please cancel your in-app purchase by launching the Google Play Store app on your device. Select My Apps and you will be able to update your subscription details and options.",
+    "id" : "offerConfirmationPageAndroidInAppSubscriptionNote"
+  }, {
+    "value" : "NOTE: Any future payments associated with your previous AFL Live Pass will cease. Instead the 2017 AFL Live Pass (Season Pass) will be added expiring on <date>",
+    "id" : "offerConfirmationPageSDFSubscriptionNote"
+  }, {
+    "value" : "Need more information? Join the conversation at <a href=\"https://crowdsupport.telstra.com.au/t5/AFL-Live/bd-p/AFL_Live\">CrowdSupport</a>",
+    "id" : "offerConfirmationPageSupportDescription"
+  }, {
+    "value" : "CONTINUE",
+    "id" : "offerConfirmationPageContinueButtonText"
+  }, {
+    "value" : "Want more? Link your AFL Live Pass for great benefits",
+    "id" : "upgradeLivePassOfferPageTitle"
+  }, {
+    "value" : "By clicking through you are agreeing to Telstra's <a href=\"https://www.afl.com.au/mobile/terms\">Terms &amp; Conditions</a> and <a href=\"https://www.telstra.com.au/privacy/privacy-statement\">privacy agreement</a>",
+    "id" : "upgradeLivePassOfferPageTCDescription"
+  }, {
+    "value" : "LINK YOUR LIVE PASS",
+    "id" : "upgradeLivePassOfferPageUpgradeButtonText"
+  }, {
+    "value" : "SKIP",
+    "id" : "upgradeLivePassOfferPageSkipButtonText"
+  }, {
+    "value" : "Thanks for Logging In",
+    "id" : "upgradeLivePassConfirmationPageTitle"
+  }, {
+    "value" : "We will send you an email confirmation when your Live Pass is ready to be used on other devices.",
+    "id" : "upgradeLivePassConfirmationPageSubtitle"
+  }, {
+    "value" : "Need more information? Join the conversation at <a href=\"https://crowdsupport.telstra.com.au/t5/AFL-Live/bd-p/AFL_Live\">CrowdSupport</a>",
+    "id" : "upgradeLivePassConfirmationPageSupportDescription"
+  }, {
+    "value" : "CONTINUE",
+    "id" : "upgradeLivePassConfirmationPageAccessPremiumContentButtonText"
+  }, {
+    "value" : "45",
+    "id" : "promptIntervalDays"
+  } ],
+  "telstraThanks" : [ {
+    "value" : "free text string",
+    "id" : "buttonText"
+  }, {
+    "value" : "https://www.telstra.com.au/dummyLogo.jpeg",
+    "id" : "logo"
+  }, {
+    "value" : "false",
+    "id" : "enabled"
+  } ],
+  "upsellText" : [ {
+    "value" : "WATCH LIVE NOW FROM $5.49",
+    "id" : "iosUpsellText"
+  }, {
+    "value" : "WATCH LIVE NOW FROM $14.99",
+    "id" : "androidUpsellText"
+  } ],
+  "versions" : [ {
+    "value" : "7.0.0",
+    "id" : "minimumAFLIOSAppVersion"
+  }, {
+    "value" : "06.00.40857",
+    "id" : "minimumAFLAndroidAppVersion"
+  } ],
+  "videoWidgets" : [ {
+    "value" : {
+      "customAttributes" : [ ],
+      "type" : "VideoSearchBar"
+    },
+    "id" : "videoSearchBar"
+  }, {
+    "value" : {
+      "customAttributes" : [ ],
+      "childNames" : [ ],
+      "type" : "HeroCarousel"
+    },
+    "id" : "heroCarousel"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Featured Shows"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "ALL SHOWS"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "children" : [ {
+          "customAttributes" : [ {
+            "attrName" : "title",
+            "attrValue" : "Access All Areas"
+          }, {
+            "attrName" : "image",
+            "attrValue" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/whats-new-ladder.jpg"
+          }, {
+            "attrName" : "url",
+            "attrValue" : "http://www.afl.com.au/"
+          } ],
+          "type" : "Promo"
+        }, {
+          "customAttributes" : [ {
+            "attrName" : "title",
+            "attrValue" : "Last 2 Minutes"
+          }, {
+            "attrName" : "image",
+            "attrValue" : "https://s.afl.com.au/staticfile/AFL%20Tenant/AFLMobile/Static%20Files/whats-new-ladder.jpg"
+          }, {
+            "attrName" : "url",
+            "attrValue" : "http://www.afl.com.au/"
+          } ],
+          "type" : "Promo"
+        } ],
+        "type" : "HorizontalCarousel"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "featuredShowsSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Latest Videos"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "latestVideosSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Most Watched This Week"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "mostWatchedSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Continue Watching"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "continueWatchingSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ ],
+      "type" : "StatsPro"
+    },
+    "id" : "statsProWidget"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "AFL Originals"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoCollection"
+      }, {
+        "customAttributes" : [ ],
+        "type" : "SponsorBanner"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "aflOriginalsSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Videos By Club"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "children" : [ {
+          "customAttributes" : [ ],
+          "type" : "Promo"
+        }, {
+          "customAttributes" : [ ],
+          "type" : "Promo"
+        } ],
+        "type" : "HorizontalCarousel"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "videosByClubSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "AFL Fantasy"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "aflFantasySection"
+  }, {
+    "value" : {
+      "customAttributes" : [ ],
+      "type" : "AflTv"
+    },
+    "id" : "aflTvWidget"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Top Playlists"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "PlaylistsCarousel"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "topPlaylistsSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Match Analysis"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "matchAnalysisSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ ],
+      "type" : "HeroVideoItem"
+    },
+    "id" : "featuredHeroItem"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Footy Flashbacks"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "footyFlashbacksSection"
+  }, {
+    "value" : {
+      "customAttributes" : [ {
+        "attrName" : "title",
+        "attrValue" : "Draft Prospects"
+      }, {
+        "attrName" : "linkText",
+        "attrValue" : "MORE"
+      }, {
+        "attrName" : "linkUrl",
+        "attrValue" : "http://www.afl.com.au/"
+      } ],
+      "children" : [ {
+        "customAttributes" : [ ],
+        "childNames" : [ ],
+        "type" : "VideoList"
+      } ],
+      "type" : "PageSection"
+    },
+    "id" : "draftProspectsSection"
+  } ],
+  "wifiTimeoutMessage" : [ {
+    "value" : "false",
+    "id" : "enabled"
+  }, {
+    "value" : "20",
+    "id" : "timeout"
+  } ]
+}

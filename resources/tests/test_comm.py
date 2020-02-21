@@ -27,6 +27,8 @@ class CommTests(testtools.TestCase):
         cwd = os.path.join(os.getcwd(), 'resources/tests')
         with open(os.path.join(cwd, 'fakes/json/BC_EDGE.json'), 'rb') as f:
             self.BC_EDGE_JSON = io.BytesIO(f.read()).read()
+        with open(os.path.join(cwd, 'fakes/json/CONFIG.json'), 'rb') as f:
+            self.CONFIG_JSON = io.BytesIO(f.read()).read()
         with open(os.path.join(cwd, 'fakes/json/LIVEMEDIA.json'), 'rb') as f:
             self.LIVEMEDIA_JSON = io.BytesIO(f.read()).read()
         with open(os.path.join(cwd, 'fakes/json/RESULTS2019.json'), 'rb') as f:
@@ -75,6 +77,10 @@ class CommTests(testtools.TestCase):
     def test_get_bc_url(self):
         url = config.BC_EDGE_URL.format(account_id='foo', video_id='bar')
         responses.add(responses.GET, url, body=self.BC_EDGE_JSON, status=200)
+        responses.add(responses.POST, config.TOKEN_URL,
+                      body=json.dumps({'token': 'abcdef'}), status=200)
+        responses.add(responses.GET, config.CONFIG_URL, body=self.CONFIG_JSON,
+                      status=200)
         v = classes.Video()
         v.account_id = 'foo'
         v.video_id = 'bar'
@@ -94,17 +100,17 @@ class CommTests(testtools.TestCase):
                 video = comm.parse_json_video(video_asset)
                 if video:
                     video_list.append(video)
-        self.assertEqual(50, len(video_list))
-        self.assertEqual('GF: Tigers v Giants Q4', video_list[0].title)
+        self.assertEqual(4, len(video_list))
+        self.assertEqual('Marsh: Saints v Hawks Q4', video_list[0].title)
 
     @responses.activate
     def test_parse_json_live(self):
         responses.add(responses.GET, config.LIVE_LIST_URL,
                       body=self.LIVEMEDIA_JSON, status=200)
         listing = []
-        data = json.loads(comm.fetch_url(config.LIVE_LIST_URL))
+        data = json.loads(comm.fetch_url(config.LIVE_LIST_URL)).get('content')
         for video in data:
-            listing .append(video)
+            listing.append(video)
         self.assertEqual('AFL.TV', listing[0].get('title'))
 
     @responses.activate
@@ -114,8 +120,8 @@ class CommTests(testtools.TestCase):
         responses.add(responses.GET, config.VIDEO_LIST_URL,
                       body=self.VIDEOS_JSON, status=200)
         observed = comm.get_videos(config.VIDEO_LIST_URL)
-        self.assertEqual(50, len(observed))
-        self.assertEqual('GF: Tigers v Giants Q4', observed[0].title)
+        self.assertEqual(4, len(observed))
+        self.assertEqual('Marsh: Saints v Hawks Q4', observed[0].title)
 
     @responses.activate
     def test_get_seasons(self):
@@ -194,4 +200,4 @@ class CommTests(testtools.TestCase):
         responses.add(responses.GET, config.LIVE_LIST_URL,
                       body=self.LIVEMEDIA_JSON, status=200)
         observed = comm.get_live_videos()
-        self.assertEqual(1, len(observed))
+        self.assertEqual(2, len(observed))
