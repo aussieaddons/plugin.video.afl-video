@@ -239,3 +239,27 @@ def iap_help():
         'the bottom of the screen to find the mis-uuid token. Enter the 32 '
         'digit hexadecimal number that comes after "mis-uuid-" into the '
         'subscription token setting.')
+
+def get_media_auth_token(pai, video_id):
+    """
+    send our user token to get our embed token, including api key
+    """
+    url = config.MEDIA_AUTH_URL.format(code=video_id, pai=pai)
+
+    try:
+        data = comm.fetch_url(url, request_token=True)
+        json_data = json.loads(data)
+        if json_data.get('Fault'):
+            raise AussieAddonsException(
+                json_data.get('fault').get('faultstring'))
+        media_auth_token = json_data.get('urlSigningToken')
+    except requests.exceptions.HTTPError as e:
+        utils.log('Error getting embed token. '
+                  'Response: {0}'.format(e.response.text))
+        cache.delete('AFLTOKEN')
+        if e.response.status_code == 401:
+            raise AussieAddonsException('Login token has expired, '
+                                        'please try again.')
+        else:
+            raise e
+    return media_auth_token
