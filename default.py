@@ -3,9 +3,9 @@ import sys
 from aussieaddonscommon import utils
 
 from resources.lib import index
-from resources.lib import ooyalahelper
 from resources.lib import play
 from resources.lib import rounds
+from resources.lib import stream_auth
 from resources.lib import teams
 from resources.lib import videos
 
@@ -41,11 +41,11 @@ def main():
         play.play(params_str)
     elif 'action' in params:
         if params['action'] == 'cleartoken':
-            ooyalahelper.clear_token()
+            stream_auth.clear_token()
         elif params['action'] == 'sendreport':
             utils.user_report()
         elif params['action'] == 'iap_help':
-            ooyalahelper.iap_help()
+            stream_auth.iap_help()
         elif params['action'] == 'open_ia_settings':
             try:
                 import drmhelper

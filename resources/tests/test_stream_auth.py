@@ -8,8 +8,6 @@ try:
 except ImportError:
     import unittest.mock as mock
 
-from future.moves.urllib.parse import quote, quote_plus
-
 import responses
 
 import testtools
@@ -137,62 +135,3 @@ class StreamAuthTests(testtools.TestCase):
         with testtools.ExpectedException(stream_auth.AussieAddonsException,
                                          'mis-uuid token must*'):
             stream_auth.get_user_token()
-
-    @responses.activate
-    def test_get_embed_token(self):
-        responses.add(responses.GET,
-                      config.EMBED_TOKEN_URL.format(fakes.MIS_UUID, 'foo'),
-                      body=self.EMBED_TOKEN_JSON, status=200)
-        responses.add(responses.POST, config.TOKEN_URL,
-                      body=json.dumps({'token': 'abcdef'}), status=200)
-        observed = stream_auth.get_embed_token(fakes.MIS_UUID, 'foo')
-        self.assertEqual(quote('http://foobar.com/video'), observed)
-
-    @responses.activate
-    @mock.patch('resources.lib.stream_auth.addon',
-                fakes.FakeAddon(sub_type=1))
-    @mock.patch('resources.lib.stream_auth.cache.delete')
-    def test_get_embed_token_fail(self, mock_delete):
-        responses.add(responses.GET,
-                      config.EMBED_TOKEN_URL.format(fakes.MIS_UUID, 'foo'),
-                      body=self.EMBED_TOKEN_FAIL_JSON, status=400)
-        responses.add(responses.POST, config.TOKEN_URL,
-                      body=json.dumps({'token': 'abcdef'}), status=200)
-        with testtools.ExpectedException(stream_auth.AussieAddonsException,
-                                         'Stored login token*'):
-            stream_auth.get_embed_token(fakes.MIS_UUID, 'foo')
-        mock_delete.assert_called_with('AFLTOKEN')
-
-    @responses.activate
-    def test_get_secure_token(self):
-        responses.add(responses.GET, 'https://foo.bar/', body=self.AUTH_JSON,
-                      status=200)
-        observed = stream_auth.get_secure_token('https://foo.bar/',
-                                                 fakes.VIDEO_ID)
-        self.assertEqual(fakes.M3U8_URL_OOYALA, observed)
-
-    @responses.activate
-    def test_get_secure_token_fail_keyerror(self):
-        responses.add(responses.GET, 'https://foo.bar/',
-                      body=self.AUTH_FAILED_JSON,
-                      status=200)
-        self.assertRaises(stream_auth.AussieAddonsException,
-                          stream_auth.get_secure_token,
-                          'https://foo.bar/',
-                          fakes.VIDEO_ID)
-
-    @responses.activate
-    @mock.patch('resources.lib.stream_auth.cache.get')
-    def test_get_m3u8_playlist(self, mock_ticket):
-        mock_ticket.return_value = 'foobar123456'
-        auth_url = config.AUTH_URL.format(
-            config.PCODE, fakes.VIDEO_ID,
-            quote_plus('http://foobar.com/video'))
-        responses.add(responses.GET, auth_url,
-                      body=self.AUTH_JSON, status=200)
-        responses.add(responses.GET,
-                      config.EMBED_TOKEN_URL.format(fakes.MIS_UUID,
-                                                    fakes.VIDEO_ID),
-                      body=self.EMBED_TOKEN_JSON, status=200)
-        observed = stream_auth.get_m3u8_playlist(fakes.VIDEO_ID, '')
-        self.assertEqual(fakes.M3U8_URL_OOYALA, observed)

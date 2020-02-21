@@ -3,6 +3,8 @@ import json
 import time
 import xml.etree.ElementTree as ET
 
+from future.moves.urllib.parse import quote_plus
+
 from aussieaddonscommon import exceptions
 from aussieaddonscommon import session
 from aussieaddonscommon import utils
@@ -65,13 +67,28 @@ def update_token(sess):
 
 
 def get_bc_url(video):
+    config_data = json.loads(fetch_url(config.CONFIG_URL, request_token=True))
+
+    video.policy_key = [x for x in config_data['general'] if
+                        x.get('id') == 'brightCovePK_premium'][0].get('value')
+    video.account_id = [x for x in config_data['general'] if
+                        x.get('id') == 'brightCoveAccountId'][0].get('value')
+
+    if not video.policy_key:
+        raise Exception("Can't retrieve brightcove policy key for {0}".format(
+            video.account_id))
     data = fetch_url(config.BC_EDGE_URL.format(account_id=video.account_id,
                                                video_id=video.video_id),
                      headers={'BCOV-POLICY': video.policy_key})
     json_data = json.loads(data)
+    src = None
     for source in json_data.get('sources'):
         if source.get('type') == 'application/vnd.apple.mpegurl':
-            return source.get('src')
+            src = source.get('src')
+    if not src:
+        utils.log(json_data.get('sources'))
+        raise Exception('Unable to locate video source.')
+    return src
 
 
 def get_attr(attrs, key):
@@ -105,18 +122,7 @@ def parse_json_video(video_data):
         video.subscription_required = True
 
     # Look for 'national' stream (e.g. Foxtel)
-    video_id = get_attr(attrs, 'ooyala embed code')
-
-    if not video_id:
-        # Look for configured state stream
-        state = ADDON.getSetting('STATE')
-        video_id = get_attr(attrs, 'state-' + state)
-
-    if not video_id:
-        # Fall back to the VIC stream
-        video_id = get_attr(attrs, 'state-VIC')
-
-    video.ooyalaid = video_id
+    video.video_id = get_attr(attrs, 'brightcove video id')
     video.live = False
     return video
 
@@ -127,42 +133,40 @@ def parse_json_live(video_data):
     Parse the JSON data for live match and construct a video object from it
     for a list of videos
     """
-    video_stream = video_data.get('videoStream')
+    streams = video_data.get('videoStreams')
+    video_stream = None
+    for stream in streams:
+        for attrib in stream.get('customAttributes'):
+            if attrib.get('attrName') == 'brightcove_videoid':
+                video_stream = stream
+                break
+        if video_stream:
+            break
     if not video_stream:
         return
 
     attrs = video_stream.get('customAttributes')
-    if not attrs:
-        return
 
     video = classes.Video()
     title = utils.ensure_ascii(video_data.get('title'))
     video.title = '[COLOR green][LIVE NOW][/COLOR] {0}'.format(title)
-    video.thumbnail = video_stream.get('thumbnailURL')
+    video.thumbnail = get_attr(attrs, 'imageURL')
 
-    if video_stream.get('entitlement'):
+    if get_attr(attrs, 'entitlement') == 'true':
         video.subscription_required = True
 
     # Look for 'national' stream (e.g. Foxtel)
-    video_id = get_attr(attrs, 'ooyala embed code')
-
-    if not video_id:
-        # Look for configured state stream
-        state = ADDON.getSetting('STATE')
-        video_id = get_attr(attrs, 'state-' + state)
-
-    if not video_id:
-        # Fall back to the VIC stream
-        video_id = get_attr(attrs, 'state-VIC')
-
+    video_id = get_attr(attrs, 'brightcove_videoid')
+    utils.log(video_id)
     if not video_id:
         utils.log('Unable to find video ID from stream data: {0}'.format(
                   video_data))
         raise exceptions.AussieAddonsException('Unable to find video '
                                                'ID from stream data.')
 
-    video.ooyalaid = video_id
+    video.video_id = video_id
     video.live = True
+    video.type = 'B'
     return video
 
 
@@ -207,7 +211,7 @@ def get_live_videos():
     video_list = []
     data = fetch_url(config.LIVE_LIST_URL, request_token=True)
     try:
-        video_data = json.loads(data)
+        video_data = json.loads(data).get('content')
     except ValueError:
         utils.log('Failed to load JSON. Data is: {0}'.format(data))
         raise Exception('Failed to retrieve video data. Service may be '
@@ -375,3 +379,22 @@ def find_aflw_live_matches():
             if watch_button.find('Title').text != 'WATCH REPLAY':
                 listing.append(tree)
     return listing
+
+
+def get_stream_url(video, embed_token):
+    src = get_bc_url(video)
+    if not embed_token:
+        return str(src)
+    else:
+        src = sign_url(src, embed_token)
+    return src
+
+
+def sign_url(url, media_auth_token):
+    headers = {'authorization': 'JWT {0}'.format(media_auth_token)}
+    data = json.loads(
+        fetch_url(config.SIGN_URL.format(quote_plus(url)), headers=headers))
+    if data.get('message') == 'SUCCESS':
+        return str(data.get('url'))
+    else:
+        raise Exception('error in signing url')

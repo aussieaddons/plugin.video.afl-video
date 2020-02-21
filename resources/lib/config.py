@@ -34,9 +34,15 @@ SEASONS_URL = 'https://api.afl.com.au/cfs/afl/seasons'
 FIXTURE_URL = 'https://api.afl.com.au/cfs/afl/fixturesAndResults/season/{0}/round/{1}'
 
 # API URL for current live videos
-LIVE_LIST_URL = 'http://api.afl.com.au/cfs/afl/liveMedia?org=AFL&view=full'
+LIVE_LIST_URL = 'https://aflapi.afl.com.au/broadcasting/afl/live/media'
 
 VIDEO_LIST_URL = 'https://api.afl.com.au/cfs/afl/videos'
+
+SIGN_URL = 'https://api.afl.com.au/keyserver/urlSigning?url={0}'
+
+MEDIA_AUTH_URL = 'http://api.sub.afl.com.au/cfs-premium/users/{pai}/token?embedCode={code}'
+
+CONFIG_URL = 'https://api.afl.com.au/cfs/afl/v3/appConfig?context=afl2019'
 
 # Bigpond authentication URL
 LOGIN_URL = 'https://services.bigpond.com/rest/v1/AuthenticationService/authenticate'

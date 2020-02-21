@@ -6,7 +6,7 @@ import drmhelper
 
 from resources.lib import classes
 from resources.lib import comm
-from resources.lib import ooyalahelper
+from resources.lib import stream_auth
 
 import xbmcgui
 
@@ -25,18 +25,16 @@ def play(url):
                     'the upcoming schedule. Please check back once the match '
                     'has started. Playable matches will have "LIVE NOW" in '
                     'green next to the title.')
-        if 'ooyalaid' in params:
-            login_token = None
+        if v.live == 'True':
+            media_auth_token = None
             if params.get('subscription_required') == 'True':
-                login_token = ooyalahelper.get_user_token()
-
-            stream_data = ooyalahelper.get_m3u8_playlist(params['ooyalaid'],
-                                                         v.live, login_token)
+                login_token = stream_auth.get_user_token()
+                media_auth_token = stream_auth.get_media_auth_token(
+                    login_token, v.video_id)
+            stream_url = comm.get_stream_url(v, media_auth_token)
+            stream_data = {'stream_url': str(stream_url)}
         else:
-            if v.type == 'B':
-                stream_url = comm.get_bc_url(v)
-            else:
-                stream_url = v.get_url()
+            stream_url = comm.get_bc_url(v)
             stream_data = {'stream_url': str(stream_url)}
 
         listitem = xbmcgui.ListItem(label=v.get_title(),
@@ -44,7 +42,7 @@ def play(url):
                                     thumbnailImage=v.get_thumbnail(),
                                     path=stream_data.get('stream_url'))
 
-        inputstream = drmhelper.check_inputstream(drm=v.live)
+        inputstream = drmhelper.check_inputstream(drm=False)
         if not inputstream:
             utils.dialog_message(
                 'Failed to play stream. Please visit our website at '
