@@ -52,10 +52,6 @@ msgctxt "#30008"
 msgid "Inputstream.adapive settings (video quality)"
 msgstr ""
 
-msgctxt "#30009"
-msgid "State"
-msgstr ""
-
 msgctxt "#30010"
 msgid "Remove Stored Login Token"
 msgstr ""
