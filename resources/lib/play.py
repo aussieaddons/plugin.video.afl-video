@@ -49,11 +49,11 @@ def play(url):
                 'http://aussieaddons.com/addons/afl/ for more '
                 'information.')
             return
-
-        listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
-        listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
-        listitem.setProperty('inputstream.adaptive.license_key',
-                             stream_data.get('stream_url'))
+        if v.live != 'True':
+            listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
+            listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
+            listitem.setProperty('inputstream.adaptive.license_key',
+                                 stream_data.get('stream_url'))
         listitem.addStreamInfo('video', v.get_kodi_stream_info())
         listitem.setInfo('video', v.get_kodi_list_item())
 
