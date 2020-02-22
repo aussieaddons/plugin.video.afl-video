@@ -50,22 +50,10 @@ def play(url):
                 'information.')
             return
 
-        widevine_url = stream_data.get('widevine_url')
-
-        if inputstream and (not v.live or not widevine_url):
-            listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
-            listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
-            listitem.setProperty('inputstream.adaptive.license_key',
-                                 stream_data.get('stream_url'))
-        elif v.live:
-            listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
-            listitem.setProperty('inputstream.adaptive.manifest_type', 'mpd')
-            listitem.setProperty('inputstream.adaptive.license_type',
-                                 'com.widevine.alpha')
-            listitem.setProperty('inputstream.adaptive.license_key',
-                                 widevine_url +
-                                 '|Content-Type=application%2F'
-                                 'x-www-form-urlencoded|A{SSM}|')
+        listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
+        listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
+        listitem.setProperty('inputstream.adaptive.license_key',
+                             stream_data.get('stream_url'))
         listitem.addStreamInfo('video', v.get_kodi_stream_info())
         listitem.setInfo('video', v.get_kodi_list_item())
 
