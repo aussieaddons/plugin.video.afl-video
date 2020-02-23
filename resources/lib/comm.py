@@ -123,6 +123,11 @@ def parse_json_video(video_data):
 
     # Look for 'national' stream (e.g. Foxtel)
     video.video_id = get_attr(attrs, 'brightcove video id')
+    if video.video_id:
+        video.type = 'B'
+    else:
+        video.video_id = get_attr(attrs, 'ooyala embed code')
+        video.type = 'O'
     video.live = False
     return video
 
