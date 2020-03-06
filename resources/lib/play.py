@@ -1,4 +1,5 @@
 import sys
+from distutils.version import LooseVersion
 
 from aussieaddonscommon import utils
 
@@ -55,13 +56,25 @@ def play(url):
 
         else:
             drm_helper = drmhelper.helper.DRMHelper()
-            inputstream_adaptive = drm_helper.check_inputstream(drm=False)
-            if not inputstream_adaptive:
-                utils.dialog_message(
-                    'Failed to play stream. Please visit our website at '
-                    'http://aussieaddons.com/addons/afl/ for more '
-                    'information.')
-                return
+            addon = drm_helper.get_addon()
+            if addon:
+                ia_ver = addon.getAddonInfo('version')
+                kodi_ver = utils.get_kodi_major_version()
+                ia_capable = False
+                if kodi_ver == 18:
+                    if LooseVersion(ia_ver) >= LooseVersion('2.4.3'):
+                        ia_capable = True
+                elif kodi_ver == 19:
+                    if LooseVersion(ia_ver) >= LooseVersion('2.5.4'):
+                        ia_capable = True
+                if ia_capable:
+                    listitem.setProperty('inputstreamaddon',
+                                         'inputstream.adaptive')
+                    listitem.setProperty('inputstream.adaptive.manifest_type',
+                                         'hls')
+                    listitem.setProperty('inputstream.adaptive.license_key',
+                                         stream_data.get('stream_url'))
+
         listitem.addStreamInfo('video', v.get_kodi_stream_info())
         listitem.setInfo('video', v.get_kodi_list_item())
 
