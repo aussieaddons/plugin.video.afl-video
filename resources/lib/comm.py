@@ -142,7 +142,8 @@ def parse_json_live(video_data):
     video_stream = None
     for stream in streams:
         for attrib in stream.get('customAttributes'):
-            if attrib.get('attrName') == 'brightcove_videoid':
+            if attrib.get('attrName') in ['brightcove_videoid',
+                                          'brightcove_videoid_VIC']:
                 video_stream = stream
                 break
         if video_stream:
@@ -162,7 +163,8 @@ def parse_json_live(video_data):
 
     # Look for 'national' stream (e.g. Foxtel)
     video_id = get_attr(attrs, 'brightcove_videoid')
-    utils.log(video_id)
+    if not video_id:
+        video_id = get_attr(attrs, 'brightcove_videoid_VIC')
     if not video_id:
         utils.log('Unable to find video ID from stream data: {0}'.format(
                   video_data))

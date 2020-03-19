@@ -42,7 +42,7 @@ class PlayTests(testtools.TestCase):
 
     @responses.activate
     @mock.patch('resources.lib.stream_auth.addon.getSetting')
-    @mock.patch.object(drmhelper.helper.DRMHelper, 'check_inputstream')
+    @mock.patch.object(drmhelper.helper.DRMHelper, 'get_addon')
     @mock.patch('resources.lib.stream_auth.cache.get')
     @mock.patch('xbmcgui.ListItem')
     @mock.patch('sys.argv',
@@ -76,7 +76,7 @@ class PlayTests(testtools.TestCase):
                       status=200)
         mock_ticket.return_value = 'foobar123456'
         mock_listitem.side_effect = fakes.FakeListItem
-        mock_drm.return_value = True
+        mock_drm.return_value = False
         mock_sub_type.return_value = '0'
         mock_plugin = fakes.FakePlugin()
         with mock.patch.dict('sys.modules', xbmcplugin=mock_plugin):
