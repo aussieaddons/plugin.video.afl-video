@@ -35,13 +35,8 @@ def play(url):
             stream_url = comm.get_stream_url(v, media_auth_token)
             stream_data = {'stream_url': str(stream_url)}
         else:
-            if v.type == 'B':
-                stream_url = comm.get_bc_url(v)
-                stream_data = {'stream_url': str(stream_url)}
-            elif v.type == 'O':
-                stream_data = stream_auth.get_m3u8_playlist(
-                    v.video_id,
-                    stream_auth.get_user_token())
+            stream_url = comm.get_bc_url(v)
+            stream_data = {'stream_url': str(stream_url)}
 
         thumb = v.get_thumbnail()
         listitem = xbmcgui.ListItem(label=v.get_title(),
@@ -81,5 +76,4 @@ def play(url):
         xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem=listitem)
 
     except Exception:
-        raise
         utils.handle_error('Unable to play video')

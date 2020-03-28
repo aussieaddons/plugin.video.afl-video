@@ -86,7 +86,7 @@ def get_bc_url(video):
         if source.get('type') == 'application/vnd.apple.mpegurl':
             src = source.get('src')
     if not src:
-        utils.log(json_data.get('sources'))
+        utils.log(json.dumps(json_data.get('sources')))
         raise Exception('Unable to locate video source.')
     return src
 
@@ -126,7 +126,7 @@ def parse_json_video(video_data):
     if video.video_id:
         video.type = 'B'
     else:
-        video.video_id = get_attr(attrs, 'ooyala embed code')
+        video.video_id = 'ref:{0}'.format(get_attr(attrs, 'ooyala embed code'))
         video.type = 'O'
     video.live = False
     return video
