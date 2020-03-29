@@ -83,8 +83,11 @@ def get_bc_url(video):
     json_data = json.loads(data)
     src = None
     for source in json_data.get('sources'):
-        if source.get('type') == 'application/vnd.apple.mpegurl':
+        if source.get('type') in ['application/vnd.apple.mpegurl',
+                                  'application/x-mpegURL']:
             src = source.get('src')
+            if src.startswith('https'):
+                break
     if not src:
         utils.log(json.dumps(json_data.get('sources')))
         raise Exception('Unable to locate video source.')
