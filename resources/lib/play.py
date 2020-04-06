@@ -27,6 +27,7 @@ def play(url):
                     'the upcoming schedule. Please check back once the match '
                     'has started. Playable matches will have "LIVE NOW" in '
                     'green next to the title.')
+            return
         if live:
             media_auth_token = None
             if params.get('subscription_required') == 'True':
