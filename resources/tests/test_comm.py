@@ -52,6 +52,7 @@ class CommTests(testtools.TestCase):
         with open(os.path.join(cwd, 'fakes/xml/AFLW_SCORE.xml'), 'rb') as f:
             self.AFLW_SCORE_XML = io.BytesIO(f.read()).read()
 
+    @mock.patch('resources.lib.comm.get_tz_delta', lambda: 11)
     def test_get_airtime(self):
         ts = '2020-03-19T08:25:00.000+0000'
         expected = 'Thursday 19 Mar @ 7:25 PM'

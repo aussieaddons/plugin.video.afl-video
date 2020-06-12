@@ -258,9 +258,12 @@ def get_media_auth_token(pai, video_id):
         utils.log('Error getting embed token. '
                   'Response: {0}'.format(e.response.text))
         cache.delete('AFLTOKEN')
-        if e.response.status_code == 401:
+        if e.response.status_code in [400, 401]:
             raise AussieAddonsException('Login token has expired, '
                                         'please try again.')
+        elif e.response.status_code == 404:
+            raise AussieAddonsException(
+                'Unknown error, please wait a few moments and try again.')
         else:
             raise e
     return media_auth_token

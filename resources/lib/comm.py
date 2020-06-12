@@ -285,13 +285,18 @@ def get_upcoming():
     return listing
 
 
+def get_tz_delta():
+    delta = (time.mktime(time.localtime()) -
+             time.mktime(time.gmtime())) / 3600
+    if time.localtime().tm_isdst:
+        delta += 1
+    return delta
+
+
 def get_airtime(timestamp, aflw=False):
     """Convert timestamp to nicely formatted local time"""
     try:
-        delta = ((time.mktime(time.localtime()) -
-                 time.mktime(time.gmtime())) / 3600)
-        if time.localtime().tm_isdst:
-            delta += 1
+        delta = get_tz_delta()
         ts_format = "%Y-%m-%dT%H:%M:%S.000+0000"
         if aflw:
             ts_format = ts_format.replace('.000+0000', 'Z')
