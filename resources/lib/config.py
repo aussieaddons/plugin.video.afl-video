@@ -40,7 +40,7 @@ VIDEO_LIST_URL = 'https://api.afl.com.au/cfs/afl/videos'
 
 SIGN_URL = 'https://api.afl.com.au/keyserver/urlSigning?url={0}'
 
-MEDIA_AUTH_URL = 'http://api.sub.afl.com.au/cfs-premium/users/{pai}/token?embedCode={code}'
+MEDIA_AUTH_URL = 'https://api.sub.afl.com.au/cfs-premium/users/{pai}/token?embedCode={code}'
 
 CONFIG_URL = 'https://api.afl.com.au/cfs/afl/v3/appConfig?context=afl2019'
 
@@ -48,10 +48,10 @@ CONFIG_URL = 'https://api.afl.com.au/cfs/afl/v3/appConfig?context=afl2019'
 LOGIN_URL = 'https://services.bigpond.com/rest/v1/AuthenticationService/authenticate'
 
 # This URL returns our user ID after authentication
-SESSION_URL = 'http://api.sub.afl.com.au/cfs-premium/users/session?sessionId={0}'
+SESSION_URL = 'https://api.sub.afl.com.au/cfs-premium/users/session?sessionId={0}'
 
 # URL to retrieve Ooyala embed token from
-EMBED_TOKEN_URL = 'http://api.sub.afl.com.au/cfs-premium/users/{0}/token?embedCode={1}'
+EMBED_TOKEN_URL = 'https://api.sub.afl.com.au/cfs-premium/users/{0}/token?embedCode={1}'
 
 # URL to send our embed token and retrieve playlist
 AUTH_URL = 'http://player.ooyala.com/sas/player_api/v1/authorization/embed_code/{0}/{1}?device=html5&domain=http://www.ooyala.com&supportedFormats=m3u8,dash'
@@ -80,7 +80,7 @@ AFLW_LONG_URL = 'https://app-league-aflw.yinzcam.com/V1/Media/LongList?carrier=&
 
 # New auth config for 2019
 
-AFL_LOGIN_URL = 'http://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
+AFL_LOGIN_URL = 'https://api.sub.afl.com.au/cfs-premium/users?paymentMethod=ONE_PLACE'
 
 SIGNON_HEADERS = {'Connection': 'keep-alive',
                   'Cache-Control': 'max-age=0',
@@ -98,7 +98,7 @@ OLD_OFFERS_URL = 'https://api.telstra.com/v1/media-products/catalogues/media/off
 
 OFFERS_URL = 'https://tapi.telstra.com/v1/media-products/catalogues/media/offers?category=afl'
 
-HUB_URL = 'http://hub.telstra.com.au/sp2017-afl-app'
+HUB_URL = 'https://hub.telstra.com.au/sp2017-afl-app'
 
 MEDIA_ORDER_HEADERS = {'Content-Type': 'application/json',
                        'Accept': 'application/json, text/plain, */*',
@@ -113,13 +113,13 @@ OLD_MEDIA_ORDER_URL = 'https://api.telstra.com/v1/media-commerce/orders'
 
 ENTITLEMENTS_URL = 'https://tapi.telstra.com/v1/media-entitlements/entitlements?idp=TDI&tenantId=afl'
 
-SUBSCRIPTIONS_URL = 'http://api.sub.afl.com.au/cfs-premium/users/{0}/subscriptions'
+SUBSCRIPTIONS_URL = 'https://api.sub.afl.com.au/cfs-premium/users/{0}/subscriptions'
 
 MEDIA_ORDER_URL = 'https://tapi.telstra.com/v1/media-commerce/orders'
 
 MEDIA_ORDER_JSON = '{{"serviceId":"{0}","serviceType":"MSISDN","offer":{{"id":"{1}"}},"pai":"{2}"}}'
 
-SPORTSPASS_URL = 'http://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
+SPORTSPASS_URL = 'https://hub.telstra.com.au/sp2017-afl-app?tpUID={0}&type=SportPassConfirmation&offerId=a482eaad-9213-419c-ace2-65b7cae73317'
 
 MYID_AUTHORIZATION_URL = 'https://myid.telstra.com/identity/as/authorization.oauth2'
 
