@@ -1,0 +1,59 @@
+{
+    "account_id": "6057984922001",
+    "ad_keys": null,
+    "created_at": "2019-11-18T07:51:12.818Z",
+    "cue_points": [],
+    "custom_fields": {
+        "asset_ref": "462750",
+        "channel": "/Category/Sport/AFL",
+        "competition": "AFL Premiership",
+        "content_provider": "Chief",
+        "country_rights": "AU NZ Only",
+        "match_champion_id": "CD_M20120141403",
+        "program_category": "Match Replays",
+        "program_type": "Matches",
+        "round_champion_id": "CD_R201201414",
+        "round_name": "Round 14",
+        "season_champion_id": "CD_S2012014",
+        "season_name": "AFL Premiership 2012",
+        "team": "RICH,ADEL"
+    },
+    "description": "1st quarter: Adelaide v Richmond at AAMI Stadium",
+    "duration": 1967640,
+    "economics": "AD_SUPPORTED",
+    "id": "6105361132001",
+    "link": null,
+    "long_description": "1st quarter: Adelaide v Richmond at AAMI Stadium",
+    "name": "Rd14 Adel v Rich (Q1)",
+    "offline_enabled": false,
+    "poster": "https://foo.bar/image.jpg",
+    "poster_sources": [
+        {
+            "src": "https://foo.bar/image.jpg"
+        }
+    ],
+    "published_at": "2019-11-18T07:51:12.832Z",
+    "reference_id": "dheWxjcTqv3oi3OjwhnL3bb_tOqSj414",
+    "sources": [
+        {
+            "asset_id": "6105360602001",
+            "avg_bitrate": null,
+            "codec": "H264",
+            "container": "MP4",
+            "duration": 1967640,
+            "height": null,
+            "size": 0,
+            "src": "https://foo.bar/video.mp4",
+            "width": null
+        }
+    ],
+    "tags": [],
+    "text_tracks": [],
+    "thumbnail": "https://foo.bar/image.jpg",
+    "thumbnail_sources": [
+        {
+            "src": "https://foo.bar/image.jpg"
+        }
+    ],
+    "updated_at": "2020-04-07T02:12:16.462Z"
+}

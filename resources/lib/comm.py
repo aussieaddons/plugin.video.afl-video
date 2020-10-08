@@ -88,6 +88,11 @@ def get_bc_url(video):
             src = source.get('src')
             if src.startswith('https'):
                 break
+    if not src:  # try for older mp4 videos
+        for source in json_data.get('sources'):
+            if source.get('container') == 'MP4':
+                src = source.get('src')
+                break
     if not src:
         utils.log(json.dumps(json_data.get('sources')))
         raise Exception('Unable to locate video source.')

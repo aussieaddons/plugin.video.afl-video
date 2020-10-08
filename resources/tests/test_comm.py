@@ -27,6 +27,8 @@ class CommTests(testtools.TestCase):
         cwd = os.path.join(os.getcwd(), 'resources/tests')
         with open(os.path.join(cwd, 'fakes/json/BC_EDGE.json'), 'rb') as f:
             self.BC_EDGE_JSON = io.BytesIO(f.read()).read()
+        with open(os.path.join(cwd, 'fakes/json/BC_EDGE_2012.json'), 'rb') as f:
+            self.BC_EDGE_2012_JSON = io.BytesIO(f.read()).read()
         with open(os.path.join(cwd, 'fakes/json/CONFIG.json'), 'rb') as f:
             self.CONFIG_JSON = io.BytesIO(f.read()).read()
         with open(os.path.join(cwd, 'fakes/json/LIVEMEDIA.json'), 'rb') as f:
@@ -87,6 +89,22 @@ class CommTests(testtools.TestCase):
         v.video_id = 'bar'
         observed = comm.get_bc_url(v)
         expected = 'https://foo.bar/index.m3u8'
+        self.assertEqual(expected, observed)
+
+    @responses.activate
+    def test_get_bc_url_2012(self):
+        url = config.BC_EDGE_URL.format(account_id='foo', video_id='bar')
+        responses.add(responses.GET, url, body=self.BC_EDGE_2012_JSON,
+                      status=200)
+        responses.add(responses.POST, config.TOKEN_URL,
+                      body=json.dumps({'token': 'abcdef'}), status=200)
+        responses.add(responses.GET, config.CONFIG_URL, body=self.CONFIG_JSON,
+                      status=200)
+        v = classes.Video()
+        v.account_id = 'foo'
+        v.video_id = 'bar'
+        observed = comm.get_bc_url(v)
+        expected = 'https://foo.bar/video.mp4'
         self.assertEqual(expected, observed)
 
     @responses.activate
