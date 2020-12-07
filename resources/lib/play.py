@@ -45,6 +45,7 @@ def play(url):
         listitem.setArt({'icon': thumb, 'thumb': thumb})
 
         if not live:
+            listitem.setProperty('inputstream', 'inputstream.adaptive')
             listitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
             listitem.setProperty('inputstream.adaptive.manifest_type', 'hls')
             listitem.setProperty('inputstream.adaptive.license_key',
@@ -65,6 +66,8 @@ def play(url):
                         ia_capable = True
                 if ia_capable:
                     listitem.setProperty('inputstreamaddon',
+                                         'inputstream.adaptive')
+                    listitem.setProperty('inputstream',
                                          'inputstream.adaptive')
                     listitem.setProperty('inputstream.adaptive.manifest_type',
                                          'hls')
