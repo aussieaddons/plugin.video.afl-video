@@ -337,7 +337,7 @@ def get_aflw_upcoming():
             title = ('[COLOR red]AFLW:[/COLOR] '
                      '{0} vs {1} - {2}')
             v.title = title.format(home, away, airtime)
-            v.dummy = True
+            v.isdummy = True
             listing.append(v)
     return listing
 
