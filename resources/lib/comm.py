@@ -326,6 +326,8 @@ def get_aflw_upcoming():
 
     for elem in tree.findall("Day"):
         for subelem in elem.findall("Game"):
+            if subelem.find('GameState') is None:
+                continue
             if subelem.find('GameState').text == 'COMPLETE':
                 continue
             v = classes.Video()

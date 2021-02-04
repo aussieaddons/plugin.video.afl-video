@@ -27,7 +27,8 @@ class CommTests(testtools.TestCase):
         cwd = os.path.join(os.getcwd(), 'resources/tests')
         with open(os.path.join(cwd, 'fakes/json/BC_EDGE.json'), 'rb') as f:
             self.BC_EDGE_JSON = io.BytesIO(f.read()).read()
-        with open(os.path.join(cwd, 'fakes/json/BC_EDGE_2012.json'), 'rb') as f:
+        with open(os.path.join(cwd, 'fakes/json/BC_EDGE_2012.json'),
+                  'rb') as f:
             self.BC_EDGE_2012_JSON = io.BytesIO(f.read()).read()
         with open(os.path.join(cwd, 'fakes/json/CONFIG.json'), 'rb') as f:
             self.CONFIG_JSON = io.BytesIO(f.read()).read()
@@ -53,6 +54,9 @@ class CommTests(testtools.TestCase):
             self.AFLW_LONG_XML = io.BytesIO(f.read()).read()
         with open(os.path.join(cwd, 'fakes/xml/AFLW_SCORE.xml'), 'rb') as f:
             self.AFLW_SCORE_XML = io.BytesIO(f.read()).read()
+        with open(os.path.join(cwd, 'fakes/xml/AFLW_SCORE_POSTPONED.xml'),
+                  'rb') as f:
+            self.AFLW_SCORE_POSTPONED_XML = io.BytesIO(f.read()).read()
 
     @mock.patch('resources.lib.comm.get_tz_delta', lambda: 11)
     def test_get_airtime(self):
@@ -170,6 +174,13 @@ class CommTests(testtools.TestCase):
                       body=self.AFLW_SCORE_XML, status=200)
         observed = comm.get_aflw_upcoming()
         self.assertEqual(7, len(observed))
+
+    @responses.activate
+    def test_get_aflw_upcoming_postponed(self):
+        responses.add(responses.GET, config.AFLW_SCORE_URL,
+                      body=self.AFLW_SCORE_POSTPONED_XML, status=200)
+        observed = comm.get_aflw_upcoming()
+        self.assertEqual(6, len(observed))
 
     @responses.activate
     def test_get_aflw_score(self):

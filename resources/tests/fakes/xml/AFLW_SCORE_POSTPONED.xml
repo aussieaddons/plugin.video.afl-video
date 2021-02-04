@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Scores>
+  <Filters>
+    <Filter QueryParameter="compId" Type="Arrow" Current="CD_S2021264">
+      <FilterItems>
+        <Items Id="CD_S2017264" Name="2017 NAB AFLW Competition" />
+        <Items Id="CD_S2018264" Name="2018 NAB AFLW Competition" />
+        <Items Id="CD_S2019264" Name="2019 NAB AFLW Competition" />
+        <Items Id="CD_S2020264" Name="2020 NAB AFLW Competition" />
+        <Items Id="CD_S2021264" Name="2021 NAB AFLW Competition" />
+      </FilterItems>
+    </Filter>
+    <Filter QueryParameter="round" Type="Scroller" Current="CD_R202126402">
+      <FilterItems>
+        <Items Id="CD_R202126401" Name="Round 1" />
+        <Items Id="CD_R202126402" Name="Round 2" />
+        <Items Id="CD_R202126403" Name="Round 3" />
+        <Items Id="CD_R202126404" Name="Round 4" />
+        <Items Id="CD_R202126405" Name="Round 5" />
+        <Items Id="CD_R202126406" Name="Round 6" />
+        <Items Id="CD_R202126407" Name="Round 7" />
+        <Items Id="CD_R202126408" Name="Round 8" />
+        <Items Id="CD_R202126409" Name="Round 9" />
+      </FilterItems>
+    </Filter>
+  </Filters>
+  <Week>Round 2</Week>
+  <Weeks>
+    <Previous>CD_R202126401</Previous>
+    <Current>CD_R202126402</Current>
+    <Next>CD_R202126403</Next>
+    <Week Id="CD_R202126401" Name="Round 1" />
+    <Week Id="CD_R202126402" Name="Round 2" />
+    <Week Id="CD_R202126403" Name="Round 3" />
+    <Week Id="CD_R202126404" Name="Round 4" />
+    <Week Id="CD_R202126405" Name="Round 5" />
+    <Week Id="CD_R202126406" Name="Round 6" />
+    <Week Id="CD_R202126407" Name="Round 7" />
+    <Week Id="CD_R202126408" Name="Round 8" />
+    <Week Id="CD_R202126409" Name="Round 9" />
+  </Weeks>
+  <Day Name="">
+    <Game Id="CD_M20212640201">
+      <State>P</State>
+      <Timestamp>2021-02-05T08:45:00Z</Timestamp>
+      <Result />
+      <ResultFull />
+      <Venue>Victoria University Whitten Oval</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7387" TriCode="WB" Name="Bulldogs" FullName="Western Bulldogs" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8096" TriCode="CARL" Name="Blues" FullName="Carlton" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fvu-whitten-oval%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20212640205">
+      <State>P</State>
+      <Timestamp>2021-02-06T04:10:00Z</Timestamp>
+      <Result />
+      <ResultFull />
+      <Venue>Victoria Park</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T8097" TriCode="COLL" Name="Magpies" FullName="Collingwood" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8467" TriCode="GEEL" Name="Cats" FullName="Geelong Cats" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="true" Label="BUY TICKETS">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fon.afl%2f2021_AFL_R2_COLLvGCFC</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20212640207">
+      <State>P</State>
+      <Timestamp>2021-02-06T06:10:00Z</Timestamp>
+      <Result />
+      <ResultFull />
+      <Venue>Casey Fields</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7386" TriCode="MELB" Name="Demons" FullName="Melbourne" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8788" TriCode="RICH" Name="Richmond" FullName="Richmond" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="true" Label="BUY TICKETS">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fon.afl%2f2021_AFL_R2_MELBvRICH</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20212640202">
+      <State>P</State>
+      <Timestamp>2021-02-07T02:10:00Z</Timestamp>
+      <Result />
+      <ResultFull />
+      <Venue>Arden Street Oval</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T8466" TriCode="NMFC" Name="Kangaroos" FullName="Kangaroos" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8796" TriCode="STK" Name="St Kilda" FullName="St Kilda" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2farden-street-oval%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20212640206">
+      <State>P</State>
+      <Timestamp>2021-02-07T04:10:00Z</Timestamp>
+      <Result />
+      <ResultFull />
+      <Venue>Hickey Park</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7887" TriCode="BL" Name="Lions" FullName="Brisbane Lions" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8786" TriCode="GCFC" Name="Suns" FullName="Gold Coast Suns" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="true" Label="BUY TICKETS">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fon.afl%2f2021_AFL_R2_BLvGEEL</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20212640203">
+      <State>P</State>
+      <Timestamp>2021-02-07T06:10:00Z</Timestamp>
+      <Result />
+      <ResultFull />
+      <Venue>Blacktown International Sportspark</Venue>
+      <GameState>UPCOMING</GameState>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>false</DisableMatchcentre>
+      <HomeTeam Id="CD_T7889" TriCode="GWS" Name="Giants" FullName="GWS Giants" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8098" TriCode="ADEL" Name="Crows" FullName="Adelaide Crows" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="true" Label="VENUE INFO">
+        <Link>yc://feature/WEBSITE?url=http%3a%2f%2fwomens.afl%2fvenues%2fblacktown-international-sportspark%3fwebview%3dtrue&amp;hideHistoryButtons=true</Link>
+      </Tickets>
+    </Game>
+    <Game Id="CD_M20212640204">
+      <State>P</State>
+      <Timestamp>2021-02-07T06:10:00Z</Timestamp>
+      <Result>POSTPONED</Result>
+      <ResultFull>POSTPONED</ResultFull>
+      <Venue>POSTPONED</Venue>
+      <Period />
+      <Label>Round 2</Label>
+      <PercentComplete>0</PercentComplete>
+      <HasOT>false</HasOT>
+      <HasDelayedVideo>false</HasDelayedVideo>
+      <DisableMatchcentre>true</DisableMatchcentre>
+      <HomeTeam Id="CD_T7886" TriCode="FRE" Name="Freo" FullName="Fremantle" LadderPosition="" Score="" ScoreDetail="" />
+      <AwayTeam Id="CD_T8787" TriCode="WCE" Name="West Coast Eagles" FullName="West Coast Eagles" LadderPosition="" Score="" ScoreDetail="" />
+      <Tickets HasLink="false" Label="VENUE INFO" />
+    </Game>
+  </Day>
+  <Bye Name="BYES" />
+  <YinzNode InVenue="false" VenueStatus="O" Ads="YC" InHomeMarket="O" Generated="2/4/2021 8:12:34 AM" />
+</Scores>
