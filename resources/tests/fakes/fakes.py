@@ -187,7 +187,7 @@ FAKE_VIDEO_ATTRS = {
 FAKE_VIDEO_URL = '&desc=Game+of+foo+vs+bar&dummy=None&genre=Sport&link_id' \
                  '=None&live=True&rating=PG&thumb=https%3A%2F%2Ffoo.com' \
                  '%2Fbar.jpg&time=2019-07-07T03%3A00%3A00Z&title=FooBar' \
-                 '&video_id=12345'
+                 '&video_id=12345&addon_version=1.0.0'
 
 M3U8_URL_OOYALA = {
     'stream_url': 'http://player.ooyala.com/player/iphone'

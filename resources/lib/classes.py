@@ -131,10 +131,12 @@ class Video(object):
             else:
                 val = d[key]
             url += '&{0}={1}'.format(key, val)
+        url += '&addon_version={0}'.format(utils.get_addon_version())
         return url
 
     def parse_kodi_url(self, url):
         params = dict(parse_qsl(url))
+        params.pop('addon_version', '')
         for item in params.keys():
             setattr(self, item, unquote_plus(params[item]))
         if self.date:
